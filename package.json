@@ -1,0 +1,20 @@
+{
+  "name": "gwind",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build:css": "tailwindcss -i ./src/styles/styles.css -o ./dist/styles.css"
+  },
+  "keywords": [],
+  "author": "lord",
+  "license": "ISC",
+  "dependencies": {
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.4.49",
+    "tailwindcss": "^3.4.17"
+  },
+  "devDependencies": {
+    "sass": "^1.83.0"
+  }
+}
