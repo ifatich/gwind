@@ -1,4 +1,4 @@
-export const colors = {
+const gwindThemeColors = {
     broccoli: {
         90: "hsl(var(--broccoli-90)  / <alpha-value>)",
         80: "hsl(var(--broccoli-80)  / <alpha-value>)",
@@ -108,3 +108,5 @@ export const colors = {
     },
     white: "hsl(var(--text-white)  / <alpha-value>)"
 }
+
+export default gwindThemeColors

@@ -46,7 +46,8 @@ const COLORS = {
     "color-inherit": "inherit",
     "transparent": "transparent"
 }
-const DEFAULT_EXTEND = {
+
+const METRICS = {
     borderRadius: {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
@@ -79,6 +80,7 @@ const DEFAULT_EXTEND = {
         "inherit": "inherit"
     }
 }
+
 const CONTAINER = {
     center: true,
     padding: "2rem",
@@ -86,10 +88,11 @@ const CONTAINER = {
         "2xl": "1400px"
     }
 }
-const GWIND_THEME = {
-    COLORS: COLORS,
-    DEFAULT_EXTEND: DEFAULT_EXTEND,
-    CONTAINER: CONTAINER
+
+const gwindScheme = {
+    COLORS,
+    METRICS,
+    CONTAINER
 }
 
-export default GWIND_THEME
+export default gwindScheme

@@ -1,9 +1,4 @@
 @import "tailwindcss/base";
-
-@import "base/colors.scss";
-@import "base/sizes.css";
-@import "base/theme.css";
-@import "base/typography.scss";
-
+@import "base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";

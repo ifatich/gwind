@@ -1,20 +1,34 @@
 {
-  "name": "gwind",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "build:css": "tailwindcss -i ./src/styles/styles.css -o ./dist/styles.css"
-  },
-  "keywords": [],
-  "author": "lord",
-  "license": "ISC",
-  "dependencies": {
-    "autoprefixer": "^10.4.20",
-    "postcss": "^8.4.49",
-    "tailwindcss": "^3.4.17"
-  },
-  "devDependencies": {
-    "sass": "^1.83.0"
-  }
+    "name": "gwind",
+    "version": "1.0.0",
+    "description": "A design token library developed specifically for internal applications of PT Pegadaian. Provides reusable design values such as colors, typography, and themes for a consistent UI experience across Pegadaian's platforms.",
+    "keywords": [],
+    "author": "PT Pegadaian",
+    "license": "proprietary",
+    "scripts": {
+        "build": "node scripts/build.js",
+        "build:ts": "node scripts/build.js build:ts",
+        "build:license": "node scripts/build.js build:license",
+        "build:css": "node scripts/build.js build:css"
+    },
+    "devDependencies": {
+        "autoprefixer": "^10.4.20",
+        "clean-publish": "^5.1.0",
+        "license-generator": "^0.0.13",
+        "postcss": "^8.4.49",
+        "sass": "^1.83.0",
+        "tailwindcss": "^3.4.17",
+        "typescript": "^5.7.2"
+    },
+    "main": "dist/index.js",
+    "types": "dist/index.d.ts",
+    "exports": {
+        ".": "./dist/index.js",
+        "./postcss": "./dist/plugins/postcss.js"
+    },
+    "files": [
+        "dist",
+        "LICENSE",
+        "README.md"
+    ]
 }
