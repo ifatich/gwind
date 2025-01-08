@@ -89,10 +89,16 @@ const CONTAINER = {
     }
 }
 
+const FONTFAMILY = {  
+    display: ['Nunito Sans', 'sans-serif'],  
+    body: ['Nunito Sans', 'sans-serif']  
+} 
+
 const gwindScheme = {
     COLORS,
     METRICS,
-    CONTAINER
+    CONTAINER,
+    FONTFAMILY
 }
 
 export default gwindScheme

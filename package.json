@@ -1,6 +1,6 @@
 {
     "name": "gwind",
-    "version": "1.0.0",
+    "version": "1.0.02",
     "description": "A design token library developed specifically for internal applications of PT Pegadaian. Provides reusable design values such as colors, typography, and themes for a consistent UI experience across Pegadaian's platforms.",
     "keywords": [],
     "author": "PT Pegadaian",
@@ -12,6 +12,7 @@
         "build:css": "node scripts/build.js build:css"
     },
     "devDependencies": {
+        "@types/node": "^22.10.5",
         "autoprefixer": "^10.4.20",
         "clean-publish": "^5.1.0",
         "license-generator": "^0.0.13",

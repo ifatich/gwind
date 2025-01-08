@@ -1,4 +1,4 @@
-import GWIND_COLORS from "./src/lib/colors";
+import GWIND_COLORS from "./src/styles/base/colors.css";
 import GWIND_FONT_SIZE from "./src/lib/font-sizes";
 import GWIND_THEME from "./src/lib/theme";
 
