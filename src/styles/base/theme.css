@@ -1,4 +1,4 @@
-@layer base {
+/* @layer base {
     :root {
         --background: var(--white);
         --foreground: var(--text-primary);
@@ -57,4 +57,4 @@
         --input-focus: var(--primary);
         --ring: var(--primary);
     }
-}
+} */

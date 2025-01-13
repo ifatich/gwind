@@ -1,8 +1,13 @@
 import plugin from "tailwindcss/plugin";
-
+import gwindScheme from "../../libraries/scheme";
+import gwindTheme from "../../libraries/theme";
 
 const gwindTwBase = plugin(({addBase}) => {
     addBase({
+        'body':{
+            fontFamily: gwindScheme.FONT_FAMILY.sans,
+            fontWeight: gwindTheme.fontWeight.regular
+        },
         ':root': {
             '--broccoli-90': '172 100% 5.9%',
             '--broccoli-80': '172 100% 9%',
@@ -165,6 +170,37 @@ const gwindTwBase = plugin(({addBase}) => {
             '--input-focus': 'var(--primary)',
             '--ring': 'var(--primary)',
             '--radius': '0.5rem',
+
+            '--elevation-1': [ '0px 0px 2px rgba(0, 0, 0, 0.08)', '0px 2px 6px rgba(0, 0, 0, 0.14)' ],
+            '--elevation-2': 'drop-shadow(0px 0px 4px rgba(0, 0, 0, 0.10)) drop-shadow(0px 6px 14px rgba(0, 0, 0, 0.16))',
+
+            '--mobile-breakpoint': '360px',
+            '--tablet-breakpoint': '768px',
+            '--desktop-breakpoint': '1440px',
+          
+            '--mobile-gutter': '24px',
+            '--tablet-gutter': '28px',
+            '--desktop-gutter': '24px',
+          
+            '--mobile-margin': '16px',
+            '--tablet-margin': '32px',
+            '--desktop-margin': '156px',
+          
+            '--mobile-columns': '4',
+            '--tablet-columns': '8',
+            '--desktop-columns': '12',
+
+            '--space-2': '2px',
+            '--space-4': '4px',
+            '--space-8': '8px',
+            '--space-16': '16px',
+            '--space-24': '24px',
+            '--space-32': '32px',
+            '--space-40': '40px',
+            '--space-48': '48px',
+            '--space-64': '64px',
+            '--space-80': '80px',
+            '--space-120': '120px',
         }
     })
 })

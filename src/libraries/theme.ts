@@ -11,7 +11,12 @@ const gwindTheme = {
         ...gwindColors,
         ...gwindScheme.COLORS,
     },
-    extend: gwindScheme.METRICS,
+    extend: {
+        ...gwindScheme.METRICS,
+        ...gwindScheme.SPACE_TOKENS,
+        ...gwindScheme.GWIND_SHADOWS,
+        ...gwindScheme.FONT_FAMILY,
+    },
 }
 
 export default gwindTheme
