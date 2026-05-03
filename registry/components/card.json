@@ -6,7 +6,7 @@
   "files": [
     {
       "name": "Card.vue",
-      "content": "<script setup lang=\"ts\">\nimport { cn } from '../../../lib/utils'\nimport { type HTMLAttributes } from 'vue'\n\ninterface Props {\n  class?: HTMLAttributes['class']\n}\n\nconst props = defineProps<Props>()\n</script>\n\n<template>\n  <div\n    :class=\"\n      cn(\n        'rounded-xl border border-[var(--gw-border)] bg-[var(--gw-card)] text-[var(--gw-card-foreground)] shadow-sm transition-shadow duration-200 hover:shadow-md',\n        props.class,\n      )\n    \"\n  >\n    <slot />\n  </div>\n</template>\n"
+      "content": "<script setup lang=\"ts\">\nimport { cn } from '../../../lib/utils'\nimport { type HTMLAttributes } from 'vue'\n\ninterface Props {\n  class?: HTMLAttributes['class']\n}\n\nconst props = defineProps<Props>()\n</script>\n\n<template>\n  <div\n    :class=\"\n      cn(\n        'rounded-xl border border-border bg-card text-card-foreground shadow-sm transition-shadow duration-200 hover:shadow-md',\n        props.class,\n      )\n    \"\n  >\n    <slot />\n  </div>\n</template>\n"
     },
     {
       "name": "CardContent.vue",
@@ -14,7 +14,7 @@
     },
     {
       "name": "CardDescription.vue",
-      "content": "<script setup lang=\"ts\">\nimport { cn } from '../../../lib/utils'\nimport { type HTMLAttributes } from 'vue'\n\ninterface Props {\n  class?: HTMLAttributes['class']\n}\n\nconst props = defineProps<Props>()\n</script>\n\n<template>\n  <p :class=\"cn('text-sm text-[var(--gw-muted-foreground)]', props.class)\">\n    <slot />\n  </p>\n</template>\n"
+      "content": "<script setup lang=\"ts\">\nimport { cn } from '../../../lib/utils'\nimport { type HTMLAttributes } from 'vue'\n\ninterface Props {\n  class?: HTMLAttributes['class']\n}\n\nconst props = defineProps<Props>()\n</script>\n\n<template>\n  <p :class=\"cn('text-sm text-muted-foreground', props.class)\">\n    <slot />\n  </p>\n</template>\n"
     },
     {
       "name": "CardFooter.vue",
