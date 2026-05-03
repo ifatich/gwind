@@ -150,6 +150,10 @@ cli
         console.log(chalk.cyan(`pnpm add ${componentData.dependencies.join(' ')}`))
       }
 
+      console.log(
+        chalk.hex('#8b5cf6')('\nBuild with ❤️ by Pegadaian Design || F.I.AL Arasy || Pegadaian')
+      )
+
     } catch (error: any) {
       spinner.fail(chalk.red(`Error adding component: ${error.message}`))
     }
