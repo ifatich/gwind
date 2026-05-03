@@ -20,7 +20,7 @@ interface Props {
 const props = defineProps<Props>()
 
 const emit = defineEmits<{
-  'update:open': [value: boolean]
+  (e: 'update:open', value: boolean): void
 }>()
 </script>
 
@@ -36,7 +36,7 @@ const emit = defineEmits<{
       <DialogOverlay
         :class="
           cn(
-            'fixed inset-0 z-50 bg-black/60 backdrop-blur-sm',
+            'fixed inset-0 z-50 bg-foreground/60 backdrop-blur-sm',
             'data-[state=open]:animate-fade-in data-[state=closed]:animate-fade-out',
           )
         "
@@ -46,7 +46,7 @@ const emit = defineEmits<{
       <DialogContent
         :class="
           cn(
-            'fixed left-1/2 top-1/2 z-50 grid w-full max-w-lg -translate-x-1/2 -translate-y-1/2 gap-4 rounded-xl border border-[var(--gw-border)] bg-[var(--gw-card)] p-6 shadow-lg duration-200',
+            'fixed left-1/2 top-1/2 z-50 grid w-full max-w-lg -translate-x-1/2 -translate-y-1/2 gap-4 rounded-xl border border-border bg-card p-6 shadow-lg duration-200',
             'data-[state=open]:animate-zoom-in data-[state=closed]:animate-zoom-out',
             props.class,
           )
@@ -57,7 +57,7 @@ const emit = defineEmits<{
           <DialogTitle class="text-lg font-semibold leading-none tracking-tight">
             <slot name="title" />
           </DialogTitle>
-          <DialogDescription class="text-sm text-[var(--gw-muted-foreground)]">
+          <DialogDescription class="text-sm text-muted-foreground">
             <slot name="description" />
           </DialogDescription>
         </div>
@@ -75,7 +75,7 @@ const emit = defineEmits<{
 
         <!-- Close button -->
         <DialogClose
-          class="absolute right-4 top-4 rounded-sm opacity-70 ring-offset-2 transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-[var(--gw-ring)] focus:ring-offset-2 cursor-pointer"
+          class="absolute right-4 top-4 rounded-sm opacity-70 ring-offset-2 transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 cursor-pointer"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"

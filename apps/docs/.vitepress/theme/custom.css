@@ -1,40 +1,53 @@
+/* 
+ * Tailwind v4 dengan Vite Plugin
+ * source() menentukan base directory untuk scanning di monorepo
+ */
 @import "tailwindcss";
+
+@source "../../../../packages/ui/src";
+
 @import "../../../../packages/ui/src/styles/main.css";
 
 /*
- * Override VitePress default vars to match Gwind branding
+ * ── CRITICAL FIX ──
+ * VitePress default theme memiliki CSS reset yang TIDAK berada di @layer,
+ * sehingga menimpa Tailwind utility classes (yang berada di @layer utilities).
+ * 
+ * Kita harus menimpa reset tersebut secara eksplisit.
+ */
+button,
+[role="button"] {
+  background-color: revert-layer;
+  background-image: revert-layer;
+  padding: revert-layer;
+}
+
+/*
+ * VitePress overrides
  */
 :root {
-  --vp-c-brand-1: var(--color-brand-600);
-  --vp-c-brand-2: var(--color-brand-500);
-  --vp-c-brand-3: var(--color-brand-400);
-  --vp-c-brand-soft: var(--color-brand-100);
-
-  --vp-font-family-base: "Inter", ui-sans-serif, system-ui, sans-serif;
-  --vp-font-family-mono: "JetBrains Mono", ui-monospace, monospace;
+  --vp-c-brand-1: #2563eb;
+  --vp-font-family-base: "Inter", sans-serif;
 }
 
-.dark {
-  --vp-c-brand-1: var(--color-brand-400);
-  --vp-c-brand-2: var(--color-brand-500);
-  --vp-c-brand-3: var(--color-brand-600);
-  --vp-c-brand-soft: var(--color-brand-950);
-}
-
-/* Preview container for component demos */
 .gw-preview {
-  @apply rounded-xl border border-[var(--gw-border)] bg-[var(--gw-card)] p-6;
+  border: 1px solid #e5e7eb;
+  background-color: #ffffff;
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  margin: 1.5rem 0;
+  color: #1f2937;
 }
 
 .gw-preview-row {
-  @apply flex flex-wrap items-center gap-4;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem;
 }
 
 .gw-preview-col {
-  @apply flex flex-col gap-4;
-}
-
-/* Source code toggle */
-.gw-source-toggle {
-  @apply mt-3 rounded-lg border border-[var(--gw-border)] bg-[var(--gw-muted)] px-4 py-2 text-sm cursor-pointer transition-colors hover:bg-[var(--gw-accent)];
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
