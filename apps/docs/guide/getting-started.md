@@ -17,10 +17,10 @@ The fastest way to get started is using the Gwind CLI. It will handle the setup 
 
 ```bash
 # 1. Initialize your project
-npx @ifatich/gwind-ui init
+npx gwind-system-ui init
 
 # 2. Add your first component
-npx @ifatich/gwind-ui add button
+npx gwind-system-ui add button
 ```
 
 ### 2. Manual Installation

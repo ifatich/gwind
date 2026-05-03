@@ -9,13 +9,13 @@ Gwind dirancang agar sangat mudah digunakan. Ikuti langkah-langkah berikut:
 ### 1. Inisialisasi Proyek (Sekali saja)
 Langkah ini akan menyiapkan utility `cn` dan file konfigurasi `gwind.json`.
 ```bash
-npx @ifatich/gwind-ui init
+npx gwind-system-ui init
 ```
 
 ### 2. Tambahkan Komponen
 Pilih komponen yang Anda butuhkan (misal: Button).
 ```bash
-npx @ifatich/gwind-ui add button
+npx gwind-system-ui add button
 ```
 
 ### 3. Gunakan di Kode Anda

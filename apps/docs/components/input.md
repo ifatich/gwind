@@ -44,7 +44,7 @@ Displays a form input field.
 ### 1. CLI Installation
 
 ```bash
-npx @ifatich/gwind-ui add input
+npx gwind-system-ui add input
 ```
 
 ### 2. Manual Installation

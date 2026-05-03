@@ -54,7 +54,7 @@ Displays a card with header, content, and footer.
 ### 1. CLI Installation
 
 ```bash
-npx @ifatich/gwind-ui add card
+npx gwind-system-ui add card
 ```
 
 ### 2. Manual Installation
