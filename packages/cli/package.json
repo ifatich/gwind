@@ -1,5 +1,5 @@
 {
-  "name": "gwind-ui",
+  "name": "@ifatich/gwind-ui",
   "version": "0.1.1",
   "description": "CLI for Gwind Design System",
   "type": "module",
