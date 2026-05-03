@@ -1,0 +1,40 @@
+@import "tailwindcss";
+@import "../../../../packages/ui/src/styles/main.css";
+
+/*
+ * Override VitePress default vars to match Gwind branding
+ */
+:root {
+  --vp-c-brand-1: var(--color-brand-600);
+  --vp-c-brand-2: var(--color-brand-500);
+  --vp-c-brand-3: var(--color-brand-400);
+  --vp-c-brand-soft: var(--color-brand-100);
+
+  --vp-font-family-base: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --vp-font-family-mono: "JetBrains Mono", ui-monospace, monospace;
+}
+
+.dark {
+  --vp-c-brand-1: var(--color-brand-400);
+  --vp-c-brand-2: var(--color-brand-500);
+  --vp-c-brand-3: var(--color-brand-600);
+  --vp-c-brand-soft: var(--color-brand-950);
+}
+
+/* Preview container for component demos */
+.gw-preview {
+  @apply rounded-xl border border-[var(--gw-border)] bg-[var(--gw-card)] p-6;
+}
+
+.gw-preview-row {
+  @apply flex flex-wrap items-center gap-4;
+}
+
+.gw-preview-col {
+  @apply flex flex-col gap-4;
+}
+
+/* Source code toggle */
+.gw-source-toggle {
+  @apply mt-3 rounded-lg border border-[var(--gw-border)] bg-[var(--gw-muted)] px-4 py-2 text-sm cursor-pointer transition-colors hover:bg-[var(--gw-accent)];
+}

@@ -1,0 +1,18 @@
+{
+  "name": "dialog",
+  "type": "ui",
+  "dependencies": [
+    "reka-ui"
+  ],
+  "registryDependencies": [],
+  "files": [
+    {
+      "name": "Dialog.vue",
+      "content": "<script setup lang=\"ts\">\nimport { type HTMLAttributes } from 'vue'\nimport {\n  DialogClose,\n  DialogContent,\n  DialogDescription,\n  DialogOverlay,\n  DialogPortal,\n  DialogRoot,\n  DialogTitle,\n  DialogTrigger,\n} from 'reka-ui'\nimport { cn } from '../../../lib/utils'\n\ninterface Props {\n  open?: boolean\n  class?: HTMLAttributes['class']\n}\n\nconst props = defineProps<Props>()\n\nconst emit = defineEmits<{\n  'update:open': [value: boolean]\n}>()\n</script>\n\n<template>\n  <DialogRoot :open=\"props.open\" @update:open=\"(val) => emit('update:open', val)\">\n    <!-- Trigger slot -->\n    <DialogTrigger as-child>\n      <slot name=\"trigger\" />\n    </DialogTrigger>\n\n    <DialogPortal>\n      <!-- Overlay -->\n      <DialogOverlay\n        :class=\"\n          cn(\n            'fixed inset-0 z-50 bg-black/60 backdrop-blur-sm',\n            'data-[state=open]:animate-fade-in data-[state=closed]:animate-fade-out',\n          )\n        \"\n      />\n\n      <!-- Content -->\n      <DialogContent\n        :class=\"\n          cn(\n            'fixed left-1/2 top-1/2 z-50 grid w-full max-w-lg -translate-x-1/2 -translate-y-1/2 gap-4 rounded-xl border border-[var(--gw-border)] bg-[var(--gw-card)] p-6 shadow-lg duration-200',\n            'data-[state=open]:animate-zoom-in data-[state=closed]:animate-zoom-out',\n            props.class,\n          )\n        \"\n      >\n        <!-- Header -->\n        <div class=\"flex flex-col gap-1.5 text-center sm:text-left\">\n          <DialogTitle class=\"text-lg font-semibold leading-none tracking-tight\">\n            <slot name=\"title\" />\n          </DialogTitle>\n          <DialogDescription class=\"text-sm text-[var(--gw-muted-foreground)]\">\n            <slot name=\"description\" />\n          </DialogDescription>\n        </div>\n\n        <!-- Body -->\n        <slot />\n\n        <!-- Footer -->\n        <div\n          v-if=\"$slots.footer\"\n          class=\"flex flex-col-reverse gap-2 sm:flex-row sm:justify-end\"\n        >\n          <slot name=\"footer\" />\n        </div>\n\n        <!-- Close button -->\n        <DialogClose\n          class=\"absolute right-4 top-4 rounded-sm opacity-70 ring-offset-2 transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-[var(--gw-ring)] focus:ring-offset-2 cursor-pointer\"\n        >\n          <svg\n            xmlns=\"http://www.w3.org/2000/svg\"\n            width=\"16\"\n            height=\"16\"\n            viewBox=\"0 0 24 24\"\n            fill=\"none\"\n            stroke=\"currentColor\"\n            stroke-width=\"2\"\n            stroke-linecap=\"round\"\n            stroke-linejoin=\"round\"\n          >\n            <path d=\"M18 6 6 18\" />\n            <path d=\"m6 6 12 12\" />\n          </svg>\n          <span class=\"sr-only\">Close</span>\n        </DialogClose>\n      </DialogContent>\n    </DialogPortal>\n  </DialogRoot>\n</template>\n"
+    },
+    {
+      "name": "index.ts",
+      "content": "export { default as Dialog } from './Dialog.vue'\n"
+    }
+  ]
+}

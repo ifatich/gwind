@@ -1,0 +1,18 @@
+{
+  "name": "tabs",
+  "type": "ui",
+  "dependencies": [
+    "reka-ui"
+  ],
+  "registryDependencies": [],
+  "files": [
+    {
+      "name": "Tabs.vue",
+      "content": "<script setup lang=\"ts\">\nimport {\n  TabsContent,\n  TabsIndicator,\n  TabsList,\n  TabsRoot,\n  TabsTrigger,\n} from 'reka-ui'\nimport { cn } from '../../../lib/utils'\nimport { type HTMLAttributes } from 'vue'\n\ninterface TabItem {\n  value: string\n  label: string\n  disabled?: boolean\n}\n\ninterface Props {\n  modelValue?: string\n  defaultValue?: string\n  tabs: TabItem[]\n  class?: HTMLAttributes['class']\n}\n\nconst props = defineProps<Props>()\n\nconst emit = defineEmits<{\n  'update:modelValue': [value: string]\n}>()\n</script>\n\n<template>\n  <TabsRoot\n    :model-value=\"props.modelValue\"\n    :default-value=\"props.defaultValue || props.tabs[0]?.value\"\n    :class=\"cn('w-full', props.class)\"\n    @update:model-value=\"(val) => emit('update:modelValue', val)\"\n  >\n    <!-- Tab list -->\n    <TabsList\n      :class=\"\n        cn(\n          'relative inline-flex h-9 w-full items-center justify-start gap-1 rounded-lg bg-[var(--gw-muted)] p-1 text-[var(--gw-muted-foreground)]',\n        )\n      \"\n    >\n      <TabsIndicator\n        class=\"absolute left-0 h-[calc(100%-8px)] rounded-md bg-[var(--gw-card)] shadow-sm transition-[width,transform] duration-200\"\n      />\n\n      <TabsTrigger\n        v-for=\"tab in tabs\"\n        :key=\"tab.value\"\n        :value=\"tab.value\"\n        :disabled=\"tab.disabled\"\n        :class=\"\n          cn(\n            'relative z-10 inline-flex flex-1 items-center justify-center whitespace-nowrap rounded-md px-3 py-1 text-sm font-medium transition-all duration-200 cursor-pointer',\n            'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--gw-ring)] focus-visible:ring-offset-2',\n            'disabled:pointer-events-none disabled:opacity-50',\n            'data-[state=active]:text-[var(--gw-foreground)]',\n          )\n        \"\n      >\n        {{ tab.label }}\n      </TabsTrigger>\n    </TabsList>\n\n    <!-- Tab panels -->\n    <div class=\"mt-3\">\n      <TabsContent\n        v-for=\"tab in tabs\"\n        :key=\"tab.value\"\n        :value=\"tab.value\"\n        :class=\"\n          cn(\n            'rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--gw-ring)] focus-visible:ring-offset-2',\n            'data-[state=active]:animate-fade-in',\n          )\n        \"\n      >\n        <slot :name=\"tab.value\" />\n      </TabsContent>\n    </div>\n  </TabsRoot>\n</template>\n"
+    },
+    {
+      "name": "index.ts",
+      "content": "export { default as Tabs } from './Tabs.vue'\n"
+    }
+  ]
+}

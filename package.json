@@ -1,0 +1,20 @@
+{
+  "name": "gwind-monorepo",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "turbo dev",
+    "dev:docs": "pnpm --filter docs dev",
+    "build": "turbo build",
+    "build:registry": "pnpm --filter @gwind/ui build:registry",
+    "lint": "turbo lint",
+    "format": "prettier --write \"**/*.{ts,vue,css,md}\""
+  },
+  "devDependencies": {
+    "prettier": "latest",
+    "tsx": "^4.21.0",
+    "turbo": "latest",
+    "typescript": "latest"
+  },
+  "packageManager": "pnpm@10.15.0"
+}

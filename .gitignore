@@ -1,0 +1,29 @@
+# Dependencies
+node_modules
+
+# Build outputs
+dist
+.output
+.nuxt
+
+# Turborepo
+.turbo
+
+# IDE
+.vscode
+.idea
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Env
+*.local
+.env
+.env.*
+
+# VitePress
+apps/docs/.vitepress/cache
+apps/docs/.vitepress/dist

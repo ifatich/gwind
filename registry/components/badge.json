@@ -1,0 +1,19 @@
+{
+  "name": "badge",
+  "type": "ui",
+  "dependencies": [
+    "reka-ui",
+    "class-variance-authority"
+  ],
+  "registryDependencies": [],
+  "files": [
+    {
+      "name": "Badge.vue",
+      "content": "<script setup lang=\"ts\">\nimport { Primitive, type PrimitiveProps } from 'reka-ui'\nimport { cva, type VariantProps } from 'class-variance-authority'\nimport { cn } from '../../../lib/utils'\nimport { type HTMLAttributes, computed } from 'vue'\n\nconst badgeVariants = cva(\n  'inline-flex items-center rounded-md border px-2.5 py-0.5 text-xs font-semibold transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-[var(--gw-ring)] focus:ring-offset-2',\n  {\n    variants: {\n      variant: {\n        default:\n          'border-transparent bg-[var(--gw-primary)] text-[var(--gw-primary-foreground)] shadow-sm',\n        secondary:\n          'border-transparent bg-[var(--gw-secondary)] text-[var(--gw-secondary-foreground)]',\n        destructive:\n          'border-transparent bg-[var(--gw-destructive)] text-[var(--gw-destructive-foreground)] shadow-sm',\n        outline: 'text-[var(--gw-foreground)]',\n        success:\n          'border-transparent bg-[var(--color-success-500)] text-white shadow-sm',\n        warning:\n          'border-transparent bg-[var(--color-warning-500)] text-white shadow-sm',\n      },\n    },\n    defaultVariants: {\n      variant: 'default',\n    },\n  },\n)\n\ntype BadgeVariants = VariantProps<typeof badgeVariants>\n\ninterface Props extends PrimitiveProps {\n  variant?: BadgeVariants['variant']\n  class?: HTMLAttributes['class']\n}\n\nconst props = withDefaults(defineProps<Props>(), {\n  as: 'div',\n})\n\nconst delegatedProps = computed(() => {\n  const { class: _, variant: __, ...delegated } = props\n  return delegated\n})\n</script>\n\n<template>\n  <Primitive\n    v-bind=\"delegatedProps\"\n    :class=\"cn(badgeVariants({ variant: props.variant }), props.class)\"\n  >\n    <slot />\n  </Primitive>\n</template>\n"
+    },
+    {
+      "name": "index.ts",
+      "content": "export { default as Badge } from './Badge.vue'\n"
+    }
+  ]
+}

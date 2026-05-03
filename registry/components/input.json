@@ -1,0 +1,16 @@
+{
+  "name": "input",
+  "type": "ui",
+  "dependencies": [],
+  "registryDependencies": [],
+  "files": [
+    {
+      "name": "Input.vue",
+      "content": "<script setup lang=\"ts\">\nimport { cn } from '../../../lib/utils'\nimport { type InputHTMLAttributes, computed, useAttrs } from 'vue'\n\ninterface Props {\n  modelValue?: string | number\n  defaultValue?: string | number\n  class?: InputHTMLAttributes['class']\n  type?: string\n}\n\nconst props = withDefaults(defineProps<Props>(), {\n  type: 'text',\n})\n\nconst emit = defineEmits<{\n  'update:modelValue': [value: string | number]\n}>()\n\nconst attrs = useAttrs()\n\nconst modelValue = computed({\n  get: () => props.modelValue ?? props.defaultValue ?? '',\n  set: (val) => emit('update:modelValue', val),\n})\n</script>\n\n<template>\n  <input\n    v-model=\"modelValue\"\n    v-bind=\"attrs\"\n    :type=\"props.type\"\n    :class=\"\n      cn(\n        'flex h-9 w-full rounded-md border border-[var(--gw-input)] bg-transparent px-3 py-1 text-sm shadow-xs transition-colors duration-200',\n        'file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-[var(--gw-foreground)]',\n        'placeholder:text-[var(--gw-muted-foreground)]',\n        'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--gw-ring)] focus-visible:ring-offset-1',\n        'disabled:cursor-not-allowed disabled:opacity-50',\n        props.class,\n      )\n    \"\n  />\n</template>\n"
+    },
+    {
+      "name": "index.ts",
+      "content": "export { default as Input } from './Input.vue'\n"
+    }
+  ]
+}

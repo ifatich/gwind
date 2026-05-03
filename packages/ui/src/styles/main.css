@@ -1,0 +1,179 @@
+@import "tailwindcss";
+
+/*
+ * ============================================
+ *  Gwind Design System — Global Design Tokens
+ * ============================================
+ *  All tokens defined here propagate to every
+ *  component through Tailwind CSS v4's native
+ *  @theme system. No tailwind.config.js needed.
+ * ============================================
+ */
+
+@theme {
+  /* ── Brand Colors ── */
+  --color-brand-50: #f5f3ff;
+  --color-brand-100: #ede9fe;
+  --color-brand-200: #ddd6fe;
+  --color-brand-300: #c4b5fd;
+  --color-brand-400: #a78bfa;
+  --color-brand-500: #8b5cf6;
+  --color-brand-600: #7c3aed;
+  --color-brand-700: #6d28d9;
+  --color-brand-800: #5b21b6;
+  --color-brand-900: #4c1d95;
+  --color-brand-950: #2e1065;
+
+  /* ── Neutral Colors ── */
+  --color-neutral-50: #fafafa;
+  --color-neutral-100: #f5f5f5;
+  --color-neutral-200: #e5e5e5;
+  --color-neutral-300: #d4d4d4;
+  --color-neutral-400: #a3a3a3;
+  --color-neutral-500: #737373;
+  --color-neutral-600: #525252;
+  --color-neutral-700: #404040;
+  --color-neutral-800: #262626;
+  --color-neutral-900: #171717;
+  --color-neutral-950: #0a0a0a;
+
+  /* ── Semantic Colors ── */
+  --color-success-500: #22c55e;
+  --color-success-600: #16a34a;
+  --color-warning-500: #f59e0b;
+  --color-warning-600: #d97706;
+  --color-destructive-500: #ef4444;
+  --color-destructive-600: #dc2626;
+  --color-info-500: #3b82f6;
+  --color-info-600: #2563eb;
+
+  /* ── Border Radius ── */
+  --radius-sm: 0.375rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+  --radius-2xl: 1.5rem;
+  --radius-full: 9999px;
+
+  /* ── Shadows ── */
+  --shadow-xs: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+
+  /* ── Font Families ── */
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+
+  /* ── Animations ── */
+  --animate-accordion-down: accordion-down 0.2s ease-out;
+  --animate-accordion-up: accordion-up 0.2s ease-out;
+  --animate-fade-in: fade-in 0.15s ease-out;
+  --animate-fade-out: fade-out 0.15s ease-out;
+  --animate-slide-in-from-top: slide-in-from-top 0.2s ease-out;
+  --animate-slide-in-from-bottom: slide-in-from-bottom 0.2s ease-out;
+  --animate-zoom-in: zoom-in 0.15s ease-out;
+  --animate-zoom-out: zoom-out 0.15s ease-out;
+}
+
+/* ── Animation Keyframes ── */
+@keyframes accordion-down {
+  from { height: 0; }
+  to { height: var(--reka-accordion-content-height); }
+}
+
+@keyframes accordion-up {
+  from { height: var(--reka-accordion-content-height); }
+  to { height: 0; }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fade-out {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+@keyframes slide-in-from-top {
+  from { transform: translateY(-0.5rem); }
+  to { transform: translateY(0); }
+}
+
+@keyframes slide-in-from-bottom {
+  from { transform: translateY(0.5rem); }
+  to { transform: translateY(0); }
+}
+
+@keyframes zoom-in {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes zoom-out {
+  from { opacity: 1; transform: scale(1); }
+  to { opacity: 0; transform: scale(0.95); }
+}
+
+/* ── CSS Custom Properties for Runtime Theming ── */
+:root {
+  --gw-background: var(--color-neutral-50);
+  --gw-foreground: var(--color-neutral-950);
+  --gw-card: #ffffff;
+  --gw-card-foreground: var(--color-neutral-950);
+  --gw-popover: #ffffff;
+  --gw-popover-foreground: var(--color-neutral-950);
+  --gw-primary: var(--color-brand-600);
+  --gw-primary-foreground: #ffffff;
+  --gw-secondary: var(--color-neutral-100);
+  --gw-secondary-foreground: var(--color-neutral-900);
+  --gw-muted: var(--color-neutral-100);
+  --gw-muted-foreground: var(--color-neutral-500);
+  --gw-accent: var(--color-neutral-100);
+  --gw-accent-foreground: var(--color-neutral-900);
+  --gw-destructive: var(--color-destructive-500);
+  --gw-destructive-foreground: #ffffff;
+  --gw-border: var(--color-neutral-200);
+  --gw-input: var(--color-neutral-200);
+  --gw-ring: var(--color-brand-600);
+  --gw-radius: var(--radius-md);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --gw-background: var(--color-neutral-950);
+    --gw-foreground: var(--color-neutral-50);
+    --gw-card: var(--color-neutral-900);
+    --gw-card-foreground: var(--color-neutral-50);
+    --gw-popover: var(--color-neutral-900);
+    --gw-popover-foreground: var(--color-neutral-50);
+    --gw-primary: var(--color-brand-500);
+    --gw-primary-foreground: #ffffff;
+    --gw-secondary: var(--color-neutral-800);
+    --gw-secondary-foreground: var(--color-neutral-50);
+    --gw-muted: var(--color-neutral-800);
+    --gw-muted-foreground: var(--color-neutral-400);
+    --gw-accent: var(--color-neutral-800);
+    --gw-accent-foreground: var(--color-neutral-50);
+    --gw-destructive: var(--color-destructive-600);
+    --gw-destructive-foreground: #ffffff;
+    --gw-border: var(--color-neutral-800);
+    --gw-input: var(--color-neutral-800);
+    --gw-ring: var(--color-brand-500);
+  }
+}
+
+/* ── Base Styles ── */
+* {
+  border-color: var(--gw-border);
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--gw-background);
+  color: var(--gw-foreground);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}

@@ -1,0 +1,63 @@
+[
+  {
+    "name": "badge",
+    "type": "ui",
+    "files": [
+      "Badge.vue",
+      "index.ts"
+    ]
+  },
+  {
+    "name": "button",
+    "type": "ui",
+    "files": [
+      "Button.vue",
+      "index.ts"
+    ]
+  },
+  {
+    "name": "card",
+    "type": "ui",
+    "files": [
+      "Card.vue",
+      "CardContent.vue",
+      "CardDescription.vue",
+      "CardFooter.vue",
+      "CardHeader.vue",
+      "CardTitle.vue",
+      "index.ts"
+    ]
+  },
+  {
+    "name": "dialog",
+    "type": "ui",
+    "files": [
+      "Dialog.vue",
+      "index.ts"
+    ]
+  },
+  {
+    "name": "input",
+    "type": "ui",
+    "files": [
+      "Input.vue",
+      "index.ts"
+    ]
+  },
+  {
+    "name": "select",
+    "type": "ui",
+    "files": [
+      "Select.vue",
+      "index.ts"
+    ]
+  },
+  {
+    "name": "tabs",
+    "type": "ui",
+    "files": [
+      "Tabs.vue",
+      "index.ts"
+    ]
+  }
+]
