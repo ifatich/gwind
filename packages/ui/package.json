@@ -19,15 +19,17 @@
     "lint": "vue-tsc --noEmit"
   },
   "dependencies": {
-    "reka-ui": "^2.2.0",
-    "clsx": "^2.1.1",
-    "tailwind-merge": "^3.3.0",
+    "@vueuse/core": "^13.1.0",
     "class-variance-authority": "^0.7.1",
-    "@vueuse/core": "^13.1.0"
+    "clsx": "^2.1.1",
+    "gwind-token": "link:../gwind-token",
+    "gwind-v2": "link:../../../gwind-token",
+    "reka-ui": "^2.2.0",
+    "tailwind-merge": "^3.3.0"
   },
   "devDependencies": {
-    "@vitejs/plugin-vue": "^5.2.4",
     "@tailwindcss/vite": "^4.1.5",
+    "@vitejs/plugin-vue": "^5.2.4",
     "tailwindcss": "^4.1.5",
     "typescript": "latest",
     "vite": "^6.3.4",

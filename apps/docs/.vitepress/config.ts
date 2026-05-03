@@ -1,3 +1,4 @@
+// @ts-nocheck — VitePress uses Vite 5 types, @tailwindcss/vite uses Vite 8
 import { defineConfig } from 'vitepress'
 import tailwindcss from '@tailwindcss/vite'
 import { resolve } from 'node:path'
@@ -59,11 +60,16 @@ export default defineConfig({
 
   vite: {
     plugins: [tailwindcss()],
+    server: {
+      fs: {
+        allow: ['../..'],
+      },
+    },
     resolve: {
       alias: [
         { find: '@gwind/ui', replacement: resolve(__dirname, '../../packages/ui/src') },
         { find: /^@\//, replacement: resolve(__dirname, '../../packages/ui/src') + '/' },
       ],
     },
-  },
+  } as any,
 })

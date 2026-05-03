@@ -67,4 +67,4 @@ Gwind dikelola menggunakan struktur monorepo untuk menjaga konsistensi antara ko
 5.  Tambahkan dokumentasi di `apps/docs/components/`.
 
 ---
-*Dibuat dengan ❤️ oleh Antigravity untuk Pegadaian Project.*
+*Dibuat dengan ❤️ oleh F.I.Al.Arasy untuk Pegadaian.*

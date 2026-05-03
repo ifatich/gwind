@@ -45,7 +45,7 @@ const props = withDefaults(defineProps<Props>(), {
 })
 
 const emit = defineEmits<{
-  'update:modelValue': [value: string]
+  (e: 'update:modelValue', value: string): void
 }>()
 </script>
 
@@ -58,9 +58,9 @@ const emit = defineEmits<{
     <SelectTrigger
       :class="
         cn(
-          'flex h-9 w-full items-center justify-between gap-2 rounded-md border border-[var(--gw-input)] bg-transparent px-3 py-2 text-sm shadow-xs transition-colors duration-200',
-          'placeholder:text-[var(--gw-muted-foreground)]',
-          'focus:outline-none focus:ring-2 focus:ring-[var(--gw-ring)] focus:ring-offset-1',
+          'flex h-10 w-full items-center justify-between gap-2 rounded-lg border border-input bg-transparent px-3 py-2 text-sm shadow-xs transition-all duration-200',
+          'placeholder:text-muted-foreground',
+          'focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2',
           'disabled:cursor-not-allowed disabled:opacity-50',
           '[&>span]:line-clamp-1',
           props.class,
@@ -89,7 +89,7 @@ const emit = defineEmits<{
       <SelectContent
         :class="
           cn(
-            'relative z-50 max-h-72 min-w-[8rem] overflow-hidden rounded-lg border border-[var(--gw-border)] bg-[var(--gw-popover)] text-[var(--gw-popover-foreground)] shadow-lg',
+            'relative z-50 max-h-72 min-w-[8rem] overflow-hidden rounded-lg border border-border bg-card text-card-foreground shadow-lg',
             'data-[state=open]:animate-zoom-in data-[state=closed]:animate-zoom-out',
           )
         "
@@ -97,7 +97,7 @@ const emit = defineEmits<{
         :side-offset="6"
       >
         <SelectScrollUpButton
-          class="flex h-6 cursor-default items-center justify-center bg-[var(--gw-popover)]"
+          class="flex h-6 cursor-default items-center justify-center bg-card"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -125,7 +125,7 @@ const emit = defineEmits<{
               :class="
                 cn(
                   'relative flex w-full cursor-pointer select-none items-center rounded-md py-1.5 pl-8 pr-2 text-sm outline-none transition-colors duration-100',
-                  'focus:bg-[var(--gw-accent)] focus:text-[var(--gw-accent-foreground)]',
+                  'focus:bg-accent focus:text-accent-foreground',
                   'data-[disabled]:pointer-events-none data-[disabled]:opacity-50',
                 )
               "
@@ -154,7 +154,7 @@ const emit = defineEmits<{
           <!-- Grouped options -->
           <template v-if="groups.length > 0">
             <SelectGroup v-for="group in groups" :key="group.label">
-              <SelectLabel class="px-8 py-1.5 text-xs font-semibold text-[var(--gw-muted-foreground)]">
+              <SelectLabel class="px-8 py-1.5 text-xs font-semibold text-muted-foreground">
                 {{ group.label }}
               </SelectLabel>
               <SelectItem
@@ -165,7 +165,7 @@ const emit = defineEmits<{
                 :class="
                   cn(
                     'relative flex w-full cursor-pointer select-none items-center rounded-md py-1.5 pl-8 pr-2 text-sm outline-none transition-colors duration-100',
-                    'focus:bg-[var(--gw-accent)] focus:text-[var(--gw-accent-foreground)]',
+                    'focus:bg-accent focus:text-accent-foreground',
                     'data-[disabled]:pointer-events-none data-[disabled]:opacity-50',
                   )
                 "
@@ -194,7 +194,7 @@ const emit = defineEmits<{
         </SelectViewport>
 
         <SelectScrollDownButton
-          class="flex h-6 cursor-default items-center justify-center bg-[var(--gw-popover)]"
+          class="flex h-6 cursor-default items-center justify-center bg-card"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"

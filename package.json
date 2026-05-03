@@ -11,10 +11,16 @@
     "format": "prettier --write \"**/*.{ts,vue,css,md}\""
   },
   "devDependencies": {
+    "@tailwindcss/postcss": "^4.2.4",
     "prettier": "latest",
     "tsx": "^4.21.0",
     "turbo": "latest",
     "typescript": "latest"
   },
-  "packageManager": "pnpm@10.15.0"
+  "packageManager": "pnpm@10.15.0",
+  "pnpm": {
+    "overrides": {
+      "vite": "^6.4.2"
+    }
+  }
 }
