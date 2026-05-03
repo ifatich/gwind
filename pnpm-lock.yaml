@@ -109,9 +109,6 @@ importers:
       clsx:
         specifier: ^2.1.1
         version: 2.1.1
-      gwind-v2:
-        specifier: link:../../../gwind-token
-        version: link:../../../gwind-token
       reka-ui:
         specifier: ^2.2.0
         version: 2.9.6(vue@3.5.33(typescript@6.0.3))
