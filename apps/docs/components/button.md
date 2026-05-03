@@ -122,7 +122,7 @@ const delegatedProps = computed(() => {
 ### 2. CLI Installation (Coming Soon)
 
 ```bash
-npx gwind-ui add button
+npx @ifatich/gwind-ui add button
 ```
 
 ## Usage

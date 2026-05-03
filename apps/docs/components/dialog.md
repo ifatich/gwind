@@ -28,7 +28,7 @@ A modal dialog that interrupts the user with important content and expects a res
 ### 1. CLI Installation
 
 ```bash
-npx gwind-ui add dialog
+npx @ifatich/gwind-ui add dialog
 ```
 
 ### 2. Manual Installation

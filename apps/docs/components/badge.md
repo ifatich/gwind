@@ -22,7 +22,7 @@ Displays a badge or a tag.
 ### 1. CLI Installation
 
 ```bash
-npx gwind-ui add badge
+npx @ifatich/gwind-ui add badge
 ```
 
 ### 2. Manual Installation
