@@ -6,6 +6,7 @@ import { resolve } from 'node:path'
 export default defineConfig({
   title: 'Gwind',
   description: 'A Vue 3 Design System — Accessible, Consistent, Performant',
+  base: '/gwind/',
 
   head: [
     ['link', { rel: 'preconnect', href: 'https://fonts.googleapis.com' }],
