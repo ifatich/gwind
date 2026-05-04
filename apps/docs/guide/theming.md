@@ -1,78 +1,79 @@
 # Theming
 
-Gwind uses **Tailwind CSS v4's** CSS-first configuration to define all design tokens. This means you can customize your entire design system by editing a single CSS file — no JavaScript config needed.
+Gwind menggunakan sistem konfigurasi CSS-first dari **Tailwind CSS v4**. Seluruh design token didefinisikan sebagai variabel CSS murni, yang kemudian didaftarkan ke dalam blok `@theme`.
 
-## Design Tokens
+## Warna Brand Pegadaian
 
-All tokens are defined using the `@theme` directive:
+Gwind hadir dengan palet warna resmi yang sudah dikonfigurasi di dalam `gwind-v2`. Anda bisa menggunakan warna ini langsung sebagai utility class:
+
+| Nama Warna | Contoh Class | Kegunaan Utama |
+|------------|--------------|----------------|
+| **Lime** | `bg-lime-500` | Warna identitas utama (Primary) |
+| **Broccoli** | `text-broccoli-600` | Warna sekunder / penekanan |
+| **Orange** | `border-orange-400` | Warna aksen / warning |
+| **Black** | `bg-black-800` | Warna teks dan UI gelap |
+
+## Cara Kerja Tema
+
+Semua warna didaftarkan melalui variabel CSS di `gwind-v2/base.css` dan dipetakan ke Tailwind di `gwind-v2/theme.css`:
 
 ```css
+/* Di dalam gwind-v2/theme.css */
 @theme {
-  /* Brand Colors */
-  --color-brand-50: #f5f3ff;
-  --color-brand-100: #ede9fe;
-  --color-brand-200: #ddd6fe;
-  --color-brand-300: #c4b5fd;
-  --color-brand-400: #a78bfa;
-  --color-brand-500: #8b5cf6;
-  --color-brand-600: #7c3aed;
-  --color-brand-700: #6d28d9;
-  --color-brand-800: #5b21b6;
-  --color-brand-900: #4c1d95;
-  --color-brand-950: #2e1065;
-
-  /* Neutral Colors */
-  --color-neutral-50: #fafafa;
-  --color-neutral-100: #f5f5f5;
-  /* ... full scale from 50-950 */
-
-  /* Semantic Colors */
-  --color-success-500: #22c55e;
-  --color-warning-500: #f59e0b;
-  --color-destructive-500: #ef4444;
-  --color-info-500: #3b82f6;
+  --color-primary: var(--lime-500);
+  --color-secondary: var(--broccoli-500);
+  
+  /* Palet warna lengkap tersedia secara native */
+  --color-lime-500: var(--lime-500);
+  --color-broccoli-500: var(--broccoli-500);
+  /* ... dsb */
 }
 ```
 
-## Runtime Theming
+## Kustomisasi Warna
 
-Components reference CSS custom properties (prefixed with `--gw-`) for runtime theming:
+Untuk mengubah tema warna di proyek Anda, Anda cukup menimpa (override) variabel CSS di file CSS utama Anda:
+
+```css
+@import "tailwindcss";
+@import "gwind-v2/base.css";
+@import "gwind-v2/theme.css";
+
+@layer base {
+  :root {
+    /* Ubah warna primary menjadi Broccoli bukan Lime */
+    --primary: var(--broccoli-500);
+    
+    /* Atau tentukan warna hex kustom */
+    --lime-500: #32CD32; 
+  }
+}
+```
+
+## Spacing & Radius
+
+Gwind menggunakan sistem spacing berbasis pixel yang dikonversi ke `rem`. Selain itu, Gwind juga tetap mempertahankan spacing standar Tailwind.
+
+- **Spacing Standar**: `p-4` (16px), `m-2` (8px).
+- **Gwind Spacing**: Jika Anda butuh presisi token Gwind, gunakan prefix `gw-` (misal: `p-gw-16` untuk 16px dari token Gwind).
+- **Radius**: Menggunakan variabel `--radius` yang bisa Anda kustomisasi secara global.
 
 ```css
 :root {
-  --gw-primary: var(--color-brand-600);
-  --gw-primary-foreground: #ffffff;
-  --gw-background: var(--color-neutral-50);
-  --gw-foreground: var(--color-neutral-950);
-  /* ... */
+  --radius: 0.75rem; /* Membuat seluruh komponen lebih bulat */
 }
 ```
 
 ## Dark Mode
 
-Dark mode is supported via `prefers-color-scheme`:
+Gwind mendukung dark mode secara otomatis. Anda bisa mengatur variabel khusus untuk dark mode menggunakan media query atau class selector:
 
 ```css
 @media (prefers-color-scheme: dark) {
   :root {
-    --gw-background: var(--color-neutral-950);
-    --gw-foreground: var(--color-neutral-50);
-    --gw-primary: var(--color-brand-500);
-    /* ... */
+    --background: var(--black-800);
+    --foreground: var(--white);
+    --primary: var(--lime-400); /* Hijau yang lebih terang untuk dark mode */
   }
 }
 ```
-
-## Customizing
-
-To change the brand color, simply update the `--color-brand-*` scale:
-
-```css
-@theme {
-  --color-brand-500: #0ea5e9; /* Sky blue */
-  --color-brand-600: #0284c7;
-  /* ... */
-}
-```
-
-All components will automatically pick up the new colors through the CSS custom property chain.

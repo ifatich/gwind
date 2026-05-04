@@ -1,41 +1,39 @@
 # Getting Started
 
-Gwind is a Vue 3 Design System built with **Reka UI** and **Tailwind CSS v4**, following the **shadcn/ui** source-code distribution model.
+Gwind adalah Vue 3 Design System yang dibangun di atas **Reka UI** dan **Tailwind CSS v4**, mengikuti model distribusi source-code **shadcn/ui**.
 
-## Prerequisites
+## Prasyarat
 
 - **Node.js** ≥ 18
 - **Vue 3** ≥ 3.5
-- **Tailwind CSS v4** configured in your project
-- **Reka UI** ≥ 2.x
+- **Tailwind CSS v4** terinstal di proyek Anda
+- **pnpm** (direkomendasikan)
 
-## Installation
+## Instalasi
 
-### 1. CLI Installation (Recommended)
-
-The fastest way to get started is using the Gwind CLI. It will handle the setup of your utilities and configuration.
-
-```bash
-# 1. Initialize your project
-npx gwind-system-ui init
-
-# 2. Add your first component
-npx gwind-system-ui add button
-```
-
-### 2. Manual Installation
-
-If you prefer to set up everything manually:
-
-#### 1. Install dependencies
+### 1. Instal Design Tokens
+Gwind menggunakan paket `gwind-v2` untuk mengelola variabel CSS dan tema Tailwind v4.
 
 ```bash
-pnpm add reka-ui clsx tailwind-merge class-variance-authority @vueuse/core
+pnpm add gwind-v2
 ```
 
-#### 2. Add the `cn` utility
+### 2. Konfigurasi CSS
+Impor base style dan tema Gwind di file CSS utama Anda (misal: `src/assets/main.css`). Pastikan Anda menggunakan Tailwind v4.
 
-Create `src/lib/utils.ts`:
+```css
+@import "tailwindcss";
+
+/* Impor Gwind tokens & theme */
+@import "gwind-v2/base.css";
+@import "gwind-v2/theme.css";
+
+/* Scanning direktori komponen Anda */
+@source "./components/ui";
+```
+
+### 3. Tambahkan Utility `cn`
+Gwind menggunakan utility `cn` untuk penggabungan class yang cerdas. Buat file `src/lib/utils.ts`:
 
 ```ts
 import { type ClassValue, clsx } from 'clsx'
@@ -46,25 +44,27 @@ export function cn(...inputs: ClassValue[]) {
 }
 ```
 
-#### 3. Copy components
+### 4. Tambahkan Komponen
+Anda bisa menggunakan CLI untuk menambahkan komponen secara otomatis:
 
-Copy the source code from the component pages into your `src/components/ui/` directory.
+```bash
+# Tambahkan komponen button
+npx gwind-system-ui add button
+```
 
-## Project Structure
+Atau salin kode sumber secara manual dari halaman dokumentasi masing-masing komponen ke direktori `src/components/ui/`.
+
+## Struktur Proyek
 
 ```
 src/
 ├── components/
-│   └── ui/
-│       ├── Button.vue
-│       ├── Input.vue
-│       ├── Badge.vue
-│       ├── Card.vue
-│       ├── Dialog.vue
-│       ├── Select.vue
-│       └── Tabs.vue
+│   └── ui/              # Komponen Gwind berada di sini
+│       ├── button/
+│       ├── input/
+│       └── ...
 ├── lib/
-│   └── utils.ts
-└── styles/
-    └── main.css
+│   └── utils.ts         # Utility cn
+└── assets/
+    └── main.css         # Entry point CSS dengan Tailwind v4
 ```
