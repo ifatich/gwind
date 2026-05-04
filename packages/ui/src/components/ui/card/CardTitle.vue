@@ -1,22 +1,14 @@
 <script setup lang="ts">
+import type { HTMLAttributes } from 'vue'
 import { cn } from '../../../lib/utils'
-import { type HTMLAttributes } from 'vue'
 
-interface Props {
+const props = defineProps<{
   class?: HTMLAttributes['class']
-  as?: string
-}
-
-const props = withDefaults(defineProps<Props>(), {
-  as: 'h3',
-})
+}>()
 </script>
 
 <template>
-  <component
-    :is="as"
-    :class="cn('font-semibold leading-none tracking-tight', props.class)"
-  >
+  <h3 :class="cn('!text-omicron font-bold leading-none tracking-tight', props.class)">
     <slot />
-  </component>
+  </h3>
 </template>

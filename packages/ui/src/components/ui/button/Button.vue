@@ -1,52 +1,79 @@
 <script setup lang="ts">
-import { Primitive, type PrimitiveProps } from 'reka-ui'
-import { cva, type VariantProps } from 'class-variance-authority'
+import { type HTMLAttributes } from 'vue'
 import { cn } from '../../../lib/utils'
-import { computed } from 'vue'
+import { Primitive, type PrimitiveProps } from 'reka-ui'
+import { type ButtonVariants, buttonVariants } from '.'
 
-const buttonVariants = cva(
-  'inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50',
-  {
-    variants: {
-      variant: {
-        default: 'bg-primary text-primary-foreground hover:bg-primary/90',
-        destructive: 'bg-destructive text-destructive-foreground hover:bg-destructive/90',
-        outline: 'border border-input bg-background hover:bg-accent hover:text-accent-foreground',
-        secondary: 'bg-secondary text-secondary-foreground hover:bg-secondary/80',
-        ghost: 'hover:bg-accent hover:text-accent-foreground',
-        link: 'text-primary underline-offset-4 hover:underline',
-      },
-      size: {
-        default: 'h-10 px-4 py-2',
-        sm: 'h-9 px-3',
-        lg: 'h-11 px-8',
-        icon: 'h-10 w-10',
-      },
-    },
-    defaultVariants: {
-      variant: 'default',
-      size: 'default',
-    },
+// Local ripple directive for portability
+const vRipple = {
+  mounted(el: HTMLElement) {
+    el.style.position = 'relative'
+    el.style.overflow = 'hidden'
+
+    el.addEventListener('pointerdown', function (e: PointerEvent) {
+      if (el.classList.contains('combobox')) return
+
+      const rect = el.getBoundingClientRect()
+      const ripple = document.createElement('span')
+      const size = Math.max(rect.width, rect.height)
+      const x = e.clientX - rect.left - size / 2
+      const y = e.clientY - rect.top - size / 2
+
+      ripple.style.position = 'absolute'
+      ripple.style.left = `${x}px`
+      ripple.style.top = `${y}px`
+      ripple.style.width = ripple.style.height = `${size}px`
+      ripple.style.background = 'rgba(0,0,0,0.15)'
+      ripple.style.borderRadius = '50%'
+      ripple.style.pointerEvents = 'none'
+      ripple.style.transform = 'scale(0)'
+      ripple.style.transition = 'transform 0.4s, opacity 0.6s'
+      ripple.style.zIndex = '1'
+      el.appendChild(ripple)
+
+      requestAnimationFrame(() => {
+        ripple.style.transform = 'scale(1)'
+        ripple.style.opacity = '0'
+      })
+
+      setTimeout(() => {
+        ripple.remove()
+      }, 600)
+    })
   },
-)
+}
 
 interface Props extends PrimitiveProps {
-  variant?: VariantProps<typeof buttonVariants>['variant']
-  size?: VariantProps<typeof buttonVariants>['size']
-  class?: string
+  variant?: ButtonVariants['variant']
+  size?: ButtonVariants['size']
+  class?: HTMLAttributes['class']
+  disabled?: boolean
 }
 
 const props = withDefaults(defineProps<Props>(), {
   as: 'button',
-})
-
-const buttonClass = computed(() => {
-  return cn(buttonVariants({ variant: props.variant, size: props.size }), props.class)
+  disabled: false,
 })
 </script>
 
 <template>
-  <Primitive :as="as" :as-child="asChild" :class="buttonClass">
+  <Primitive
+    v-ripple
+    data-slot="button"
+    :as="as"
+    :as-child="asChild"
+    :class="
+      cn(
+        buttonVariants({
+          variant: props.variant,
+          size: props.size,
+          state: props.disabled ? 'disabled' : undefined,
+        }),
+        props.class,
+      )
+    "
+    :disabled="disabled"
+  >
     <slot />
   </Primitive>
 </template>

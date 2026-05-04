@@ -10,125 +10,89 @@ A set of layered sections of content, known as tab panels, that are displayed on
 ## Preview
 
 <div class="gw-preview">
-  <GwTabs
-    v-model="activeTab"
-    :tabs="[
-      { value: 'account', label: 'Account' },
-      { value: 'password', label: 'Password' },
-      { value: 'notifications', label: 'Notifications' },
-    ]"
-  >
-    <template #account>
+  <GwTabGroup v-model="activeTab">
+    <GwTabTriggerGroup>
+      <GwTabTrigger value="account">Account</GwTabTrigger>
+      <GwTabTrigger value="password">Password</GwTabTrigger>
+      <GwTabTrigger value="notifications">Notifications</GwTabTrigger>
+    </GwTabTriggerGroup>
+    
+    <GwTabContent value="account" class="mt-4">
       <GwCard>
         <GwCardHeader>
           <GwCardTitle>Account</GwCardTitle>
-          <GwCardDescription>Make changes to your account here. Click save when you're done.</GwCardDescription>
+          <GwCardDescription>Make changes to your account here.</GwCardDescription>
         </GwCardHeader>
         <GwCardContent>
-          <div class="flex flex-col gap-4">
-            <div>
-              <label class="text-sm font-medium mb-1.5 block">Name</label>
-              <GwInput default-value="Pedro Duarte" />
-            </div>
-            <div>
-              <label class="text-sm font-medium mb-1.5 block">Username</label>
-              <GwInput default-value="@peduarte" />
-            </div>
-          </div>
+          <p class="text-sm">Account details content goes here.</p>
         </GwCardContent>
-        <GwCardFooter>
-          <GwButton>Save changes</GwButton>
-        </GwCardFooter>
       </GwCard>
-    </template>
-
-    <template #password>
-      <GwCard>
+    </GwTabContent>
+    
+    <GwTabContent value="password" class="mt-4">
+       <GwCard>
         <GwCardHeader>
           <GwCardTitle>Password</GwCardTitle>
-          <GwCardDescription>Change your password here. After saving, you'll be logged out.</GwCardDescription>
+          <GwCardDescription>Change your password here.</GwCardDescription>
         </GwCardHeader>
-        <GwCardContent>
-          <div class="flex flex-col gap-4">
-            <div>
-              <label class="text-sm font-medium mb-1.5 block">Current password</label>
-              <GwInput type="password" />
-            </div>
-            <div>
-              <label class="text-sm font-medium mb-1.5 block">New password</label>
-              <GwInput type="password" />
-            </div>
-          </div>
-        </GwCardContent>
-        <GwCardFooter>
-          <GwButton>Update password</GwButton>
-        </GwCardFooter>
       </GwCard>
-    </template>
-
-    <template #notifications>
-      <GwCard>
-        <GwCardHeader>
-          <GwCardTitle>Notifications</GwCardTitle>
-          <GwCardDescription>Configure how you receive notifications.</GwCardDescription>
-        </GwCardHeader>
-        <GwCardContent>
-          <div class="flex flex-col gap-3">
-            <div class="flex items-center justify-between">
-              <span class="text-sm">Email notifications</span>
-              <GwBadge variant="success">Enabled</GwBadge>
-            </div>
-            <div class="flex items-center justify-between">
-              <span class="text-sm">Push notifications</span>
-              <GwBadge variant="outline">Disabled</GwBadge>
-            </div>
-            <div class="flex items-center justify-between">
-              <span class="text-sm">SMS notifications</span>
-              <GwBadge variant="outline">Disabled</GwBadge>
-            </div>
-          </div>
-        </GwCardContent>
-      </GwCard>
-    </template>
-  </GwTabs>
+    </GwTabContent>
+  </GwTabGroup>
 </div>
+
+## Installation
+
+### 1. CLI Installation
+
+```bash
+npx gwind-system-ui add tabs
+ npx gwind-system-ui add badge
+```
+
+### 2. Manual Installation
+
+Create a folder `src/components/ui/tabs/` and copy the source code for each file.
 
 ## Usage
 
 ```vue
 <script setup>
-import { Tabs, Card, CardHeader, CardTitle, CardContent } from '@/components/ui'
+import { 
+  TabGroup, 
+  TabTriggerGroup, 
+  TabTrigger, 
+  TabContent 
+} from '@/components/ui/tabs'
 import { ref } from 'vue'
 
 const activeTab = ref('tab1')
 </script>
 
 <template>
-  <Tabs
-    v-model="activeTab"
-    :tabs="[
-      { value: 'tab1', label: 'Tab 1' },
-      { value: 'tab2', label: 'Tab 2' },
-    ]"
-  >
-    <template #tab1>
+  <TabGroup v-model="activeTab">
+    <TabTriggerGroup>
+      <TabTrigger value="tab1">Tab 1</TabTrigger>
+      <TabTrigger value="tab2">Tab 2</TabTrigger>
+    </TabTriggerGroup>
+    
+    <TabContent value="tab1">
       <p>Content for Tab 1</p>
-    </template>
-    <template #tab2>
+    </TabContent>
+    <TabContent value="tab2">
       <p>Content for Tab 2</p>
-    </template>
-  </Tabs>
+    </TabContent>
+  </TabGroup>
 </template>
 ```
 
-## Props
+## Sub-components
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `modelValue` | `string` | — | Active tab value (v-model) |
-| `defaultValue` | `string` | First tab's value | Initially active tab |
-| `tabs` | `{ value: string, label: string, disabled?: boolean }[]` | — | Tab definitions |
-| `class` | `string` | — | Additional CSS classes |
+| Component | Description |
+|-----------|-------------|
+| `TabGroup` | The Root component that manages the active state |
+| `TabTriggerGroup` | The container for tab triggers, includes the animated indicator |
+| `TabTrigger` | A button that activates a specific tab panel |
+| `TabContent` | The panel containing the content for a specific tab |
 
 ## Accessibility
 

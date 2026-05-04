@@ -1,12 +1,14 @@
 {
   "name": "input",
   "type": "ui",
-  "dependencies": [],
+  "dependencies": [
+    "@vueuse/core"
+  ],
   "registryDependencies": [],
   "files": [
     {
       "name": "Input.vue",
-      "content": "<script setup lang=\"ts\">\nimport { cn } from '../../../lib/utils'\nimport { type InputHTMLAttributes, computed, useAttrs } from 'vue'\n\ninterface Props {\n  modelValue?: string | number\n  defaultValue?: string | number\n  class?: InputHTMLAttributes['class']\n  type?: string\n}\n\nconst props = withDefaults(defineProps<Props>(), {\n  type: 'text',\n})\n\nconst emit = defineEmits<{\n  (e: 'update:modelValue', value: string | number): void\n}>()\n\nconst attrs = useAttrs()\n\nconst modelValue = computed({\n  get: () => props.modelValue ?? props.defaultValue ?? '',\n  set: (val) => emit('update:modelValue', val),\n})\n</script>\n\n<template>\n  <input\n    v-model=\"modelValue\"\n    v-bind=\"attrs\"\n    :type=\"props.type\"\n    :class=\"\n      cn(\n        'flex h-10 w-full rounded-lg border border-input bg-transparent px-3 py-1 text-sm shadow-xs transition-all duration-200',\n        'file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground',\n        'placeholder:text-muted-foreground',\n        'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2',\n        'disabled:cursor-not-allowed disabled:opacity-50',\n        props.class,\n      )\n    \"\n  />\n</template>\n"
+      "content": "<script setup lang=\"ts\">\nimport type { HTMLAttributes } from 'vue'\nimport { cn } from '../../../lib/utils'\nimport { useVModel } from '@vueuse/core'\n\nconst props = defineProps<{\n  defaultValue?: string | number\n  modelValue?: string | number\n  class?: HTMLAttributes['class']\n  type?: string\n}>()\n\nconst emits = defineEmits<{\n  (e: 'update:modelValue', payload: string | number): void\n}>()\n\nconst modelValue = useVModel(props, 'modelValue', emits, {\n  passive: true,\n  defaultValue: props.defaultValue,\n})\n</script>\n\n<template>\n  <input\n    v-model=\"modelValue\"\n    :type=\"type\"\n    :class=\"\n      cn(\n        'flex w-full rounded-md border border-input bg-background px-3 py-[11px] text-omicron ring-offset-background file:border-0 file:bg-transparent file:text-omicron file:font-default file-placeholder:text-black-50 placeholder:text-black-50 focus-visible:outline-none focus-visible:border-lime-50 focus-visible:ring-ring focus-visible:ring-offset-2 hover:border-lime-500 transition-all duration-100 focus:border-lime-500',\n        'disabled:cursor-not-allowed disabled:bg-black-200 disabled:text-black-600 disabled:focus:border-transparent disabled:hover:border-transparent',\n        props.class,\n      )\n    \"\n  />\n</template>\n"
     },
     {
       "name": "index.ts",

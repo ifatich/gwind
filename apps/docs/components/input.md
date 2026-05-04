@@ -19,26 +19,6 @@ Displays a form input field.
   </div>
 </div>
 
-### File Input
-
-<div class="gw-preview">
-  <div class="gw-preview-col" style="max-width: 360px;">
-    <GwInput type="file" />
-  </div>
-</div>
-
-### With Label
-
-<div class="gw-preview">
-  <div class="gw-preview-col" style="max-width: 360px;">
-    <div>
-      <label class="text-sm font-medium mb-1.5 block">Email</label>
-      <GwInput placeholder="you@example.com" v-model="email" />
-      <p class="text-xs text-[var(--gw-muted-foreground)] mt-1.5">We'll never share your email.</p>
-    </div>
-  </div>
-</div>
-
 ## Installation
 
 ### 1. CLI Installation
@@ -53,44 +33,35 @@ Copy the following code into your `src/components/ui/input/Input.vue` file:
 
 ```vue
 <script setup lang="ts">
+import type { HTMLAttributes } from 'vue'
 import { cn } from '@/lib/utils'
-import { computed, useAttrs } from 'vue'
+import { useVModel } from '@vueuse/core'
 
-interface Props {
-  modelValue?: string | number
+const props = defineProps<{
   defaultValue?: string | number
-  class?: string
+  modelValue?: string | number
+  class?: HTMLAttributes['class']
   type?: string
-}
-
-const props = withDefaults(defineProps<Props>(), {
-  type: 'text',
-})
-
-const emit = defineEmits<{
-  'update:modelValue': [value: string | number]
 }>()
 
-const attrs = useAttrs()
+const emits = defineEmits<{
+  (e: 'update:modelValue', payload: string | number): void
+}>()
 
-const modelValue = computed({
-  get: () => props.modelValue ?? props.defaultValue ?? '',
-  set: (val) => emit('update:modelValue', val),
+const modelValue = useVModel(props, 'modelValue', emits, {
+  passive: true,
+  defaultValue: props.defaultValue,
 })
 </script>
 
 <template>
   <input
     v-model="modelValue"
-    v-bind="attrs"
     :type="type"
     :class="
       cn(
-        'flex h-9 w-full rounded-md border border-[var(--gw-input)] bg-transparent px-3 py-1 text-sm shadow-xs transition-colors duration-200',
-        'file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-[var(--gw-foreground)]',
-        'placeholder:text-[var(--gw-muted-foreground)]',
-        'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--gw-ring)] focus-visible:ring-offset-1',
-        'disabled:cursor-not-allowed disabled:opacity-50',
+        'flex w-full rounded-md border border-input bg-background px-3 py-[11px] text-omicron ring-offset-background file:border-0 file:bg-transparent file:text-omicron file:font-default file-placeholder:text-black-50 placeholder:text-black-50 focus-visible:outline-none focus-visible:border-lime-50 focus-visible:ring-ring focus-visible:ring-offset-2 hover:border-lime-500 transition-all duration-100 focus:border-lime-500',
+        'disabled:cursor-not-allowed disabled:bg-black-200 disabled:text-black-600 disabled:focus:border-transparent disabled:hover:border-transparent',
         props.class,
       )
     "
@@ -102,7 +73,7 @@ const modelValue = computed({
 
 ```vue
 <script setup>
-import { Input } from '@/components/ui'
+import { Input } from '@/components/ui/input'
 import { ref } from 'vue'
 
 const email = ref('')
@@ -111,7 +82,6 @@ const email = ref('')
 <template>
   <Input v-model="email" placeholder="Email address" />
   <Input type="password" placeholder="Password" />
-  <Input disabled placeholder="Disabled" />
 </template>
 ```
 

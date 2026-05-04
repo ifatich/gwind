@@ -35,6 +35,7 @@ export default defineConfig({
         items: [
           { text: 'Button', link: '/components/button' },
           { text: 'Input', link: '/components/input' },
+          { text: 'Label', link: '/components/label' },
           { text: 'Badge', link: '/components/badge' },
           { text: 'Card', link: '/components/card' },
           { text: 'Dialog', link: '/components/dialog' },

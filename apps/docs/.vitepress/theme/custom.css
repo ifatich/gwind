@@ -1,42 +1,48 @@
-/* 
- * Tailwind v4 dengan Vite Plugin
- * source() menentukan base directory untuk scanning di monorepo
- */
 @import "tailwindcss";
 
+/* 
+ * Tailwind v4 dengan Vite Plugin
+ * @source menentukan base directory untuk scanning di monorepo
+ */
 @source "../../../../packages/ui/src";
 
+/* Import Gwind UI styles */
 @import "../../../../packages/ui/src/styles/main.css";
+
+@theme {
+  /* VitePress specific brand overrides */
+  --color-vp-brand-1: var(--lime-500);
+}
 
 /*
  * ── CRITICAL FIX ──
  * VitePress default theme memiliki CSS reset yang TIDAK berada di @layer,
  * sehingga menimpa Tailwind utility classes (yang berada di @layer utilities).
- * 
- * Kita harus menimpa reset tersebut secara eksplisit.
  */
 button,
+input,
+select,
+textarea,
 [role="button"] {
   background-color: revert-layer;
   background-image: revert-layer;
   padding: revert-layer;
+  color: revert-layer;
+  border-color: revert-layer;
 }
 
-/*
- * VitePress overrides
- */
+/* VitePress overrides */
 :root {
-  --vp-c-brand-1: #2563eb;
   --vp-font-family-base: "Inter", sans-serif;
 }
 
 .gw-preview {
-  border: 1px solid #e5e7eb;
+  border: 1px solid var(--black-200);
   background-color: #ffffff;
   border-radius: 0.75rem;
   padding: 1.5rem;
   margin: 1.5rem 0;
-  color: #1f2937;
+  color: var(--black-800);
 }
 
 .gw-preview-row {

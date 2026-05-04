@@ -33,6 +33,14 @@
     "type": "ui",
     "files": [
       "Dialog.vue",
+      "DialogClose.vue",
+      "DialogContent.vue",
+      "DialogDescription.vue",
+      "DialogFooter.vue",
+      "DialogHeader.vue",
+      "DialogOverlay.vue",
+      "DialogTitle.vue",
+      "DialogTrigger.vue",
       "index.ts"
     ]
   },
@@ -45,10 +53,28 @@
     ]
   },
   {
+    "name": "label",
+    "type": "ui",
+    "files": [
+      "Label.vue",
+      "index.ts"
+    ]
+  },
+  {
     "name": "select",
     "type": "ui",
     "files": [
       "Select.vue",
+      "SelectContent.vue",
+      "SelectGroup.vue",
+      "SelectItem.vue",
+      "SelectItemText.vue",
+      "SelectLabel.vue",
+      "SelectScrollDownButton.vue",
+      "SelectScrollUpButton.vue",
+      "SelectSeparator.vue",
+      "SelectTrigger.vue",
+      "SelectValue.vue",
       "index.ts"
     ]
   },
@@ -56,7 +82,10 @@
     "name": "tabs",
     "type": "ui",
     "files": [
-      "Tabs.vue",
+      "TabContent.vue",
+      "TabGroup.vue",
+      "TabTrigger.vue",
+      "TabTriggerGroup.vue",
       "index.ts"
     ]
   }

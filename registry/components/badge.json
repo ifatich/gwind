@@ -2,18 +2,17 @@
   "name": "badge",
   "type": "ui",
   "dependencies": [
-    "reka-ui",
     "class-variance-authority"
   ],
   "registryDependencies": [],
   "files": [
     {
       "name": "Badge.vue",
-      "content": "<script setup lang=\"ts\">\nimport { Primitive, type PrimitiveProps } from 'reka-ui'\nimport { cva, type VariantProps } from 'class-variance-authority'\nimport { cn } from '../../../lib/utils'\nimport { type HTMLAttributes, computed } from 'vue'\n\nconst badgeVariants = cva(\n  'inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2',\n  {\n    variants: {\n      variant: {\n        default:\n          'border-transparent bg-primary text-primary-foreground shadow-sm',\n        secondary:\n          'border-transparent bg-secondary text-secondary-foreground',\n        destructive:\n          'border-transparent bg-destructive text-destructive-foreground shadow-sm',\n        outline: 'text-foreground',\n        success:\n          'border-transparent bg-success text-success-foreground shadow-sm',\n        warning:\n          'border-transparent bg-warning text-warning-foreground shadow-sm',\n      },\n    },\n    defaultVariants: {\n      variant: 'default',\n    },\n  },\n)\n\ntype BadgeVariants = VariantProps<typeof badgeVariants>\n\ninterface Props extends PrimitiveProps {\n  variant?: BadgeVariants['variant']\n  class?: HTMLAttributes['class']\n}\n\nconst props = withDefaults(defineProps<Props>(), {\n  as: 'div',\n})\n\nconst delegatedProps = computed(() => {\n  const { class: _, variant: __, ...delegated } = props\n  return delegated\n})\n</script>\n\n<template>\n  <Primitive\n    v-bind=\"delegatedProps\"\n    :class=\"cn(badgeVariants({ variant: props.variant }), props.class)\"\n  >\n    <slot />\n  </Primitive>\n</template>\n"
+      "content": "<script setup lang=\"ts\">\nimport { type HTMLAttributes } from 'vue'\nimport { cn } from '../../../lib/utils'\nimport { type BadgeVariants, badgeVariants } from '.'\n\nconst props = withDefaults(\n  defineProps<{\n    variant?: BadgeVariants['variant']\n    class?: HTMLAttributes['class']\n    modelValue?: boolean\n  }>(),\n  {\n    modelValue: true,\n  },\n)\n</script>\n\n<template>\n  <div\n    :class=\"\n      cn(\n        badgeVariants({ variant: props.variant }),\n        !props.modelValue && 'hidden',\n        props.class,\n      )\n    \"\n  >\n    <slot />\n    <div\n      :class=\"\n        cn(`additional-item cursor-pointer ml-3`, !$slots.rightIcon && `hidden`)\n      \"\n    >\n      <slot name=\"rightIcon\" />\n    </div>\n  </div>\n</template>\n"
     },
     {
       "name": "index.ts",
-      "content": "export { default as Badge } from './Badge.vue'\n"
+      "content": "import { cva, type VariantProps } from 'class-variance-authority'\n\nexport { default as Badge } from './Badge.vue'\n\nexport const badgeVariants = cva(\n  '!text-omega font-bold w-fit inline-flex items-center rounded-md px-2.5 py-1 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2',\n  {\n    variants: {\n      variant: {\n        green: '!text-omega border-transparent bg-lime-100 text-lime-500',\n        brocoli: '!text-omega border-transparent bg-broccoli-100 text-broccoli-500',\n        orange: '!text-omega border-transparent bg-orange-100 text-orange-500',\n        blue: '!text-omega border-transparent bg-blue-100 text-blue-500',\n        red: '!text-omega border-transparent bg-red-100 text-red-500',\n        outline: '!text-omega text-foreground',\n      },\n    },\n    defaultVariants: {\n      variant: 'green',\n    },\n  },\n)\n\nexport type BadgeVariants = VariantProps<typeof badgeVariants>\n"
     }
   ]
 }

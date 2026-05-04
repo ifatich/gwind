@@ -46,6 +46,7 @@ const main = () => {
     if (files.some(f => f.content.includes('clsx'))) dependencies.push('clsx')
     if (files.some(f => f.content.includes('tailwind-merge'))) dependencies.push('tailwind-merge')
     if (files.some(f => f.content.includes('@vueuse/core'))) dependencies.push('@vueuse/core')
+    if (files.some(f => f.content.includes('lucide-vue-next'))) dependencies.push('lucide-vue-next')
 
     const registryItem: RegistryItem = {
       name,

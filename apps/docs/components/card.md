@@ -24,31 +24,6 @@ Displays a card with header, content, and footer.
   </div>
 </div>
 
-### Multiple Cards
-
-<div class="gw-preview">
-  <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-    <GwCard>
-      <GwCardHeader>
-        <GwCardTitle>Notifications</GwCardTitle>
-        <GwCardDescription>Manage your notification preferences.</GwCardDescription>
-      </GwCardHeader>
-      <GwCardContent>
-        <p class="text-sm text-[var(--gw-muted-foreground)]">You have 3 unread notifications.</p>
-      </GwCardContent>
-    </GwCard>
-    <GwCard>
-      <GwCardHeader>
-        <GwCardTitle>Billing</GwCardTitle>
-        <GwCardDescription>Manage your billing and payment methods.</GwCardDescription>
-      </GwCardHeader>
-      <GwCardContent>
-        <p class="text-sm text-[var(--gw-muted-foreground)]">Your next payment is due on Jan 1, 2025.</p>
-      </GwCardContent>
-    </GwCard>
-  </div>
-</div>
-
 ## Installation
 
 ### 1. CLI Installation
@@ -59,32 +34,45 @@ npx gwind-system-ui add card
 
 ### 2. Manual Installation
 
-Create a folder `src/components/ui/card/` and copy the source code for each file from the [GitHub Repository](https://github.com/gwind-ui/ui/tree/main/src/components/ui/card).
+Create a folder `src/components/ui/card/` and copy the source code for each file.
 
 Main `Card.vue` source:
 
 ```vue
 <script setup lang="ts">
+import type { HTMLAttributes } from 'vue'
 import { cn } from '@/lib/utils'
 
-interface Props {
-  class?: string
-}
-
-const props = defineProps<Props>()
+const props = defineProps<{
+  class?: HTMLAttributes['class']
+}>()
 </script>
 
 <template>
   <div
-    :class="
-      cn(
-        'rounded-xl border border-[var(--gw-border)] bg-[var(--gw-card)] text-[var(--gw-card-foreground)] shadow-sm',
-        props.class,
-      )
-    "
+    :class="cn('p-4 rounded-md bg-white text-black-800 drop-shadow-1', props.class)"
   >
     <slot />
   </div>
+</template>
+```
+
+`CardTitle.vue` source:
+
+```vue
+<script setup lang="ts">
+import type { HTMLAttributes } from 'vue'
+import { cn } from '@/lib/utils'
+
+const props = defineProps<{
+  class?: HTMLAttributes['class']
+}>()
+</script>
+
+<template>
+  <h3 :class="cn('!text-omicron font-bold leading-none tracking-tight', props.class)">
+    <slot />
+  </h3>
 </template>
 ```
 
@@ -94,9 +82,8 @@ const props = defineProps<Props>()
 <script setup>
 import {
   Card, CardHeader, CardTitle,
-  CardDescription, CardContent, CardFooter,
-  Button,
-} from '@/components/ui'
+  CardDescription, CardContent, CardFooter
+} from '@/components/ui/card'
 </script>
 
 <template>
@@ -119,9 +106,9 @@ import {
 
 | Component | Description |
 |-----------|-------------|
-| `Card` | The container with border, shadow, and rounded corners |
-| `CardHeader` | Flex column wrapper with padding for title and description |
-| `CardTitle` | Renders as `h3` with semibold font |
-| `CardDescription` | Muted text below the title |
-| `CardContent` | Padded content area |
+| `Card` | The container with rounded corners and drop-shadow-1 |
+| `CardHeader` | Flex column wrapper with gap-y-2 |
+| `CardTitle` | Bold title with text-omicron typography |
+| `CardDescription` | Secondary text below the title |
+| `CardContent` | The main content area |
 | `CardFooter` | Flex row at the bottom for actions |
