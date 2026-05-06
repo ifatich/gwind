@@ -1,0 +1,31 @@
+{
+  "name": "accordion",
+  "type": "ui",
+  "dependencies": [
+    "reka-ui",
+    "lucide-vue-next"
+  ],
+  "registryDependencies": [],
+  "files": [
+    {
+      "name": "Accordion.vue",
+      "content": "<script setup lang=\"ts\">\nimport { AccordionRoot, type AccordionRootEmits, type AccordionRootProps, useForwardPropsEmits } from \"reka-ui\"\n\nconst props = defineProps<AccordionRootProps>()\nconst emits = defineEmits<AccordionRootEmits>()\n\nconst forwarded = useForwardPropsEmits(props, emits)\n</script>\n\n<template>\n  <AccordionRoot v-bind=\"forwarded\" class=\"flex flex-col gap-3\">\n    <slot />\n  </AccordionRoot>\n</template>\n"
+    },
+    {
+      "name": "AccordionContent.vue",
+      "content": "<script setup lang=\"ts\">\nimport { cn } from \"../../../lib/utils\"\nimport { AccordionContent, type AccordionContentProps } from \"reka-ui\"\nimport { computed, type HTMLAttributes } from \"vue\"\n\nconst props = defineProps<AccordionContentProps & { class?: HTMLAttributes[\"class\"] }>()\n\nconst delegatedProps = computed(() => {\n  const { class: _, ...delegated } = props\n  return delegated\n})\n</script>\n\n<template>\n  <AccordionContent\n    v-bind=\"delegatedProps\"\n    class=\"overflow-hidden px-3 !text-omicron text-muted-foreground transition-all data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down\"\n  >\n    <div :class=\"cn('pb-4 pt-0', props.class)\">\n      <slot />\n    </div>\n  </AccordionContent>\n</template>\n"
+    },
+    {
+      "name": "AccordionItem.vue",
+      "content": "<script setup lang=\"ts\">\nimport { cn } from \"../../../lib/utils\"\nimport { AccordionItem, type AccordionItemProps, useForwardProps } from \"reka-ui\"\nimport { type HTMLAttributes } from \"vue\"\n\nconst props = defineProps<AccordionItemProps & { class?: HTMLAttributes[\"class\"] }>()\n\nconst forwardedProps = useForwardProps(props)\n</script>\n\n<template>\n  <AccordionItem\n    v-bind=\"forwardedProps\"\n    :class=\"cn('rounded-md bg-background border border-input flex flex-col', props.class)\"\n  >\n    <slot />\n  </AccordionItem>\n</template>\n"
+    },
+    {
+      "name": "AccordionTrigger.vue",
+      "content": "<script setup lang=\"ts\">\nimport { cn } from \"../../../lib/utils\"\nimport { AccordionHeader, AccordionTrigger, type AccordionTriggerProps } from \"reka-ui\"\nimport { computed, type HTMLAttributes } from \"vue\"\nimport { ChevronDown } from 'lucide-vue-next'\n\nconst props = defineProps<AccordionTriggerProps & { class?: HTMLAttributes[\"class\"] }>()\n\nconst delegatedProps = computed(() => {\n  const { class: _, ...delegated } = props\n  return delegated\n})\n</script>\n\n<template>\n  <AccordionHeader class=\"flex\">\n    <AccordionTrigger\n      v-bind=\"delegatedProps\"\n      :class=\"\n        cn(\n          'flex flex-1 items-center justify-between p-3 !text-omicron text-muted-foreground font-bold transition-all cursor-pointer data-[state=open]:text-primary [&[data-state=open]>svg]:rotate-180',\n          props.class,\n        )\n      \"\n    >\n      <slot />\n      <slot name=\"icon\">\n        <ChevronDown\n          class=\"h-6 w-6 shrink-0 transition-transform duration-200 text-muted-foreground\"\n        />\n      </slot>\n    </AccordionTrigger>\n  </AccordionHeader>\n</template>\n"
+    },
+    {
+      "name": "index.ts",
+      "content": "export { default as Accordion } from './Accordion.vue'\nexport { default as AccordionContent } from './AccordionContent.vue'\nexport { default as AccordionItem } from './AccordionItem.vue'\nexport { default as AccordionTrigger } from './AccordionTrigger.vue'\n"
+    }
+  ]
+}

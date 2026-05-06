@@ -1,0 +1,27 @@
+{
+  "name": "alert",
+  "type": "ui",
+  "dependencies": [
+    "class-variance-authority",
+    "lucide-vue-next"
+  ],
+  "registryDependencies": [],
+  "files": [
+    {
+      "name": "Alert.vue",
+      "content": "<script setup lang=\"ts\">\nimport type { HTMLAttributes } from 'vue'\nimport { cn } from '../../../lib/utils'\nimport { type AlertVariants, alertVariants } from '.'\nimport { X } from 'lucide-vue-next'\n\nconst props = defineProps<{\n  class?: HTMLAttributes['class']\n  variant?: AlertVariants['variant']\n  showClose?: boolean\n}>()\n\nconst emit = defineEmits(['close'])\n</script>\n\n<template>\n  <div :class=\"cn(alertVariants({ variant }), props.class)\" role=\"alert\">\n    <button\n      v-if=\"showClose\"\n      class=\"absolute right-4 top-4 text-muted-foreground hover:text-foreground focus:outline-none\"\n      aria-label=\"Close\"\n      @click=\"emit('close')\"\n    >\n      <X class=\"h-[18px] w-[18px] cursor-pointer\" />\n    </button>\n    <slot />\n  </div>\n</template>\n"
+    },
+    {
+      "name": "AlertDescription.vue",
+      "content": "<script setup lang=\"ts\">\nimport type { HTMLAttributes } from 'vue'\nimport { cn } from '../../../lib/utils'\n\nconst props = defineProps<{\n  class?: HTMLAttributes['class']\n}>()\n</script>\n\n<template>\n  <div :class=\"cn('text-sigma font-normal [&_p]:leading-relaxed', props.class)\">\n    <slot />\n  </div>\n</template>\n"
+    },
+    {
+      "name": "AlertTitle.vue",
+      "content": "<script setup lang=\"ts\">\nimport type { HTMLAttributes } from 'vue'\nimport { cn } from '../../../lib/utils'\n\nconst props = defineProps<{\n  class?: HTMLAttributes['class']\n}>()\n</script>\n\n<template>\n  <h5 :class=\"cn('mb-1 text-omicron font-bold leading-none tracking-tight', props.class)\">\n    <slot />\n  </h5>\n</template>\n"
+    },
+    {
+      "name": "index.ts",
+      "content": "import { cva, type VariantProps } from 'class-variance-authority'\n\nexport { default as Alert } from './Alert.vue'\nexport { default as AlertDescription } from './AlertDescription.vue'\nexport { default as AlertTitle } from './AlertTitle.vue'\n\nexport const alertVariants = cva(\n  'relative w-full rounded-lg border p-4 [&>svg~*]:pl-10 [&>svg+div]:translate-y-[-3px] [&>svg]:absolute [&>svg]:left-4 [&>svg]:top-4 [&>svg]:text-foreground',\n  {\n    variants: {\n      variant: {\n        default: 'border-primary bg-primary text-primary-foreground',\n        destructive: 'border-destructive bg-destructive/10 text-destructive',\n        success: 'border-success bg-success/10 text-success',\n        warning: 'border-warning bg-warning/10 text-warning',\n        info: 'border-blue-500 bg-blue-100 text-blue-800',\n      },\n    },\n    defaultVariants: {\n      variant: 'default',\n    },\n  },\n)\n\nexport type AlertVariants = VariantProps<typeof alertVariants>\n"
+    }
+  ]
+}

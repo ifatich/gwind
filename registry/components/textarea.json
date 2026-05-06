@@ -1,0 +1,18 @@
+{
+  "name": "textarea",
+  "type": "ui",
+  "dependencies": [
+    "@vueuse/core"
+  ],
+  "registryDependencies": [],
+  "files": [
+    {
+      "name": "Textarea.vue",
+      "content": "<script setup lang=\"ts\">\nimport { type HTMLAttributes } from 'vue'\nimport { cn } from '../../../lib/utils'\nimport { useVModel } from '@vueuse/core'\n\nconst props = defineProps<{\n  class?: HTMLAttributes['class']\n  defaultValue?: string | number\n  modelValue?: string | number\n}>()\n\nconst emits = defineEmits<{\n  (e: 'update:modelValue', payload: string | number): void\n}>()\n\nconst modelValue = useVModel(props, 'modelValue', emits, {\n  passive: true,\n  defaultValue: props.defaultValue,\n})\n</script>\n\n<template>\n  <textarea\n    v-model=\"modelValue\"\n    :class=\"\n      cn(\n        'flex min-h-[80px] w-full rounded-md border border-input bg-background px-3 py-2 text-omicron ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:bg-muted disabled:opacity-50 transition-all duration-100 hover:border-primary focus-visible:border-primary',\n        props.class,\n      )\n    \"\n  />\n</template>\n"
+    },
+    {
+      "name": "index.ts",
+      "content": "export { default as Textarea } from './Textarea.vue'\n"
+    }
+  ]
+}

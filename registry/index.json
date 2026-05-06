@@ -1,9 +1,44 @@
 [
   {
+    "name": "accordion",
+    "type": "ui",
+    "files": [
+      "Accordion.vue",
+      "AccordionContent.vue",
+      "AccordionItem.vue",
+      "AccordionTrigger.vue",
+      "index.ts"
+    ]
+  },
+  {
+    "name": "alert",
+    "type": "ui",
+    "files": [
+      "Alert.vue",
+      "AlertDescription.vue",
+      "AlertTitle.vue",
+      "index.ts"
+    ]
+  },
+  {
     "name": "badge",
     "type": "ui",
     "files": [
       "Badge.vue",
+      "index.ts"
+    ]
+  },
+  {
+    "name": "breadcrumb",
+    "type": "ui",
+    "files": [
+      "Breadcrumb.vue",
+      "BreadcrumbEllipsis.vue",
+      "BreadcrumbItem.vue",
+      "BreadcrumbLink.vue",
+      "BreadcrumbList.vue",
+      "BreadcrumbPage.vue",
+      "BreadcrumbSeparator.vue",
       "index.ts"
     ]
   },
@@ -25,6 +60,31 @@
       "CardFooter.vue",
       "CardHeader.vue",
       "CardTitle.vue",
+      "index.ts"
+    ]
+  },
+  {
+    "name": "checkbox",
+    "type": "ui",
+    "files": [
+      "Checkbox.vue",
+      "index.ts"
+    ]
+  },
+  {
+    "name": "combobox",
+    "type": "ui",
+    "files": [
+      "Combobox.vue",
+      "ComboboxAnchor.vue",
+      "ComboboxEmpty.vue",
+      "ComboboxGroup.vue",
+      "ComboboxInput.vue",
+      "ComboboxItem.vue",
+      "ComboboxItemIndicator.vue",
+      "ComboboxList.vue",
+      "ComboboxSeparator.vue",
+      "ComboboxTrigger.vue",
       "index.ts"
     ]
   },
@@ -61,6 +121,34 @@
     ]
   },
   {
+    "name": "popover",
+    "type": "ui",
+    "files": [
+      "Popover.vue",
+      "PopoverAnchor.vue",
+      "PopoverContent.vue",
+      "PopoverTrigger.vue",
+      "index.ts"
+    ]
+  },
+  {
+    "name": "progress",
+    "type": "ui",
+    "files": [
+      "Progress.vue",
+      "index.ts"
+    ]
+  },
+  {
+    "name": "radio-group",
+    "type": "ui",
+    "files": [
+      "RadioGroup.vue",
+      "RadioGroupItem.vue",
+      "index.ts"
+    ]
+  },
+  {
     "name": "select",
     "type": "ui",
     "files": [
@@ -86,6 +174,25 @@
       "TabGroup.vue",
       "TabTrigger.vue",
       "TabTriggerGroup.vue",
+      "index.ts"
+    ]
+  },
+  {
+    "name": "textarea",
+    "type": "ui",
+    "files": [
+      "Textarea.vue",
+      "index.ts"
+    ]
+  },
+  {
+    "name": "tooltip",
+    "type": "ui",
+    "files": [
+      "Tooltip.vue",
+      "TooltipContent.vue",
+      "TooltipProvider.vue",
+      "TooltipTrigger.vue",
       "index.ts"
     ]
   }
