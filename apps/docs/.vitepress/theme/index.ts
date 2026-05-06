@@ -10,7 +10,10 @@ export default {
   enhanceApp({ app }) {
     /* Register all components globally with Gw prefix */
     Object.entries(Gwind).forEach(([name, component]) => {
-      app.component(`Gw${name}`, component)
+      // Handle the case where the export might be a function/object (Vue component)
+      if (component && (typeof component === 'object' || typeof component === 'function')) {
+        app.component(`Gw${name}`, component as any)
+      }
     })
   },
 } satisfies Theme

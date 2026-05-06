@@ -1,6 +1,57 @@
+<script setup>
+import { ref } from 'vue'
+const frameworks = [
+  { value: 'next.js', label: 'Next.js' },
+  { value: 'sveltekit', label: 'SvelteKit' },
+  { value: 'nuxt', label: 'Nuxt.js' },
+  { value: 'remix', label: 'Remix' },
+  { value: 'astro', label: 'Astro' },
+]
+const value = ref('')
+</script>
+
 # Combobox
 
 Autocomplete input and command palette with a list of suggestions.
+
+## Preview
+
+<div class="gw-preview">
+  <GwCombobox v-model="value">
+    <GwComboboxAnchor>
+      <GwComboboxTrigger as-child>
+        <GwButton
+          variant="outline"
+          role="combobox"
+          class="w-[200px] justify-between"
+        >
+          {{ value ? frameworks.find((f) => f.value === value)?.label : "Select framework..." }}
+        </GwButton>
+      </GwComboboxTrigger>
+    </GwComboboxAnchor>
+
+    <GwComboboxList>
+      <GwComboboxInput placeholder="Search framework..." />
+      <GwComboboxEmpty>No framework found.</GwComboboxEmpty>
+      <GwComboboxGroup>
+        <GwComboboxItem
+          v-for="framework in frameworks"
+          :key="framework.value"
+          :value="framework.value"
+        >
+          <div class="flex items-center gap-2">
+            <GwComboboxItemIndicator>
+              <div class="h-4 w-4 border-2 border-primary rounded-sm flex items-center justify-center">
+                <div class="h-2 w-2 bg-primary rounded-full" />
+              </div>
+            </GwComboboxItemIndicator>
+            {{ framework.label }}
+          </div>
+        </GwComboboxItem>
+      </GwComboboxGroup>
+    </GwComboboxList>
+  </GwCombobox>
+</div>
 
 ## Usage
 

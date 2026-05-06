@@ -2,6 +2,21 @@
 
 A small pop-up box that appears when a user hovers over an element.
 
+## Preview
+
+<div class="gw-preview">
+  <GwTooltipProvider>
+    <GwTooltip>
+      <GwTooltipTrigger as-child>
+        <GwButton variant="outline">Hover</GwButton>
+      </GwTooltipTrigger>
+      <GwTooltipContent>
+        <p>Add to library</p>
+      </GwTooltipContent>
+    </GwTooltip>
+  </GwTooltipProvider>
+</div>
+
 ## Usage
 
 ```vue

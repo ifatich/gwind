@@ -42,17 +42,17 @@ import {
 <template>
   <Breadcrumb>
     <BreadcrumbList>
-      <GwBreadcrumbItem>
-        <GwBreadcrumbLink href="/">Home</GwBreadcrumbLink>
-      </GwBreadcrumbItem>
-      <GwBreadcrumbSeparator />
-      <GwBreadcrumbItem>
-        <GwBreadcrumbLink href="/components">Components</GwBreadcrumbLink>
-      </GwBreadcrumbItem>
-      <GwBreadcrumbSeparator />
-      <GwBreadcrumbItem>
-        <GwBreadcrumbPage>Breadcrumb</GwBreadcrumbPage>
-      </GwBreadcrumbItem>
+      <BreadcrumbItem>
+        <BreadcrumbLink href="/">Home</BreadcrumbLink>
+      </BreadcrumbItem>
+      <BreadcrumbSeparator />
+      <BreadcrumbItem>
+        <BreadcrumbLink href="/components">Components</BreadcrumbLink>
+      </BreadcrumbItem>
+      <BreadcrumbSeparator />
+      <BreadcrumbItem>
+        <BreadcrumbPage>Breadcrumb</BreadcrumbPage>
+      </BreadcrumbItem>
     </GwBreadcrumbList>
   </Breadcrumb>
 </template>

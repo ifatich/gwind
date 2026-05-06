@@ -2,6 +2,26 @@
 
 Displays a list of options for the user to pick from—triggered by a button.
 
+## Preview
+
+<div class="gw-preview">
+  <GwSelect>
+    <GwSelectTrigger class="w-[180px]">
+      <GwSelectValue placeholder="Select a fruit" />
+    </GwSelectTrigger>
+    <GwSelectContent>
+      <GwSelectGroup>
+        <GwSelectLabel>Fruits</GwSelectLabel>
+        <GwSelectItem value="apple">Apple</GwSelectItem>
+        <GwSelectItem value="banana">Banana</GwSelectItem>
+        <GwSelectItem value="blueberry">Blueberry</GwSelectItem>
+        <GwSelectItem value="grapes">Grapes</GwSelectItem>
+        <GwSelectItem value="pineapple">Pineapple</GwSelectItem>
+      </GwSelectGroup>
+    </GwSelectContent>
+  </GwSelect>
+</div>
+
 ## Usage
 
 ```vue

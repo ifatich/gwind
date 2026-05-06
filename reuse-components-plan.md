@@ -38,3 +38,15 @@ Kriteria:
 - [x] Tambah docs page `components/label.md`
 - [x] Register komponen untuk preview docs
 - [x] Rebuild registry CLI
+
+## Medium Effort Execution Log (Next)
+- [ ] accordion
+- [ ] alert (5 variants: default, error, success, warning, info)
+- [ ] checkbox
+- [ ] popover
+- [ ] tooltip
+- [ ] textarea
+- [ ] progress
+- [ ] radio
+- [ ] breadcrumb
+- [ ] combobox (12 files: 11 primitives + 1 composite)

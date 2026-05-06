@@ -2,6 +2,28 @@
 
 Displays a card with header, content, and footer.
 
+## Preview
+
+<div class="gw-preview">
+  <GwCard class="w-[350px]">
+    <GwCardHeader>
+      <GwCardTitle>Create project</GwCardTitle>
+      <GwCardDescription>Deploy your new project in one-click.</GwCardDescription>
+    </GwCardHeader>
+    <GwCardContent>
+      <div class="flex flex-col gap-4">
+        <GwInput placeholder="Project Name" />
+      </div>
+    </GwCardContent>
+    <GwCardFooter class="flex justify-between px-6 pb-6 mt-4">
+      <GwButton variant="outline">Cancel</GwButton>
+      <GwButton>Deploy</GwButton>
+    </GwCardFooter>
+  </GwCard>
+</div>
+
+---
+
 ## Usage
 
 ```vue

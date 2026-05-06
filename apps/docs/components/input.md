@@ -2,6 +2,18 @@
 
 Displays a form input field or a component that looks like an input field.
 
+## Preview
+
+<div class="gw-preview">
+  <div class="flex flex-col gap-4 w-full max-w-sm">
+    <GwInput type="email" placeholder="Email" />
+    <GwInput type="password" placeholder="Password" />
+    <GwInput disabled type="text" placeholder="Disabled input" />
+  </div>
+</div>
+
+---
+
 ## Usage
 
 ```vue
