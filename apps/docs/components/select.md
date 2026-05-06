@@ -1,68 +1,25 @@
-<script setup>
-import { ref } from 'vue'
-const framework = ref('')
-</script>
-
 # Select
 
-Displays a list of options for the user to pick from — triggered by a button.
-
-## Preview
-
-### Basic Select
-
-<div class="gw-preview">
-  <div style="max-width: 280px;">
-    <GwSelect v-model="framework">
-      <GwSelectTrigger>
-        <GwSelectValue placeholder="Select a framework..." />
-      </GwSelectTrigger>
-      <GwSelectContent>
-        <GwSelectGroup>
-          <GwSelectLabel>Frameworks</GwSelectLabel>
-          <GwSelectItem value="vue">Vue.js</GwSelectItem>
-          <GwSelectItem value="react">React</GwSelectItem>
-          <GwSelectItem value="angular">Angular</GwSelectItem>
-          <GwSelectItem value="svelte">Svelte</GwSelectItem>
-        </GwSelectGroup>
-      </GwSelectContent>
-    </GwSelect>
-  </div>
-</div>
-
-## Installation
-
-### 1. CLI Installation
-
-```bash
-npx gwind-system-ui add select
-```
-
-### 2. Manual Installation
-
-Create a folder `src/components/ui/select/` and copy the source code for each file.
+Displays a list of options for the user to pick from—triggered by a button.
 
 ## Usage
 
 ```vue
-<script setup>
-import { 
-  Select, 
-  SelectContent, 
-  SelectGroup, 
-  SelectItem, 
-  SelectLabel, 
-  SelectTrigger, 
-  SelectValue 
+<script setup lang="ts">
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
 } from '@/components/ui/select'
-import { ref } from 'vue'
-
-const value = ref('')
 </script>
 
 <template>
-  <Select v-model="value">
-    <SelectTrigger>
+  <Select>
+    <SelectTrigger class="w-[180px]">
       <SelectValue placeholder="Select a fruit" />
     </SelectTrigger>
     <SelectContent>
@@ -79,15 +36,43 @@ const value = ref('')
 </template>
 ```
 
-## Sub-components
+---
 
-| Component | Description |
-|-----------|-------------|
-| `Select` | The Root component that manages the open/close state |
-| `SelectTrigger` | The button that opens the select menu |
-| `SelectValue` | Displays the current selected value or placeholder |
-| `SelectContent` | The portal-wrapped dropdown container |
-| `SelectGroup` | Used to group related items |
-| `SelectLabel` | A non-clickable label for a group of items |
-| `SelectItem` | A clickable option in the select menu |
-| `SelectSeparator` | A visual divider between items or groups |
+## Structure
+
+The Select component uses several sub-components to provide a flexible and accessible dropdown:
+
+- `Select`: Root component that manages state.
+- `SelectTrigger`: The button that opens the dropdown.
+- `SelectValue`: Displays the current selection or placeholder.
+- `SelectContent`: The container for the list of items.
+- `SelectGroup`: Used to group related items.
+- `SelectLabel`: A label for a group of items.
+- `SelectItem`: An individual pickable option.
+- `SelectSeparator`: A horizontal line to separate items or groups.
+
+---
+
+## Examples
+
+### With Grouped Options
+```vue
+<Select>
+  <SelectTrigger>
+    <SelectValue placeholder="Select a timezone" />
+  </SelectTrigger>
+  <SelectContent>
+    <SelectGroup>
+      <SelectLabel>North America</SelectLabel>
+      <SelectItem value="est">Eastern Standard Time (EST)</SelectItem>
+      <SelectItem value="cst">Central Standard Time (CST)</SelectItem>
+    </SelectGroup>
+    <SelectSeparator />
+    <SelectGroup>
+      <SelectLabel>Europe</SelectLabel>
+      <SelectItem value="gmt">Greenwich Mean Time (GMT)</SelectItem>
+      <SelectItem value="cet">Central European Time (CET)</SelectItem>
+    </SelectGroup>
+  </SelectContent>
+</Select>
+```

@@ -2,113 +2,68 @@
 
 Displays a card with header, content, and footer.
 
-## Preview
-
-### Basic Card
-
-<div class="gw-preview">
-  <div style="max-width: 380px;">
-    <GwCard>
-      <GwCardHeader>
-        <GwCardTitle>Card Title</GwCardTitle>
-        <GwCardDescription>Card description goes here. This is a brief summary of the card content.</GwCardDescription>
-      </GwCardHeader>
-      <GwCardContent>
-        <p class="text-sm">This is the main content area of the card. You can place any content here.</p>
-      </GwCardContent>
-      <GwCardFooter>
-        <GwButton variant="outline" size="sm">Cancel</GwButton>
-        <GwButton size="sm" class="ml-auto">Save</GwButton>
-      </GwCardFooter>
-    </GwCard>
-  </div>
-</div>
-
-## Installation
-
-### 1. CLI Installation
-
-```bash
-npx gwind-system-ui add card
-```
-
-### 2. Manual Installation
-
-Create a folder `src/components/ui/card/` and copy the source code for each file.
-
-Main `Card.vue` source:
-
-```vue
-<script setup lang="ts">
-import type { HTMLAttributes } from 'vue'
-import { cn } from '@/lib/utils'
-
-const props = defineProps<{
-  class?: HTMLAttributes['class']
-}>()
-</script>
-
-<template>
-  <div
-    :class="cn('p-4 rounded-md bg-white text-black-800 drop-shadow-1', props.class)"
-  >
-    <slot />
-  </div>
-</template>
-```
-
-`CardTitle.vue` source:
-
-```vue
-<script setup lang="ts">
-import type { HTMLAttributes } from 'vue'
-import { cn } from '@/lib/utils'
-
-const props = defineProps<{
-  class?: HTMLAttributes['class']
-}>()
-</script>
-
-<template>
-  <h3 :class="cn('!text-omicron font-bold leading-none tracking-tight', props.class)">
-    <slot />
-  </h3>
-</template>
-```
-
 ## Usage
 
 ```vue
-<script setup>
+<script setup lang="ts">
 import {
-  Card, CardHeader, CardTitle,
-  CardDescription, CardContent, CardFooter
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
 } from '@/components/ui/card'
 </script>
 
 <template>
-  <Card>
+  <Card class="w-[350px]">
     <CardHeader>
-      <CardTitle>Project Settings</CardTitle>
-      <CardDescription>Configure your project.</CardDescription>
+      <CardTitle>Create project</CardTitle>
+      <CardDescription>Deploy your new project in one-click.</CardDescription>
     </CardHeader>
     <CardContent>
-      <!-- Your content -->
+      <!-- Content goes here -->
     </CardContent>
-    <CardFooter>
-      <Button>Save changes</Button>
+    <CardFooter class="flex justify-between px-6 pb-6">
+      <Button variant="outline">Cancel</Button>
+      <Button>Deploy</Button>
     </CardFooter>
   </Card>
 </template>
 ```
 
-## Sub-components
+---
 
-| Component | Description |
-|-----------|-------------|
-| `Card` | The container with rounded corners and drop-shadow-1 |
-| `CardHeader` | Flex column wrapper with gap-y-2 |
-| `CardTitle` | Bold title with text-omicron typography |
-| `CardDescription` | Secondary text below the title |
-| `CardContent` | The main content area |
-| `CardFooter` | Flex row at the bottom for actions |
+## Structure
+
+The Card component is composed of several sub-components that you can use to build your custom layout:
+
+- `Card`: The main container.
+- `CardHeader`: The header section, usually containing title and description.
+- `CardTitle`: The main title of the card.
+- `CardDescription`: A supporting description.
+- `CardContent`: The main body of the card.
+- `CardFooter`: The bottom section for actions or metadata.
+
+---
+
+## Examples
+
+### Account Settings
+```vue
+<Card>
+  <CardHeader>
+    <CardTitle>Account</CardTitle>
+    <CardDescription>
+      Make changes to your account here. Click save when you're done.
+    </CardDescription>
+  </CardHeader>
+  <CardContent class="space-y-2">
+    <!-- Form Inputs would go here -->
+  </CardContent>
+  <CardFooter>
+    <Button>Save changes</Button>
+  </CardFooter>
+</Card>
+```
