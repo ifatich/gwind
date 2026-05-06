@@ -1,14 +1,5 @@
 <script setup>
-import { ref } from 'vue'
-import { Check, ChevronsUpDown } from 'lucide-vue-next'
-const frameworks = [
-  { value: 'next.js', label: 'Next.js' },
-  { value: 'sveltekit', label: 'SvelteKit' },
-  { value: 'nuxt', label: 'Nuxt.js' },
-  { value: 'remix', label: 'Remix' },
-  { value: 'astro', label: 'Astro' },
-]
-const value = ref('')
+import ComboboxPreview from './previews/ComboboxPreview.vue'
 </script>
 
 # Combobox
@@ -17,45 +8,16 @@ Autocomplete input and command palette with a list of suggestions.
 
 ## Preview
 
-<div class="gw-preview">
-  <GwCombobox v-model="value">
-    <GwComboboxAnchor>
-      <GwComboboxTrigger as-child>
-        <GwButton
-          variant="outline"
-          role="combobox"
-          class="w-[200px] justify-between"
-        >
-          {{ value ? frameworks.find((f) => f.value === value)?.label : "Select framework..." }}
-          <ChevronsUpDown class="ml-2 h-4 w-4 shrink-0 opacity-50" />
-        </GwButton>
-      </GwComboboxTrigger>
-    </GwComboboxAnchor>
+<ComboboxPreview />
 
-    <GwComboboxList>
-      <GwComboboxInput placeholder="Search framework..." />
-      <GwComboboxEmpty>No framework found.</GwComboboxEmpty>
-      <GwComboboxGroup>
-        <GwComboboxItem
-          v-for="framework in frameworks"
-          :key="framework.value"
-          :value="framework.value"
-        >
-          <GwComboboxItemIndicator>
-            <Check class="mr-2 h-4 w-4" />
-          </GwComboboxItemIndicator>
-          {{ framework.label }}
-        </GwComboboxItem>
-      </GwComboboxGroup>
-    </GwComboboxList>
-  </GwCombobox>
-</div>
+---
 
 ## Usage
 
+The live preview above is rendered from a separate Vue component so the source example stays clean and easy to copy.
+
 ```vue
 <script setup lang="ts">
-import { Check, ChevronsUpDown } from 'lucide-vue-next'
 import { ref } from 'vue'
 import { Button } from '@/components/ui/button'
 import {
@@ -65,11 +27,9 @@ import {
   ComboboxGroup,
   ComboboxInput,
   ComboboxItem,
-  ComboboxItemIndicator,
   ComboboxList,
   ComboboxTrigger,
 } from '@/components/ui/combobox'
-import { cn } from '@/lib/utils'
 
 const frameworks = [
   { value: 'next.js', label: 'Next.js' },
@@ -92,7 +52,9 @@ const value = ref('')
           class="w-[200px] justify-between"
         >
           {{ value ? frameworks.find((f) => f.value === value)?.label : "Select framework..." }}
-          <ChevronsUpDown class="ml-2 h-4 w-4 shrink-0 opacity-50" />
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ml-2 h-4 w-4 shrink-0 opacity-50">
+            <path d="m6 9 6 6 6-6" />
+          </svg>
         </Button>
       </ComboboxTrigger>
     </ComboboxAnchor>
@@ -106,9 +68,6 @@ const value = ref('')
           :key="framework.value"
           :value="framework.value"
         >
-          <ComboboxItemIndicator>
-            <Check class="mr-2 h-4 w-4" />
-          </ComboboxItemIndicator>
           {{ framework.label }}
         </ComboboxItem>
       </ComboboxGroup>

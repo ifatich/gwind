@@ -2,14 +2,21 @@
 
 Label adalah komponen untuk memberi teks penjelas pada field input/form.
 
-## Basic Usage
+## Preview
 
 <div class="gw-preview">
   <div class="gw-preview-col">
     <GwLabel for="email">Email</GwLabel>
     <GwInput id="email" placeholder="name@example.com" />
+    <div class="grid w-full items-center gap-1.5">
+      <GwLabel for="company">Company</GwLabel>
+      <GwInput id="company" placeholder="Acme Inc." />
+      <p class="text-xs text-muted-foreground">Used to identify the account owner.</p>
+    </div>
   </div>
 </div>
+
+## Usage
 
 ```vue
 <script setup lang="ts">
@@ -31,6 +38,11 @@ import { Input } from '@gwind/ui'
     <GwInput id="username" disabled value="disabled-input" />
   </div>
 </div>
+
+## Notes
+
+- `Label` should always point to a matching form field via `for`.
+- Combine it with helper text to create clearer form instructions.
 
 ## API
 

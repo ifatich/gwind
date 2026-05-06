@@ -7,7 +7,7 @@ Displays an indicator showing the completion progress of a task.
 <div class="gw-preview">
   <div class="gw-preview-col">
     <div class="gw-preview-section">
-      <div class="gw-preview-label">Default (33%)</div>
+      <div class="gw-preview-label">Loading (33%)</div>
       <GwProgress :model-value="33" />
     </div>
     <div class="gw-preview-section">
@@ -18,8 +18,20 @@ Displays an indicator showing the completion progress of a task.
       <div class="gw-preview-label">Destructive (90%)</div>
       <GwProgress :model-value="90" class="[&>div]:bg-destructive" />
     </div>
+    <div class="gw-preview-section">
+      <div class="gw-preview-label">Indeterminate</div>
+      <GwProgress :model-value="null" />
+    </div>
   </div>
 </div>
+
+---
+
+## Variants
+
+- Numeric values show loading progress.
+- `null` renders the indeterminate state.
+- Color utilities can be used to visually distinguish statuses.
 
 ---
 

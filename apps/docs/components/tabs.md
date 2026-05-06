@@ -16,9 +16,8 @@ A set of layered sections of content, known as tab panels, that are displayed on
       <GwTabTrigger value="password">Password</GwTabTrigger>
       <GwTabTrigger value="notifications">Notifications</GwTabTrigger>
     </GwTabTriggerGroup>
-    
     <GwTabContent value="account" class="mt-4">
-      <GwCard>
+      <GwCard class="w-100">
         <GwCardHeader>
           <GwCardTitle>Account</GwCardTitle>
           <GwCardDescription>Make changes to your account here.</GwCardDescription>
@@ -28,17 +27,31 @@ A set of layered sections of content, known as tab panels, that are displayed on
         </GwCardContent>
       </GwCard>
     </GwTabContent>
-    
     <GwTabContent value="password" class="mt-4">
-       <GwCard>
+      <GwCard class="w-100">
         <GwCardHeader>
           <GwCardTitle>Password</GwCardTitle>
           <GwCardDescription>Change your password here.</GwCardDescription>
         </GwCardHeader>
       </GwCard>
     </GwTabContent>
+    <GwTabContent value="notifications" class="mt-4">
+      <GwCard class="w-100">
+        <GwCardHeader>
+          <GwCardTitle>Notifications</GwCardTitle>
+          <GwCardDescription>Choose how you want to be notified.</GwCardDescription>
+        </GwCardHeader>
+      </GwCard>
+    </GwTabContent>
   </GwTabGroup>
 </div>
+
+---
+
+## Variants
+
+- `orientation="vertical"` is supported by the root component for side-by-side layouts.
+- Use the same trigger/content composition for both horizontal and vertical arrangements.
 
 ## Installation
 
@@ -46,7 +59,7 @@ A set of layered sections of content, known as tab panels, that are displayed on
 
 ```bash
 npx gwind-system-ui add tabs
- npx gwind-system-ui add badge
+npx gwind-system-ui add badge
 ```
 
 ### 2. Manual Installation

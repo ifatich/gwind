@@ -5,22 +5,55 @@ Displays a list of options for the user to pick from—triggered by a button.
 ## Preview
 
 <div class="gw-preview">
-  <GwSelect>
-    <GwSelectTrigger class="w-[180px]">
-      <GwSelectValue placeholder="Select a fruit" />
-    </GwSelectTrigger>
-    <GwSelectContent>
-      <GwSelectGroup>
-        <GwSelectLabel>Fruits</GwSelectLabel>
-        <GwSelectItem value="apple">Apple</GwSelectItem>
-        <GwSelectItem value="banana">Banana</GwSelectItem>
-        <GwSelectItem value="blueberry">Blueberry</GwSelectItem>
-        <GwSelectItem value="grapes">Grapes</GwSelectItem>
-        <GwSelectItem value="pineapple">Pineapple</GwSelectItem>
-      </GwSelectGroup>
-    </GwSelectContent>
-  </GwSelect>
+  <div class="gw-preview-col">
+    <div class="gw-preview-section">
+      <div class="gw-preview-label">Simple</div>
+      <GwSelect>
+        <GwSelectTrigger class="w-[180px]">
+          <GwSelectValue placeholder="Select a fruit" />
+        </GwSelectTrigger>
+        <GwSelectContent>
+          <GwSelectGroup>
+            <GwSelectLabel>Fruits</GwSelectLabel>
+            <GwSelectItem value="apple">Apple</GwSelectItem>
+            <GwSelectItem value="banana">Banana</GwSelectItem>
+            <GwSelectItem value="blueberry">Blueberry</GwSelectItem>
+            <GwSelectItem value="grapes">Grapes</GwSelectItem>
+            <GwSelectItem value="pineapple">Pineapple</GwSelectItem>
+          </GwSelectGroup>
+        </GwSelectContent>
+      </GwSelect>
+    </div>
+    <div class="gw-preview-section">
+      <div class="gw-preview-label">Grouped</div>
+      <GwSelect>
+        <GwSelectTrigger class="w-[220px]">
+          <GwSelectValue placeholder="Select a timezone" />
+        </GwSelectTrigger>
+        <GwSelectContent>
+          <GwSelectGroup>
+            <GwSelectLabel>North America</GwSelectLabel>
+            <GwSelectItem value="est">Eastern Standard Time (EST)</GwSelectItem>
+            <GwSelectItem value="cst">Central Standard Time (CST)</GwSelectItem>
+          </GwSelectGroup>
+          <GwSelectSeparator />
+          <GwSelectGroup>
+            <GwSelectLabel>Europe</GwSelectLabel>
+            <GwSelectItem value="gmt">Greenwich Mean Time (GMT)</GwSelectItem>
+            <GwSelectItem value="cet">Central European Time (CET)</GwSelectItem>
+          </GwSelectGroup>
+        </GwSelectContent>
+      </GwSelect>
+    </div>
+  </div>
 </div>
+
+---
+
+## Variants
+
+- Standard select for single choice input.
+- Grouped select with separators for more complex option sets.
 
 ## Usage
 

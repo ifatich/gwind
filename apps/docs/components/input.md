@@ -5,16 +5,31 @@ Displays a form input field or a component that looks like an input field.
 ## Preview
 
 <div class="gw-preview">
-  <div class="flex flex-col gap-4 w-full max-w-sm">
+  <div class="gw-preview-col w-full max-w-sm">
     <GwInput type="email" placeholder="Email" />
     <GwInput disabled type="password" placeholder="Password (Disabled)" />
+    <GwInput class="border-destructive focus-visible:ring-destructive" type="email" value="invalid-email" />
+    <GwInput class="border-lime-500 focus-visible:ring-lime-500" type="text" value="Valid input state" />
     <div class="grid w-full items-center gap-1.5">
       <GwLabel for="email-preview">Email Address</GwLabel>
       <GwInput id="email-preview" type="email" placeholder="Email" />
       <p class="text-xs text-muted-foreground">We'll never share your email.</p>
     </div>
+    <div class="grid w-full items-center gap-1.5">
+      <GwLabel for="file-preview">File Upload</GwLabel>
+      <GwInput id="file-preview" type="file" />
+    </div>
   </div>
 </div>
+
+---
+
+## States
+
+- Default input for general form fields.
+- Disabled input for non-interactive forms.
+- Error and success styles can be applied with utility classes.
+- File input demonstrates browser-native file picking.
 
 ## Usage
 

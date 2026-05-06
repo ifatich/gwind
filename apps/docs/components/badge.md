@@ -8,12 +8,12 @@ Displays a small label or status indicator.
 
 <div class="gw-preview">
   <div class="gw-preview-row">
-    <GwBadge variant="default">Default</GwBadge>
-    <GwBadge variant="secondary">Secondary</GwBadge>
-    <GwBadge variant="outline">Outline</GwBadge>
-    <GwBadge variant="destructive">Destructive</GwBadge>
-    <GwBadge variant="success">Success</GwBadge>
-    <GwBadge variant="warning">Warning</GwBadge>
+    <GwBadge variant="green">Default</GwBadge>
+    <GwBadge variant="brocoli">Secondary</GwBadge>
+    <GwBadge variant="orange">Outline</GwBadge>
+    <GwBadge variant="blue">Destructive</GwBadge>
+    <GwBadge variant="red">Success</GwBadge>
+    <GwBadge variant="outline">Warning</GwBadge>
   </div>
 </div>
 

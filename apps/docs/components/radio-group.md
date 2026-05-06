@@ -5,17 +5,56 @@ A set of checkable buttons—known as radio buttons—where no more than one but
 ## Preview
 
 <div class="gw-preview">
-  <GwRadioGroup default-value="option-one">
-    <div class="flex items-center space-x-2">
-      <GwRadioGroupItem id="preview-option-one" value="option-one" />
-      <GwLabel for="preview-option-one">Option One</GwLabel>
+  <div class="gw-preview-col">
+    <div class="gw-preview-section">
+      <div class="gw-preview-label">Horizontal</div>
+      <GwRadioGroup default-value="option-one" class="grid gap-2">
+        <div class="flex items-center space-x-2">
+          <GwRadioGroupItem id="preview-option-one" value="option-one" />
+          <GwLabel for="preview-option-one">Option One</GwLabel>
+        </div>
+        <div class="flex items-center space-x-2">
+          <GwRadioGroupItem id="preview-option-two" value="option-two" />
+          <GwLabel for="preview-option-two">Option Two</GwLabel>
+        </div>
+      </GwRadioGroup>
     </div>
-    <div class="flex items-center space-x-2">
-      <GwRadioGroupItem id="preview-option-two" value="option-two" />
-      <GwLabel for="preview-option-two">Option Two</GwLabel>
+    <div class="gw-preview-section">
+      <div class="gw-preview-label">Vertical</div>
+      <GwRadioGroup default-value="email" orientation="vertical" class="grid gap-2">
+        <div class="flex items-center space-x-2">
+          <GwRadioGroupItem id="preview-email" value="email" />
+          <GwLabel for="preview-email">Email</GwLabel>
+        </div>
+        <div class="flex items-center space-x-2">
+          <GwRadioGroupItem id="preview-phone" value="phone" />
+          <GwLabel for="preview-phone">Phone</GwLabel>
+        </div>
+      </GwRadioGroup>
     </div>
-  </GwRadioGroup>
+    <div class="gw-preview-section">
+      <div class="gw-preview-label">Disabled</div>
+      <GwRadioGroup default-value="option-a" disabled class="grid gap-2">
+        <div class="flex items-center space-x-2">
+          <GwRadioGroupItem id="preview-disabled-a" value="option-a" />
+          <GwLabel for="preview-disabled-a">Disabled A</GwLabel>
+        </div>
+        <div class="flex items-center space-x-2">
+          <GwRadioGroupItem id="preview-disabled-b" value="option-b" />
+          <GwLabel for="preview-disabled-b">Disabled B</GwLabel>
+        </div>
+      </GwRadioGroup>
+    </div>
+  </div>
 </div>
+
+---
+
+## Variants
+
+- `default-value` sets the initial selection.
+- `orientation="vertical"` stacks the options vertically.
+- `disabled` makes the group non-interactive.
 
 ---
 

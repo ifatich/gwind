@@ -17,6 +17,19 @@ A small pop-up box that appears when a user hovers over an element.
   </GwTooltipProvider>
 </div>
 
+---
+
+## Variants
+
+- `side="top"` places the tooltip above the trigger.
+- `side="bottom"` places it below the trigger.
+- `side="left"` and `side="right"` place it laterally.
+
+## Advanced Notes
+
+- Use `TooltipProvider` to tune delay and hover behavior globally.
+- Customize `TooltipContent` with `side`, `align`, and `sideOffset` props when positioning matters.
+
 ## Usage
 
 ```vue

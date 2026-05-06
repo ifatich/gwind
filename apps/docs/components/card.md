@@ -5,38 +5,58 @@ Displays a card with header, content, and footer.
 ## Preview
 
 <div class="gw-preview">
-  <GwCard class="w-[350px]">
-    <GwCardHeader>
-      <GwCardTitle>Create project</GwCardTitle>
-      <GwCardDescription>Deploy your new project in one-click.</GwCardDescription>
-    </GwCardHeader>
-    <GwCardContent>
-      <div class="grid w-full items-center gap-4">
-        <div class="flex flex-col space-y-1.5">
-          <GwLabel for="name">Name</GwLabel>
-          <GwInput id="name" placeholder="Name of your project" />
+  <div class="gw-preview-col">
+    <GwCard class="w-[350px]">
+      <GwCardHeader>
+        <GwCardTitle class="!mt-0">Create project</GwCardTitle>
+        <GwCardDescription class="!mt-0">Deploy your new project in one-click.</GwCardDescription>
+      </GwCardHeader>
+      <GwCardContent>
+        <div class="grid w-full items-center gap-4">
+          <div class="flex flex-col space-y-1.5">
+            <GwLabel for="name">Name</GwLabel>
+            <GwInput id="name" placeholder="Name of your project" />
+          </div>
         </div>
-      </div>
-    </GwCardContent>
-    <GwCardFooter class="flex justify-between">
-      <GwButton variant="outline">Cancel</GwButton>
-      <GwButton>Deploy</GwButton>
-    </GwCardFooter>
-  </GwCard>
+      </GwCardContent>
+      <GwCardFooter class="flex justify-between p-0 pt-4">
+        <GwButton variant="outline">Cancel</GwButton>
+        <GwButton>Deploy</GwButton>
+      </GwCardFooter>
+    </GwCard>
+    <GwCard class="w-[350px] border-none bg-muted/30 shadow-none">
+      <GwCardHeader>
+        <GwCardTitle>Minimal card</GwCardTitle>
+        <GwCardDescription>A lighter layout for supporting content or summaries.</GwCardDescription>
+      </GwCardHeader>
+      <GwCardContent>
+        <p class="text-sm text-muted-foreground">
+          Use this pattern when the card should feel like a content surface rather than a framed container.
+        </p>
+      </GwCardContent>
+    </GwCard>
+  </div>
 </div>
+
+---
+
+## Variants
+
+- Standard framed card with header, content, and footer.
+- Minimal card without border and shadow for softer surfaces.
 
 ## Usage
 
 ```vue
 <script setup lang="ts">
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card'
+  import {
+    Card,
+    CardContent,
+    CardDescription,
+    CardFooter,
+    CardHeader,
+    CardTitle,
+  } from '@/components/ui/card'
 </script>
 
 <template>
