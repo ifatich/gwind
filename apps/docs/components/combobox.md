@@ -1,5 +1,6 @@
 <script setup>
 import { ref } from 'vue'
+import { Check, ChevronsUpDown } from 'lucide-vue-next'
 const frameworks = [
   { value: 'next.js', label: 'Next.js' },
   { value: 'sveltekit', label: 'SvelteKit' },
@@ -26,6 +27,7 @@ Autocomplete input and command palette with a list of suggestions.
           class="w-[200px] justify-between"
         >
           {{ value ? frameworks.find((f) => f.value === value)?.label : "Select framework..." }}
+          <ChevronsUpDown class="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </GwButton>
       </GwComboboxTrigger>
     </GwComboboxAnchor>
@@ -39,14 +41,10 @@ Autocomplete input and command palette with a list of suggestions.
           :key="framework.value"
           :value="framework.value"
         >
-          <div class="flex items-center gap-2">
-            <GwComboboxItemIndicator>
-              <div class="h-4 w-4 border-2 border-primary rounded-sm flex items-center justify-center">
-                <div class="h-2 w-2 bg-primary rounded-full" />
-              </div>
-            </GwComboboxItemIndicator>
-            {{ framework.label }}
-          </div>
+          <GwComboboxItemIndicator>
+            <Check class="mr-2 h-4 w-4" />
+          </GwComboboxItemIndicator>
+          {{ framework.label }}
         </GwComboboxItem>
       </GwComboboxGroup>
     </GwComboboxList>

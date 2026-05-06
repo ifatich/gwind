@@ -11,18 +11,19 @@ Displays a card with header, content, and footer.
       <GwCardDescription>Deploy your new project in one-click.</GwCardDescription>
     </GwCardHeader>
     <GwCardContent>
-      <div class="flex flex-col gap-4">
-        <GwInput placeholder="Project Name" />
+      <div class="grid w-full items-center gap-4">
+        <div class="flex flex-col space-y-1.5">
+          <GwLabel for="name">Name</GwLabel>
+          <GwInput id="name" placeholder="Name of your project" />
+        </div>
       </div>
     </GwCardContent>
-    <GwCardFooter class="flex justify-between px-6 pb-6 mt-4">
+    <GwCardFooter class="flex justify-between">
       <GwButton variant="outline">Cancel</GwButton>
       <GwButton>Deploy</GwButton>
     </GwCardFooter>
   </GwCard>
 </div>
-
----
 
 ## Usage
 

@@ -7,12 +7,14 @@ Displays a form input field or a component that looks like an input field.
 <div class="gw-preview">
   <div class="flex flex-col gap-4 w-full max-w-sm">
     <GwInput type="email" placeholder="Email" />
-    <GwInput type="password" placeholder="Password" />
-    <GwInput disabled type="text" placeholder="Disabled input" />
+    <GwInput disabled type="password" placeholder="Password (Disabled)" />
+    <div class="grid w-full items-center gap-1.5">
+      <GwLabel for="email-preview">Email Address</GwLabel>
+      <GwInput id="email-preview" type="email" placeholder="Email" />
+      <p class="text-xs text-muted-foreground">We'll never share your email.</p>
+    </div>
   </div>
 </div>
-
----
 
 ## Usage
 
