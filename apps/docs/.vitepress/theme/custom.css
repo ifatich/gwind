@@ -4,6 +4,8 @@
  * @source menentukan base directory untuk scanning di monorepo
  */
 @source "../../../../packages/ui/src";
+@source "../../**/*.md";
+@source "../../**/*.vue";
 
 /* Import Gwind UI styles */
 @import "../../../../packages/ui/src/styles/main.css";
@@ -30,6 +32,8 @@ textarea,
 }
 
 :root {
+  --vp-font-family-base: 'Nunito Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  --vp-font-family-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
   --gw-preview-bg: #ffffff;
   --gw-preview-border: #e2e8f0;
   --gw-preview-text-label: #64748b;
