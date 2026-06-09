@@ -35,6 +35,10 @@ jobs:
           cd packages/cli
           PACKAGE_NAME=$(node -p "require('./package.json').name")
           PACKAGE_VERSION=$(node -p "require('./package.json').version")
+          echo "Publishing $PACKAGE_NAME@$PACKAGE_VERSION"
+          echo "NPM token user: $(npm whoami)"
+          echo "Package maintainers:"
+          npm owner ls "$PACKAGE_NAME"
           if npm view "$PACKAGE_NAME@$PACKAGE_VERSION" version > /dev/null 2>&1; then
             echo "Version $PACKAGE_VERSION already exists on NPM. Skipping publish."
           else
