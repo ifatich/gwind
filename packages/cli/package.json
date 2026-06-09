@@ -1,11 +1,10 @@
 {
-  "name": "gwind-system-ui",
+  "name": "gwind-v2",
   "version": "0.1.7",
   "description": "CLI for Gwind Design System",
   "type": "module",
   "bin": {
-    "gwind-ui": "./dist/index.js",
-    "gwind-system-ui": "./dist/index.js"
+    "gwind-ui": "./dist/index.js"
   },
   "files": [
     "dist",
