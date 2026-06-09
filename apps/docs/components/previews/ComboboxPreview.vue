@@ -13,7 +13,8 @@ const value = ref('')
 </script>
 
 <template>
-  <div class="gw-preview-col w-full max-w-sm">
+  <ShadowPreview>
+    <div class="gwind-docs-preview-col w-full max-w-sm">
     <GwCombobox v-model="value">
       <GwComboboxAnchor as-child>
         <GwComboboxTrigger as-child>
@@ -46,5 +47,6 @@ const value = ref('')
     <p class="text-xs text-muted-foreground">
       Selected value: {{ value || 'none' }}
     </p>
-  </div>
+    </div>
+  </ShadowPreview>
 </template>

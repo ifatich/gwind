@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ComboboxContent, type ComboboxContentEmits, type ComboboxContentProps, ComboboxPortal, useForwardPropsEmits } from 'reka-ui'
 import { computed, type HTMLAttributes } from 'vue'
+import { useGwindPortalTarget } from '../../../lib/portal'
 import { cn } from '../../../lib/utils'
 
 const props = defineProps<ComboboxContentProps & { class?: HTMLAttributes['class'] }>()
@@ -12,10 +13,11 @@ const delegatedProps = computed(() => {
 })
 
 const forwarded = useForwardPropsEmits(delegatedProps, emits)
+const portalTarget = useGwindPortalTarget()
 </script>
 
 <template>
-  <ComboboxPortal>
+  <ComboboxPortal :to="portalTarget">
     <ComboboxContent
       v-bind="forwarded"
       :class="

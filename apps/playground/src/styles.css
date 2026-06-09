@@ -1,0 +1,89 @@
+@import 'tailwindcss';
+
+@source "../../../packages/ui/src";
+@source "./**/*.{vue,ts}";
+
+@import '@gwind/ui/styles';
+
+:root {
+  color: var(--foreground);
+  background: #f6f8f7;
+  font-family: 'Nunito Sans', Inter, ui-sans-serif, system-ui, sans-serif;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+  margin: 0;
+}
+
+#app {
+  min-height: 100vh;
+}
+
+.playground-shell {
+  min-height: 100vh;
+  background:
+    linear-gradient(180deg, rgba(0, 171, 82, 0.08), rgba(246, 248, 247, 0) 320px),
+    #f6f8f7;
+}
+
+.playground-header {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  border-bottom: 1px solid rgba(15, 23, 42, 0.08);
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(16px);
+}
+
+.playground-container {
+  width: min(1440px, calc(100vw - 32px));
+  margin: 0 auto;
+}
+
+.playground-grid {
+  display: grid;
+  grid-template-columns: 240px minmax(0, 1fr);
+  gap: 24px;
+}
+
+.playground-sidebar {
+  position: sticky;
+  top: 88px;
+  height: calc(100vh - 112px);
+  overflow: auto;
+  padding: 16px 0;
+}
+
+.playground-panel {
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  border-radius: 8px;
+  background: white;
+}
+
+.playground-section {
+  scroll-margin-top: 96px;
+}
+
+.playground-swatch {
+  height: 48px;
+  border-radius: 6px;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+}
+
+@media (max-width: 960px) {
+  .playground-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .playground-sidebar {
+    position: static;
+    height: auto;
+    padding: 0;
+  }
+}

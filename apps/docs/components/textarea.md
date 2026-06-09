@@ -4,9 +4,9 @@ A multi-line text input.
 
 ## Preview
 
-<div class="gw-preview">
+<ShadowPreview class="gwind-docs-preview">
   <GwTextarea placeholder="Type your message here." />
-</div>
+</ShadowPreview>
 
 ---
 
@@ -27,9 +27,9 @@ import { Textarea } from '@/components/ui/textarea'
 ## States
 
 ### Disabled
-<div class="gw-preview">
+<ShadowPreview class="gwind-docs-preview">
   <GwTextarea disabled placeholder="Type your message here." />
-</div>
+</ShadowPreview>
 
 ```vue
 <Textarea disabled placeholder="Type your message here." />

@@ -4,7 +4,7 @@ A small pop-up box that appears when a user hovers over an element.
 
 ## Preview
 
-<div class="gw-preview">
+<ShadowPreview class="gwind-docs-preview">
   <GwTooltipProvider>
     <GwTooltip>
       <GwTooltipTrigger as-child>
@@ -15,7 +15,7 @@ A small pop-up box that appears when a user hovers over an element.
       </GwTooltipContent>
     </GwTooltip>
   </GwTooltipProvider>
-</div>
+</ShadowPreview>
 
 ---
 

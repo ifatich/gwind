@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed, type HTMLAttributes } from 'vue'
 import { TooltipArrow, TooltipContent, type TooltipContentEmits, type TooltipContentProps, TooltipPortal, useForwardPropsEmits } from 'reka-ui'
+import { useGwindPortalTarget } from '../../../lib/portal'
 import { cn } from '../../../lib/utils'
 
 defineOptions({
@@ -19,10 +20,11 @@ const delegatedProps = computed(() => {
 })
 
 const forwarded = useForwardPropsEmits(delegatedProps, emits)
+const portalTarget = useGwindPortalTarget()
 </script>
 
 <template>
-  <TooltipPortal>
+  <TooltipPortal :to="portalTarget">
     <TooltipContent
       v-bind="{ ...forwarded, ...$attrs }"
       :class="

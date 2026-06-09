@@ -4,8 +4,8 @@ Displays a card with header, content, and footer.
 
 ## Preview
 
-<div class="gw-preview">
-  <div class="gw-preview-col">
+<ShadowPreview class="gwind-docs-preview">
+  <div class="gwind-docs-preview-col">
     <GwCard class="w-[350px]">
       <GwCardHeader>
         <GwCardTitle class="!mt-0">Create project</GwCardTitle>
@@ -36,7 +36,7 @@ Displays a card with header, content, and footer.
       </GwCardContent>
     </GwCard>
   </div>
-</div>
+</ShadowPreview>
 
 ---
 

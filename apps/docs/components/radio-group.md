@@ -4,10 +4,10 @@ A set of checkable buttons—known as radio buttons—where no more than one but
 
 ## Preview
 
-<div class="gw-preview">
-  <div class="gw-preview-col">
-    <div class="gw-preview-section">
-      <div class="gw-preview-label">Horizontal</div>
+<ShadowPreview class="gwind-docs-preview">
+  <div class="gwind-docs-preview-col">
+    <div class="gwind-docs-preview-section">
+      <div class="gwind-docs-preview-label">Horizontal</div>
       <GwRadioGroup default-value="option-one" class="grid gap-2">
         <div class="flex items-center space-x-2">
           <GwRadioGroupItem id="preview-option-one" value="option-one" />
@@ -19,8 +19,8 @@ A set of checkable buttons—known as radio buttons—where no more than one but
         </div>
       </GwRadioGroup>
     </div>
-    <div class="gw-preview-section">
-      <div class="gw-preview-label">Vertical</div>
+    <div class="gwind-docs-preview-section">
+      <div class="gwind-docs-preview-label">Vertical</div>
       <GwRadioGroup default-value="email" orientation="vertical" class="grid gap-2">
         <div class="flex items-center space-x-2">
           <GwRadioGroupItem id="preview-email" value="email" />
@@ -32,8 +32,8 @@ A set of checkable buttons—known as radio buttons—where no more than one but
         </div>
       </GwRadioGroup>
     </div>
-    <div class="gw-preview-section">
-      <div class="gw-preview-label">Disabled</div>
+    <div class="gwind-docs-preview-section">
+      <div class="gwind-docs-preview-label">Disabled</div>
       <GwRadioGroup default-value="option-a" disabled class="grid gap-2">
         <div class="flex items-center space-x-2">
           <GwRadioGroupItem id="preview-disabled-a" value="option-a" />
@@ -46,7 +46,7 @@ A set of checkable buttons—known as radio buttons—where no more than one but
       </GwRadioGroup>
     </div>
   </div>
-</div>
+</ShadowPreview>
 
 ---
 

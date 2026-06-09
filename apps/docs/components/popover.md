@@ -4,7 +4,7 @@ Displays rich content in a portal, triggered by a button.
 
 ## Preview
 
-<div class="gw-preview">
+<ShadowPreview class="gwind-docs-preview">
     <div class="grid gap-4 md:grid-cols-2">
         <GwPopover>
             <GwPopoverTrigger as-child>
@@ -51,7 +51,7 @@ Displays rich content in a portal, triggered by a button.
             </GwPopoverContent>
         </GwPopover>
     </div>
-</div>
+</ShadowPreview>
 
 ---
 

@@ -4,10 +4,10 @@ Displays a list of options for the user to pick from—triggered by a button.
 
 ## Preview
 
-<div class="gw-preview">
-  <div class="gw-preview-col">
-    <div class="gw-preview-section">
-      <div class="gw-preview-label">Simple</div>
+<ShadowPreview class="gwind-docs-preview">
+  <div class="gwind-docs-preview-col">
+    <div class="gwind-docs-preview-section">
+      <div class="gwind-docs-preview-label">Simple</div>
       <GwSelect>
         <GwSelectTrigger class="w-[180px]">
           <GwSelectValue placeholder="Select a fruit" />
@@ -24,8 +24,8 @@ Displays a list of options for the user to pick from—triggered by a button.
         </GwSelectContent>
       </GwSelect>
     </div>
-    <div class="gw-preview-section">
-      <div class="gw-preview-label">Grouped</div>
+    <div class="gwind-docs-preview-section">
+      <div class="gwind-docs-preview-label">Grouped</div>
       <GwSelect>
         <GwSelectTrigger class="w-[220px]">
           <GwSelectValue placeholder="Select a timezone" />
@@ -46,7 +46,7 @@ Displays a list of options for the user to pick from—triggered by a button.
       </GwSelect>
     </div>
   </div>
-</div>
+</ShadowPreview>
 
 ---
 

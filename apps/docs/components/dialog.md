@@ -9,7 +9,7 @@ A modal dialog that interrupts the user with important content and expects a res
 
 ## Preview
 
-<div class="gw-preview">
+<ShadowPreview class="gwind-docs-preview">
   <GwDialog v-model:open="isOpen">
     <GwDialogTrigger as-child>
       <GwButton>Open Dialog</GwButton>
@@ -27,7 +27,7 @@ A modal dialog that interrupts the user with important content and expects a res
       </GwDialogFooter>
     </GwDialogContent>
   </GwDialog>
-</div>
+</ShadowPreview>
 
 ## Installation
 

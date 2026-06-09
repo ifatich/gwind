@@ -6,8 +6,8 @@ Displays a small label or status indicator.
 
 ### Variants
 
-<div class="gw-preview">
-  <div class="gw-preview-row">
+<ShadowPreview class="gwind-docs-preview">
+  <div class="gwind-docs-preview-row">
     <GwBadge variant="green">Default</GwBadge>
     <GwBadge variant="brocoli">Secondary</GwBadge>
     <GwBadge variant="orange">Outline</GwBadge>
@@ -15,7 +15,7 @@ Displays a small label or status indicator.
     <GwBadge variant="red">Success</GwBadge>
     <GwBadge variant="outline">Warning</GwBadge>
   </div>
-</div>
+</ShadowPreview>
 
 ---
 

@@ -4,8 +4,8 @@ Displays the path to the current resource using a hierarchy of links.
 
 ## Preview
 
-<div class="gw-preview">
-    <div class="gw-preview-col">
+<ShadowPreview class="gwind-docs-preview">
+    <div class="gwind-docs-preview-col">
         <GwBreadcrumb>
             <GwBreadcrumbList>
                 <GwBreadcrumbItem>
@@ -22,7 +22,7 @@ Displays the path to the current resource using a hierarchy of links.
             </GwBreadcrumbList>
         </GwBreadcrumb>
     </div>
-    <div class="gw-preview-col">
+    <div class="gwind-docs-preview-col">
         <GwBreadcrumb>
             <GwBreadcrumbList>
                 <GwBreadcrumbItem>
@@ -43,7 +43,7 @@ Displays the path to the current resource using a hierarchy of links.
             </GwBreadcrumbList>
         </GwBreadcrumb>
     </div>
-</div>
+</ShadowPreview>
 
 ---
 
@@ -83,7 +83,7 @@ Displays the path to the current resource using a hierarchy of links.
             <BreadcrumbItem>
                 <BreadcrumbPage>Breadcrumb</BreadcrumbPage>
             </BreadcrumbItem>
-            </GwBreadcrumbList>
+            </BreadcrumbList>
     </Breadcrumb>
 </template>
 ```

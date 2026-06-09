@@ -10,6 +10,7 @@ import {
   DialogPortal,
   useForwardPropsEmits,
 } from 'reka-ui'
+import { useGwindPortalTarget } from '../../../lib/portal'
 import { cn } from '../../../lib/utils'
 import DialogOverlay from './DialogOverlay.vue'
 
@@ -21,10 +22,11 @@ const emits = defineEmits<DialogContentEmits>()
 const delegatedProps = reactiveOmit(props, 'class')
 
 const forwarded = useForwardPropsEmits(delegatedProps, emits)
+const portalTarget = useGwindPortalTarget()
 </script>
 
 <template>
-  <DialogPortal>
+  <DialogPortal :to="portalTarget">
     <DialogOverlay />
     <DialogContent
       data-slot="dialog-content"

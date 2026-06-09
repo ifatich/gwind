@@ -24,8 +24,10 @@ export default defineConfig({
     },
   },
   resolve: {
+    dedupe: ['vue'],
     alias: {
       '@': resolve(__dirname, 'src'),
+      vue: resolve(__dirname, 'node_modules/vue'),
     },
   },
 })

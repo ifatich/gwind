@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "turbo dev",
     "dev:docs": "pnpm --filter docs dev",
+    "dev:playground": "pnpm --filter playground dev",
     "build": "turbo build",
     "build:registry": "pnpm --filter @gwind/ui build:registry",
     "lint": "turbo lint",
@@ -12,6 +13,7 @@
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.2.4",
+    "vue": "^3.5.16",
     "prettier": "latest",
     "tsx": "^4.21.0",
     "turbo": "latest",

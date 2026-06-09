@@ -4,8 +4,8 @@ Label adalah komponen untuk memberi teks penjelas pada field input/form.
 
 ## Preview
 
-<div class="gw-preview">
-  <div class="gw-preview-col">
+<ShadowPreview class="gwind-docs-preview">
+  <div class="gwind-docs-preview-col">
     <GwLabel for="email">Email</GwLabel>
     <GwInput id="email" placeholder="name@example.com" />
     <div class="grid w-full items-center gap-1.5">
@@ -14,7 +14,7 @@ Label adalah komponen untuk memberi teks penjelas pada field input/form.
       <p class="text-xs text-muted-foreground">Used to identify the account owner.</p>
     </div>
   </div>
-</div>
+</ShadowPreview>
 
 ## Usage
 
@@ -32,12 +32,12 @@ import { Input } from '@gwind/ui'
 
 ## Disabled Peer State
 
-<div class="gw-preview">
-  <div class="gw-preview-col">
+<ShadowPreview class="gwind-docs-preview">
+  <div class="gwind-docs-preview-col">
     <GwLabel for="username">Username</GwLabel>
     <GwInput id="username" disabled value="disabled-input" />
   </div>
-</div>
+</ShadowPreview>
 
 ## Notes
 

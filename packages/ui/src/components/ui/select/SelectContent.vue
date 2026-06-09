@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { cn } from '../../../lib/utils'
+import { useGwindPortalTarget } from '../../../lib/portal'
 import {
   SelectContent,
   type SelectContentEmits,
@@ -25,10 +26,11 @@ const props = withDefaults(
 const emits = defineEmits<SelectContentEmits>()
 
 const forwarded = useForwardPropsEmits(props, emits)
+const portalTarget = useGwindPortalTarget()
 </script>
 
 <template>
-  <SelectPortal>
+  <SelectPortal :to="portalTarget">
     <SelectContent
       v-bind="{ ...forwarded, ...$attrs }"
       :class="

@@ -26,5 +26,6 @@ Thumbs.db
 
 # VitePress
 apps/docs/.vitepress/cache
+apps/docs/.vitepress/.temp
 apps/docs/.vitepress/dist
 gwind-test/

@@ -68,13 +68,13 @@ Gwind menggunakan sistem spacing berbasis pixel yang dikonversi ke `rem`. Selain
 
 Utility typography Gwind mengikuti token font size yang tersedia di desain system. Contoh paling umum adalah `text-omicron` untuk body text default.
 
-<div class="gw-preview">
-  <div class="gw-preview-col">
+<ShadowPreview>
+  <div class="gwind-docs-preview-col">
     <p class="text-omega text-black-500">Omega - helper text dan metadata kecil</p>
     <p class="text-sigma text-black-600">Sigma - teks sekunder dan body kecil</p>
     <p class="text-omicron font-bold text-black-800">Omicron - body default dan teks utama</p>
   </div>
-</div>
+</ShadowPreview>
 
 ```html
 <p class="text-omicron">Teks utama menggunakan token typography Gwind.</p>

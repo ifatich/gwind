@@ -4,26 +4,26 @@ Displays an indicator showing the completion progress of a task.
 
 ## Preview
 
-<div class="gw-preview">
-  <div class="gw-preview-col">
-    <div class="gw-preview-section">
-      <div class="gw-preview-label">Loading (33%)</div>
+<ShadowPreview class="gwind-docs-preview">
+  <div class="gwind-docs-preview-col">
+    <div class="gwind-docs-preview-section">
+      <div class="gwind-docs-preview-label">Loading (33%)</div>
       <GwProgress :model-value="33" />
     </div>
-    <div class="gw-preview-section">
-      <div class="gw-preview-label">Success Color (66%)</div>
+    <div class="gwind-docs-preview-section">
+      <div class="gwind-docs-preview-label">Success Color (66%)</div>
       <GwProgress :model-value="66" class="[&>div]:bg-lime-500" />
     </div>
-    <div class="gw-preview-section">
-      <div class="gw-preview-label">Destructive (90%)</div>
+    <div class="gwind-docs-preview-section">
+      <div class="gwind-docs-preview-label">Destructive (90%)</div>
       <GwProgress :model-value="90" class="[&>div]:bg-destructive" />
     </div>
-    <div class="gw-preview-section">
-      <div class="gw-preview-label">Indeterminate</div>
+    <div class="gwind-docs-preview-section">
+      <div class="gwind-docs-preview-label">Indeterminate</div>
       <GwProgress :model-value="null" />
     </div>
   </div>
-</div>
+</ShadowPreview>
 
 ---
 

@@ -4,8 +4,8 @@ A control that allows the user to toggle between checked and not checked.
 
 ## Preview
 
-<div class="gw-preview">
-  <div class="gw-preview-col">
+<ShadowPreview class="gwind-docs-preview">
+  <div class="gwind-docs-preview-col">
     <div class="flex items-center gap-2">
       <GwCheckbox id="checkbox-unchecked" />
       <GwLabel for="checkbox-unchecked">Unchecked</GwLabel>
@@ -23,7 +23,7 @@ A control that allows the user to toggle between checked and not checked.
       <GwLabel for="checkbox-disabled" class="opacity-50">Disabled</GwLabel>
     </div>
   </div>
-</div>
+</ShadowPreview>
 
 ---
 

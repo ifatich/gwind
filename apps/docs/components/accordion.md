@@ -4,10 +4,10 @@ A vertically stacked set of interactive headings that each reveal a section of c
 
 ## Preview
 
-<div class="gw-preview">
-    <div class="gw-preview-col">
-        <div class="gw-preview-section">
-            <div class="gw-preview-label">Single / collapsible</div>
+<ShadowPreview class="gwind-docs-preview">
+    <div class="gwind-docs-preview-col">
+        <div class="gwind-docs-preview-section">
+            <div class="gwind-docs-preview-label">Single / collapsible</div>
             <GwAccordion type="single" collapsible class="w-full">
                 <GwAccordionItem value="item-1">
                     <GwAccordionTrigger>Is it accessible?</GwAccordionTrigger>
@@ -29,27 +29,27 @@ A vertically stacked set of interactive headings that each reveal a section of c
                 </GwAccordionItem>
             </GwAccordion>
         </div>
-        <div class="gw-preview-col">
-            <div class="gw-preview-section">
-                <div class="gw-preview-label">Multiple</div>
-                <GwAccordion type="multiple" :default-value="['item-1', 'item-2']" class="w-full">
-                    <GwAccordionItem value="item-1">
-                        <GwAccordionTrigger>Content strategy</GwAccordionTrigger>
-                        <GwAccordionContent>
-                            Show multiple sections open when users need faster comparison.
-                        </GwAccordionContent>
-                    </GwAccordionItem>
-                    <GwAccordionItem value="item-2">
-                        <GwAccordionTrigger>Spacing system</GwAccordionTrigger>
-                        <GwAccordionContent>
-                            Keep content blocks short so the component remains scannable.
-                        </GwAccordionContent>
-                    </GwAccordionItem>
-                </GwAccordion>
-            </div>
+    </div>
+    <div class="gwind-docs-preview-col">
+        <div class="gwind-docs-preview-section">
+            <div class="gwind-docs-preview-label">Multiple</div>
+            <GwAccordion type="multiple" :default-value="['item-1', 'item-2']" class="w-full">
+                <GwAccordionItem value="item-1">
+                    <GwAccordionTrigger>Content strategy</GwAccordionTrigger>
+                    <GwAccordionContent>
+                        Show multiple sections open when users need faster comparison.
+                    </GwAccordionContent>
+                </GwAccordionItem>
+                <GwAccordionItem value="item-2">
+                    <GwAccordionTrigger>Spacing system</GwAccordionTrigger>
+                    <GwAccordionContent>
+                        Keep content blocks short so the component remains scannable.
+                    </GwAccordionContent>
+                </GwAccordionItem>
+            </GwAccordion>
         </div>
     </div>
-</div>
+</ShadowPreview>
 
 ---
 

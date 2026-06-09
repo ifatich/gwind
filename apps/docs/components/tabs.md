@@ -9,7 +9,7 @@ A set of layered sections of content, known as tab panels, that are displayed on
 
 ## Preview
 
-<div class="gw-preview">
+<ShadowPreview class="gwind-docs-preview">
   <GwTabGroup v-model="activeTab">
     <GwTabTriggerGroup>
       <GwTabTrigger value="account">Account</GwTabTrigger>
@@ -44,7 +44,7 @@ A set of layered sections of content, known as tab panels, that are displayed on
       </GwCard>
     </GwTabContent>
   </GwTabGroup>
-</div>
+</ShadowPreview>
 
 ---
 
