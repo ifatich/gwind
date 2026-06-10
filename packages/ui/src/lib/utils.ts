@@ -7,5 +7,5 @@ import { twMerge } from 'tailwind-merge'
  * for intelligent deduplication of Tailwind utility classes.
  */
 export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs))
+  return twMerge(clsx(inputs, '!font-sans'))
 }
