@@ -14,7 +14,7 @@
     },
     {
       "name": "CardDescription.vue",
-      "content": "<script setup lang=\"ts\">\nimport { cn } from '../../../lib/utils'\nimport { type HTMLAttributes } from 'vue'\n\ninterface Props {\n  class?: HTMLAttributes['class']\n}\n\nconst props = defineProps<Props>()\n</script>\n\n<template>\n  <p :class=\"cn('text-sm text-muted-foreground', props.class)\">\n    <slot />\n  </p>\n</template>\n"
+      "content": "<script setup lang=\"ts\">\nimport { cn } from '../../../lib/utils'\nimport { type HTMLAttributes } from 'vue'\n\ninterface Props {\n  class?: HTMLAttributes['class']\n}\n\nconst props = defineProps<Props>()\n</script>\n\n<template>\n  <p :class=\"cn('text-omicron text-muted-foreground', props.class)\">\n    <slot />\n  </p>\n</template>\n"
     },
     {
       "name": "CardFooter.vue",

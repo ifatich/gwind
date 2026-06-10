@@ -8,7 +8,7 @@
   "files": [
     {
       "name": "Label.vue",
-      "content": "<script setup lang=\"ts\">\nimport { Label, type LabelProps } from 'reka-ui'\nimport { computed, type HTMLAttributes } from 'vue'\nimport { cn } from '../../../lib/utils'\n\nconst props = defineProps<LabelProps & { class?: HTMLAttributes['class'] }>()\n\nconst delegatedProps = computed(() => {\n  const { class: _, ...delegated } = props\n  return delegated\n})\n</script>\n\n<template>\n  <Label\n    v-bind=\"delegatedProps\"\n    :class=\"\n      cn(\n        'text-omicron font-bold leading-none peer-disabled:cursor-not-allowed peer-disabled:text-black-80/50',\n        props.class,\n      )\n    \"\n  >\n    <slot />\n  </Label>\n</template>\n"
+      "content": "<script setup lang=\"ts\">\nimport { Label, type LabelProps } from 'reka-ui'\nimport { computed, type HTMLAttributes } from 'vue'\nimport { cn } from '../../../lib/utils'\n\nconst props = defineProps<LabelProps & { class?: HTMLAttributes['class'] }>()\n\nconst delegatedProps = computed(() => {\n  const { class: _, ...delegated } = props\n  return delegated\n})\n</script>\n\n<template>\n  <Label\n    v-bind=\"delegatedProps\"\n    :class=\"\n      cn(\n        '!text-omicron font-[800] leading-none peer-disabled:cursor-not-allowed peer-disabled:text-black-80/50',\n        props.class,\n      )\n    \"\n  >\n    <slot />\n  </Label>\n</template>\n"
     },
     {
       "name": "index.ts",
