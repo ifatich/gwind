@@ -62,7 +62,7 @@ function handleTextareaInput(event: Event) {
       :for="fieldId"
       :class="
         cn(
-          'inline-flex h-5 items-center gap-1 overflow-hidden text-black-800 !text-sigma !font-extrabold !leading-5',
+          'inline-flex h-5 items-center gap-1 overflow-hidden text-black-800 !leading-5',
           disabled && 'text-black-600',
           props.labelClass,
         )
