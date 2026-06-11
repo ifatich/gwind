@@ -1,7 +1,5 @@
+@import "@fontsource/nunito-sans/latin-600.css";
+@import "@fontsource/nunito-sans/latin-700.css";
+@import "@fontsource/nunito-sans/latin-800.css";
 @import "gwind-v2/base.css";
 @import "gwind-v2/theme.css";
-
-.gwind-ui,
-.gwind-ui * {
-  font-family: var(--font-family-base) !important;
-}

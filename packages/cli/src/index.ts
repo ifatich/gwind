@@ -20,6 +20,7 @@ const __dirname = path.dirname(__filename)
 // Remote registry URL
 const REMOTE_REGISTRY = 'https://raw.githubusercontent.com/ifatich/gwind/main/registry'
 const LOCAL_REGISTRY = path.resolve(__dirname, '../../../registry')
+const BASE_DEPENDENCIES = ['@fontsource/nunito-sans', 'clsx', 'tailwind-merge', 'gwind-v2']
 
 async function getRegistryData(subPath: string) {
   // Check local first (for development)
@@ -81,11 +82,16 @@ cli
       await mkdirp(utilsDir)
       await writeFile(
         path.join(process.cwd(), response.utilsPath),
-        `import { type ClassValue, clsx } from 'clsx'
+        `import '@fontsource/nunito-sans/latin-600.css'
+import '@fontsource/nunito-sans/latin-700.css'
+import '@fontsource/nunito-sans/latin-800.css'
+import { type ClassValue, clsx } from 'clsx'
 import { twMerge } from 'tailwind-merge'
 
+const GWIND_FONT_CLASS = '![font-family:var(--font-family-base)]'
+
 export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs, '!font-sans'))
+  return twMerge(clsx(inputs, GWIND_FONT_CLASS))
 }
 `
       )
@@ -94,6 +100,8 @@ export function cn(...inputs: ClassValue[]) {
       await mkdirp(path.join(process.cwd(), response.componentsPath))
 
       spinner.succeed(chalk.green('Project initialized successfully!'))
+      console.log(chalk.yellow('\nInstall required base dependencies:'))
+      console.log(chalk.cyan(`pnpm add ${BASE_DEPENDENCIES.join(' ')}`))
       console.log(chalk.cyan('\nYou can now start adding components using:'))
       console.log(chalk.bold('npx gwind-ui add <component>'))
 
@@ -145,9 +153,11 @@ cli
 
       console.log(chalk.bold.green(`\nSuccessfully added ${componentName}!`))
       
-      if (componentData.dependencies.length > 0) {
+      const dependencies = Array.from(new Set([...BASE_DEPENDENCIES, ...componentData.dependencies]))
+
+      if (dependencies.length > 0) {
         console.log(chalk.yellow(`\nDon't forget to install these dependencies:`))
-        console.log(chalk.cyan(`pnpm add ${componentData.dependencies.join(' ')}`))
+        console.log(chalk.cyan(`pnpm add ${dependencies.join(' ')}`))
       }
 
       console.log(

@@ -1,7 +1,7 @@
 import { type ClassValue, clsx } from 'clsx'
 import { twMerge } from 'tailwind-merge'
 
-const GWIND_UI_SCOPE_CLASS = 'gwind-ui'
+const GWIND_FONT_CLASS = '![font-family:var(--font-family-base)]'
 
 /**
  * Merge class names with Tailwind CSS conflict resolution.
@@ -9,5 +9,5 @@ const GWIND_UI_SCOPE_CLASS = 'gwind-ui'
  * for intelligent deduplication of Tailwind utility classes.
  */
 export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs, GWIND_UI_SCOPE_CLASS, '!font-sans'))
+  return twMerge(clsx(inputs, GWIND_FONT_CLASS))
 }
