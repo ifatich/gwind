@@ -2,6 +2,12 @@
 
 Displays a small label or status indicator.
 
+## Installation
+
+```bash
+npx gwind-system-ui add badge
+```
+
 ## Preview
 
 ### Variants

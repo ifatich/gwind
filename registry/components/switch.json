@@ -1,0 +1,16 @@
+{
+  "name": "switch",
+  "type": "ui",
+  "dependencies": [],
+  "registryDependencies": [],
+  "files": [
+    {
+      "name": "Switch.vue",
+      "content": "<script setup lang=\"ts\">\nimport type { HTMLAttributes } from 'vue'\nimport { computed, ref, watch } from 'vue'\nimport { cn } from '../../../lib/utils'\n\nconst props = withDefaults(\n  defineProps<{\n    id?: string\n    modelValue?: boolean\n    defaultValue?: boolean\n    disabled?: boolean\n    class?: HTMLAttributes['class']\n    thumbClass?: HTMLAttributes['class']\n  }>(),\n  {\n    defaultValue: false,\n  },\n)\n\nconst emits = defineEmits<{\n  (event: 'update:modelValue', payload: boolean): void\n}>()\n\nconst internalValue = ref(props.modelValue ?? props.defaultValue)\nconst isChecked = computed(() => props.modelValue ?? internalValue.value)\n\nwatch(\n  () => props.modelValue,\n  (value) => {\n    if (value !== undefined) internalValue.value = value\n  },\n)\n\nfunction toggle() {\n  if (props.disabled) return\n\n  const nextValue = !isChecked.value\n  internalValue.value = nextValue\n  emits('update:modelValue', nextValue)\n}\n</script>\n\n<template>\n  <button\n    :id=\"id\"\n    type=\"button\"\n    role=\"switch\"\n    :aria-checked=\"isChecked\"\n    :disabled=\"disabled\"\n    :class=\"\n      cn(\n        'inline-flex h-6 w-11 shrink-0 cursor-pointer items-center rounded-full border border-transparent bg-black-300 p-0.5 transition-[background-color,box-shadow,transform] duration-150 ease-out active:scale-[var(--gwind-motion-scale-icon-press)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lime-500 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 disabled:active:scale-100',\n        isChecked && 'bg-lime-500',\n        props.class,\n      )\n    \"\n    @click=\"toggle\"\n  >\n    <span\n      :class=\"\n        cn(\n          'block h-5 w-5 rounded-full bg-white shadow-sm transition-transform duration-100',\n          isChecked && 'translate-x-5',\n          thumbClass,\n        )\n      \"\n    />\n  </button>\n</template>\n"
+    },
+    {
+      "name": "index.ts",
+      "content": "export { default as Switch } from './Switch.vue'\n"
+    }
+  ]
+}

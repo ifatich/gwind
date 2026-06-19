@@ -13,11 +13,11 @@
     },
     {
       "name": "AlertDescription.vue",
-      "content": "<script setup lang=\"ts\">\nimport type { HTMLAttributes } from 'vue'\nimport { cn } from '../../../lib/utils'\n\nconst props = defineProps<{\n  class?: HTMLAttributes['class']\n}>()\n</script>\n\n<template>\n  <div :class=\"cn('text-sigma font-normal [&_p]:leading-relaxed', props.class)\">\n    <slot />\n  </div>\n</template>\n"
+      "content": "<script setup lang=\"ts\">\nimport type { HTMLAttributes } from 'vue'\nimport { cn } from '../../../lib/utils'\n\nconst props = defineProps<{\n  class?: HTMLAttributes['class']\n}>()\n</script>\n\n<template>\n  <div :class=\"cn('text-sigma font-semibold [&_p]:leading-relaxed', props.class)\">\n    <slot />\n  </div>\n</template>\n"
     },
     {
       "name": "AlertTitle.vue",
-      "content": "<script setup lang=\"ts\">\nimport type { HTMLAttributes } from 'vue'\nimport { cn } from '../../../lib/utils'\n\nconst props = defineProps<{\n  class?: HTMLAttributes['class']\n}>()\n</script>\n\n<template>\n  <h5 :class=\"cn('mb-1 text-omicron font-bold leading-none tracking-tight', props.class)\">\n    <slot />\n  </h5>\n</template>\n"
+      "content": "<script setup lang=\"ts\">\nimport type { HTMLAttributes } from 'vue'\nimport { cn } from '../../../lib/utils'\n\nconst props = defineProps<{\n  class?: HTMLAttributes['class']\n}>()\n</script>\n\n<template>\n  <h5 :class=\"cn('mb-1 text-omicron font-extrabold leading-none tracking-tight', props.class)\">\n    <slot />\n  </h5>\n</template>\n"
     },
     {
       "name": "index.ts",

@@ -3,6 +3,7 @@ import { type HTMLAttributes } from 'vue'
 import { cn } from '../../../lib/utils'
 import { Primitive, type PrimitiveProps } from 'reka-ui'
 import { type ButtonVariants, buttonVariants } from '.'
+import Spinner from '../spinner/Spinner.vue'
 
 // Local ripple directive for portability
 const vRipple = {
@@ -12,6 +13,7 @@ const vRipple = {
 
     el.addEventListener('pointerdown', function (e: PointerEvent) {
       if (el.classList.contains('combobox')) return
+      if (el.getAttribute('aria-busy') === 'true') return
 
       const rect = el.getBoundingClientRect()
       const ripple = document.createElement('span')
@@ -48,11 +50,15 @@ interface Props extends PrimitiveProps {
   size?: ButtonVariants['size']
   class?: HTMLAttributes['class']
   disabled?: boolean
+  loading?: boolean
+  loadingLabel?: string
 }
 
 const props = withDefaults(defineProps<Props>(), {
   as: 'button',
   disabled: false,
+  loading: false,
+  loadingLabel: 'Loading',
 })
 </script>
 
@@ -67,13 +73,22 @@ const props = withDefaults(defineProps<Props>(), {
         buttonVariants({
           variant: props.variant,
           size: props.size,
-          state: props.disabled ? 'disabled' : undefined,
+          state: props.disabled || props.loading ? 'disabled' : undefined,
         }),
         props.class,
       )
     "
-    :disabled="disabled"
+    :disabled="disabled || loading"
+    :aria-disabled="disabled || loading ? 'true' : undefined"
+    :aria-busy="loading ? 'true' : undefined"
   >
+    <Spinner
+      v-if="loading"
+      size="sm"
+      :label="loadingLabel"
+      class="shrink-0"
+      aria-hidden="true"
+    />
     <slot />
   </Primitive>
 </template>

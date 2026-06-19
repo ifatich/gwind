@@ -2,6 +2,12 @@
 
 A vertically stacked set of interactive headings that each reveal a section of content.
 
+## Installation
+
+```bash
+npx gwind-system-ui add accordion
+```
+
 ## Preview
 
 <ShadowPreview class="gwind-docs-preview">

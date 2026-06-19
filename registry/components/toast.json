@@ -1,0 +1,16 @@
+{
+  "name": "toast",
+  "type": "ui",
+  "dependencies": [],
+  "registryDependencies": [],
+  "files": [
+    {
+      "name": "Toast.vue",
+      "content": "<script setup lang=\"ts\">\nimport type { HTMLAttributes } from 'vue'\nimport { computed } from 'vue'\nimport { cn } from '../../../lib/utils'\n\nconst props = withDefaults(\n  defineProps<{\n    title?: string\n    description?: string\n    variant?: 'default' | 'success' | 'warning' | 'error'\n    class?: HTMLAttributes['class']\n    titleClass?: HTMLAttributes['class']\n    descriptionClass?: HTMLAttributes['class']\n  }>(),\n  {\n    variant: 'default',\n  },\n)\n\nconst variantClass = computed(() => ({\n  default: 'border-black-200 bg-white text-black-800',\n  success: 'border-lime-500 bg-lime-100 text-black-800',\n  warning: 'border-orange-500 bg-orange-100 text-black-800',\n  error: 'border-red-500 bg-red-100 text-black-800',\n}[props.variant]))\n</script>\n\n<template>\n  <div\n    role=\"status\"\n    :class=\"\n      cn(\n        'grid w-full max-w-sm gap-1 rounded-md border p-4 shadow-sm animate-in fade-in-0 slide-in-from-top-2',\n        variantClass,\n        props.class,\n      )\n    \"\n  >\n    <div v-if=\"title || $slots.title\" :class=\"cn('text-omicron font-extrabold leading-6', titleClass)\">\n      <slot name=\"title\">{{ title }}</slot>\n    </div>\n    <div\n      v-if=\"description || $slots.default\"\n      :class=\"cn('text-sigma font-semibold leading-5 text-black-600', descriptionClass)\"\n    >\n      <slot>{{ description }}</slot>\n    </div>\n  </div>\n</template>\n"
+    },
+    {
+      "name": "index.ts",
+      "content": "export { default as Toast } from './Toast.vue'\n"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "name": "divider",
+  "type": "ui",
+  "dependencies": [],
+  "registryDependencies": [],
+  "files": [
+    {
+      "name": "Divider.vue",
+      "content": "<script setup lang=\"ts\">\nimport type { HTMLAttributes } from 'vue'\nimport { computed } from 'vue'\nimport { cn } from '../../../lib/utils'\n\nconst props = withDefaults(\n  defineProps<{\n    orientation?: 'horizontal' | 'vertical'\n    decorative?: boolean\n    class?: HTMLAttributes['class']\n  }>(),\n  {\n    orientation: 'horizontal',\n    decorative: true,\n  },\n)\n\nconst orientationClass = computed(() =>\n  props.orientation === 'vertical' ? 'h-full min-h-6 w-px' : 'h-px w-full',\n)\n</script>\n\n<template>\n  <div\n    :role=\"decorative ? 'presentation' : 'separator'\"\n    :aria-orientation=\"decorative ? undefined : orientation\"\n    :class=\"cn('shrink-0 bg-black-200', orientationClass, props.class)\"\n  />\n</template>\n"
+    },
+    {
+      "name": "index.ts",
+      "content": "export { default as Divider } from './Divider.vue'\n"
+    }
+  ]
+}

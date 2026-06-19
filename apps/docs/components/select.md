@@ -2,6 +2,12 @@
 
 Displays a list of options for the user to pick from—triggered by a button.
 
+## Installation
+
+```bash
+npx gwind-system-ui add select
+```
+
 ## Preview
 
 <ShadowPreview class="gwind-docs-preview">

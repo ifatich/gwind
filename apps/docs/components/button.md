@@ -6,6 +6,12 @@ import ButtonPreview from './previews/ButtonPreview.vue'
 
 Displays a button or a component that looks like a button.
 
+## Installation
+
+```bash
+npx gwind-system-ui add button
+```
+
 ## Preview
 
 <ButtonPreview />
@@ -44,6 +50,14 @@ A button with a border, used for less prominent actions.
 <Button variant="outline">Outline Button</Button>
 ```
 
+### Loading
+Uses the Gwind `Spinner` internally and disables interaction while work is pending.
+```vue
+<Button loading loading-label="Saving">
+  Saving
+</Button>
+```
+
 ---
 
 ## Props
@@ -54,4 +68,7 @@ A button with a border, used for less prominent actions.
 | `size` | `sm | md | lg | xl | icon | fab` | `lg` | The size of the button. |
 | `as` | `string` | `button` | The element to render the button as. |
 | `asChild` | `boolean` | `false` | Whether to render the button as its child component. |
+| `disabled` | `boolean` | `false` | Disables the button. |
+| `loading` | `boolean` | `false` | Shows spinner and disables interaction. |
+| `loadingLabel` | `string` | `'Loading'` | Accessible label for the loading spinner. |
 | `class` | `string | HTMLAttributes['class']` | `undefined` | Additional CSS classes. |

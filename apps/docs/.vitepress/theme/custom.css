@@ -63,6 +63,66 @@
   outline: revert-layer;
 }
 
+.vp-doc .gwind-docs-preview :where(.gwind-table table) {
+  display: table;
+  overflow: visible;
+  background-color: revert-layer;
+  border-collapse: revert-layer;
+  border-spacing: revert-layer;
+  border: revert-layer;
+  font: revert-layer;
+  margin: revert-layer;
+  table-layout: revert-layer;
+}
+
+.vp-doc .gwind-docs-preview :where(.gwind-table thead) {
+  display: table-header-group;
+}
+
+.vp-doc .gwind-docs-preview :where(.gwind-table tbody) {
+  display: table-row-group;
+}
+
+.vp-doc .gwind-docs-preview :where(.gwind-table tr) {
+  display: table-row;
+  background-color: revert-layer;
+  border: revert-layer;
+}
+
+.vp-doc .gwind-docs-preview :where(.gwind-table tr.bg-black-100) {
+  background-color: var(--color-black-100) !important;
+}
+
+.vp-doc .gwind-docs-preview :where(.gwind-table tr.bg-white) {
+  background-color: #ffffff !important;
+}
+
+.vp-doc .gwind-docs-preview :where(.gwind-table th, .gwind-table td) {
+  display: table-cell;
+  background-color: revert-layer;
+  border-color: revert-layer;
+  border-style: revert-layer;
+  border-width: revert-layer;
+  color: revert-layer;
+  font: revert-layer;
+  font-size: revert-layer;
+  font-weight: revert-layer;
+  line-height: revert-layer;
+  margin: revert-layer;
+  padding: revert-layer;
+  text-align: revert-layer;
+  vertical-align: revert-layer;
+}
+
+.vp-doc .gwind-docs-preview :where(.gwind-table caption) {
+  display: table-caption;
+  color: revert-layer;
+  font: revert-layer;
+  margin: revert-layer;
+  padding: revert-layer;
+  text-align: revert-layer;
+}
+
 .vp-doc .gwind-docs-preview,
 .vp-doc .gwind-docs-preview :where(*) {
   font-family: var(--vp-font-family-base);

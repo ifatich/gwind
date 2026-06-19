@@ -26,7 +26,7 @@
     },
     {
       "name": "CardTitle.vue",
-      "content": "<script setup lang=\"ts\">\nimport type { HTMLAttributes } from 'vue'\nimport { cn } from '../../../lib/utils'\n\nconst props = defineProps<{\n  class?: HTMLAttributes['class']\n}>()\n</script>\n\n<template>\n  <h3 :class=\"cn('!text-omicron font-bold leading-none tracking-tight', props.class)\">\n    <slot />\n  </h3>\n</template>\n"
+      "content": "<script setup lang=\"ts\">\nimport type { HTMLAttributes } from 'vue'\nimport { cn } from '../../../lib/utils'\n\nconst props = defineProps<{\n  class?: HTMLAttributes['class']\n}>()\n</script>\n\n<template>\n  <h3 :class=\"cn('!text-omicron font-extrabold leading-none tracking-tight', props.class)\">\n    <slot />\n  </h3>\n</template>\n"
     },
     {
       "name": "index.ts",

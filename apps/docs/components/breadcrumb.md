@@ -2,6 +2,12 @@
 
 Displays the path to the current resource using a hierarchy of links.
 
+## Installation
+
+```bash
+npx gwind-system-ui add breadcrumb
+```
+
 ## Preview
 
 <ShadowPreview class="gwind-docs-preview">

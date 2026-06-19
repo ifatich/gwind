@@ -1,0 +1,44 @@
+{
+  "name": "table",
+  "type": "ui",
+  "dependencies": [],
+  "registryDependencies": [],
+  "files": [
+    {
+      "name": "DataTable.vue",
+      "content": "<script setup lang=\"ts\">\nimport type { HTMLAttributes } from 'vue'\nimport { cn } from '../../../lib/utils'\nimport Table from './Table.vue'\nimport TableBody from './TableBody.vue'\nimport TableCell from './TableCell.vue'\nimport TableHead from './TableHead.vue'\nimport TableHeader from './TableHeader.vue'\nimport TableRow from './TableRow.vue'\n\nexport interface DataTableColumn {\n  key: string\n  label: string\n  subLabel?: string\n  align?: 'left' | 'center' | 'right'\n  width?: string\n  class?: HTMLAttributes['class']\n  headerClass?: HTMLAttributes['class']\n  cellClass?: HTMLAttributes['class']\n}\n\nexport type DataTableRow = Record<string, string | number | null | undefined>\n\nconst props = withDefaults(\n  defineProps<{\n    columns: DataTableColumn[]\n    rows: DataTableRow[]\n    rowKey?: string\n    striped?: boolean\n    emptyText?: string\n    class?: HTMLAttributes['class']\n    wrapperClass?: HTMLAttributes['class']\n    headerClass?: HTMLAttributes['class']\n    bodyClass?: HTMLAttributes['class']\n    rowClass?: HTMLAttributes['class']\n  }>(),\n  {\n    rowKey: 'id',\n    striped: true,\n    emptyText: 'No data available.',\n  },\n)\n\nfunction getRowKey(row: DataTableRow, index: number) {\n  return row[props.rowKey] ?? index\n}\n\nfunction getCellValue(row: DataTableRow, key: string) {\n  const value = row[key]\n\n  return value === null || value === undefined || value === '' ? '-' : value\n}\n</script>\n\n<template>\n  <Table :class=\"cn('min-w-max', props.class)\" :wrapper-class=\"wrapperClass\">\n    <colgroup>\n      <col\n        v-for=\"column in columns\"\n        :key=\"column.key\"\n        :style=\"{ width: column.width }\"\n      >\n    </colgroup>\n    <TableHeader :class=\"headerClass\">\n      <TableRow>\n        <TableHead\n          v-for=\"column in columns\"\n          :key=\"column.key\"\n          :align=\"column.align\"\n          :class=\"cn('whitespace-nowrap', column.headerClass, column.class)\"\n        >\n          <slot :name=\"`header-${column.key}`\" :column=\"column\">\n            <span class=\"block\">{{ column.label }}</span>\n            <span v-if=\"column.subLabel\" class=\"block\">{{ column.subLabel }}</span>\n          </slot>\n        </TableHead>\n      </TableRow>\n    </TableHeader>\n    <TableBody :class=\"bodyClass\">\n      <TableRow\n        v-for=\"(row, rowIndex) in rows\"\n        :key=\"getRowKey(row, rowIndex)\"\n        :class=\"\n          cn(\n            striped\n              ? rowIndex % 2 === 0\n                ? 'bg-white'\n                : 'bg-black-100'\n              : 'bg-white',\n            rowClass,\n          )\n        \"\n      >\n        <TableCell\n          v-for=\"column in columns\"\n          :key=\"column.key\"\n          :align=\"column.align\"\n          :class=\"cn('whitespace-nowrap', column.cellClass, column.class)\"\n        >\n          <slot\n            :name=\"`cell-${column.key}`\"\n            :row=\"row\"\n            :column=\"column\"\n            :value=\"getCellValue(row, column.key)\"\n            :row-index=\"rowIndex\"\n          >\n            {{ getCellValue(row, column.key) }}\n          </slot>\n        </TableCell>\n      </TableRow>\n      <TableRow v-if=\"rows.length === 0\">\n        <TableCell :colspan=\"columns.length\" class=\"text-center text-black-500\">\n          {{ emptyText }}\n        </TableCell>\n      </TableRow>\n    </TableBody>\n  </Table>\n</template>\n"
+    },
+    {
+      "name": "Table.vue",
+      "content": "<script setup lang=\"ts\">\nimport type { HTMLAttributes } from 'vue'\nimport { cn } from '../../../lib/utils'\n\ndefineOptions({\n  inheritAttrs: false,\n})\n\nconst props = defineProps<{\n  class?: HTMLAttributes['class']\n  wrapperClass?: HTMLAttributes['class']\n}>()\n</script>\n\n<template>\n  <div :class=\"cn('gwind-table w-full overflow-x-auto rounded-md bg-white', wrapperClass)\">\n    <table\n      v-bind=\"$attrs\"\n      :class=\"\n        cn(\n          'w-full min-w-[592px] border-separate border-spacing-0 bg-white text-left',\n          props.class,\n        )\n      \"\n    >\n      <slot />\n    </table>\n  </div>\n</template>\n"
+    },
+    {
+      "name": "TableBody.vue",
+      "content": "<script setup lang=\"ts\">\nimport type { HTMLAttributes } from 'vue'\nimport { cn } from '../../../lib/utils'\n\nconst props = defineProps<{\n  class?: HTMLAttributes['class']\n}>()\n</script>\n\n<template>\n  <tbody :class=\"cn('[&_tr:last-child_td:first-child]:rounded-bl-md [&_tr:last-child_td:last-child]:rounded-br-md', props.class)\">\n    <slot />\n  </tbody>\n</template>\n"
+    },
+    {
+      "name": "TableCaption.vue",
+      "content": "<script setup lang=\"ts\">\nimport type { HTMLAttributes } from 'vue'\nimport { cn } from '../../../lib/utils'\n\nconst props = defineProps<{\n  class?: HTMLAttributes['class']\n}>()\n</script>\n\n<template>\n  <caption :class=\"cn('mt-3 text-left !text-sigma font-semibold leading-5 text-black-500', props.class)\">\n    <slot />\n  </caption>\n</template>\n"
+    },
+    {
+      "name": "TableCell.vue",
+      "content": "<script setup lang=\"ts\">\nimport type { HTMLAttributes } from 'vue'\nimport { computed } from 'vue'\nimport { cn } from '../../../lib/utils'\n\nconst props = withDefaults(\n  defineProps<{\n    align?: 'left' | 'center' | 'right'\n    class?: HTMLAttributes['class']\n  }>(),\n  {\n    align: 'left',\n  },\n)\n\nconst alignClass = computed(() => ({\n  left: 'text-left',\n  center: 'text-center',\n  right: 'text-right',\n}[props.align]))\n</script>\n\n<template>\n  <td\n    :class=\"\n      cn(\n        'border-b border-r border-black-200 bg-inherit px-3 py-3 align-middle !text-omicron font-semibold leading-6 text-black-800 first:border-l',\n        alignClass,\n        props.class,\n      )\n    \"\n  >\n    <slot />\n  </td>\n</template>\n"
+    },
+    {
+      "name": "TableHead.vue",
+      "content": "<script setup lang=\"ts\">\nimport type { HTMLAttributes } from 'vue'\nimport { computed } from 'vue'\nimport { cn } from '../../../lib/utils'\n\nconst props = withDefaults(\n  defineProps<{\n    align?: 'left' | 'center' | 'right'\n    class?: HTMLAttributes['class']\n  }>(),\n  {\n    align: 'left',\n  },\n)\n\nconst alignClass = computed(() => ({\n  left: 'text-left',\n  center: 'text-center',\n  right: 'text-right',\n}[props.align]))\n</script>\n\n<template>\n  <th\n    :class=\"\n      cn(\n        'bg-lime-500 px-3 py-3 align-middle !text-sigma font-extrabold leading-5 text-white',\n        alignClass,\n        props.class,\n      )\n    \"\n  >\n    <slot />\n  </th>\n</template>\n"
+    },
+    {
+      "name": "TableHeader.vue",
+      "content": "<script setup lang=\"ts\">\nimport type { HTMLAttributes } from 'vue'\nimport { cn } from '../../../lib/utils'\n\nconst props = defineProps<{\n  class?: HTMLAttributes['class']\n}>()\n</script>\n\n<template>\n  <thead :class=\"cn('[&_tr:first-child_th:first-child]:rounded-tl-md [&_tr:first-child_th:last-child]:rounded-tr-md', props.class)\">\n    <slot />\n  </thead>\n</template>\n"
+    },
+    {
+      "name": "TableRow.vue",
+      "content": "<script setup lang=\"ts\">\nimport type { HTMLAttributes } from 'vue'\nimport { cn } from '../../../lib/utils'\n\nconst props = defineProps<{\n  class?: HTMLAttributes['class']\n}>()\n</script>\n\n<template>\n  <tr :class=\"cn('transition-colors duration-150 ease-out', props.class)\">\n    <slot />\n  </tr>\n</template>\n"
+    },
+    {
+      "name": "index.ts",
+      "content": "export { default as DataTable } from './DataTable.vue'\nexport type { DataTableColumn, DataTableRow } from './DataTable.vue'\nexport { default as Table } from './Table.vue'\nexport { default as TableBody } from './TableBody.vue'\nexport { default as TableCaption } from './TableCaption.vue'\nexport { default as TableCell } from './TableCell.vue'\nexport { default as TableHead } from './TableHead.vue'\nexport { default as TableHeader } from './TableHeader.vue'\nexport { default as TableRow } from './TableRow.vue'\n"
+    }
+  ]
+}

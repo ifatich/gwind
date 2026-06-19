@@ -2,6 +2,12 @@
 
 A multi-line text input.
 
+## Installation
+
+```bash
+npx gwind-system-ui add textarea
+```
+
 ## Preview
 
 <ShadowPreview class="gwind-docs-preview">

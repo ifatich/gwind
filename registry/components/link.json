@@ -1,0 +1,16 @@
+{
+  "name": "link",
+  "type": "ui",
+  "dependencies": [],
+  "registryDependencies": [],
+  "files": [
+    {
+      "name": "Link.vue",
+      "content": "<script setup lang=\"ts\">\nimport type { HTMLAttributes } from 'vue'\nimport { cn } from '../../../lib/utils'\n\nconst props = withDefaults(\n  defineProps<{\n    href?: string\n    target?: string\n    rel?: string\n    disabled?: boolean\n    class?: HTMLAttributes['class']\n  }>(),\n  {\n    href: '#',\n  },\n)\n</script>\n\n<template>\n  <a\n    :href=\"disabled ? undefined : href\"\n    :target=\"disabled ? undefined : target\"\n    :rel=\"rel ?? (target === '_blank' ? 'noreferrer' : undefined)\"\n    :aria-disabled=\"disabled ? 'true' : undefined\"\n    :tabindex=\"disabled ? -1 : undefined\"\n    :class=\"\n      cn(\n        'inline-flex w-fit items-center gap-1 text-omicron font-semibold leading-6 text-lime-600 underline-offset-4 transition-colors hover:text-lime-500 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lime-500 focus-visible:ring-offset-2',\n        disabled && 'pointer-events-none text-black-600',\n        props.class,\n      )\n    \"\n  >\n    <slot />\n  </a>\n</template>\n"
+    },
+    {
+      "name": "index.ts",
+      "content": "export { default as Link } from './Link.vue'\n"
+    }
+  ]
+}

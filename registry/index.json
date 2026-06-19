@@ -21,6 +21,14 @@
     ]
   },
   {
+    "name": "avatar",
+    "type": "ui",
+    "files": [
+      "Avatar.vue",
+      "index.ts"
+    ]
+  },
+  {
     "name": "badge",
     "type": "ui",
     "files": [
@@ -68,6 +76,8 @@
     "type": "ui",
     "files": [
       "Checkbox.vue",
+      "CheckboxField.vue",
+      "CheckboxGroup.vue",
       "index.ts"
     ]
   },
@@ -105,6 +115,25 @@
     ]
   },
   {
+    "name": "divider",
+    "type": "ui",
+    "files": [
+      "Divider.vue",
+      "index.ts"
+    ]
+  },
+  {
+    "name": "dropdown",
+    "type": "ui",
+    "files": [
+      "Dropdown.vue",
+      "DropdownList.vue",
+      "DropdownListCheckboxItem.vue",
+      "DropdownListItem.vue",
+      "index.ts"
+    ]
+  },
+  {
     "name": "input",
     "type": "ui",
     "files": [
@@ -114,10 +143,34 @@
     ]
   },
   {
+    "name": "input-rupiah",
+    "type": "ui",
+    "files": [
+      "InputRupiah.vue",
+      "index.ts"
+    ]
+  },
+  {
     "name": "label",
     "type": "ui",
     "files": [
       "Label.vue",
+      "index.ts"
+    ]
+  },
+  {
+    "name": "link",
+    "type": "ui",
+    "files": [
+      "Link.vue",
+      "index.ts"
+    ]
+  },
+  {
+    "name": "pagination",
+    "type": "ui",
+    "files": [
+      "Pagination.vue",
       "index.ts"
     ]
   },
@@ -145,6 +198,7 @@
     "type": "ui",
     "files": [
       "RadioGroup.vue",
+      "RadioGroupField.vue",
       "RadioGroupItem.vue",
       "index.ts"
     ]
@@ -168,6 +222,37 @@
     ]
   },
   {
+    "name": "spinner",
+    "type": "ui",
+    "files": [
+      "Spinner.vue",
+      "index.ts"
+    ]
+  },
+  {
+    "name": "switch",
+    "type": "ui",
+    "files": [
+      "Switch.vue",
+      "index.ts"
+    ]
+  },
+  {
+    "name": "table",
+    "type": "ui",
+    "files": [
+      "DataTable.vue",
+      "Table.vue",
+      "TableBody.vue",
+      "TableCaption.vue",
+      "TableCell.vue",
+      "TableHead.vue",
+      "TableHeader.vue",
+      "TableRow.vue",
+      "index.ts"
+    ]
+  },
+  {
     "name": "tabs",
     "type": "ui",
     "files": [
@@ -183,6 +268,14 @@
     "type": "ui",
     "files": [
       "Textarea.vue",
+      "index.ts"
+    ]
+  },
+  {
+    "name": "toast",
+    "type": "ui",
+    "files": [
+      "Toast.vue",
       "index.ts"
     ]
   },

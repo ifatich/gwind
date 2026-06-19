@@ -12,10 +12,11 @@ Gwind adalah Vue 3 Design System yang dibangun di atas **Reka UI** dan **Tailwin
 ## Instalasi
 
 ### 1. Instal Design Tokens
-Gwind menggunakan paket `gwind-v2` untuk mengelola variabel CSS dan tema Tailwind v4.
+
+Instal dependency dasar yang digunakan oleh source component Gwind:
 
 ```bash
-pnpm add gwind-v2
+pnpm add @fontsource/nunito-sans clsx tailwind-merge gwind-v2
 ```
 
 ### 2. Konfigurasi CSS
@@ -32,25 +33,24 @@ Impor base style dan tema Gwind di file CSS utama Anda (misal: `src/assets/main.
 @source "./components/ui";
 ```
 
-### 3. Tambahkan Utility `cn`
-Gwind menggunakan utility `cn` untuk penggabungan class yang cerdas. Buat file `src/lib/utils.ts`:
+### 3. Inisialisasi Gwind
 
-```ts
-import { type ClassValue, clsx } from 'clsx'
-import { twMerge } from 'tailwind-merge'
+Gunakan package CLI `gwind-system-ui`. Perintah `init` membuat `gwind.json`, utility `cn` beserta import font, dan direktori komponen sesuai jawaban prompt. Perintah ini dapat menimpa file konfigurasi dan utility pada path yang dipilih, jadi periksa perubahan sebelum menjalankannya ulang.
 
-export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs))
-}
+```bash
+npx gwind-system-ui init
 ```
 
 ### 4. Tambahkan Komponen
-Anda bisa menggunakan CLI untuk menambahkan komponen secara otomatis:
+
+Tambahkan source component melalui CLI:
 
 ```bash
 # Tambahkan komponen button
 npx gwind-system-ui add button
 ```
+
+CLI menampilkan dependency tambahan yang dibutuhkan oleh komponen. Instal dependency yang belum ada menggunakan package manager project Anda.
 
 Atau salin kode sumber secara manual dari halaman dokumentasi masing-masing komponen ke direktori `src/components/ui/`.
 

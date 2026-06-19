@@ -6,6 +6,12 @@ import ComboboxPreview from './previews/ComboboxPreview.vue'
 
 Autocomplete input and command palette with a list of suggestions.
 
+## Installation
+
+```bash
+npx gwind-system-ui add combobox
+```
+
 ## Preview
 
 <ComboboxPreview />

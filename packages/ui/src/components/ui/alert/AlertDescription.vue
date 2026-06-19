@@ -8,7 +8,7 @@ const props = defineProps<{
 </script>
 
 <template>
-  <div :class="cn('text-sigma font-normal [&_p]:leading-relaxed', props.class)">
+  <div :class="cn('text-sigma font-semibold [&_p]:leading-relaxed', props.class)">
     <slot />
   </div>
 </template>

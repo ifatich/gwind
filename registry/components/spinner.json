@@ -1,0 +1,16 @@
+{
+  "name": "spinner",
+  "type": "ui",
+  "dependencies": [],
+  "registryDependencies": [],
+  "files": [
+    {
+      "name": "Spinner.vue",
+      "content": "<script setup lang=\"ts\">\nimport type { HTMLAttributes } from 'vue'\nimport { computed } from 'vue'\nimport { cn } from '../../../lib/utils'\n\nconst props = withDefaults(\n  defineProps<{\n    size?: 'sm' | 'md' | 'lg'\n    label?: string\n    class?: HTMLAttributes['class']\n  }>(),\n  {\n    size: 'md',\n    label: 'Loading',\n  },\n)\n\nconst sizeClass = computed(() => ({\n  sm: 'h-4 w-4 border-2',\n  md: 'h-6 w-6 border-2',\n  lg: 'h-8 w-8 border-[3px]',\n}[props.size]))\n</script>\n\n<template>\n  <span\n    :class=\"\n      cn(\n        'inline-block animate-spin rounded-full border-current border-r-transparent text-current',\n        sizeClass,\n        props.class,\n      )\n    \"\n    role=\"status\"\n    :aria-label=\"label\"\n  >\n    <span class=\"sr-only\">{{ label }}</span>\n  </span>\n</template>\n"
+    },
+    {
+      "name": "index.ts",
+      "content": "export { default as Spinner } from './Spinner.vue'\n"
+    }
+  ]
+}

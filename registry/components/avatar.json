@@ -1,0 +1,16 @@
+{
+  "name": "avatar",
+  "type": "ui",
+  "dependencies": [],
+  "registryDependencies": [],
+  "files": [
+    {
+      "name": "Avatar.vue",
+      "content": "<script setup lang=\"ts\">\nimport type { HTMLAttributes } from 'vue'\nimport { computed, ref } from 'vue'\nimport { cn } from '../../../lib/utils'\n\nconst props = withDefaults(\n  defineProps<{\n    src?: string\n    alt?: string\n    fallback?: string\n    size?: 'sm' | 'md' | 'lg'\n    class?: HTMLAttributes['class']\n    imageClass?: HTMLAttributes['class']\n    fallbackClass?: HTMLAttributes['class']\n  }>(),\n  {\n    size: 'md',\n  },\n)\n\nconst hasImageError = ref(false)\n\nconst sizeClass = computed(() => ({\n  sm: 'h-8 w-8 text-omega',\n  md: 'h-10 w-10 text-sigma',\n  lg: 'h-12 w-12 text-omicron',\n}[props.size]))\n\nconst fallbackText = computed(() => {\n  if (props.fallback) return props.fallback.slice(0, 2).toUpperCase()\n  if (!props.alt) return ''\n\n  return props.alt\n    .split(' ')\n    .filter(Boolean)\n    .slice(0, 2)\n    .map(word => word[0])\n    .join('')\n    .toUpperCase()\n})\n</script>\n\n<template>\n  <span\n    :class=\"\n      cn(\n        'inline-flex shrink-0 items-center justify-center overflow-hidden rounded-full bg-black-100 align-middle text-black-800',\n        sizeClass,\n        props.class,\n      )\n    \"\n  >\n    <img\n      v-if=\"src && !hasImageError\"\n      :src=\"src\"\n      :alt=\"alt ?? ''\"\n      :class=\"cn('h-full w-full object-cover animate-in fade-in-0 zoom-in-95', imageClass)\"\n      @error=\"hasImageError = true\"\n    >\n    <span\n      v-else\n      :class=\"cn('font-extrabold leading-none animate-in fade-in-0 zoom-in-95', fallbackClass)\"\n      aria-hidden=\"true\"\n    >\n      <slot>{{ fallbackText }}</slot>\n    </span>\n  </span>\n</template>\n"
+    },
+    {
+      "name": "index.ts",
+      "content": "export { default as Avatar } from './Avatar.vue'\n"
+    }
+  ]
+}

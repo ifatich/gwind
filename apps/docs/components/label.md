@@ -2,6 +2,12 @@
 
 Label adalah komponen untuk memberi teks penjelas pada field input/form.
 
+## Installation
+
+```bash
+npx gwind-system-ui add label
+```
+
 ## Preview
 
 <ShadowPreview class="gwind-docs-preview">
@@ -20,8 +26,8 @@ Label adalah komponen untuk memberi teks penjelas pada field input/form.
 
 ```vue
 <script setup lang="ts">
-import { Label } from '@gwind/ui'
-import { Input } from '@gwind/ui'
+import { Label } from '@/components/ui/label'
+import { Input } from '@/components/ui/input'
 </script>
 
 <template>

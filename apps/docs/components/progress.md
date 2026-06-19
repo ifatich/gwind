@@ -2,6 +2,12 @@
 
 Displays an indicator showing the completion progress of a task.
 
+## Installation
+
+```bash
+npx gwind-system-ui add progress
+```
+
 ## Preview
 
 <ShadowPreview class="gwind-docs-preview">

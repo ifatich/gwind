@@ -2,6 +2,12 @@
 
 Displays a callout for user attention.
 
+## Installation
+
+```bash
+npx gwind-system-ui add alert
+```
+
 ## Preview
 
 <ShadowPreview class="gwind-docs-preview">

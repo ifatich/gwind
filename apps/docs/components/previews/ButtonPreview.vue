@@ -12,6 +12,7 @@
       <GwButton class="bg-lime-600">Hover</GwButton>
       <GwButton class="bg-lime-800">Focused</GwButton>
       <GwButton disabled>Disabled</GwButton>
+      <GwButton loading>Loading</GwButton>
       <GwButton class="active:bg-lime-800">Pressed</GwButton>
     </div>
 

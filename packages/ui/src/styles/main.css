@@ -1,5 +1,141 @@
-@import "@fontsource/nunito-sans/latin-600.css";
-@import "@fontsource/nunito-sans/latin-700.css";
-@import "@fontsource/nunito-sans/latin-800.css";
 @import "gwind-v2/base.css";
 @import "gwind-v2/theme.css";
+
+:root {
+  --black-10: hsl(0 0% 100%);
+  --black-20: hsl(0 0% 97.3%);
+  --gwind-motion-duration-instant: 80ms;
+  --gwind-motion-duration-fast: 120ms;
+  --gwind-motion-duration-base: 160ms;
+  --gwind-motion-duration-moderate: 200ms;
+  --gwind-motion-duration-slow: 300ms;
+  --gwind-motion-ease-standard: cubic-bezier(0.2, 0, 0, 1);
+  --gwind-motion-ease-enter: cubic-bezier(0.16, 1, 0.3, 1);
+  --gwind-motion-ease-exit: cubic-bezier(0.4, 0, 1, 1);
+  --gwind-motion-scale-press: 0.98;
+  --gwind-motion-scale-icon-press: 0.95;
+}
+
+@theme {
+  --color-black-10: var(--black-10);
+  --color-black-20: var(--black-20);
+}
+
+@keyframes gwind-enter {
+  from {
+    opacity: var(--gwind-enter-opacity, 1);
+    transform:
+      translate3d(var(--gwind-enter-translate-x, 0), var(--gwind-enter-translate-y, 0), 0)
+      scale3d(var(--gwind-enter-scale, 1), var(--gwind-enter-scale, 1), 1);
+  }
+}
+
+@keyframes gwind-exit {
+  to {
+    opacity: var(--gwind-exit-opacity, 1);
+    transform:
+      translate3d(var(--gwind-exit-translate-x, 0), var(--gwind-exit-translate-y, 0), 0)
+      scale3d(var(--gwind-exit-scale, 1), var(--gwind-exit-scale, 1), 1);
+  }
+}
+
+@keyframes gwind-accordion-down {
+  from {
+    height: 0;
+  }
+
+  to {
+    height: var(--reka-accordion-content-height, var(--radix-accordion-content-height));
+  }
+}
+
+@keyframes gwind-accordion-up {
+  from {
+    height: var(--reka-accordion-content-height, var(--radix-accordion-content-height));
+  }
+
+  to {
+    height: 0;
+  }
+}
+
+@utility animate-in {
+  animation-duration: var(--gwind-motion-duration-base);
+  animation-fill-mode: both;
+  animation-name: gwind-enter;
+  animation-timing-function: var(--gwind-motion-ease-enter);
+}
+
+@utility animate-out {
+  animation-duration: var(--gwind-motion-duration-fast);
+  animation-fill-mode: both;
+  animation-name: gwind-exit;
+  animation-timing-function: var(--gwind-motion-ease-exit);
+}
+
+@utility animate-accordion-down {
+  animation: gwind-accordion-down var(--gwind-motion-duration-moderate) var(--gwind-motion-ease-enter);
+}
+
+@utility animate-accordion-up {
+  animation: gwind-accordion-up var(--gwind-motion-duration-base) var(--gwind-motion-ease-exit);
+}
+
+@utility fade-in-0 {
+  --gwind-enter-opacity: 0;
+}
+
+@utility fade-out-0 {
+  --gwind-exit-opacity: 0;
+}
+
+@utility zoom-in-95 {
+  --gwind-enter-scale: 0.95;
+}
+
+@utility zoom-out-95 {
+  --gwind-exit-scale: 0.95;
+}
+
+@utility zoom-in-75 {
+  --gwind-enter-scale: 0.75;
+}
+
+@utility zoom-out-75 {
+  --gwind-exit-scale: 0.75;
+}
+
+@utility slide-in-from-top-2 {
+  --gwind-enter-translate-y: -0.5rem;
+}
+
+@utility slide-in-from-bottom-2 {
+  --gwind-enter-translate-y: 0.5rem;
+}
+
+@utility slide-in-from-left-2 {
+  --gwind-enter-translate-x: -0.5rem;
+}
+
+@utility slide-in-from-right-2 {
+  --gwind-enter-translate-x: 0.5rem;
+}
+
+@utility slide-out-to-top-2 {
+  --gwind-exit-translate-y: -0.5rem;
+}
+
+@utility slide-out-to-bottom-2 {
+  --gwind-exit-translate-y: 0.5rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}

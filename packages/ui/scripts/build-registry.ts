@@ -29,6 +29,23 @@ const getComponentFiles = (componentName: string) => {
   }))
 }
 
+const getRegistryDependencies = (componentName: string, files: ReturnType<typeof getComponentFiles>, components: string[]) => {
+  const dependencies = new Set<string>()
+  const importPattern = /from ['"]\.\.\/([^/'"]+)/g
+
+  files.forEach((file) => {
+    for (const match of file.content.matchAll(importPattern)) {
+      const dependency = match[1]
+
+      if (dependency !== componentName && components.includes(dependency)) {
+        dependencies.add(dependency)
+      }
+    }
+  })
+
+  return Array.from(dependencies).sort()
+}
+
 const main = () => {
   const components = fs.readdirSync(UI_PATH).filter(f => 
     fs.statSync(path.join(UI_PATH, f)).isDirectory()
@@ -38,6 +55,7 @@ const main = () => {
 
   components.forEach(name => {
     const files = getComponentFiles(name)
+    const registryDependencies = getRegistryDependencies(name, files, components)
     
     // Simple dependency detection (heuristic)
     const dependencies: string[] = []
@@ -52,7 +70,7 @@ const main = () => {
       name,
       type: 'ui',
       dependencies,
-      registryDependencies: [], // Could be used if components depend on each other
+      registryDependencies,
       files
     }
 

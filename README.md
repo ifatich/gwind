@@ -40,7 +40,7 @@ import { Badge } from '@/components/ui/badge'
 Gwind dikelola menggunakan struktur monorepo untuk menjaga konsistensi antara komponen, alat bantu CLI, dan dokumentasi:
 
 -   `packages/ui`: Library komponen inti. Di sinilah semua source code komponen berada.
--   `packages/cli`: Alat baris perintah (`gwind-ui`) untuk menginisialisasi dan menambahkan komponen ke proyek lain.
+-   `packages/cli`: Alat baris perintah (`gwind-system-ui`) untuk menginisialisasi dan menambahkan komponen ke proyek lain.
 -   `registry/`: Database metadata komponen dalam format JSON yang dikonsumsi oleh CLI.
 -   `apps/docs`: Situs dokumentasi interaktif yang dibangun dengan VitePress.
 

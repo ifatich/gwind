@@ -2,6 +2,12 @@
 
 Displays a card with header, content, and footer.
 
+## Installation
+
+```bash
+npx gwind-system-ui add card
+```
+
 ## Preview
 
 <ShadowPreview class="gwind-docs-preview">

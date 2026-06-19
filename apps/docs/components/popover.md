@@ -2,6 +2,12 @@
 
 Displays rich content in a portal, triggered by a button.
 
+## Installation
+
+```bash
+npx gwind-system-ui add popover
+```
+
 ## Preview
 
 <ShadowPreview class="gwind-docs-preview">
