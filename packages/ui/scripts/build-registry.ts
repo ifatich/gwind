@@ -6,6 +6,7 @@ const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
 const UI_PATH = path.resolve(__dirname, '../src/components/ui')
+const UI_STYLES_PATH = path.resolve(__dirname, '../src/styles/main.css')
 const REGISTRY_PATH = path.resolve(__dirname, '../../../registry')
 
 interface RegistryItem {
@@ -47,6 +48,9 @@ const getRegistryDependencies = (componentName: string, files: ReturnType<typeof
 }
 
 const main = () => {
+  fs.mkdirSync(path.join(REGISTRY_PATH, 'components'), { recursive: true })
+  fs.mkdirSync(path.join(REGISTRY_PATH, 'styles'), { recursive: true })
+
   const components = fs.readdirSync(UI_PATH).filter(f => 
     fs.statSync(path.join(UI_PATH, f)).isDirectory()
   )
@@ -91,6 +95,9 @@ const main = () => {
     path.join(REGISTRY_PATH, 'index.json'),
     JSON.stringify(registryIndex, null, 2)
   )
+
+  // Keep the CLI foundation stylesheet in sync with the internal UI package.
+  fs.copyFileSync(UI_STYLES_PATH, path.join(REGISTRY_PATH, 'styles', 'gwind.css'))
 
   console.log(`Registry built with ${components.length} components.`)
 }

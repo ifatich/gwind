@@ -19,29 +19,26 @@ Instal dependency dasar yang digunakan oleh source component Gwind:
 pnpm add @fontsource/nunito-sans clsx tailwind-merge gwind-v2
 ```
 
-### 2. Konfigurasi CSS
-Impor base style dan tema Gwind di file CSS utama Anda (misal: `src/assets/main.css`). Pastikan Anda menggunakan Tailwind v4.
+### 2. Inisialisasi Gwind
 
-```css
-@import "tailwindcss";
-
-/* Impor Gwind tokens & theme */
-@import "gwind-v2/base.css";
-@import "gwind-v2/theme.css";
-
-/* Scanning direktori komponen Anda */
-@source "./components/ui";
-```
-
-### 3. Inisialisasi Gwind
-
-Gunakan package CLI `gwind-system-ui`. Perintah `init` membuat `gwind.json`, utility `cn` beserta import font, dan direktori komponen sesuai jawaban prompt. Perintah ini dapat menimpa file konfigurasi dan utility pada path yang dipilih, jadi periksa perubahan sebelum menjalankannya ulang.
+Jalankan CLI dari root aplikasi. Perintah `init` membuat `gwind.json`, utility `cn`, direktori komponen, dan `gwind.css` di sebelah CSS global yang Anda pilih.
 
 ```bash
 npx gwind-system-ui init
 ```
 
-### 4. Tambahkan Komponen
+CLI otomatis menambahkan import berikut ke CSS global:
+
+```css
+@import "tailwindcss";
+@import "./gwind.css";
+```
+
+File `gwind.css` berisi import `gwind-v2`, motion utilities, reduced-motion rules, dan `@source` yang mengarah ke direktori komponen. Anda tidak perlu mengimpor `packages/ui/dist/gwind-ui.css`.
+
+`init` tidak menimpa utility yang sudah ada, tetapi memperbarui file fondasi `gwind.css` agar sesuai dengan versi registry CLI. Tetap periksa diff ketika menjalankannya ulang.
+
+### 3. Tambahkan Komponen
 
 Tambahkan source component melalui CLI:
 
@@ -51,6 +48,14 @@ npx gwind-system-ui add button
 ```
 
 CLI menampilkan dependency tambahan yang dibutuhkan oleh komponen. Instal dependency yang belum ada menggunakan package manager project Anda.
+
+Komponen dan stylesheet diambil dari snapshot registry yang dibundel bersama versi CLI, sehingga hasil instalasi tidak berubah hanya karena branch repository diperbarui.
+
+File komponen yang sudah ada tidak ditimpa secara default. Gunakan `--overwrite` hanya ketika Anda memang ingin memperbarui source component dari registry:
+
+```bash
+npx gwind-system-ui add button --overwrite
+```
 
 Atau salin kode sumber secara manual dari halaman dokumentasi masing-masing komponen ke direktori `src/components/ui/`.
 
@@ -66,5 +71,6 @@ src/
 ├── lib/
 │   └── utils.ts         # Utility cn
 └── assets/
-    └── main.css         # Entry point CSS dengan Tailwind v4
+    ├── main.css         # Entry point CSS; mengimpor ./gwind.css
+    └── gwind.css        # Token, theme, motion, dan component source scan
 ```

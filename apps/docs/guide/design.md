@@ -15,6 +15,7 @@ Gwind bukan landing-page kit. Hindari visual yang terlalu dekoratif, layout prom
 | CLI source component | `gwind-system-ui` | `npx gwind-system-ui add button` |
 | Monorepo component library | `@gwind/ui` | Dependency internal dengan `workspace:*`; package ini bersifat private |
 | Monorepo component styles | `@gwind/ui/styles` | Dipakai oleh docs dan playground di workspace |
+| Consumer foundation styles | Generated `gwind.css` | Dibuat oleh `npx gwind-system-ui init`; tidak memakai file `dist` monorepo |
 | Design tokens | `gwind-v2` | `@import "gwind-v2/base.css";` dan `@import "gwind-v2/theme.css";` |
 
 ## Design Principles

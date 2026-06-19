@@ -7,10 +7,12 @@ Gwind adalah sistem desain modern berbasis Vue 3 yang dibangun di atas **Reka UI
 Gwind dirancang agar sangat mudah digunakan. Ikuti langkah-langkah berikut:
 
 ### 1. Inisialisasi Proyek (Sekali saja)
-Langkah ini akan menyiapkan utility `cn` dan file konfigurasi `gwind.json`.
+Langkah ini menyiapkan utility `cn`, file konfigurasi `gwind.json`, dan stylesheet fondasi lokal `gwind.css` beserta import ke CSS global.
 ```bash
 npx gwind-system-ui init
 ```
+
+Consumer tidak perlu mengimpor `packages/ui/dist/gwind-ui.css`; token, theme, motion, dan source scanning disiapkan melalui `gwind.css` yang dihasilkan CLI.
 
 ### 2. Tambahkan Komponen
 Pilih komponen yang Anda butuhkan (misal: Button).

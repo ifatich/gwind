@@ -1,6 +1,6 @@
 {
   "name": "gwind-system-ui",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "CLI for Gwind Design System",
   "type": "module",
   "bin": {
@@ -13,9 +13,9 @@
     "README.md"
   ],
   "scripts": {
-    "build": "tsup src/index.ts --format esm --clean --minify",
+    "build": "tsup src/index.ts --format esm --clean --minify && tsx scripts/copy-registry.ts",
     "dev": "tsup src/index.ts --format esm --watch",
-    "lint": "eslint src"
+    "lint": "tsc --noEmit --module NodeNext --moduleResolution NodeNext --target ES2022 --esModuleInterop --skipLibCheck src/index.ts"
   },
   "dependencies": {
     "cac": "^6.7.14",

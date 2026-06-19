@@ -4,13 +4,13 @@ Gwind motion exists to clarify state changes, not to decorate the interface.
 
 ## Source
 
-Motion utilities berada di stylesheet package internal monorepo:
+Untuk consumer CLI, motion utilities dibuat oleh `gwind-system-ui init` di file `gwind.css` dan diimpor otomatis oleh CSS global:
 
 ```css
-@import "@gwind/ui/styles";
+@import "./gwind.css";
 ```
 
-Import tersebut hanya untuk aplikasi workspace seperti docs dan playground. Project consumer menggunakan source component dari `gwind-system-ui` dan konfigurasi CSS pada halaman Getting Started.
+Consumer tidak perlu mengimpor `packages/ui/dist/gwind-ui.css`. Di dalam monorepo, sumber kanonik stylesheet tetap berada di `packages/ui/src/styles/main.css` dan disalin ke registry saat `pnpm build:registry` dijalankan.
 
 ## Principles
 
