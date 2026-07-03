@@ -11,44 +11,53 @@ npx gwind-system-ui add breadcrumb
 ## Preview
 
 <ShadowPreview class="gwind-docs-preview">
-    <div class="gwind-docs-preview-col">
-        <GwBreadcrumb>
-            <GwBreadcrumbList>
-                <GwBreadcrumbItem>
-                    <GwBreadcrumbLink href="#">Home</GwBreadcrumbLink>
-                </GwBreadcrumbItem>
-                <GwBreadcrumbSeparator />
-                <GwBreadcrumbItem>
-                    <GwBreadcrumbLink href="#">Components</GwBreadcrumbLink>
-                </GwBreadcrumbItem>
-                <GwBreadcrumbSeparator />
-                <GwBreadcrumbItem>
-                    <GwBreadcrumbPage>Breadcrumb</GwBreadcrumbPage>
-                </GwBreadcrumbItem>
-            </GwBreadcrumbList>
-        </GwBreadcrumb>
-    </div>
-    <div class="gwind-docs-preview-col">
-        <GwBreadcrumb>
-            <GwBreadcrumbList>
-                <GwBreadcrumbItem>
-                    <GwBreadcrumbLink href="#">Dashboard</GwBreadcrumbLink>
-                </GwBreadcrumbItem>
-                <GwBreadcrumbSeparator />
-                <GwBreadcrumbItem>
-                    <GwBreadcrumbLink href="#">Projects</GwBreadcrumbLink>
-                </GwBreadcrumbItem>
-                <GwBreadcrumbSeparator />
-                <GwBreadcrumbItem>
-                    <GwBreadcrumbEllipsis />
-                </GwBreadcrumbItem>
-                <GwBreadcrumbSeparator />
-                <GwBreadcrumbItem>
-                    <GwBreadcrumbPage>Design System</GwBreadcrumbPage>
-                </GwBreadcrumbItem>
-            </GwBreadcrumbList>
-        </GwBreadcrumb>
-    </div>
+    <GwBreadcrumb>
+        <GwBreadcrumbList>
+            <GwBreadcrumbItem>
+                <GwBreadcrumbLink href="#">Root</GwBreadcrumbLink>
+            </GwBreadcrumbItem>
+            <GwBreadcrumbSeparator />
+            <GwBreadcrumbItem>
+                <GwBreadcrumbLink href="#">Lv1</GwBreadcrumbLink>
+            </GwBreadcrumbItem>
+            <GwBreadcrumbSeparator />
+            <GwBreadcrumbItem>
+                <GwBreadcrumbLink href="#">Lv2</GwBreadcrumbLink>
+            </GwBreadcrumbItem>
+            <GwBreadcrumbSeparator />
+            <GwBreadcrumbItem>
+                <GwBreadcrumbLink href="#">lv3</GwBreadcrumbLink>
+            </GwBreadcrumbItem>
+            <GwBreadcrumbSeparator />
+            <GwBreadcrumbItem>
+                <GwBreadcrumbPage>lv4</GwBreadcrumbPage>
+            </GwBreadcrumbItem>
+        </GwBreadcrumbList>
+    </GwBreadcrumb>
+</ShadowPreview>
+
+## With Ellipsis
+
+<ShadowPreview class="gwind-docs-preview">
+    <GwBreadcrumb>
+        <GwBreadcrumbList>
+            <GwBreadcrumbItem>
+                <GwBreadcrumbLink href="#">Dashboard</GwBreadcrumbLink>
+            </GwBreadcrumbItem>
+            <GwBreadcrumbSeparator />
+            <GwBreadcrumbItem>
+                <GwBreadcrumbLink href="#">Projects</GwBreadcrumbLink>
+            </GwBreadcrumbItem>
+            <GwBreadcrumbSeparator />
+            <GwBreadcrumbItem>
+                <GwBreadcrumbEllipsis />
+            </GwBreadcrumbItem>
+            <GwBreadcrumbSeparator />
+            <GwBreadcrumbItem>
+                <GwBreadcrumbPage>Design System</GwBreadcrumbPage>
+            </GwBreadcrumbItem>
+        </GwBreadcrumbList>
+    </GwBreadcrumb>
 </ShadowPreview>
 
 ---
