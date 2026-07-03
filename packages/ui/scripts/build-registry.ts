@@ -20,9 +20,10 @@ interface RegistryItem {
   type: 'ui'
 }
 
-const getComponentFiles = (componentName: string) => {
-  const componentDir = path.join(UI_PATH, componentName)
-  const files = fs.readdirSync(componentDir)
+const getComponentFiles = (componentPath: string) => {
+  const componentDir = path.join(UI_PATH, componentPath)
+  const items = fs.readdirSync(componentDir)
+  const files = items.filter(f => fs.statSync(path.join(componentDir, f)).isFile())
   
   return files.map(file => ({
     name: file,
@@ -30,16 +31,21 @@ const getComponentFiles = (componentName: string) => {
   }))
 }
 
-const getRegistryDependencies = (componentName: string, files: ReturnType<typeof getComponentFiles>, components: string[]) => {
+const getRegistryDependencies = (componentPath: string, files: ReturnType<typeof getComponentFiles>, componentPaths: string[]) => {
   const dependencies = new Set<string>()
-  const importPattern = /from ['"]\.\.\/([^/'"]+)/g
+  const importPattern = /from ['"]([./]+)([^'"]+)['"]/g
 
   files.forEach((file) => {
     for (const match of file.content.matchAll(importPattern)) {
-      const dependency = match[1]
+      const importPath = match[1] + match[2]
+      
+      const resolvedPath = path.normalize(path.join(componentPath, importPath))
+      let dirname = path.dirname(resolvedPath)
+      
+      if (dirname === '.') dirname = componentPath
 
-      if (dependency !== componentName && components.includes(dependency)) {
-        dependencies.add(dependency)
+      if (componentPaths.includes(dirname) && dirname !== componentPath) {
+        dependencies.add(path.basename(dirname))
       }
     }
   })
@@ -47,19 +53,37 @@ const getRegistryDependencies = (componentName: string, files: ReturnType<typeof
   return Array.from(dependencies).sort()
 }
 
+function findComponents(dir: string, baseDir = dir): string[] {
+  const components: string[] = []
+  const items = fs.readdirSync(dir)
+  
+  if (items.includes('index.ts')) {
+    components.push(path.relative(baseDir, dir))
+  }
+  
+  for (const item of items) {
+    const fullPath = path.join(dir, item)
+    if (fs.statSync(fullPath).isDirectory()) {
+      components.push(...findComponents(fullPath, baseDir))
+    }
+  }
+  return components.filter(c => c !== '')
+}
+
 const main = () => {
   fs.mkdirSync(path.join(REGISTRY_PATH, 'components'), { recursive: true })
   fs.mkdirSync(path.join(REGISTRY_PATH, 'styles'), { recursive: true })
 
-  const components = fs.readdirSync(UI_PATH).filter(f => 
-    fs.statSync(path.join(UI_PATH, f)).isDirectory()
-  )
+  const componentPaths = findComponents(UI_PATH)
+  // Ensure we just match the exact basename for dependencies
+  const components = componentPaths.map(p => path.basename(p))
 
   const registryIndex: any[] = []
 
-  components.forEach(name => {
-    const files = getComponentFiles(name)
-    const registryDependencies = getRegistryDependencies(name, files, components)
+  componentPaths.forEach((componentPath, index) => {
+    const name = components[index]
+    const files = getComponentFiles(componentPath)
+    const registryDependencies = getRegistryDependencies(componentPath, files, componentPaths)
     
     // Simple dependency detection (heuristic)
     const dependencies: string[] = []
