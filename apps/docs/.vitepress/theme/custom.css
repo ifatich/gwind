@@ -41,7 +41,8 @@
  * so VitePress element resets can override component utilities. Keep this
  * scoped to preview only and reveal the layered Gwind utility values again.
  */
-.vp-doc .gwind-docs-preview :where(button, [role='button'], input, select, textarea) {
+.vp-doc .gwind-docs-preview :where(button, [role='button'], input, select, textarea),
+:is([data-radix-portal], [data-reka-portal], [data-radix-popper-content-wrapper], [data-reka-popper-content-wrapper], .gwind-datepicker-content, .z-50) :where(button, [role='button'], input, select, textarea) {
   appearance: revert-layer;
   background-color: revert-layer;
   background-image: revert-layer;
@@ -59,7 +60,8 @@
   padding: revert-layer;
 }
 
-.vp-doc .gwind-docs-preview :where(button:focus, button:focus-visible, input:focus, select:focus, textarea:focus) {
+.vp-doc .gwind-docs-preview :where(button:focus, button:focus-visible, input:focus, select:focus, textarea:focus),
+:is([data-radix-portal], [data-reka-portal], [data-radix-popper-content-wrapper], [data-reka-popper-content-wrapper], .gwind-datepicker-content, .z-50) :where(button:focus, button:focus-visible, input:focus, select:focus, textarea:focus) {
   outline: revert-layer;
 }
 
@@ -124,36 +126,40 @@
 }
 
 .vp-doc .gwind-docs-preview,
-.vp-doc .gwind-docs-preview :where(*) {
+.vp-doc .gwind-docs-preview :where(*),
+:is([data-radix-portal], [data-reka-portal], [data-radix-popper-content-wrapper], [data-reka-popper-content-wrapper], .gwind-datepicker-content, .z-50),
+:is([data-radix-portal], [data-reka-portal], [data-radix-popper-content-wrapper], [data-reka-popper-content-wrapper], .gwind-datepicker-content, .z-50) :where(*) {
   font-family: var(--vp-font-family-base);
   letter-spacing: 0;
 }
 
-.vp-doc .gwind-docs-preview :where(h1, h2, h3, h4, h5, h6, p, ul, ol, li) {
+.vp-doc .gwind-docs-preview :where(h1, h2, h3, h4, h5, h6, p, ul, ol, li),
+:is([data-radix-portal], [data-reka-portal], [data-radix-popper-content-wrapper], [data-reka-popper-content-wrapper], .gwind-datepicker-content, .z-50) :where(h1, h2, h3, h4, h5, h6, p, ul, ol, li) {
   margin: 0;
+  padding: 0;
+  border: none;
 }
 
-.vp-doc .gwind-docs-preview :where(a) {
+.vp-doc .gwind-docs-preview :where(a),
+:is([data-radix-portal], [data-reka-portal], [data-radix-popper-content-wrapper], [data-reka-popper-content-wrapper], .gwind-datepicker-content, .z-50) :where(a) {
   color: inherit;
   font-weight: inherit;
   text-decoration: none;
   text-underline-offset: auto;
 }
 
-.vp-doc .gwind-docs-preview :where(.text-omega) {
-  font-size: var(--font-size-omega);
-  line-height: 18px;
-}
-
-.vp-doc .gwind-docs-preview :where(.text-sigma) {
-  font-size: var(--font-size-sigma);
-  line-height: 20px;
-}
-
-.vp-doc .gwind-docs-preview :where(.text-omicron) {
-  font-size: var(--font-size-omicron);
-  line-height: 24px;
-}
+.vp-doc .gwind-docs-preview :where(.text-alpha) { font-size: 4.5rem; line-height: 1; }
+.vp-doc .gwind-docs-preview :where(.text-beta) { font-size: 3.75rem; line-height: 1; }
+.vp-doc .gwind-docs-preview :where(.text-gamma) { font-size: 3rem; line-height: 1; }
+.vp-doc .gwind-docs-preview :where(.text-delta) { font-size: 2.25rem; line-height: 2.5rem; }
+.vp-doc .gwind-docs-preview :where(.text-epsilon) { font-size: 1.875rem; line-height: 2.25rem; }
+.vp-doc .gwind-docs-preview :where(.text-zeta) { font-size: 1.5rem; line-height: 2rem; }
+.vp-doc .gwind-docs-preview :where(.text-kappa) { font-size: 1.25rem; line-height: 1.75rem; }
+.vp-doc .gwind-docs-preview :where(.text-lambda) { font-size: 1.125rem; line-height: 1.75rem; }
+.vp-doc .gwind-docs-preview :where(.text-omicron) { font-size: 1rem; line-height: 1.5rem; }
+.vp-doc .gwind-docs-preview :where(.text-sigma) { font-size: 0.875rem; line-height: 1.25rem; }
+.vp-doc .gwind-docs-preview :where(.text-omega) { font-size: 0.75rem; line-height: 1rem; }
+.vp-doc .gwind-docs-preview :where(.text-atom) { font-size: 0.625rem; line-height: 0.875rem; }
 
 .vp-doc .gwind-docs-preview :where(.text-xs) {
   font-size: 0.75rem;

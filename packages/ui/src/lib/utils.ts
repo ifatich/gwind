@@ -1,13 +1,22 @@
+import '@fontsource/nunito-sans/latin-600.css'
+import '@fontsource/nunito-sans/latin-700.css'
+import '@fontsource/nunito-sans/latin-800.css'
 import { type ClassValue, clsx } from 'clsx'
-import { twMerge } from 'tailwind-merge'
+import { extendTailwindMerge } from 'tailwind-merge'
 
 const GWIND_FONT_CLASS = '![font-family:var(--font-family-base)]'
 
-/**
- * Merge class names with Tailwind CSS conflict resolution.
- * Combines clsx for conditional classes with tailwind-merge
- * for intelligent deduplication of Tailwind utility classes.
- */
+const gwindTwMerge = extendTailwindMerge({
+  extend: {
+    theme: {
+      text: [
+        'alpha', 'beta', 'gamma', 'delta', 'epsilon', 'zeta',
+        'kappa', 'lambda', 'omicron', 'sigma', 'omega', 'atom',
+      ],
+    },
+  },
+})
+
 export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs, GWIND_FONT_CLASS))
+  return gwindTwMerge(clsx(inputs, GWIND_FONT_CLASS))
 }
