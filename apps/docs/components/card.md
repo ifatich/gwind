@@ -14,8 +14,12 @@ npx gwind-system-ui add card
   <div class="gwind-docs-preview-col">
     <GwCard class="w-[350px]">
       <GwCardHeader>
-        <GwCardTitle class="!mt-0">Create project</GwCardTitle>
-        <GwCardDescription class="!mt-0">Deploy your new project in one-click.</GwCardDescription>
+        <div class="flex items-center justify-between">
+          <div class="flex flex-col gap-y-1">
+            <GwCardTitle class="!mt-0">Create project</GwCardTitle>
+            <GwCardDescription class="!mt-0">Deploy your new project in one-click.</GwCardDescription>
+          </div>
+        </div>
       </GwCardHeader>
       <GwCardContent>
         <div class="grid w-full items-center gap-4">
@@ -25,19 +29,41 @@ npx gwind-system-ui add card
           </div>
         </div>
       </GwCardContent>
-      <GwCardFooter class="flex justify-between p-0 pt-4">
-        <GwButton variant="outline">Cancel</GwButton>
-        <GwButton>Deploy</GwButton>
+      <GwCardFooter>
+        <GwButton class="w-full">Deploy</GwButton>
+        <GwButton variant="outline" class="w-full">Cancel</GwButton>
       </GwCardFooter>
     </GwCard>
-    <GwCard class="w-[350px] border-none bg-muted/30 shadow-none">
+    <GwCard class="w-[350px]">
       <GwCardHeader>
-        <GwCardTitle>Minimal card</GwCardTitle>
-        <GwCardDescription>A lighter layout for supporting content or summaries.</GwCardDescription>
+        <div class="flex items-center justify-between">
+          <div class="flex flex-col gap-y-1">
+            <GwCardTitle class="!mt-0">Create project</GwCardTitle>
+            <GwCardDescription class="!mt-0">Deploy your new project in one-click.</GwCardDescription>
+          </div>
+        </div>
       </GwCardHeader>
       <GwCardContent>
-        <p class="text-sm text-muted-foreground">
-          Use this pattern when the card should feel like a content surface rather than a framed container.
+        <div class="mb-4 h-32 w-full overflow-hidden rounded-lg bg-black-200">
+          <img src="https://picsum.photos/400/200" alt="Card Image" class="h-full w-full object-cover" />
+        </div>
+        <p class="text-sigma font-bold text-black-800">Headline</p>
+        <p class="mt-1 text-sigma text-black-500">
+          Supporting text or description related to the image above.
+        </p>
+      </GwCardContent>
+      <GwCardFooter>
+        <GwButton class="w-full">Deploy</GwButton>
+        <GwButton variant="outline" class="w-full">Cancel</GwButton>
+      </GwCardFooter>
+    </GwCard>
+    <GwCard class="w-[350px]">
+      <GwCardHeader>
+        <GwCardTitle>Minimal card</GwCardTitle>
+      </GwCardHeader>
+      <GwCardContent>
+        <p class="text-sigma text-black-500">
+          Use this pattern when the card should feel like a content surface.
         </p>
       </GwCardContent>
     </GwCard>
@@ -48,8 +74,9 @@ npx gwind-system-ui add card
 
 ## Variants
 
-- Standard framed card with header, content, and footer.
-- Minimal card without border and shadow for softer surfaces.
+- **Standard Card**: Framed card with header, content, and footer.
+- **Card with Image**: Includes a media object within the content block.
+- **Minimal Card**: Stripped-down version with just the essential content.
 
 ## Usage
 
@@ -74,9 +101,9 @@ npx gwind-system-ui add card
     <CardContent>
       <!-- Content goes here -->
     </CardContent>
-    <CardFooter class="flex justify-between px-6 pb-6">
-      <Button variant="outline">Cancel</Button>
-      <Button>Deploy</Button>
+    <CardFooter>
+      <Button class="w-full">Deploy</Button>
+      <Button variant="outline" class="w-full">Cancel</Button>
     </CardFooter>
   </Card>
 </template>
@@ -99,20 +126,48 @@ The Card component is composed of several sub-components that you can use to bui
 
 ## Examples
 
-### Account Settings
+### Opsi A: Kartu Interaktif Lengkap (Formulir/Aksi)
 ```vue
 <Card>
   <CardHeader>
-    <CardTitle>Account</CardTitle>
-    <CardDescription>
-      Make changes to your account here. Click save when you're done.
-    </CardDescription>
+    <div class="flex items-center justify-between">
+      <div class="flex flex-col gap-y-1">
+        <CardTitle>Ubah Data</CardTitle>
+        <CardDescription>Perbarui informasi Anda</CardDescription>
+      </div>
+      <X class="h-5 w-5 text-black-500" /> 
+    </div>
   </CardHeader>
-  <CardContent class="space-y-2">
-    <!-- Form Inputs would go here -->
+
+  <CardContent>
+    <!-- Komponen Input -->
+    <Input placeholder="Nama Lengkap" />
   </CardContent>
+
   <CardFooter>
-    <Button>Save changes</Button>
+    <Button class="w-full">Simpan</Button>
+    <Button variant="outline" class="w-full">Batal</Button>
   </CardFooter>
+</Card>
+```
+
+### Opsi B: Kartu Media / Artikel
+```vue
+<Card>
+  <CardContent class="pt-4"> 
+    <img src="/promo.jpg" class="mb-4 h-32 w-full rounded-lg object-cover" />
+    <p class="text-omicron font-bold text-black-800">Promo Akhir Tahun</p>
+    <p class="text-sigma text-black-500">Dapatkan diskon hingga 50%</p>
+  </CardContent>
+</Card>
+```
+
+### Opsi C: Kartu Polos / Minimalis
+```vue
+<Card>
+  <CardContent class="pt-4">
+    <p class="text-sigma font-bold text-black-800">Total Saldo</p>
+    <p class="text-2xl font-bold text-black-800">Rp 15.000.000</p>
+  </CardContent>
 </Card>
 ```
