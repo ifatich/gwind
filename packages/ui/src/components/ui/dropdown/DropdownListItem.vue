@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import type { HTMLAttributes } from "vue";
+import { ref, toRefs, type HTMLAttributes } from "vue";
 import { Check } from "lucide-vue-next";
 import { cn } from "../../../lib/utils";
+import { useDropdownListItemSearch } from "./useDropdownListItemSearch";
 
 const props = withDefaults(
   defineProps<{
@@ -9,6 +10,7 @@ const props = withDefaults(
     disabled?: boolean;
     label?: string;
     caption?: string;
+    searchText?: string;
     class?: HTMLAttributes["class"];
   }>(),
   {
@@ -16,16 +18,31 @@ const props = withDefaults(
     disabled: false,
   },
 );
+
+const emits = defineEmits<{
+  (event: "select"): void;
+}>();
+
+const { label, caption, searchText } = toRefs(props);
+const contentRef = ref<HTMLElement | null>(null);
+const { isVisible } = useDropdownListItemSearch({
+  label,
+  caption,
+  searchText,
+  contentRef,
+});
 </script>
 
 <template>
   <button
+    v-show="isVisible"
     type="button"
     :disabled="disabled"
     :aria-selected="selected"
+    @click="emits('select')"
     :class="
       cn(
-        'group flex min-h-12 w-full items-center gap-4 border-b border-black-20 bg-white py-3 text-left transition-[background-color,color] duration-150 ease-out first:border-t focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lime-500 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50',
+        'group flex min-h-[48px] w-full items-center gap-4 bg-white px-4 py-4 text-left transition-[background-color,color] duration-150 ease-out hover:bg-black-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lime-500 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50',
         $slots.icon ? 'min-h-16' : '',
         props.class,
       )
@@ -40,6 +57,7 @@ const props = withDefaults(
 
     <span class="grid min-w-0 flex-1 gap-0.5">
       <span
+        ref="contentRef"
         class="truncate text-omicron font-semibold leading-6 text-black-800"
       >
         <slot>{{ label }}</slot>
