@@ -22,9 +22,7 @@ npx gwind-system-ui add input-rupiah
 <ShadowPreview>
   <div class="grid w-full gap-4 md:grid-cols-2">
     <div class="rounded-md border border-black-200 bg-white p-4">
-      <GwInputRupiah id="input-rupiah-preview" v-model="rupiahValue" label="Rupiah" placeholder="Placeholder">
-        <template #right-icon><span class="text-omicron leading-6">X</span></template>
-      </GwInputRupiah>
+      <GwInputRupiah id="input-rupiah-preview" v-model="rupiahValue" label="Rupiah" placeholder="Placeholder" />
     </div>
     <div class="rounded-md border border-black-200 bg-white p-4">
       <div class="grid gap-2">
@@ -99,7 +97,7 @@ const amount = ref<number | null>(1000000)
 ```vue
 <InputRupiah id="input-rupiah-icon" label="Rupiah" :model-value="1000000">
   <template #right-icon>
-    <X class="h-6 w-6" />
+    <Search class="h-6 w-6" />
   </template>
 </InputRupiah>
 ```
