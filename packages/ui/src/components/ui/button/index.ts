@@ -26,12 +26,12 @@ export const buttonVariants = cva(
         facebook: 'border border-black-400 bg-white text-black-600 hover:border-black-500 hover:text-black-800',
       },
       size: {
-        sm: 'h-6 rounded px-2.5 py-[3px] !text-omega leading-[18px]',
-        md: 'h-8 rounded-md px-3 py-1.5 !text-sigma leading-5',
-        lg: 'h-10 rounded-md px-4 py-2 !text-omicron leading-6',
-        xl: 'h-12 rounded-md px-4 py-3 !text-omicron leading-6',
-        icon: 'h-12 w-12 rounded p-3 !text-omicron leading-6',
-        fab: 'h-12 w-12 rounded p-3 transition !text-omicron leading-6',
+        sm: 'h-6 rounded px-2.5 py-[3px] !text-omega',
+        md: 'h-8 rounded-md px-3 py-1.5 !text-sigma',
+        lg: 'h-10 rounded-md px-4 py-2 !text-omicron',
+        xl: 'h-12 rounded-md px-4 py-3 !text-omicron',
+        icon: 'h-12 w-12 rounded p-3 !text-omicron',
+        fab: 'h-12 w-12 rounded p-3 transition !text-omicron',
       },
       state: {
         disabled: 'bg-black-500 text-white pointer-events-none hover:bg-black-500',

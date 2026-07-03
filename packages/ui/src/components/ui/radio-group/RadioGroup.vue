@@ -81,13 +81,13 @@ const isWebsite = computed(() => props.styleMode === 'website')
     <div class="grid gap-1">
       <div
         v-if="title || $slots.title"
-        :class="cn('!text-sigma font-extrabold leading-5 text-black-800', titleClass)"
+        :class="cn('!text-sigma font-extrabold text-black-800', titleClass)"
       >
         <slot name="title">{{ title }}</slot>
       </div>
       <div
         v-if="subtitle || $slots.subtitle"
-        :class="cn('!text-omega font-semibold leading-[18px] text-black-600', subtitleClass)"
+        :class="cn('!text-omega font-semibold text-black-600', subtitleClass)"
       >
         <slot name="subtitle">{{ subtitle }}</slot>
       </div>
@@ -110,7 +110,7 @@ const isWebsite = computed(() => props.styleMode === 'website')
       v-if="hasCaption"
       :class="
         cn(
-          '!text-omega font-semibold leading-[18px]',
+          '!text-omega font-semibold',
           error ? 'text-red-500' : 'text-black-600',
           captionClass,
         )

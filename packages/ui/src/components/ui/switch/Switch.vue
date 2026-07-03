@@ -59,7 +59,7 @@ function toggle() {
     <span
       :class="
         cn(
-          'block h-5 w-5 rounded-full bg-white shadow-sm transition-transform duration-100',
+          'block h-5 w-5 rounded-full bg-white shadow-drop-1 transition-transform duration-100',
           isChecked && 'translate-x-5',
           thumbClass,
         )

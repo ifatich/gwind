@@ -30,7 +30,7 @@ const variantClass = computed(() => ({
     role="status"
     :class="
       cn(
-        'grid w-full max-w-sm gap-1 rounded-md border p-4 shadow-sm animate-in fade-in-0 slide-in-from-top-2',
+        'grid w-full max-w-sm gap-1 rounded-md border p-4 shadow-drop-1 animate-in fade-in-0 slide-in-from-top-2',
         variantClass,
         props.class,
       )

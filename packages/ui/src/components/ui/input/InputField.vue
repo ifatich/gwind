@@ -91,8 +91,8 @@ function handleTextareaInput(event: Event) {
           :aria-describedby="hasCaption ? captionId : undefined"
           :class="
             cn(
-              'flex min-h-20 w-full resize-none rounded-md !border border-[#eeeeef] bg-white px-3 py-3 text-omicron font-semibold leading-6 text-black-800 outline-none transition-colors duration-100 placeholder:text-black-500 hover:border-lime-600 focus:border-lime-500 focus-visible:border-lime-500 focus-visible:outline-none focus-visible:ring-0',
-              'disabled:cursor-not-allowed disabled:border-[#eeeeef] disabled:bg-[#eeeeef] disabled:text-black-600 disabled:placeholder:text-black-600 disabled:hover:border-[#eeeeef] disabled:focus:border-[#eeeeef]',
+              'flex min-h-20 w-full resize-none rounded-md !border border-black-200 bg-white px-3 py-3 text-omicron font-semibold text-black-800 outline-none transition-colors duration-100 placeholder:text-black-500 hover:border-lime-600 focus:border-lime-500 focus-visible:border-lime-500 focus-visible:outline-none focus-visible:ring-0',
+              'disabled:cursor-not-allowed disabled:border-black-400 disabled:bg-black-200 disabled:text-black-600 disabled:placeholder:text-black-600 disabled:hover:border-black-400 disabled:focus:border-black-400',
               controlPaddingClass,
               props.inputClass,
             )
@@ -104,8 +104,8 @@ function handleTextareaInput(event: Event) {
           v-else-if="isGrouped"
           :class="
             cn(
-              'flex h-12 w-full overflow-hidden rounded-md border border-[#eeeeef] bg-white transition-colors duration-100 hover:border-lime-600 focus-within:border-lime-500',
-              disabled && 'border-[#eeeeef] bg-[#eeeeef] hover:border-[#eeeeef] focus-within:border-[#eeeeef]',
+              'flex h-12 w-full overflow-hidden rounded-md border border-black-200 bg-white transition-colors duration-100 hover:border-lime-600 focus-within:border-lime-500',
+              disabled && 'border-black-400 bg-black-200 hover:border-black-400 focus-within:border-black-400',
             )
           "
         >
@@ -113,8 +113,8 @@ function handleTextareaInput(event: Event) {
             v-if="prefix || slots.prefix"
             :class="
               cn(
-                'flex h-full shrink-0 items-center justify-center border-r border-[#eeeeef] bg-black-100 px-5 text-omicron font-semibold leading-6 text-black-600',
-                disabled && 'bg-[#eeeeef]',
+                'flex h-full shrink-0 items-center justify-center border-r border-black-200 bg-black-100 px-5 text-omicron font-semibold text-black-600',
+                disabled && 'bg-black-200 border-black-400',
                 props.prefixClass,
               )
             "
@@ -158,7 +158,7 @@ function handleTextareaInput(event: Event) {
 
             <div
               v-if="slots.action"
-              class="absolute right-3 top-1/2 -translate-y-1/2 text-omicron font-extrabold leading-6 text-lime-500"
+              class="absolute right-3 top-1/2 -translate-y-1/2 text-omicron font-extrabold text-lime-500"
             >
               <slot name="action" />
             </div>
@@ -168,8 +168,8 @@ function handleTextareaInput(event: Event) {
             v-if="suffix || slots.suffix"
             :class="
               cn(
-                'flex h-full w-[98px] shrink-0 items-center justify-center border-l border-[#eeeeef] bg-black-100 text-omicron font-semibold leading-6 text-black-600',
-                disabled && 'bg-[#eeeeef]',
+                'flex h-full px-5 shrink-0 min-w-[92px] items-center justify-center border-l border-black-200 bg-black-100 text-omicron font-semibold text-black-600',
+                disabled && 'bg-black-200 border-black-400',
                 props.suffixClass,
               )
             "
@@ -206,7 +206,7 @@ function handleTextareaInput(event: Event) {
 
         <div
           v-if="slots.action && !isGrouped"
-          class="absolute right-3 top-1/2 -translate-y-1/2 text-omicron font-extrabold leading-6 text-lime-500"
+          class="absolute right-3 top-1/2 -translate-y-1/2 text-omicron font-extrabold text-lime-500"
         >
           <slot name="action" />
         </div>
@@ -217,7 +217,7 @@ function handleTextareaInput(event: Event) {
         :id="captionId"
         :class="
           cn(
-            'h-[18px] truncate !text-omega font-semibold !leading-[18px]',
+            'min-h-5 truncate text-omega font-semibold',
             error ? 'text-red-500' : 'text-black-600',
             props.captionClass,
           )

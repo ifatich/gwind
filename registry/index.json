@@ -99,6 +99,22 @@
     ]
   },
   {
+    "name": "datepicker",
+    "type": "ui",
+    "files": [
+      "Calendar.vue",
+      "CalendarHeading.vue",
+      "Datepicker.vue",
+      "DatepickerContent.vue",
+      "DatepickerInput.vue",
+      "DatepickerRoot.vue",
+      "DatepickerScroll.vue",
+      "YearPicker.vue",
+      "index.ts",
+      "utils.ts"
+    ]
+  },
+  {
     "name": "dialog",
     "type": "ui",
     "files": [
@@ -130,7 +146,9 @@
       "DropdownList.vue",
       "DropdownListCheckboxItem.vue",
       "DropdownListItem.vue",
-      "index.ts"
+      "context.ts",
+      "index.ts",
+      "useDropdownListItemSearch.ts"
     ]
   },
   {
@@ -139,6 +157,14 @@
     "files": [
       "Input.vue",
       "InputField.vue",
+      "index.ts"
+    ]
+  },
+  {
+    "name": "input-persentase",
+    "type": "ui",
+    "files": [
+      "InputPersentase.vue",
       "index.ts"
     ]
   },
@@ -268,6 +294,7 @@
     "type": "ui",
     "files": [
       "Textarea.vue",
+      "TextareaField.vue",
       "index.ts"
     ]
   },

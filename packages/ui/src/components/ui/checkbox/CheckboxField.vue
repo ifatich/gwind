@@ -111,7 +111,7 @@ function toggleFromKeyboard(event: KeyboardEvent) {
       <div
         :class="
           cn(
-            'h-6 truncate text-omicron font-semibold leading-6 text-black-800 transition-colors duration-150 group-hover/checkbox-field:text-lime-600',
+            'h-6 truncate text-omicron font-semibold text-black-800 transition-colors duration-150 group-hover/checkbox-field:text-lime-600',
             disabled && 'text-black-600 group-hover/checkbox-field:text-black-600',
             labelClass,
           )
@@ -124,7 +124,7 @@ function toggleFromKeyboard(event: KeyboardEvent) {
         :id="captionId"
         :class="
           cn(
-            'h-[18px] truncate !text-omega font-semibold leading-[18px]',
+            'h-[18px] truncate !text-omega font-semibold',
             error ? 'text-red-500' : 'text-black-600',
             disabled && 'text-black-500',
             captionClass,

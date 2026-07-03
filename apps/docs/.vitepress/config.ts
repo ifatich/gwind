@@ -59,6 +59,7 @@ export default defineConfig({
           { text: "Dialog", link: "/components/dialog" },
           { text: "Divider", link: "/components/divider" },
           { text: "Dropdown", link: "/components/dropdown" },
+          { text: "Datepicker", link: "/components/datepicker" },
           {
             text: "Input",
             link: "/components/input",
@@ -68,6 +69,7 @@ export default defineConfig({
               { text: "Input Field", link: "/components/input-field" },
               { text: "Input File", link: "/components/input-file" },
               { text: "Input Icons", link: "/components/input-icons" },
+              { text: "Input Persentase", link: "/components/input-persentase" },
               { text: "Input Rupiah", link: "/components/input-rupiah" },
             ],
           },

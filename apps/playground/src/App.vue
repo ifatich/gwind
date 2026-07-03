@@ -39,6 +39,7 @@ import {
   ComboboxTrigger,
   DataTable,
   Dialog,
+  DialogBody,
   DialogClose,
   DialogContent,
   DialogDescription,
@@ -48,12 +49,14 @@ import {
   DialogTitle,
   DialogTrigger,
   Divider,
+  Datepicker,
   Dropdown,
   DropdownList,
   DropdownListCheckboxItem,
   DropdownListItem,
   Input,
   InputField,
+  InputPersentase,
   InputRupiah,
   Label,
   Link,
@@ -88,6 +91,7 @@ import {
   TabsList,
   TabsTrigger,
   Textarea,
+  TextareaField,
   Tooltip,
   TooltipContent,
   TooltipProvider,
@@ -113,13 +117,40 @@ import {
 
 const activeSection = ref("inventory");
 const isDialogOpen = ref(false);
+const isDialogOpen2 = ref(false);
+const isDialogOpen3 = ref(false);
 const selectedFramework = ref("");
 const progressValue = ref(64);
 const paginationPage = ref(5);
 const dropdownOptionA = ref(true);
 const dropdownOptionB = ref(false);
+const dropdownOpen = ref(false);
+const dropdownProvince = ref("Bali");
+
+const dropdownIconOpen = ref(false);
+const dropdownIconSelected = ref("1.805,0595 gram");
+const dropdownMultipleOpen = ref(false);
+const dropdownMultipleLabel = computed(() => {
+  const selected = [];
+  if (dropdownOptionA.value) selected.push("Option A");
+  if (dropdownOptionB.value) selected.push("Option B");
+  return selected.length > 0 ? selected.join(", ") : "";
+});
+
+const accounts = [
+  { title: "1.805,0595 gram", caption: "1234 5678 9101 2345" },
+  { title: "2.500,0000 gram", caption: "9876 5432 1098 7654" },
+];
+
+const datepickerValue = ref("2026-06-21");
+
+function selectDropdownProvince(province: string) {
+  dropdownProvince.value = province;
+  dropdownOpen.value = false;
+}
 const compactMode = ref(false);
 const rupiahValue = ref<number | null>(1000000);
+const persentaseValue = ref<number | null>(50);
 const switchValue = ref(true);
 const checkboxPrimitiveChecked = ref(true);
 const checkboxPrimitiveIndeterminate = ref<boolean | "indeterminate">(
@@ -239,6 +270,7 @@ const sections = [
   { id: "combobox", label: "Combobox" },
   { id: "dialog", label: "Dialog" },
   { id: "dropdown", label: "Dropdown" },
+  { id: "datepicker", label: "Datepicker" },
   { id: "popover", label: "Popover" },
   { id: "tooltip", label: "Tooltip" },
   { id: "breadcrumb", label: "Breadcrumb" },
@@ -330,6 +362,7 @@ const componentInventory = [
     group: "Dialog",
     items: [
       "Dialog",
+      "DialogBody",
       "DialogClose",
       "DialogContent",
       "DialogDescription",
@@ -354,8 +387,21 @@ const componentInventory = [
     ],
   },
   {
+    group: "Datepicker",
+    items: [
+      "Datepicker",
+      "DatepickerRoot",
+      "DatepickerInput",
+      "DatepickerContent",
+      "Calendar",
+      "CalendarHeading",
+      "YearPicker",
+      "DatepickerScroll",
+    ],
+  },
+  {
     group: "Input",
-    items: ["Input", "InputField", "InputRupiah"],
+    items: ["Input", "InputField", "InputPersentase", "InputRupiah"],
   },
   {
     group: "Label",
@@ -424,7 +470,7 @@ const componentInventory = [
   },
   {
     group: "Textarea",
-    items: ["Textarea"],
+    items: ["Textarea", "TextareaField"],
   },
   {
     group: "Tooltip",
@@ -964,11 +1010,21 @@ const shellClass = computed(() =>
                       v-model="rupiahValue"
                       label="Title"
                       placeholder="Placeholder"
-                    >
-                      <template #right-icon>
-                        <X class="h-6 w-6" />
-                      </template>
-                    </InputRupiah>
+                    />
+                  </CardContent>
+                </Card>
+
+                <Card id="inputpersentase">
+                  <CardHeader>
+                    <CardTitle>Persentase</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <InputPersentase
+                      id="input-persentase"
+                      v-model="persentaseValue"
+                      label="Title"
+                      placeholder="Placeholder"
+                    />
                   </CardContent>
                 </Card>
 
@@ -1029,8 +1085,43 @@ const shellClass = computed(() =>
               <p class="mb-5 text-sigma text-black-500">
                 Multi-line entry surface.
               </p>
+              <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+                <Card>
+                  <CardHeader>
+                    <CardTitle>Default</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <TextareaField id="textarea-default" label="Title" model-value="Value" placeholder="Placeholder" caption="Assistive text" />
+                  </CardContent>
+                </Card>
 
-              <Textarea id="message" placeholder="Write a short message..." />
+                <Card>
+                  <CardHeader>
+                    <CardTitle>Empty</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <TextareaField id="textarea-empty" label="Title" placeholder="Placeholder" />
+                  </CardContent>
+                </Card>
+
+                <Card>
+                  <CardHeader>
+                    <CardTitle>Error</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <TextareaField id="textarea-error" label="Title" model-value="Value" placeholder="Placeholder" error="This is an error message." />
+                  </CardContent>
+                </Card>
+
+                <Card>
+                  <CardHeader>
+                    <CardTitle>Disabled</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <TextareaField id="textarea-disabled" label="Title" model-value="Value" placeholder="Placeholder" caption="Assistive text" disabled />
+                  </CardContent>
+                </Card>
+              </div>
             </section>
 
             <section
@@ -1425,27 +1516,75 @@ const shellClass = computed(() =>
                 description, footer, and close.
               </p>
 
-              <Dialog v-model:open="isDialogOpen">
-                <DialogTrigger as-child>
-                  <Button>Open Dialog</Button>
-                </DialogTrigger>
-                <DialogOverlay class="hidden" />
-                <DialogContent>
-                  <DialogHeader>
-                    <DialogTitle>Review component style</DialogTitle>
-                    <DialogDescription>
-                      Dialog surfaces should be visually independent from the
-                      page behind it.
-                    </DialogDescription>
-                  </DialogHeader>
-                  <DialogFooter>
-                    <DialogClose as-child>
-                      <Button variant="outline">Cancel</Button>
-                    </DialogClose>
-                    <Button @click="isDialogOpen = false">Save</Button>
-                  </DialogFooter>
-                </DialogContent>
-              </Dialog>
+              <div class="flex flex-wrap gap-4">
+                <!-- Variant 1: Default Dialog -->
+                <Dialog v-model:open="isDialogOpen">
+                  <DialogTrigger as-child>
+                    <Button>Default Dialog</Button>
+                  </DialogTrigger>
+                  <DialogContent>
+                    <DialogHeader>
+                      <DialogTitle>Review component style</DialogTitle>
+                      <DialogDescription>
+                        Dialog surfaces should be visually independent from the
+                        page behind it.
+                      </DialogDescription>
+                    </DialogHeader>
+                    <DialogBody class="text-sigma text-black-800">
+                      Ini adalah contoh konten utama dialog. Struktur styling dialog identik dengan Card, sehingga padding diserahkan kepada child komponen.
+                    </DialogBody>
+                    <DialogFooter>
+                      <DialogClose as-child>
+                        <Button variant="outline">Cancel</Button>
+                      </DialogClose>
+                      <Button @click="isDialogOpen = false">Save</Button>
+                    </DialogFooter>
+                  </DialogContent>
+                </Dialog>
+
+                <!-- Variant 2: Dialog with Image -->
+                <Dialog v-model:open="isDialogOpen2">
+                  <DialogTrigger as-child>
+                    <Button variant="secondary">Dialog with Image</Button>
+                  </DialogTrigger>
+                  <DialogContent>
+                    <DialogHeader>
+                      <DialogTitle>Confirm Action</DialogTitle>
+                    </DialogHeader>
+                    <DialogBody>
+                      <div class="mb-4 h-32 w-full overflow-hidden rounded-lg bg-black-200">
+                        <img src="https://picsum.photos/400/200" alt="Dialog Image" class="h-full w-full object-cover" />
+                      </div>
+                      <p class="text-sigma font-bold text-black-800">Warning Headline</p>
+                      <p class="mt-1 text-sigma text-black-500">
+                        This action has consequences related to the image above. Please be careful.
+                      </p>
+                    </DialogBody>
+                    <DialogFooter>
+                      <DialogClose as-child>
+                        <Button variant="outline">Cancel</Button>
+                      </DialogClose>
+                      <Button @click="isDialogOpen2 = false">Confirm</Button>
+                    </DialogFooter>
+                  </DialogContent>
+                </Dialog>
+
+                <!-- Variant 3: Minimal Dialog (No Footer) -->
+                <Dialog v-model:open="isDialogOpen3">
+                  <DialogTrigger as-child>
+                    <Button variant="tertiary">Minimal Dialog</Button>
+                  </DialogTrigger>
+                  <DialogContent>
+                    <DialogHeader>
+                      <DialogTitle>Information</DialogTitle>
+                      <DialogDescription>Just a simple informational dialog without footer actions.</DialogDescription>
+                    </DialogHeader>
+                    <DialogBody class="text-omicron">
+                      You can click the close button at the top right to dismiss this dialog.
+                    </DialogBody>
+                  </DialogContent>
+                </Dialog>
+              </div>
             </section>
 
             <section
@@ -1495,50 +1634,137 @@ const shellClass = computed(() =>
                 rows.
               </p>
 
+              <div class="grid gap-6">
+                <!-- Interactive Dropdowns -->
+                <div>
+                  <h3 class="mb-3 text-pi font-semibold text-black-800">Interactive Dropdowns</h3>
+                  <div class="grid gap-4 lg:grid-cols-3">
+                    <Dropdown
+                      v-model:open="dropdownOpen"
+                      :model-label="dropdownProvince"
+                      placeholder="Pilih provinsi"
+                      trigger-class="w-full"
+                    >
+                      <DropdownList>
+                        <DropdownListItem
+                          v-for="province in ['Aceh', 'Bali', 'Banten']"
+                          :key="province"
+                          :selected="dropdownProvince === province"
+                          @select="selectDropdownProvince(province)"
+                        >
+                          {{ province }}
+                        </DropdownListItem>
+                      </DropdownList>
+                    </Dropdown>
+
+                    <Dropdown
+                      v-model:open="dropdownIconOpen"
+                      :model-label="dropdownIconSelected"
+                      placeholder="Pilih rekening"
+                      trigger-class="w-full"
+                    >
+                      <DropdownList>
+                        <DropdownListItem
+                          v-for="(account, index) in accounts"
+                          :key="index"
+                          :label="account.title"
+                          :caption="account.caption"
+                          :selected="dropdownIconSelected === account.title"
+                          @select="dropdownIconSelected = account.title; dropdownIconOpen = false"
+                        >
+                          <template #icon>
+                            <Landmark class="h-6 w-6" />
+                          </template>
+                        </DropdownListItem>
+                      </DropdownList>
+                    </Dropdown>
+
+                    <Dropdown
+                      v-model:open="dropdownMultipleOpen"
+                      :model-label="dropdownMultipleLabel"
+                      placeholder="Pilih opsi"
+                      trigger-class="w-full"
+                    >
+                      <DropdownList variant="multiple">
+                        <DropdownListCheckboxItem v-model="dropdownOptionA">
+                          Option A
+                        </DropdownListCheckboxItem>
+                        <DropdownListCheckboxItem v-model="dropdownOptionB">
+                          Option B
+                        </DropdownListCheckboxItem>
+                      </DropdownList>
+                    </Dropdown>
+                  </div>
+                </div>
+
+                <!-- Dropdown List Surface Previews -->
+                <div>
+                  <h3 class="mb-3 text-pi font-semibold text-black-800">Dropdown List Surfaces</h3>
+                  <div class="grid gap-4 lg:grid-cols-3">
+                    <DropdownList>
+                      <DropdownListItem>Aceh</DropdownListItem>
+                      <DropdownListItem selected>Bali</DropdownListItem>
+                      <DropdownListItem>Banten</DropdownListItem>
+                      <DropdownListItem>Bengkulu</DropdownListItem>
+                    </DropdownList>
+
+                    <DropdownList>
+                      <DropdownListItem
+                        label="1.805,0595 gram"
+                        caption="1234 5678 9101 2345"
+                        selected
+                      >
+                        <template #icon>
+                          <Landmark class="h-6 w-6" />
+                        </template>
+                      </DropdownListItem>
+                      <DropdownListItem
+                        label="1.805,0595 gram"
+                        caption="1234 5678 9101 2345"
+                      >
+                        <template #icon>
+                          <Landmark class="h-6 w-6" />
+                        </template>
+                      </DropdownListItem>
+                    </DropdownList>
+
+                    <DropdownList variant="multiple">
+                      <DropdownListCheckboxItem v-model="dropdownOptionA">
+                        This is an option
+                      </DropdownListCheckboxItem>
+                      <DropdownListCheckboxItem v-model="dropdownOptionB">
+                        This is an option
+                      </DropdownListCheckboxItem>
+                    </DropdownList>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <section
+              id="datepicker"
+              class="playground-section playground-panel p-5"
+            >
+              <h2 class="mb-1 text-omicron font-bold text-black-800">
+                Datepicker
+              </h2>
+              <p class="mb-5 text-sigma text-black-500">
+                Input-style trigger with calendar popup for single date
+                selection.
+              </p>
+
               <div class="grid gap-4 lg:grid-cols-2">
-                <Dropdown model-label="Bali" trigger-class="max-w-md">
-                  <DropdownList>
-                    <DropdownListItem>Aceh</DropdownListItem>
-                    <DropdownListItem selected>Bali</DropdownListItem>
-                    <DropdownListItem>Banten</DropdownListItem>
-                  </DropdownList>
-                </Dropdown>
-
-                <DropdownList>
-                  <DropdownListItem>Aceh</DropdownListItem>
-                  <DropdownListItem selected>Bali</DropdownListItem>
-                  <DropdownListItem>Banten</DropdownListItem>
-                  <DropdownListItem>Bengkulu</DropdownListItem>
-                </DropdownList>
-
-                <DropdownList>
-                  <DropdownListItem
-                    label="1.805,0595 gram"
-                    caption="1234 5678 9101 2345"
-                    selected
-                  >
-                    <template #icon>
-                      <Landmark class="h-6 w-6" />
-                    </template>
-                  </DropdownListItem>
-                  <DropdownListItem
-                    label="1.805,0595 gram"
-                    caption="1234 5678 9101 2345"
-                  >
-                    <template #icon>
-                      <Landmark class="h-6 w-6" />
-                    </template>
-                  </DropdownListItem>
-                </DropdownList>
-
-                <DropdownList variant="multiple" class="lg:col-span-2">
-                  <DropdownListCheckboxItem v-model="dropdownOptionA">
-                    This is an option
-                  </DropdownListCheckboxItem>
-                  <DropdownListCheckboxItem v-model="dropdownOptionB">
-                    This is an option
-                  </DropdownListCheckboxItem>
-                </DropdownList>
+                <Datepicker
+                  v-model="datepickerValue"
+                  placeholder="Pilih tanggal"
+                  trigger-class="max-w-md"
+                />
+                <Datepicker
+                  default-open
+                  model-value="2026-06-21"
+                  placeholder="Pilih tanggal"
+                  trigger-class="max-w-md"
+                />
               </div>
             </section>
 
@@ -1574,27 +1800,56 @@ const shellClass = computed(() =>
                 List, item, link, separator, ellipsis, and page state.
               </p>
 
-              <Breadcrumb>
-                <BreadcrumbList>
-                  <BreadcrumbItem>
-                    <BreadcrumbLink href="#"
-                      ><Home class="h-4 w-4"
-                    /></BreadcrumbLink>
-                  </BreadcrumbItem>
-                  <BreadcrumbSeparator />
-                  <BreadcrumbItem>
-                    <BreadcrumbLink href="#">Components</BreadcrumbLink>
-                  </BreadcrumbItem>
-                  <BreadcrumbSeparator />
-                  <BreadcrumbItem>
-                    <BreadcrumbEllipsis />
-                  </BreadcrumbItem>
-                  <BreadcrumbSeparator />
-                  <BreadcrumbItem>
-                    <BreadcrumbPage>Playground</BreadcrumbPage>
-                  </BreadcrumbItem>
-                </BreadcrumbList>
-              </Breadcrumb>
+              <div class="space-y-4">
+                <div>
+                  <h3 class="mb-2 text-sigma font-semibold text-black-600">Default (Figma Pattern)</h3>
+                  <Breadcrumb>
+                    <BreadcrumbList>
+                      <BreadcrumbItem>
+                        <BreadcrumbLink href="#">Root</BreadcrumbLink>
+                      </BreadcrumbItem>
+                      <BreadcrumbSeparator />
+                      <BreadcrumbItem>
+                        <BreadcrumbLink href="#">Lv1</BreadcrumbLink>
+                      </BreadcrumbItem>
+                      <BreadcrumbSeparator />
+                      <BreadcrumbItem>
+                        <BreadcrumbLink href="#">Lv2</BreadcrumbLink>
+                      </BreadcrumbItem>
+                      <BreadcrumbSeparator />
+                      <BreadcrumbItem>
+                        <BreadcrumbLink href="#">lv3</BreadcrumbLink>
+                      </BreadcrumbItem>
+                      <BreadcrumbSeparator />
+                      <BreadcrumbItem>
+                        <BreadcrumbPage>lv4</BreadcrumbPage>
+                      </BreadcrumbItem>
+                    </BreadcrumbList>
+                  </Breadcrumb>
+                </div>
+                <div>
+                  <h3 class="mb-2 text-sigma font-semibold text-black-600">With Ellipsis</h3>
+                  <Breadcrumb>
+                    <BreadcrumbList>
+                      <BreadcrumbItem>
+                        <BreadcrumbLink href="#">Dashboard</BreadcrumbLink>
+                      </BreadcrumbItem>
+                      <BreadcrumbSeparator />
+                      <BreadcrumbItem>
+                        <BreadcrumbLink href="#">Projects</BreadcrumbLink>
+                      </BreadcrumbItem>
+                      <BreadcrumbSeparator />
+                      <BreadcrumbItem>
+                        <BreadcrumbEllipsis />
+                      </BreadcrumbItem>
+                      <BreadcrumbSeparator />
+                      <BreadcrumbItem>
+                        <BreadcrumbPage>Playground</BreadcrumbPage>
+                      </BreadcrumbItem>
+                    </BreadcrumbList>
+                  </Breadcrumb>
+                </div>
+              </div>
             </section>
 
             <section id="tabs" class="playground-section playground-panel p-5">
@@ -1784,24 +2039,63 @@ const shellClass = computed(() =>
                 Header, title, description, content, and footer slots.
               </p>
 
-              <Card class="max-w-md">
-                <CardHeader>
-                  <CardTitle>Default card</CardTitle>
-                  <CardDescription
-                    >Header, content, and footer composition.</CardDescription
-                  >
-                </CardHeader>
-                <CardContent>
-                  <p class="text-sigma text-black-500">
-                    Use this to tune card padding, radius, text, and form
-                    nesting.
-                  </p>
-                </CardContent>
-                <CardFooter class="justify-end gap-2">
-                  <Button variant="outline">Cancel</Button>
-                  <Button>Save</Button>
-                </CardFooter>
-              </Card>
+              <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+                <!-- Variant 1: Default Card -->
+                <Card>
+                  <CardHeader>
+                    <div class="flex items-center justify-between">
+                      <div class="flex flex-col gap-y-1">
+                        <CardTitle>Card Title</CardTitle>
+                        <CardDescription>Card Description Subtitle</CardDescription>
+                      </div>
+                      <Button variant="icon" size="icon" class="h-6 w-6">
+                        <X class="h-4 w-4" />
+                      </Button>
+                    </div>
+                  </CardHeader>
+                  <CardContent>
+                    <div class="rounded-lg bg-black-100 p-4">
+                      <p class="text-sigma font-bold text-black-800">Content Title</p>
+                      <p class="mt-1 text-sigma text-black-500">
+                        This is the main content area for the card where you can put any information.
+                      </p>
+                    </div>
+                  </CardContent>
+                  <CardFooter>
+                    <Button class="w-full">Action</Button>
+                    <Button variant="outline" class="w-full">Cancel</Button>
+                  </CardFooter>
+                </Card>
+
+                <!-- Variant 2: Card with Image -->
+                <Card>
+                  <CardHeader>
+                    <CardTitle>Card with Image</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div class="mb-4 h-32 w-full overflow-hidden rounded-lg bg-black-200">
+                      <img src="https://picsum.photos/400/200" alt="Card Image" class="h-full w-full object-cover" />
+                    </div>
+                    <p class="text-sigma font-bold text-black-800">Headline</p>
+                    <p class="mt-1 text-sigma text-black-500">
+                      Supporting text or description related to the image above.
+                    </p>
+                  </CardContent>
+                  <CardFooter>
+                    <Button class="w-full">Confirm</Button>
+                  </CardFooter>
+                </Card>
+
+                <!-- Variant 3: Minimal Content Only -->
+                <Card>
+                  <CardContent class="pt-4">
+                    <p class="text-sigma font-bold text-black-800">Minimal Card</p>
+                    <p class="mt-1 text-sigma text-black-500">
+                      Card without header and footer, just displaying simple information.
+                    </p>
+                  </CardContent>
+                </Card>
+              </div>
             </section>
 
             <section
