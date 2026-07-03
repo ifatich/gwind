@@ -1,30 +1,84 @@
 <script setup>
 import { ref } from 'vue'
-const isOpen = ref(false)
+const isDialogOpen1 = ref(false)
+const isDialogOpen2 = ref(false)
+const isDialogOpen3 = ref(false)
 </script>
 
 # Dialog
 
 A modal dialog that interrupts the user with important content and expects a response.
 
-## Preview
+## Examples
+
+### Default Dialog
 
 <ShadowPreview class="gwind-docs-preview">
-  <GwDialog v-model:open="isOpen">
+  <GwDialog v-model:open="isDialogOpen1">
     <GwDialogTrigger as-child>
-      <GwButton>Open Dialog</GwButton>
+      <GwButton>Default Dialog</GwButton>
     </GwDialogTrigger>
     <GwDialogContent>
       <GwDialogHeader>
-        <GwDialogTitle>Are you sure?</GwDialogTitle>
+        <GwDialogTitle>Review component style</GwDialogTitle>
         <GwDialogDescription>
-          This action cannot be undone. This will permanently delete your account and remove your data from our servers.
+          Dialog surfaces should be visually independent from the page behind it.
         </GwDialogDescription>
       </GwDialogHeader>
+      <GwDialogBody>
+        Ini adalah contoh konten utama dialog. Struktur styling dialog identik dengan Card, sehingga padding diserahkan kepada child komponen.
+      </GwDialogBody>
       <GwDialogFooter>
-        <GwButton variant="outline" @click="isOpen = false">Cancel</GwButton>
-        <GwButton variant="destructive" @click="isOpen = false">Delete Account</GwButton>
+        <GwButton variant="outline" @click="isDialogOpen1 = false">Cancel</GwButton>
+        <GwButton @click="isDialogOpen1 = false">Save</GwButton>
       </GwDialogFooter>
+    </GwDialogContent>
+  </GwDialog>
+</ShadowPreview>
+
+### Dialog with Image
+
+<ShadowPreview class="gwind-docs-preview">
+  <GwDialog v-model:open="isDialogOpen2">
+    <GwDialogTrigger as-child>
+      <GwButton variant="secondary">Dialog with Image</GwButton>
+    </GwDialogTrigger>
+    <GwDialogContent>
+      <GwDialogHeader>
+        <GwDialogTitle>Delete Confirmation</GwDialogTitle>
+      </GwDialogHeader>
+      <GwDialogBody>
+        <div class="mb-4 h-32 w-full overflow-hidden rounded-lg bg-black-200">
+          <img src="https://picsum.photos/400/200" alt="Warning Image" class="h-full w-full object-cover" />
+        </div>
+        <p class="text-sigma font-bold text-black-800">Are you sure?</p>
+        <p class="mt-1 text-sigma text-black-500">
+          This action cannot be undone. This will permanently delete your account and remove your data from our servers.
+        </p>
+      </GwDialogBody>
+      <GwDialogFooter>
+        <GwButton variant="outline" @click="isDialogOpen2 = false">Cancel</GwButton>
+        <GwButton variant="destructive" @click="isDialogOpen2 = false">Delete Account</GwButton>
+      </GwDialogFooter>
+    </GwDialogContent>
+  </GwDialog>
+</ShadowPreview>
+
+### Minimal Dialog
+
+<ShadowPreview class="gwind-docs-preview">
+  <GwDialog v-model:open="isDialogOpen3">
+    <GwDialogTrigger as-child>
+      <GwButton variant="tertiary">Minimal Dialog</GwButton>
+    </GwDialogTrigger>
+    <GwDialogContent>
+      <GwDialogHeader>
+        <GwDialogTitle>Information</GwDialogTitle>
+        <GwDialogDescription>Just a simple informational dialog without footer actions.</GwDialogDescription>
+      </GwDialogHeader>
+      <GwDialogBody class="text-sigma text-black-800">
+        You can click the close button at the top right to dismiss this dialog.
+      </GwDialogBody>
     </GwDialogContent>
   </GwDialog>
 </ShadowPreview>
@@ -47,6 +101,7 @@ Create a folder `src/components/ui/dialog/` and copy the source code for each fi
 <script setup>
 import { 
   Dialog, 
+  DialogBody,
   DialogContent, 
   DialogHeader, 
   DialogTitle, 
@@ -71,7 +126,9 @@ const isOpen = ref(false)
         <DialogDescription>Are you sure you want to proceed?</DialogDescription>
       </DialogHeader>
       
-      <p>Additional body content goes here.</p>
+      <DialogBody class="text-sigma text-black-800">
+        <p>Additional body content goes here.</p>
+      </DialogBody>
 
       <DialogFooter>
         <Button variant="outline" @click="isOpen = false">Cancel</Button>
@@ -90,6 +147,7 @@ const isOpen = ref(false)
 | `DialogTrigger` | The element that opens the dialog |
 | `DialogContent` | The portal-wrapped content container with overlay and close button |
 | `DialogHeader` | Header area for title and description |
+| `DialogBody` | Body area for content |
 | `DialogTitle` | Semi-bold title text |
 | `DialogDescription` | Muted description text |
 | `DialogFooter` | Footer area for action buttons |
