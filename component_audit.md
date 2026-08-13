@@ -13,11 +13,11 @@ Dokumen ini berisi hasil audit komprehensif 3-arah (*3-Way Benchmark*) yang memb
 
 | Metrik | Gwind UI (Local) | Kitvue Live (`ifatich4.github.io`) | Shadcn UI (Context7) |
 | :--- | :---: | :---: | :---: |
-| **Kategori Komponen** | **28 Folder** | **82 Story Suites** | **48 Komponen Core** |
-| **Total File `.vue`** | **106 File** | N/A (Storybook deploy) | ~140 File TSX |
-| **Total File `.ts` (barrel/util)** | **34 File** | N/A | N/A |
-| **Registry JSON** | **30 Entri** | N/A | N/A |
-| **Barrel Export** | Semua 28 kategori ter-export di [`index.ts`](file:///Users/lord/Documents/Pegadaian%20Project/Desktop/design%20system/gwind/packages/ui/src/index.ts) | N/A | N/A |
+| **Kategori Komponen** | **31 Folder** | **82 Story Suites** | **48 Komponen Core** |
+| **Total File `.vue`** | **116 File** | N/A (Storybook deploy) | ~140 File TSX |
+| **Total File `.ts` (barrel/util)** | **37 File** | N/A | N/A |
+| **Registry JSON** | **32 Entri** | N/A | N/A |
+| **Barrel Export** | Semua 31 kategori ter-export di [`index.ts`](file:///Users/lord/Documents/Pegadaian%20Project/Desktop/design%20system/gwind/packages/ui/src/index.ts) | N/A | N/A |
 
 ---
 
@@ -34,29 +34,32 @@ Data berikut 100% dihasilkan dari `find` pada direktori [packages/ui/src/compone
 | 5 | **breadcrumb** | 7 | `Breadcrumb.vue`, `BreadcrumbEllipsis.vue`, `BreadcrumbItem.vue`, `BreadcrumbLink.vue`, `BreadcrumbList.vue`, `BreadcrumbPage.vue`, `BreadcrumbSeparator.vue` | [breadcrumb/](file:///Users/lord/Documents/Pegadaian%20Project/Desktop/design%20system/gwind/packages/ui/src/components/ui/breadcrumb) |
 | 6 | **button** | 1 | `Button.vue` | [button/](file:///Users/lord/Documents/Pegadaian%20Project/Desktop/design%20system/gwind/packages/ui/src/components/ui/button) |
 | 7 | **card** | 6 | `Card.vue`, `CardContent.vue`, `CardDescription.vue`, `CardFooter.vue`, `CardHeader.vue`, `CardTitle.vue` | [card/](file:///Users/lord/Documents/Pegadaian%20Project/Desktop/design%20system/gwind/packages/ui/src/components/ui/card) |
-| 8 | **checkbox** | 3 | `Checkbox.vue`, `CheckboxField.vue`, `CheckboxGroup.vue` | [checkbox/](file:///Users/lord/Documents/Pegadaian%20Project/Desktop/design%20system/gwind/packages/ui/src/components/ui/checkbox) |
-| 9 | **combobox** | 10 | `Combobox.vue`, `ComboboxAnchor.vue`, `ComboboxEmpty.vue`, `ComboboxGroup.vue`, `ComboboxInput.vue`, `ComboboxItem.vue`, `ComboboxItemIndicator.vue`, `ComboboxList.vue`, `ComboboxSeparator.vue`, `ComboboxTrigger.vue` | [combobox/](file:///Users/lord/Documents/Pegadaian%20Project/Desktop/design%20system/gwind/packages/ui/src/components/ui/combobox) |
-| 10 | **datepicker** | 8 | `Calendar.vue`, `CalendarHeading.vue`, `Datepicker.vue`, `DatepickerContent.vue`, `DatepickerInput.vue`, `DatepickerRoot.vue`, `DatepickerScroll.vue`, `YearPicker.vue` | [datepicker/](file:///Users/lord/Documents/Pegadaian%20Project/Desktop/design%20system/gwind/packages/ui/src/components/ui/datepicker) |
-| 11 | **dialog** | 10 | `Dialog.vue`, `DialogBody.vue`, `DialogClose.vue`, `DialogContent.vue`, `DialogDescription.vue`, `DialogFooter.vue`, `DialogHeader.vue`, `DialogOverlay.vue`, `DialogTitle.vue`, `DialogTrigger.vue` | [dialog/](file:///Users/lord/Documents/Pegadaian%20Project/Desktop/design%20system/gwind/packages/ui/src/components/ui/dialog) |
-| 12 | **divider** | 1 | `Divider.vue` | [divider/](file:///Users/lord/Documents/Pegadaian%20Project/Desktop/design%20system/gwind/packages/ui/src/components/ui/divider) |
-| 13 | **dropdown** | 4 | `Dropdown.vue`, `DropdownList.vue`, `DropdownListCheckboxItem.vue`, `DropdownListItem.vue` | [dropdown/](file:///Users/lord/Documents/Pegadaian%20Project/Desktop/design%20system/gwind/packages/ui/src/components/ui/dropdown) |
-| 14 | **input** | 4 | `Input.vue`, `InputField.vue` (root), `InputPersentase.vue` (subfolder `input-persentase/`), `InputRupiah.vue` (subfolder `input-rupiah/`) | [input/](file:///Users/lord/Documents/Pegadaian%20Project/Desktop/design%20system/gwind/packages/ui/src/components/ui/input) |
-| 15 | **label** | 1 | `Label.vue` | [label/](file:///Users/lord/Documents/Pegadaian%20Project/Desktop/design%20system/gwind/packages/ui/src/components/ui/label) |
-| 16 | **link** | 1 | `Link.vue` | [link/](file:///Users/lord/Documents/Pegadaian%20Project/Desktop/design%20system/gwind/packages/ui/src/components/ui/link) |
-| 17 | **pagination** | 1 | `Pagination.vue` | [pagination/](file:///Users/lord/Documents/Pegadaian%20Project/Desktop/design%20system/gwind/packages/ui/src/components/ui/pagination) |
-| 18 | **popover** | 4 | `Popover.vue`, `PopoverAnchor.vue`, `PopoverContent.vue`, `PopoverTrigger.vue` | [popover/](file:///Users/lord/Documents/Pegadaian%20Project/Desktop/design%20system/gwind/packages/ui/src/components/ui/popover) |
-| 19 | **progress** | 1 | `Progress.vue` | [progress/](file:///Users/lord/Documents/Pegadaian%20Project/Desktop/design%20system/gwind/packages/ui/src/components/ui/progress) |
-| 20 | **radio-group** | 3 | `RadioGroup.vue`, `RadioGroupField.vue`, `RadioGroupItem.vue` | [radio-group/](file:///Users/lord/Documents/Pegadaian%20Project/Desktop/design%20system/gwind/packages/ui/src/components/ui/radio-group) |
-| 21 | **select** | 11 | `Select.vue`, `SelectContent.vue`, `SelectGroup.vue`, `SelectItem.vue`, `SelectItemText.vue`, `SelectLabel.vue`, `SelectScrollDownButton.vue`, `SelectScrollUpButton.vue`, `SelectSeparator.vue`, `SelectTrigger.vue`, `SelectValue.vue` | [select/](file:///Users/lord/Documents/Pegadaian%20Project/Desktop/design%20system/gwind/packages/ui/src/components/ui/select) |
-| 22 | **spinner** | 1 | `Spinner.vue` | [spinner/](file:///Users/lord/Documents/Pegadaian%20Project/Desktop/design%20system/gwind/packages/ui/src/components/ui/spinner) |
-| 23 | **switch** | 1 | `Switch.vue` | [switch/](file:///Users/lord/Documents/Pegadaian%20Project/Desktop/design%20system/gwind/packages/ui/src/components/ui/switch) |
-| 24 | **table** | 8 | `DataTable.vue`, `Table.vue`, `TableBody.vue`, `TableCaption.vue`, `TableCell.vue`, `TableHead.vue`, `TableHeader.vue`, `TableRow.vue` | [table/](file:///Users/lord/Documents/Pegadaian%20Project/Desktop/design%20system/gwind/packages/ui/src/components/ui/table) |
-| 25 | **tabs** | 4 | `TabContent.vue`, `TabGroup.vue`, `TabTrigger.vue`, `TabTriggerGroup.vue` | [tabs/](file:///Users/lord/Documents/Pegadaian%20Project/Desktop/design%20system/gwind/packages/ui/src/components/ui/tabs) |
-| 26 | **textarea** | 2 | `Textarea.vue`, `TextareaField.vue` | [textarea/](file:///Users/lord/Documents/Pegadaian%20Project/Desktop/design%20system/gwind/packages/ui/src/components/ui/textarea) |
-| 27 | **toast** | 1 | `Toast.vue` | [toast/](file:///Users/lord/Documents/Pegadaian%20Project/Desktop/design%20system/gwind/packages/ui/src/components/ui/toast) |
-| 28 | **tooltip** | 4 | `Tooltip.vue`, `TooltipContent.vue`, `TooltipProvider.vue`, `TooltipTrigger.vue` | [tooltip/](file:///Users/lord/Documents/Pegadaian%20Project/Desktop/design%20system/gwind/packages/ui/src/components/ui/tooltip) |
+| 8 | **carousel** | 7 | `BannerCarousel.vue`, `Carousel.vue`, `CarouselContent.vue`, `CarouselIndicators.vue`, `CarouselItem.vue`, `CarouselNext.vue`, `CarouselPrevious.vue` | [carousel/](file:///Users/lord/Documents/Pegadaian%20Project/Desktop/design%20system/gwind/packages/ui/src/components/ui/carousel) |
+| 9 | **checkbox** | 3 | `Checkbox.vue`, `CheckboxField.vue`, `CheckboxGroup.vue` | [checkbox/](file:///Users/lord/Documents/Pegadaian%20Project/Desktop/design%20system/gwind/packages/ui/src/components/ui/checkbox) |
+| 10 | **combobox** | 10 | `Combobox.vue`, `ComboboxAnchor.vue`, `ComboboxEmpty.vue`, `ComboboxGroup.vue`, `ComboboxInput.vue`, `ComboboxItem.vue`, `ComboboxItemIndicator.vue`, `ComboboxList.vue`, `ComboboxSeparator.vue`, `ComboboxTrigger.vue` | [combobox/](file:///Users/lord/Documents/Pegadaian%20Project/Desktop/design%20system/gwind/packages/ui/src/components/ui/combobox) |
+| 11 | **datepicker** | 8 | `Calendar.vue`, `CalendarHeading.vue`, `Datepicker.vue`, `DatepickerContent.vue`, `DatepickerInput.vue`, `DatepickerRoot.vue`, `DatepickerScroll.vue`, `YearPicker.vue` | [datepicker/](file:///Users/lord/Documents/Pegadaian%20Project/Desktop/design%20system/gwind/packages/ui/src/components/ui/datepicker) |
+| 12 | **dialog** | 10 | `Dialog.vue`, `DialogBody.vue`, `DialogClose.vue`, `DialogContent.vue`, `DialogDescription.vue`, `DialogFooter.vue`, `DialogHeader.vue`, `DialogOverlay.vue`, `DialogTitle.vue`, `DialogTrigger.vue` | [dialog/](file:///Users/lord/Documents/Pegadaian%20Project/Desktop/design%20system/gwind/packages/ui/src/components/ui/dialog) |
+| 13 | **divider** | 1 | `Divider.vue` | [divider/](file:///Users/lord/Documents/Pegadaian%20Project/Desktop/design%20system/gwind/packages/ui/src/components/ui/divider) |
+| 14 | **dropdown** | 4 | `Dropdown.vue`, `DropdownList.vue`, `DropdownListCheckboxItem.vue`, `DropdownListItem.vue` | [dropdown/](file:///Users/lord/Documents/Pegadaian%20Project/Desktop/design%20system/gwind/packages/ui/src/components/ui/dropdown) |
+| 15 | **file-picker** | 1 | `FilePicker.vue` | [file-picker/](file:///Users/lord/Documents/Pegadaian%20Project/Desktop/design%20system/gwind/packages/ui/src/components/ui/file-picker) |
+| 16 | **image-picker** | 2 | `ImageDisplay.vue`, `ImagePicker.vue` | [image-picker/](file:///Users/lord/Documents/Pegadaian%20Project/Desktop/design%20system/gwind/packages/ui/src/components/ui/image-picker) |
+| 17 | **input** | 4 | `Input.vue`, `InputField.vue` (root), `InputPersentase.vue` (subfolder `input-persentase/`), `InputRupiah.vue` (subfolder `input-rupiah/`) | [input/](file:///Users/lord/Documents/Pegadaian%20Project/Desktop/design%20system/gwind/packages/ui/src/components/ui/input) |
+| 18 | **label** | 1 | `Label.vue` | [label/](file:///Users/lord/Documents/Pegadaian%20Project/Desktop/design%20system/gwind/packages/ui/src/components/ui/label) |
+| 19 | **link** | 1 | `Link.vue` | [link/](file:///Users/lord/Documents/Pegadaian%20Project/Desktop/design%20system/gwind/packages/ui/src/components/ui/link) |
+| 20 | **pagination** | 1 | `Pagination.vue` | [pagination/](file:///Users/lord/Documents/Pegadaian%20Project/Desktop/design%20system/gwind/packages/ui/src/components/ui/pagination) |
+| 21 | **popover** | 4 | `Popover.vue`, `PopoverAnchor.vue`, `PopoverContent.vue`, `PopoverTrigger.vue` | [popover/](file:///Users/lord/Documents/Pegadaian%20Project/Desktop/design%20system/gwind/packages/ui/src/components/ui/popover) |
+| 22 | **progress** | 1 | `Progress.vue` | [progress/](file:///Users/lord/Documents/Pegadaian%20Project/Desktop/design%20system/gwind/packages/ui/src/components/ui/progress) |
+| 23 | **radio-group** | 3 | `RadioGroup.vue`, `RadioGroupField.vue`, `RadioGroupItem.vue` | [radio-group/](file:///Users/lord/Documents/Pegadaian%20Project/Desktop/design%20system/gwind/packages/ui/src/components/ui/radio-group) |
+| 24 | **select** | 11 | `Select.vue`, `SelectContent.vue`, `SelectGroup.vue`, `SelectItem.vue`, `SelectItemText.vue`, `SelectLabel.vue`, `SelectScrollDownButton.vue`, `SelectScrollUpButton.vue`, `SelectSeparator.vue`, `SelectTrigger.vue`, `SelectValue.vue` | [select/](file:///Users/lord/Documents/Pegadaian%20Project/Desktop/design%20system/gwind/packages/ui/src/components/ui/select) |
+| 25 | **spinner** | 1 | `Spinner.vue` | [spinner/](file:///Users/lord/Documents/Pegadaian%20Project/Desktop/design%20system/gwind/packages/ui/src/components/ui/spinner) |
+| 26 | **switch** | 1 | `Switch.vue` | [switch/](file:///Users/lord/Documents/Pegadaian%20Project/Desktop/design%20system/gwind/packages/ui/src/components/ui/switch) |
+| 27 | **table** | 8 | `DataTable.vue`, `Table.vue`, `TableBody.vue`, `TableCaption.vue`, `TableCell.vue`, `TableHead.vue`, `TableHeader.vue`, `TableRow.vue` | [table/](file:///Users/lord/Documents/Pegadaian%20Project/Desktop/design%20system/gwind/packages/ui/src/components/ui/table) |
+| 28 | **tabs** | 4 | `TabContent.vue`, `TabGroup.vue`, `TabTrigger.vue`, `TabTriggerGroup.vue` | [tabs/](file:///Users/lord/Documents/Pegadaian%20Project/Desktop/design%20system/gwind/packages/ui/src/components/ui/tabs) |
+| 29 | **textarea** | 2 | `Textarea.vue`, `TextareaField.vue` | [textarea/](file:///Users/lord/Documents/Pegadaian%20Project/Desktop/design%20system/gwind/packages/ui/src/components/ui/textarea) |
+| 30 | **toast** | 1 | `Toast.vue` | [toast/](file:///Users/lord/Documents/Pegadaian%20Project/Desktop/design%20system/gwind/packages/ui/src/components/ui/toast) |
+| 31 | **tooltip** | 4 | `Tooltip.vue`, `TooltipContent.vue`, `TooltipProvider.vue`, `TooltipTrigger.vue` | [tooltip/](file:///Users/lord/Documents/Pegadaian%20Project/Desktop/design%20system/gwind/packages/ui/src/components/ui/tooltip) |
 
-> **Total terverifikasi: 28 folder, 106 file `.vue`, 34 file `.ts`, 30 entri registry JSON.**
+> **Total terverifikasi: 31 folder, 116 file `.vue`, 37 file `.ts`, 32 entri registry JSON.**
 
 ---
 
@@ -85,7 +88,7 @@ Legenda status:
 | 14 | **Dialog / Modal** | ✅ Ada (10 `.vue`) | ✅ `Modal/Default`, `Modal/CustomModal`, `Modal/Slider` | ✅ `Dialog` / `AlertDialog` | Paritas penuh |
 | 15 | **Divider / Separator** | ✅ Ada (1 `.vue`) | ❌ Tidak terdeteksi | ✅ `Separator` | Ada di Gwind & Shadcn |
 | 16 | **Dropdown** | ✅ Ada (4 `.vue`) | ✅ `Dropdown/Default`, `DropdownGroupItem`, `DropdownHeader`, `DropdownItem`, `InputDropdownMultiple` | ✅ `DropdownMenu` | Paritas penuh |
-| 17 | **FilePicker / Upload** | ❌ Belum Ada | 🏆 `FilePickerLG`, `FilePickerSM`, `ImagePickerWithCamera` | ❌ Tidak Ada | Hanya ada di Kitvue Live |
+| 17 | **FilePicker / Upload** | ✅ Ada (`FilePicker.vue`, `ImagePicker.vue`, `ImageDisplay.vue`) | 🏆 `FilePickerLG`, `FilePickerSM`, `ImagePickerWithCamera` | ❌ Tidak Ada | Gwind: `FilePicker` (dokumen) + `ImagePicker` (gambar). Kitvue Live: varian lebih kaya |
 | 18 | **Filter CMS** | ❌ Belum Ada | ✅ `FilterCMS` | ❌ Tidak Ada | Hanya ada di Kitvue Live |
 | 19 | **Header CMS** | ❌ Belum Ada | ✅ `HeaderCMS` | ❌ Tidak Ada | Hanya ada di Kitvue Live |
 | 20 | **ImageView** | ❌ Belum Ada | ✅ `ImageView` | ❌ Tidak Ada | Hanya ada di Kitvue Live |
@@ -131,8 +134,8 @@ Komponen berikut ditemukan di Storybook deployment `ifatich4.github.io` tetapi *
 | 11 | **DoughnutChart** | `Components/Chart/DoughnutChart` | ❌ Tidak Ada |
 | 12 | **LineChart** | `Components/Chart/LineChart` | ❌ Tidak Ada |
 | 13 | **StackedBarChart** | `Components/Chart/StackedBarChart` | ❌ Tidak Ada |
-| 14 | **FilePickerLG / SM** | `Components/FilePicker/FilePickerLG`, `FilePickerSM` | ❌ Tidak Ada |
-| 15 | **ImagePickerWithCamera** | `Components/FilePicker/ImagePickerWithCamera` | ❌ Tidak Ada |
+| 14 | **FilePickerLG / SM** | `Components/FilePicker/FilePickerLG`, `FilePickerSM` | ⚠️ Parsial (`FilePicker.vue` — versi unified) |
+| 15 | **ImagePickerWithCamera** | `Components/FilePicker/ImagePickerWithCamera` | ⚠️ Parsial (`ImagePicker.vue` — tanpa camera) |
 | 16 | **FilterCMS** | `Components/Filter/FilterCMS` | ❌ Tidak Ada |
 | 17 | **HeaderCMS** | `Components/Header/HeaderCMS` | ❌ Tidak Ada |
 | 18 | **ImageView** | `Components/ImageView` | ❌ Tidak Ada |
@@ -170,7 +173,7 @@ Komponen berikut ditemukan di Storybook deployment `ifatich4.github.io` tetapi *
 | 3 | **Command Palette** | ❌ Tidak Ada | ❌ Tidak Ada | Dialog pencarian cepat `Cmd+K` |
 | 4 | **Slider / Range** | ❌ Tidak Ada | ❌ Tidak Ada | Kontrol geser angka |
 | 5 | **Scroll Area** | ❌ Tidak Ada | ❌ Tidak Ada | Custom scrollbar wrapper |
-| 6 | **Carousel** | ❌ Tidak Ada | ❌ Tidak Ada | Slide konten horizontal |
+| 6 | **Carousel** | ✅ Ada (7 `.vue`: `Carousel`, `BannerCarousel`, `CarouselContent`, `CarouselItem`, `CarouselNext`, `CarouselPrevious`, `CarouselIndicators`) | ❌ Tidak Ada | Sudah diimplementasikan di Gwind |
 | 7 | **Aspect Ratio** | ❌ Tidak Ada | ❌ Tidak Ada | Responsive ratio wrapper |
 | 8 | **Sheet / Drawer** | ❌ Tidak Ada | ✅ Ada (`BottomSheet`) | Shadcn: `Sheet`. Kitvue: `BottomSheet` |
 | 9 | **Navigation Menu** | ❌ Tidak Ada | ✅ Ada (`NavbarCorporate`, dll) | Shadcn: `NavigationMenu`. Kitvue: varian CMS |
@@ -187,7 +190,7 @@ Komponen berikut ditemukan di Storybook deployment `ifatich4.github.io` tetapi *
 ### Phase 2B: Komponen dari Kitvue Live yang Bisa Di-Porting
 3. **BottomSheet / Sheet** — Porting sebagai `Sheet.vue` atau `Drawer.vue`.
 4. **Stepper** — Porting `Stepper` & `SideStepper` dari Kitvue Live.
-5. **FilePicker** — Porting `FilePickerLG`, `FilePickerSM`, `ImagePickerWithCamera`.
+5. ~~**FilePicker**~~ — ✅ Sudah ada (`FilePicker.vue` + `ImagePicker.vue`). Evaluasi fitur camera dari Kitvue.
 6. **SideNavCMS & HeaderCMS** — Porting layout CMS sidebar & header.
 
 ### Phase 2C: Nice to Have
