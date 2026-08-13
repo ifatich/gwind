@@ -16,7 +16,9 @@ npx gwind-system-ui add carousel
 
 ## Preview
 
-<CarouselPreview />
+<ShadowPreview>
+  <CarouselPreview />
+</ShadowPreview>
 
 ---
 
