@@ -20,6 +20,9 @@
   --color-black-10: var(--black-10);
   --color-black-20: var(--black-20);
 
+  /* Override gwind-v2 theme tokens */
+  --font-weight-semibold: 600;
+
   /* Mapping gwind-token CSS variables to Tailwind v4 utilities */
   --shadow-drop-1: 0 2px 6px 0 rgba(0, 0, 0, 0.14), 0 0 2px 0 rgba(0, 0, 0, 0.08);
   --shadow-drop-2: 0 6px 14px rgba(0, 0, 0, 0.16), 0 0 4px rgba(0, 0, 0, 0.10);
