@@ -57,7 +57,7 @@ watch(
   (newVal) => {
     internalError.value = null
     cleanupObjectUrl()
-    if (newVal instanceof File) {
+    if (typeof File !== 'undefined' && newVal instanceof File) {
       objectUrl.value = URL.createObjectURL(newVal)
     }
   },
@@ -72,7 +72,7 @@ const previewUrl = computed(() => {
   if (typeof props.modelValue === 'string' && props.modelValue.length > 0) {
     return props.modelValue
   }
-  if (props.modelValue instanceof File) {
+  if (typeof File !== 'undefined' && props.modelValue instanceof File) {
     return objectUrl.value
   }
   return null
@@ -171,12 +171,12 @@ const handleRemove = (event: Event) => {
 </script>
 
 <template>
-  <div class="relative w-max">
+  <div class="relative w-full">
     <div
       :class="
         cn(
           'relative font-sans transition-all',
-          size === 'small' ? 'size-[80px]' : 'h-[160px] w-[328px]',
+          size === 'small' ? 'size-[80px] shrink-0' : 'h-[160px] w-full max-w-[328px]',
           disabled && 'opacity-60 cursor-not-allowed',
           props.class,
         )
