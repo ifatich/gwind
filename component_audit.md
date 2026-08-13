@@ -58,8 +58,9 @@ Data berikut 100% dihasilkan dari `find` pada direktori [packages/ui/src/compone
 | 29 | **textarea** | 2 | `Textarea.vue`, `TextareaField.vue` | [textarea/](file:///Users/lord/Documents/Pegadaian%20Project/Desktop/design%20system/gwind/packages/ui/src/components/ui/textarea) |
 | 30 | **toast** | 1 | `Toast.vue` | [toast/](file:///Users/lord/Documents/Pegadaian%20Project/Desktop/design%20system/gwind/packages/ui/src/components/ui/toast) |
 | 31 | **tooltip** | 4 | `Tooltip.vue`, `TooltipContent.vue`, `TooltipProvider.vue`, `TooltipTrigger.vue` | [tooltip/](file:///Users/lord/Documents/Pegadaian%20Project/Desktop/design%20system/gwind/packages/ui/src/components/ui/tooltip) |
+| 32 | **add-amount** | 1 | `AddAmount.vue` | [add-amount/](file:///Users/lord/Documents/Pegadaian%20Project/Desktop/design%20system/gwind/packages/ui/src/components/ui/add-amount) |
 
-> **Total terverifikasi: 31 folder, 116 file `.vue`, 37 file `.ts`, 32 entri registry JSON.**
+> **Total terverifikasi: 32 folder, 117 file `.vue`, 38 file `.ts`, 34 entri registry JSON.**
 
 ---
 
@@ -73,7 +74,7 @@ Legenda status:
 | No | Kategori Komponen | Gwind UI (Local) | Kitvue Live (`ifatich4.github.io`) | Shadcn UI (Context7) | Catatan |
 | :-: | :--- | :-: | :-: | :-: | :--- |
 | 1 | **Accordion** | ✅ Ada (4 `.vue`) | ✅ `Accordion/Group`, `Accordion/Single` | ✅ `Accordion` | Paritas penuh |
-| 2 | **AddAmountCounter** | ❌ Belum Ada | ✅ `AddAmountCounter` | ❌ Tidak Ada | Hanya ada di Kitvue Live |
+| 2 | **AddAmountCounter** | ✅ Ada (1 `.vue`: `AddAmount.vue`) | ✅ `AddAmountCounter` | ❌ Tidak Ada | Gwind: `add-amount`. Kitvue: `AddAmountCounter` |
 | 3 | **Alert** | ✅ Ada (3 `.vue`) | ✅ `Alert` (5 varian) | ✅ `Alert` | Paritas penuh |
 | 4 | **Avatar** | ✅ Ada (1 `.vue`) | ❌ Tidak terdeteksi | ✅ `Avatar` | Ada di Gwind & Shadcn, tidak terdeteksi di Live |
 | 5 | **Badge** | ✅ Ada (1 `.vue`) | ✅ `Badge` | ✅ `Badge` | Paritas penuh |
@@ -121,8 +122,7 @@ Komponen berikut ditemukan di Storybook deployment `ifatich4.github.io` tetapi *
 
 | No | Komponen Kitvue Live | Storybook Title Path | Ada di Gwind Local? |
 | :-: | :--- | :--- | :-: |
-| 1 | **AddAmountCounter** | `Components/AddAmountCounter` | ❌ Tidak Ada |
-| 2 | **BottomSheet** | `Components/BottomSheet` | ❌ Tidak Ada |
+| 1 | **BottomSheet** | `Components/BottomSheet` | ❌ Tidak Ada |
 | 3 | **CardAccount** | `Components/Card/CardAccount` | ❌ Tidak Ada |
 | 4 | **CardArticle / ArticleHighlight** | `Components/Card/CardArticle`, `CardArticleHighlight` | ❌ Tidak Ada |
 | 5 | **CardEvent** | `Components/Card/CardEvent` | ❌ Tidak Ada |
