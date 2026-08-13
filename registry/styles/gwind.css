@@ -19,14 +19,107 @@
 @theme {
   --color-black-10: var(--black-10);
   --color-black-20: var(--black-20);
+
+  /* Mapping gwind-token CSS variables to Tailwind v4 utilities */
+  --shadow-drop-1: 0 2px 6px 0 rgba(0, 0, 0, 0.14), 0 0 2px 0 rgba(0, 0, 0, 0.08);
+  --shadow-drop-2: 0 6px 14px rgba(0, 0, 0, 0.16), 0 0 4px rgba(0, 0, 0, 0.10);
+}
+
+@utility text-alpha {
+  font-size: 4.5rem;
+  line-height: 1;
+}
+
+@utility text-beta {
+  font-size: 3.75rem;
+  line-height: 1;
+}
+
+@utility text-gamma {
+  font-size: 3rem;
+  line-height: 1;
+}
+
+@utility text-delta {
+  font-size: 2.25rem;
+  line-height: 2.5rem;
+}
+
+@utility text-epsilon {
+  font-size: 1.875rem;
+  line-height: 2.25rem;
+}
+
+@utility text-zeta {
+  font-size: 1.5rem;
+  line-height: 2rem;
+}
+
+@utility text-kappa {
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+}
+
+@utility text-lambda {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+}
+
+@utility text-omicron {
+  font-size: 1rem;
+  line-height: 1.5rem;
+}
+
+@utility text-sigma {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
+@utility text-omega {
+  font-size: 0.75rem;
+  line-height: 1rem;
+}
+
+@utility text-atom {
+  font-size: 0.625rem;
+  line-height: 0.875rem;
 }
 
 @keyframes gwind-enter {
   from {
     opacity: var(--gwind-enter-opacity, 1);
     transform:
-      translate3d(var(--gwind-enter-translate-x, 0), var(--gwind-enter-translate-y, 0), 0)
-      scale3d(var(--gwind-enter-scale, 1), var(--gwind-enter-scale, 1), 1);
+      translate3d(var(--gwind-enter-translate-x, 0), var(--gwind-enter-translate-y, 0), 0) scale3d(var(--gwind-enter-scale, 1), var(--gwind-enter-scale, 1), 1);
+  }
+}
+
+/* Dropdown mobile bottom-sheet positioning fix for Reka wrapper */
+@media (max-width: 639.9px) {
+  [data-reka-popper-content-wrapper]:has([data-slot="dropdown-content"]) {
+    transform: none !important;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+}
+
+@keyframes dropdown-overlay-enter {
+  from {
+    background-color: rgba(0, 0, 0, 0);
+  }
+
+  to {
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+}
+
+@keyframes dropdown-overlay-exit {
+  from {
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+
+  to {
+    background-color: rgba(0, 0, 0, 0);
   }
 }
 
@@ -34,8 +127,7 @@
   to {
     opacity: var(--gwind-exit-opacity, 1);
     transform:
-      translate3d(var(--gwind-exit-translate-x, 0), var(--gwind-exit-translate-y, 0), 0)
-      scale3d(var(--gwind-exit-scale, 1), var(--gwind-exit-scale, 1), 1);
+      translate3d(var(--gwind-exit-translate-x, 0), var(--gwind-exit-translate-y, 0), 0) scale3d(var(--gwind-exit-scale, 1), var(--gwind-exit-scale, 1), 1);
   }
 }
 
@@ -129,7 +221,24 @@
   --gwind-exit-translate-y: 0.5rem;
 }
 
+@utility slide-in-from-bottom-full {
+  --gwind-enter-translate-y: 100%;
+}
+
+@utility slide-out-to-bottom-full {
+  --gwind-exit-translate-y: 100%;
+}
+
+@utility slide-in-from-bottom-0 {
+  --gwind-enter-translate-y: 0;
+}
+
+@utility slide-out-to-bottom-0 {
+  --gwind-exit-translate-y: 0;
+}
+
 @media (prefers-reduced-motion: reduce) {
+
   *,
   ::before,
   ::after {

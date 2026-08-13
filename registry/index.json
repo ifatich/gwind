@@ -72,6 +72,20 @@
     ]
   },
   {
+    "name": "carousel",
+    "type": "ui",
+    "files": [
+      "BannerCarousel.vue",
+      "Carousel.vue",
+      "CarouselContent.vue",
+      "CarouselIndicators.vue",
+      "CarouselItem.vue",
+      "CarouselNext.vue",
+      "CarouselPrevious.vue",
+      "index.ts"
+    ]
+  },
+  {
     "name": "checkbox",
     "type": "ui",
     "files": [
@@ -119,6 +133,7 @@
     "type": "ui",
     "files": [
       "Dialog.vue",
+      "DialogBody.vue",
       "DialogClose.vue",
       "DialogContent.vue",
       "DialogDescription.vue",
@@ -149,6 +164,15 @@
       "context.ts",
       "index.ts",
       "useDropdownListItemSearch.ts"
+    ]
+  },
+  {
+    "name": "image-picker",
+    "type": "ui",
+    "files": [
+      "ImageDisplay.vue",
+      "ImagePicker.vue",
+      "index.ts"
     ]
   },
   {
