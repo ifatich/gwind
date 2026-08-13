@@ -1,5 +1,6 @@
 /* Components */
 export * from "./accordion";
+export * from "./add-amount";
 export * from "./alert";
 export * from "./avatar";
 export * from "./badge";

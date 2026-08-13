@@ -3,6 +3,7 @@ import "@fontsource/nunito-sans/latin-800.css";
 import "./styles/main.css";
 
 export * from "./components/ui/accordion";
+export * from "./components/ui/add-amount";
 export * from "./components/ui/alert";
 export * from "./components/ui/avatar";
 export * from "./components/ui/badge";

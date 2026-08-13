@@ -48,6 +48,7 @@ export default defineConfig({
         collapsed: true,
         items: [
           { text: "Accordion", link: "/components/accordion" },
+          { text: "Add Amount", link: "/components/add-amount" },
           { text: "Alert", link: "/components/alert" },
           { text: "Avatar", link: "/components/avatar" },
           { text: "Badge", link: "/components/badge" },
