@@ -24,6 +24,13 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselPrevious,
+  CarouselNext,
+  CarouselIndicators,
+  BannerCarousel,
   Checkbox,
   CheckboxField,
   CheckboxGroup,
@@ -54,6 +61,8 @@ import {
   DropdownList,
   DropdownListCheckboxItem,
   DropdownListItem,
+  ImageDisplay,
+  ImagePicker,
   Input,
   InputField,
   InputPersentase,
@@ -144,11 +153,41 @@ const accounts = [
 
 const datepickerValue = ref("2026-06-21");
 
+// ImagePicker state
+const imagePickerSmall = ref<string | File | null>(null);
+const imagePickerLarge43 = ref<string | File | null>(null);
+const imagePickerLarge11 = ref<string | File | null>(null);
+const imagePickerPrefilled = ref<string | File | null>(
+  "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400"
+);
+
 function selectDropdownProvince(province: string) {
   dropdownProvince.value = province;
   dropdownOpen.value = false;
 }
 const compactMode = ref(false);
+const carouselBannerSlides = [
+  {
+    id: 1,
+    tag: "Inspirasi",
+    title: "Ide Hadiah untuk Ibu Tersayang",
+    description:
+      "Meski kasih sayang Ibu tak mungkin dibalas lunas, namun tak ada salahnya berusaha membuatnya bahagia. Ada banyak cara agar Ibu bahagia, salah satunya dengan memberi hadiah...",
+    image:
+      "https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=1600&auto=format&fit=crop",
+    actionLabel: "Lihat Selengkapnya",
+  },
+  {
+    id: 2,
+    tag: "Promo Special",
+    title: "Investasi Emas Mulai dari 10 Ribu Rupiah",
+    description:
+      "Wujudkan masa depan finansial yang aman dan berkilau dengan Tabungan Emas Pegadaian. Kemudahan bertransaksi kapan saja dan di mana saja.",
+    image:
+      "https://images.unsplash.com/photo-1610375461246-83df859d849d?q=80&w=1600&auto=format&fit=crop",
+    actionLabel: "Mulai Investasi",
+  },
+];
 const rupiahValue = ref<number | null>(1000000);
 const persentaseValue = ref<number | null>(50);
 const switchValue = ref(true);
@@ -287,6 +326,8 @@ const sections = [
   { id: "toast", label: "Toast" },
   { id: "accordion", label: "Accordion" },
   { id: "badge", label: "Badge" },
+  { id: "carousel", label: "Carousel" },
+  { id: "image-picker", label: "Image Picker" },
   { id: "tokens", label: "Tokens" },
 ];
 
@@ -307,6 +348,18 @@ const componentInventory = [
   {
     group: "Badge",
     items: ["Badge"],
+  },
+  {
+    group: "Carousel",
+    items: [
+      "Carousel",
+      "CarouselContent",
+      "CarouselItem",
+      "CarouselPrevious",
+      "CarouselNext",
+      "CarouselIndicators",
+      "BannerCarousel",
+    ],
   },
   {
     group: "Avatar",
@@ -2212,6 +2265,164 @@ const shellClass = computed(() =>
                 <Badge variant="blue">Blue</Badge>
                 <Badge variant="red">Red</Badge>
                 <Badge variant="outline">Outline</Badge>
+              </div>
+            </section>
+
+            <section id="carousel" class="playground-section playground-panel p-5">
+              <h2 class="mb-1 text-omicron font-bold text-black-800">
+                Carousel & Banner
+              </h2>
+              <p class="mb-5 text-sigma text-black-500">
+                Figma Banner Carousel preset and compound primitive components.
+              </p>
+
+              <div class="space-y-6">
+                <div class="rounded-md border border-black-200 bg-white p-4">
+                  <h3 class="mb-3 text-sigma font-bold text-black-800">
+                    1. BannerCarousel (Figma Preset)
+                  </h3>
+                  <BannerCarousel
+                    :items="carouselBannerSlides"
+                    :autoplay="true"
+                    :autoplay-interval="5000"
+                  />
+                </div>
+
+                <div class="rounded-md border border-black-200 bg-white p-4">
+                  <h3 class="mb-3 text-sigma font-bold text-black-800">
+                    2. Custom Compound Carousel
+                  </h3>
+                  <Carousel :loop="true" :autoplay="false" class="w-full">
+                    <CarouselContent>
+                      <CarouselItem v-for="i in 3" :key="i">
+                        <div
+                          class="flex flex-col items-center justify-center min-h-[180px] p-8 rounded-xl bg-lime-500 text-white font-bold"
+                        >
+                          <span class="text-zeta">Custom Slide Item {{ i }}</span>
+                          <span class="text-sigma font-normal opacity-90 mt-1"
+                            >Modular CarouselItem component</span
+                          >
+                        </div>
+                      </CarouselItem>
+                    </CarouselContent>
+
+                    <div class="mt-4 flex items-center justify-between">
+                      <div class="flex items-center gap-2">
+                        <CarouselPrevious />
+                        <CarouselNext />
+                      </div>
+                      <CarouselIndicators />
+                    </div>
+                  </Carousel>
+                </div>
+              </div>
+            </section>
+
+            <section
+              id="image-picker"
+              class="playground-section playground-panel p-5"
+            >
+              <div class="mb-5 flex items-center justify-between">
+                <div>
+                  <h2 class="text-omicron font-bold text-black-800">
+                    Form Image (Input) & Image Display
+                  </h2>
+                  <p class="text-sigma text-black-500">
+                    Komponen upload dan penampil gambar (Figma Node 26213:1781).
+                  </p>
+                </div>
+              </div>
+
+              <!-- Form Image (Input) -->
+              <div class="space-y-6">
+                <h3 class="text-omicron font-bold text-black-800">1. Form Image (Input)</h3>
+                
+                <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
+                  <div class="rounded-xl border border-black-200 p-4 bg-white space-y-3">
+                    <h4 class="text-sigma font-bold text-black-700">Size: Small</h4>
+                    <p class="text-sm text-black-500">Ukuran 80x80px untuk bentuk form ringkas.</p>
+                    <div class="flex items-center gap-4">
+                      <ImagePicker v-model="imagePickerSmall" size="small" />
+                    </div>
+                  </div>
+
+                  <div class="rounded-xl border border-black-200 p-4 bg-white space-y-3">
+                    <h4 class="text-sigma font-bold text-black-700">Size: Large (4:3)</h4>
+                    <p class="text-sm text-black-500">Ukuran 328x160px dengan rasio pratinjau 4:3.</p>
+                    <ImagePicker v-model="imagePickerLarge43" size="large" aspectRatio="4:3" />
+                  </div>
+
+                  <div class="rounded-xl border border-black-200 p-4 bg-white space-y-3">
+                    <h4 class="text-sigma font-bold text-black-700">Size: Large (1:1)</h4>
+                    <p class="text-sm text-black-500">Ukuran 328x160px dengan rasio pratinjau 1:1.</p>
+                    <ImagePicker v-model="imagePickerLarge11" size="large" aspectRatio="1:1" />
+                  </div>
+
+                  <div class="rounded-xl border border-black-200 p-4 bg-white space-y-3">
+                    <h4 class="text-sigma font-bold text-black-700">State: Filled with Pre-filled URL</h4>
+                    <p class="text-sm text-black-500">Kondisi saat gambar sudah diunggah/diisi.</p>
+                    <ImagePicker
+                      v-model="imagePickerPrefilled"
+                      size="large"
+                      aspectRatio="4:3"
+                    />
+                  </div>
+
+                  <div class="rounded-xl border border-black-200 p-4 bg-white space-y-3">
+                    <h4 class="text-sigma font-bold text-black-700">Validation: Max Size (Error Simulation)</h4>
+                    <p class="text-sm text-black-500">Menyertakan pesan error untuk pembatasan ukuran (`maxSize="1"`).</p>
+                    <ImagePicker
+                      size="large"
+                      aspectRatio="4:3"
+                      :maxSize="1"
+                    />
+                  </div>
+                </div>
+
+                <!-- Image Display -->
+                <h3 class="text-omicron font-bold text-black-800 pt-4">2. Image Display</h3>
+                
+                <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
+                  <div class="rounded-xl border border-black-200 p-4 bg-white space-y-3">
+                    <h4 class="text-sigma font-bold text-black-700">Sizes (Small, Large 4:3, Large 1:1)</h4>
+                    <div class="flex flex-wrap items-end gap-4">
+                      <div class="flex flex-col items-center gap-1">
+                        <ImageDisplay size="small" src="https://images.unsplash.com/photo-1542291026-7eec264c27ff" />
+                        <span class="text-xs text-black-500">Small</span>
+                      </div>
+                      <div class="flex flex-col items-center gap-1">
+                        <ImageDisplay size="large-4:3" src="https://images.unsplash.com/photo-1542291026-7eec264c27ff" />
+                        <span class="text-xs text-black-500">Large 4:3</span>
+                      </div>
+                      <div class="flex flex-col items-center gap-1">
+                        <ImageDisplay size="large-1:1" src="https://images.unsplash.com/photo-1542291026-7eec264c27ff" />
+                        <span class="text-xs text-black-500">Large 1:1</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="rounded-xl border border-black-200 p-4 bg-white space-y-3">
+                    <h4 class="text-sigma font-bold text-black-700">States (Filled, Multiple, Empty, Broken)</h4>
+                    <div class="flex flex-wrap items-end gap-4">
+                      <div class="flex flex-col items-center gap-1">
+                        <ImageDisplay size="small" status="filled-more" :count="1" src="https://images.unsplash.com/photo-1542291026-7eec264c27ff" />
+                        <span class="text-xs text-black-500">Multiple</span>
+                      </div>
+                      <div class="flex flex-col items-center gap-1">
+                        <ImageDisplay size="small" status="filled" src="https://images.unsplash.com/photo-1542291026-7eec264c27ff" />
+                        <span class="text-xs text-black-500">Filled</span>
+                      </div>
+                      <div class="flex flex-col items-center gap-1">
+                        <ImageDisplay size="small" status="empty" />
+                        <span class="text-xs text-black-500">Empty</span>
+                      </div>
+                      <div class="flex flex-col items-center gap-1">
+                        <ImageDisplay size="small" status="broken" />
+                        <span class="text-xs text-black-500">Broken</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </section>
 
