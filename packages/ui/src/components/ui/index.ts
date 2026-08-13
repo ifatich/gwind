@@ -13,6 +13,7 @@ export * from "./datepicker";
 export * from "./dialog";
 export * from "./divider";
 export * from "./dropdown";
+export * from "./file-picker";
 export * from "./image-picker";
 export * from "./input";
 export * from "./input/input-persentase";

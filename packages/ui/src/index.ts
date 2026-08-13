@@ -16,6 +16,7 @@ export * from "./components/ui/datepicker";
 export * from "./components/ui/dialog";
 export * from "./components/ui/divider";
 export * from "./components/ui/dropdown";
+export * from "./components/ui/file-picker";
 export * from "./components/ui/image-picker";
 export * from "./components/ui/input";
 export * from "./components/ui/input/input-persentase";
