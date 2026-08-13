@@ -2,6 +2,7 @@
 import { computed, ref } from "vue";
 import {
   Accordion,
+  AddAmount,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
@@ -162,6 +163,7 @@ const filePickerFile2 = ref<File | null>(null);
 const imagePickerSmall = ref<string | File | null>(null);
 const imagePickerLarge43 = ref<string | File | null>(null);
 const imagePickerLarge11 = ref<string | File | null>(null);
+const imagePickerMultiple = ref<File[]>([]);
 const imagePickerPrefilled = ref<string | File | null>(
   "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400"
 );
@@ -195,6 +197,9 @@ const carouselBannerSlides = [
 ];
 const rupiahValue = ref<number | null>(1000000);
 const persentaseValue = ref<number | null>(50);
+const addAmountVal1 = ref(1);
+const addAmountVal2 = ref(2);
+const addAmountValDisabled = ref(1);
 const switchValue = ref(true);
 const checkboxPrimitiveChecked = ref(true);
 const checkboxPrimitiveIndeterminate = ref<boolean | "indeterminate">(
@@ -303,6 +308,7 @@ const tableRows = [
 
 const sections = [
   { id: "inventory", label: "Inventory" },
+  { id: "add-amount", label: "Add Amount" },
   { id: "button", label: "Button" },
   { id: "avatar", label: "Avatar" },
   { id: "input", label: "Input" },
@@ -742,6 +748,53 @@ const shellClass = computed(() =>
                     >
                       {{ item }}
                     </Badge>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <section
+              id="add-amount"
+              class="playground-section playground-panel p-5"
+            >
+              <div class="mb-5">
+                <h2 class="text-omicron font-bold text-black-800">
+                  Add Amount (Quantity Counter)
+                </h2>
+                <p class="text-sigma text-black-500">
+                  Komponen penghitung jumlah/kuantitas sesuai desain Figma controls/add-amount/counter.
+                </p>
+              </div>
+
+              <div class="grid gap-6 md:grid-cols-2">
+                <div class="space-y-3 rounded-md border border-black-200 bg-white p-4">
+                  <h3 class="text-sigma font-bold text-black-800">Standard Counter (Default min=1)</h3>
+                  <div class="flex items-center gap-4">
+                    <AddAmount v-model="addAmountVal1" class="w-32" />
+                    <span class="text-sigma text-black-600">Nilai: {{ addAmountVal1 }}</span>
+                  </div>
+                </div>
+
+                <div class="space-y-3 rounded-md border border-black-200 bg-white p-4">
+                  <h3 class="text-sigma font-bold text-black-800">Active State (Value = 2)</h3>
+                  <div class="flex items-center gap-4">
+                    <AddAmount v-model="addAmountVal2" class="w-32" />
+                    <span class="text-sigma text-black-600">Nilai: {{ addAmountVal2 }}</span>
+                  </div>
+                </div>
+
+                <div class="space-y-3 rounded-md border border-black-200 bg-white p-4">
+                  <h3 class="text-sigma font-bold text-black-800">Disabled State</h3>
+                  <div class="flex items-center gap-4">
+                    <AddAmount v-model="addAmountValDisabled" disabled class="w-32" />
+                    <span class="text-sigma text-black-600">Disabled</span>
+                  </div>
+                </div>
+
+                <div class="space-y-3 rounded-md border border-black-200 bg-white p-4">
+                  <h3 class="text-sigma font-bold text-black-800">Custom Min & Max (Min: 0, Max: 5)</h3>
+                  <div class="flex items-center gap-4">
+                    <AddAmount :min="0" :max="5" :default-value="3" class="w-36" />
                   </div>
                 </div>
               </div>
@@ -2391,7 +2444,23 @@ const shellClass = computed(() =>
                   <div class="rounded-xl border border-black-200 p-4 bg-white space-y-3">
                     <h4 class="text-sigma font-bold text-black-700">Size: Large (4:3)</h4>
                     <p class="text-sm text-black-500">Ukuran 328x160px dengan rasio pratinjau 4:3.</p>
-                    <ImagePicker v-model="imagePickerLarge43" size="large" aspectRatio="4:3" />
+                    <!-- 4:3 Ratio -->
+                    <div class="flex flex-col gap-2">
+                      <Label class="text-omicron">Large Variant (4:3)</Label>
+                      <ImagePicker v-model="imagePickerLarge43" size="large" aspectRatio="4:3" />
+                    </div>
+                    <!-- Multiple Images (Carousel) -->
+                    <div class="flex flex-col gap-2">
+                      <Label class="text-omicron">Multiple Images (Slider) + CTA & Metadata</Label>
+                      <ImagePicker 
+                        v-model="imagePickerMultiple" 
+                        multiple 
+                        size="large" 
+                        showDownload
+                        showRetake
+                        :metadata="{ takenBy: 'P12345', timestamp: '20 Jan 2025, 12.00' }"
+                      />
+                    </div>
                   </div>
 
                   <div class="rounded-xl border border-black-200 p-4 bg-white space-y-3">

@@ -1,9 +1,8 @@
+@import '@gwind/ui/styles';
 @import 'tailwindcss';
 
 @source "../../../packages/ui/src";
 @source "./**/*.{vue,ts}";
-
-@import '@gwind/ui/styles';
 
 :root {
   color: var(--foreground);
@@ -19,6 +18,7 @@ body {
   min-width: 320px;
   min-height: 100vh;
   margin: 0;
+  overflow-x: hidden;
 }
 
 #app {
@@ -68,6 +68,7 @@ body {
 
 .playground-section {
   scroll-margin-top: 96px;
+  overflow-x: auto;
 }
 
 .playground-swatch {
@@ -78,7 +79,7 @@ body {
 
 @media (max-width: 960px) {
   .playground-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .playground-sidebar {
