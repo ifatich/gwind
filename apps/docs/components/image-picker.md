@@ -10,18 +10,24 @@ npx gwind-system-ui add image-picker
 
 ## Preview
 
+<script setup>
+import { ref } from 'vue'
+const image1 = ref(null)
+const image2 = ref(null)
+</script>
+
 <ShadowPreview>
   <div class="grid w-full gap-4 md:grid-cols-2">
     <div class="rounded-md border border-black-200 bg-white p-4">
       <div class="grid w-full items-center gap-1">
         <GwLabel class="mb-2 block">Upload Image (Large 4:3)</GwLabel>
-        <GwImagePicker size="large" aspectRatio="4:3" />
+        <GwImagePicker v-model="image1" size="large" aspectRatio="4:3" />
       </div>
     </div>
     <div class="rounded-md border border-black-200 bg-white p-4">
       <div class="grid w-full items-center gap-1">
         <GwLabel class="mb-2 block">Upload Image (Small)</GwLabel>
-        <GwImagePicker size="small" />
+        <GwImagePicker v-model="image2" size="small" />
       </div>
     </div>
   </div>
