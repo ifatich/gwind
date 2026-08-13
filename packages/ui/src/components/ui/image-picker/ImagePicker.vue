@@ -2,12 +2,15 @@
 import type { HTMLAttributes } from 'vue'
 import { computed, onUnmounted, ref, watch } from 'vue'
 import { cn } from '../../../lib/utils'
-import { Dialog, DialogContent, DialogTrigger } from '../dialog'
+import { Dialog, DialogContent, DialogTrigger, DialogHeader, DialogTitle, DialogBody, DialogFooter, DialogClose } from '../dialog'
+import { Carousel, CarouselContent, CarouselItem, CarouselIndicators, CarouselPrevious, CarouselNext } from '../carousel'
+import { Button } from '../button'
 
 const props = withDefaults(
   defineProps<{
-    /** Bound via v-model. Accepts a File object, a URL string, or null. */
-    modelValue?: string | File | null
+    /** Bound via v-model. Accepts a File object, a URL string, or null. If multiple is true, accepts an array. */
+    modelValue?: string | File | (string | File)[] | null
+    multiple?: boolean
     size?: 'small' | 'large'
     aspectRatio?: '4:3' | '1:1'
     accept?: string
@@ -16,22 +19,38 @@ const props = withDefaults(
     error?: string
     class?: HTMLAttributes['class']
     imageClass?: HTMLAttributes['class']
+    previewTitle?: string
+    metadata?: { takenBy?: string; timestamp?: string }
+    metadataLabels?: { takenBy?: string; timestamp?: string }
+    showDownload?: boolean
+    downloadLabel?: string
+    showRetake?: boolean
+    retakeLabel?: string
   }>(),
   {
     modelValue: null,
+    multiple: false,
     size: 'large',
     aspectRatio: '4:3',
     accept: 'image/*',
     disabled: false,
     maxSize: 2 * 1024 * 1024, // 2MB default
+    previewTitle: 'Preview Foto',
+    metadataLabels: () => ({ takenBy: 'Diambil oleh', timestamp: 'Waktu' }),
+    showDownload: false,
+    downloadLabel: 'Download',
+    showRetake: false,
+    retakeLabel: 'Ambil Ulang Foto',
   },
 )
 
 const emit = defineEmits<{
-  (e: 'update:modelValue', value: string | File | null): void
-  (e: 'change', value: File | string | null): void
+  (e: 'update:modelValue', value: string | File | (string | File)[] | null): void
+  (e: 'change', value: string | File | (string | File)[] | null): void
   (e: 'remove'): void
   (e: 'error', message: string): void
+  (e: 'download', file: string | File): void
+  (e: 'retake'): void
 }>()
 
 const fileInputRef = ref<HTMLInputElement | null>(null)
@@ -42,43 +61,32 @@ const internalError = ref<string | null>(null)
 
 const errorMessage = computed(() => props.error || internalError.value)
 
-/**
- * Revokes a previously created object URL to prevent memory leaks.
- */
-const cleanupObjectUrl = () => {
-  if (objectUrl.value) {
-    URL.revokeObjectURL(objectUrl.value)
-    objectUrl.value = null
-  }
+const objectUrlsMap = new Map<File, string>()
+
+const cleanupObjectUrls = () => {
+  objectUrlsMap.forEach(url => URL.revokeObjectURL(url))
+  objectUrlsMap.clear()
 }
 
-watch(
-  () => props.modelValue,
-  (newVal) => {
-    internalError.value = null
-    cleanupObjectUrl()
-    if (typeof File !== 'undefined' && newVal instanceof File) {
-      objectUrl.value = URL.createObjectURL(newVal)
-    }
-  },
-  { immediate: true },
-)
-
 onUnmounted(() => {
-  cleanupObjectUrl()
+  cleanupObjectUrls()
 })
 
-const previewUrl = computed(() => {
-  if (typeof props.modelValue === 'string' && props.modelValue.length > 0) {
-    return props.modelValue
-  }
-  if (typeof File !== 'undefined' && props.modelValue instanceof File) {
-    return objectUrl.value
-  }
-  return null
+const previewUrls = computed<string[]>(() => {
+  const vals = Array.isArray(props.modelValue) ? props.modelValue : (props.modelValue ? [props.modelValue] : [])
+  return vals.map(v => {
+    if (typeof v === 'string') return v
+    if (typeof File !== 'undefined' && v instanceof File) {
+      if (!objectUrlsMap.has(v)) {
+        objectUrlsMap.set(v, URL.createObjectURL(v))
+      }
+      return objectUrlsMap.get(v)!
+    }
+    return ''
+  }).filter(Boolean)
 })
 
-const isFilled = computed(() => !!previewUrl.value)
+const isFilled = computed(() => previewUrls.value.length > 0)
 
 const triggerFileInput = () => {
   if (props.disabled) return
@@ -86,45 +94,58 @@ const triggerFileInput = () => {
   fileInputRef.value?.click()
 }
 
-const handleFileSelect = (file: File | null) => {
-  if (!file) return
+const handleFileSelect = (files: FileList | File[] | null) => {
+  if (!files || files.length === 0) return
 
   internalError.value = null
+  const validFiles: File[] = []
 
-  // Validate file type against accept prop
-  if (props.accept && props.accept !== '*') {
-    const acceptPatterns = props.accept.split(',').map((p) => p.trim())
-    const isAccepted = acceptPatterns.some((pattern) => {
-      if (pattern.startsWith('.')) {
-        return file.name.toLowerCase().endsWith(pattern.toLowerCase())
+  for (let i = 0; i < files.length; i++) {
+    const file = files[i]
+
+    // Validate file type against accept prop
+    if (props.accept && props.accept !== '*') {
+      const acceptPatterns = props.accept.split(',').map((p) => p.trim())
+      const isAccepted = acceptPatterns.some((pattern) => {
+        if (pattern.startsWith('.')) {
+          return file.name.toLowerCase().endsWith(pattern.toLowerCase())
+        }
+        const regex = new RegExp('^' + pattern.replace(/\*/g, '.*') + '$')
+        return regex.test(file.type)
+      })
+      if (!isAccepted) {
+        const msg = 'Tipe file tidak didukung.'
+        internalError.value = msg
+        emit('error', msg)
+        return
       }
-      const regex = new RegExp('^' + pattern.replace(/\*/g, '.*') + '$')
-      return regex.test(file.type)
-    })
-    if (!isAccepted) {
-      const msg = 'Tipe file tidak didukung.'
+    }
+
+    if (props.maxSize && file.size > props.maxSize) {
+      const maxMb = (props.maxSize / (1024 * 1024)).toFixed(1)
+      const msg = `Ukuran file melebihi batas maksimum ${maxMb}MB.`
       internalError.value = msg
       emit('error', msg)
       return
     }
+
+    validFiles.push(file)
   }
 
-  if (props.maxSize && file.size > props.maxSize) {
-    const maxMb = (props.maxSize / (1024 * 1024)).toFixed(1)
-    const msg = `Ukuran file melebihi batas maksimum ${maxMb}MB.`
-    internalError.value = msg
-    emit('error', msg)
-    return
+  if (validFiles.length > 0) {
+    if (props.multiple) {
+      emit('update:modelValue', validFiles)
+      emit('change', validFiles)
+    } else {
+      emit('update:modelValue', validFiles[0])
+      emit('change', validFiles[0])
+    }
   }
-
-  emit('update:modelValue', file)
-  emit('change', file)
 }
 
 const onFileChange = (event: Event) => {
   const target = event.target as HTMLInputElement
-  const file = target.files?.[0] || null
-  handleFileSelect(file)
+  handleFileSelect(target.files)
   // Reset input value so the same file can be re-selected
   if (target) target.value = ''
 }
@@ -144,8 +165,8 @@ const onDrop = (event: DragEvent) => {
   event.preventDefault()
   if (props.disabled) return
   isDragging.value = false
-  const file = event.dataTransfer?.files?.[0] || null
-  handleFileSelect(file)
+  const files = event.dataTransfer?.files || null
+  handleFileSelect(files)
 }
 
 const onEmptyClick = () => {
@@ -168,6 +189,45 @@ const handleRemove = (event: Event) => {
   emit('remove')
   isPreviewOpen.value = false
 }
+
+const handleDownload = () => {
+  if (previewUrls.value.length === 0) return
+  
+  // For multiple downloads, we trigger them sequentially or handle the first one.
+  const filesToDownload = Array.isArray(props.modelValue) ? props.modelValue : [props.modelValue]
+  
+  filesToDownload.forEach((fileVal, idx) => {
+    if (!fileVal) return
+    if (typeof fileVal === 'string') {
+      emit('download', fileVal)
+      const a = document.createElement('a')
+      a.href = fileVal
+      a.download = `downloaded_image_${idx}`
+      a.target = '_blank'
+      document.body.appendChild(a)
+      a.click()
+      document.body.removeChild(a)
+    } else if (fileVal instanceof File) {
+      emit('download', fileVal)
+      const a = document.createElement('a')
+      a.href = URL.createObjectURL(fileVal)
+      a.download = fileVal.name || `downloaded_image_${idx}`
+      document.body.appendChild(a)
+      a.click()
+      document.body.removeChild(a)
+    }
+  })
+}
+
+const handleRetake = () => {
+  if (props.disabled) return
+  isPreviewOpen.value = false
+  internalError.value = null
+  emit('update:modelValue', null)
+  emit('change', null)
+  emit('retake')
+  triggerFileInput()
+}
 </script>
 
 <template>
@@ -186,6 +246,7 @@ const handleRemove = (event: Event) => {
       <input
         ref="fileInputRef"
         type="file"
+        :multiple="multiple"
         :accept="accept"
         :disabled="disabled"
         class="hidden"
@@ -223,15 +284,60 @@ const handleRemove = (event: Event) => {
         >
           <Dialog v-model:open="isPreviewOpen">
             <DialogTrigger as-child>
-              <img
-                :src="previewUrl!"
-                alt="Preview"
-                :class="cn('h-full w-full object-cover rounded-[8px] cursor-pointer', imageClass)"
-                @error="handleImageError"
-              >
+              <div class="relative h-full w-full cursor-pointer">
+                <img
+                  :src="previewUrls[0]"
+                  alt="Preview"
+                  :class="cn('h-full w-full object-cover rounded-[8px]', imageClass)"
+                  @error="handleImageError"
+                >
+                <div v-if="multiple && previewUrls.length > 1" class="absolute inset-0 flex items-center justify-center rounded-[8px] bg-black-900/50 text-white font-bold text-sigma">
+                  +{{ previewUrls.length - 1 }}
+                </div>
+              </div>
             </DialogTrigger>
-            <DialogContent class="max-w-3xl border-0 bg-transparent p-0 shadow-none">
-              <img :src="previewUrl!" class="max-h-[85vh] w-full object-contain rounded-md" alt="Preview">
+            <DialogContent class="flex max-h-[90dvh] w-full flex-col overflow-hidden bg-white p-0 sm:max-w-md">
+              <!-- Header -->
+              <DialogHeader class="border-b border-black-100 px-4 py-4 sm:px-6">
+                <DialogTitle class="text-lambda font-extrabold text-black-800">{{ previewTitle }}</DialogTitle>
+              </DialogHeader>
+
+              <!-- Body Container -->
+              <div class="flex flex-col gap-4 overflow-y-auto p-4 sm:p-4">
+                <!-- Image & Overlay -->
+                <div class="relative w-full shrink-0 overflow-hidden rounded-xl border border-black-100">
+                  <template v-if="previewUrls.length > 1">
+                    <Carousel :opts="{ loop: true }" class="w-full">
+                      <CarouselContent>
+                        <CarouselItem v-for="(url, idx) in previewUrls" :key="idx">
+                          <img :src="url" class="max-h-[50vh] w-full object-cover sm:max-h-[60vh]" alt="Preview" />
+                        </CarouselItem>
+                      </CarouselContent>
+                      <div class="absolute inset-y-0 left-2 right-2 z-10 flex items-center justify-between pointer-events-none">
+                        <CarouselPrevious class="pointer-events-auto !size-6 shadow-sm" />
+                        <CarouselNext class="pointer-events-auto !size-6 shadow-sm" />
+                      </div>
+                      <div class="absolute bottom-10 left-0 flex w-full justify-center">
+                        <CarouselIndicators />
+                      </div>
+                    </Carousel>
+                  </template>
+                  <template v-else>
+                    <img :src="previewUrls[0]" class="max-h-[50vh] w-full object-cover sm:max-h-[60vh]" alt="Preview" />
+                  </template>
+                  
+                  <div v-if="metadata" class="absolute bottom-0 left-0 flex w-full flex-row items-center justify-between rounded-b-xl bg-black-800/75 p-2 text-omega font-semibold text-white">
+                    <span v-if="metadata.takenBy">{{ metadataLabels.takenBy }} : {{ metadata.takenBy }}</span>
+                    <span v-if="metadata.timestamp" class="text-right">{{ metadataLabels.timestamp }} : {{ metadata.timestamp }}</span>
+                  </div>
+                </div>
+
+                <!-- Actions -->
+                <div v-if="showDownload || showRetake" class="mt-2 flex w-full shrink-0 flex-col gap-2">
+                  <Button v-if="showDownload" variant="primary" class="w-full" @click="handleDownload">{{ downloadLabel }}</Button>
+                  <Button v-if="showRetake" variant="secondary" class="w-full" @click="handleRetake">{{ retakeLabel }}</Button>
+                </div>
+              </div>
             </DialogContent>
           </Dialog>
 
@@ -291,15 +397,60 @@ const handleRemove = (event: Event) => {
           >
             <Dialog v-model:open="isPreviewOpen">
               <DialogTrigger as-child>
-                <img
-                  :src="previewUrl!"
-                  alt="Preview"
-                  :class="cn('h-full w-full rounded-[12px] object-cover cursor-pointer', imageClass)"
-                  @error="handleImageError"
-                />
+                <div class="relative h-full w-full cursor-pointer">
+                  <img
+                    :src="previewUrls[0]"
+                    alt="Preview"
+                    :class="cn('h-full w-full rounded-[12px] object-cover', imageClass)"
+                    @error="handleImageError"
+                  />
+                  <div v-if="multiple && previewUrls.length > 1" class="absolute inset-0 flex items-center justify-center rounded-[12px] bg-black-900/50 text-white font-bold text-lambda">
+                    +{{ previewUrls.length - 1 }}
+                  </div>
+                </div>
               </DialogTrigger>
-              <DialogContent class="max-w-3xl border-0 bg-transparent p-0 shadow-none">
-                <img :src="previewUrl!" class="max-h-[85vh] w-full object-contain rounded-md" alt="Preview" />
+              <DialogContent class="flex max-h-[90dvh] w-full flex-col overflow-hidden bg-white p-0 sm:max-w-md">
+                <!-- Header -->
+                <DialogHeader class="border-b border-black-100 px-4 py-4 sm:px-6">
+                  <DialogTitle class="text-lambda font-extrabold text-black-800">{{ previewTitle }}</DialogTitle>
+                </DialogHeader>
+
+                <!-- Body Container -->
+                <div class="flex flex-col gap-4 overflow-y-auto p-4 sm:p-4">
+                  <!-- Image & Overlay -->
+                  <div class="relative w-full shrink-0 overflow-hidden rounded-xl border border-black-100">
+                    <template v-if="previewUrls.length > 1">
+                      <Carousel :opts="{ loop: true }" class="w-full">
+                        <CarouselContent>
+                          <CarouselItem v-for="(url, idx) in previewUrls" :key="idx">
+                            <img :src="url" class="max-h-[50vh] w-full object-cover sm:max-h-[60vh]" alt="Preview" />
+                          </CarouselItem>
+                        </CarouselContent>
+                        <div class="absolute inset-y-0 left-2 right-2 z-10 flex items-center justify-between pointer-events-none">
+                          <CarouselPrevious class="pointer-events-auto !size-6 shadow-sm" />
+                          <CarouselNext class="pointer-events-auto !size-6 shadow-sm" />
+                        </div>
+                        <div class="absolute bottom-10 left-0 flex w-full justify-center">
+                          <CarouselIndicators />
+                        </div>
+                      </Carousel>
+                    </template>
+                    <template v-else>
+                      <img :src="previewUrls[0]" class="max-h-[50vh] w-full object-cover sm:max-h-[60vh]" alt="Preview" />
+                    </template>
+                    
+                    <div v-if="metadata" class="absolute bottom-0 left-0 flex w-full flex-row items-center justify-between rounded-b-xl bg-black-800/75 p-2 text-omega font-semibold text-white">
+                      <span v-if="metadata.takenBy">{{ metadataLabels.takenBy }} : {{ metadata.takenBy }}</span>
+                      <span v-if="metadata.timestamp" class="text-right">{{ metadataLabels.timestamp }} : {{ metadata.timestamp }}</span>
+                    </div>
+                  </div>
+
+                  <!-- Actions -->
+                  <div v-if="showDownload || showRetake" class="mt-2 flex w-full shrink-0 flex-col gap-2">
+                    <Button v-if="showDownload" variant="primary" class="w-full" @click="handleDownload">{{ downloadLabel }}</Button>
+                    <Button v-if="showRetake" variant="secondary" class="w-full" @click="handleRetake">{{ retakeLabel }}</Button>
+                  </div>
+                </div>
               </DialogContent>
             </Dialog>
 
