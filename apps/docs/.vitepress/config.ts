@@ -69,6 +69,7 @@ export default defineConfig({
               { text: "Input Affix", link: "/components/input-affix" },
               { text: "Input Field", link: "/components/input-field" },
               { text: "Input File", link: "/components/input-file" },
+              { text: "File Picker", link: "/components/file-picker" },
               { text: "Image Picker", link: "/components/image-picker" },
               { text: "Input Icons", link: "/components/input-icons" },
               { text: "Input Persentase", link: "/components/input-persentase" },

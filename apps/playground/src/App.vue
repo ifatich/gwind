@@ -61,6 +61,7 @@ import {
   DropdownList,
   DropdownListCheckboxItem,
   DropdownListItem,
+  FilePicker,
   ImageDisplay,
   ImagePicker,
   Input,
@@ -152,6 +153,10 @@ const accounts = [
 ];
 
 const datepickerValue = ref("2026-06-21");
+
+// FilePicker state
+const filePickerFile1 = ref<File | null>(null);
+const filePickerFile2 = ref<File | null>(null);
 
 // ImagePicker state
 const imagePickerSmall = ref<string | File | null>(null);
@@ -327,6 +332,7 @@ const sections = [
   { id: "accordion", label: "Accordion" },
   { id: "badge", label: "Badge" },
   { id: "carousel", label: "Carousel" },
+  { id: "file-picker", label: "File Picker" },
   { id: "image-picker", label: "Image Picker" },
   { id: "tokens", label: "Tokens" },
 ];
@@ -454,7 +460,7 @@ const componentInventory = [
   },
   {
     group: "Input",
-    items: ["Input", "InputField", "InputPersentase", "InputRupiah"],
+    items: ["FilePicker", "Input", "InputField", "InputPersentase", "InputRupiah"],
   },
   {
     group: "Label",
@@ -2314,6 +2320,42 @@ const shellClass = computed(() =>
                       <CarouselIndicators />
                     </div>
                   </Carousel>
+                </div>
+              </div>
+            </section>
+
+            <section
+              id="file-picker"
+              class="playground-section playground-panel p-5"
+            >
+              <div class="mb-5 flex items-center justify-between">
+                <div>
+                  <h2 class="text-omicron font-bold text-black-800">
+                    File Picker
+                  </h2>
+                  <p class="text-sigma text-black-500">
+                    Komponen upload file non-gambar (PDF, CSV, Excel, dll).
+                  </p>
+                </div>
+              </div>
+
+              <div class="space-y-6">
+                <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
+                  <div class="rounded-xl border border-black-200 p-4 bg-white space-y-3">
+                    <h4 class="text-sigma font-bold text-black-700">Default</h4>
+                    <p class="text-sm text-black-500">Menerima dokumen (kecuali gambar).</p>
+                    <div class="flex items-center gap-4">
+                      <FilePicker v-model="filePickerFile1" title="Upload Dokumen" />
+                    </div>
+                  </div>
+
+                  <div class="rounded-xl border border-black-200 p-4 bg-white space-y-3">
+                    <h4 class="text-sigma font-bold text-black-700">With Right Action</h4>
+                    <p class="text-sm text-black-500">Spesifik hanya menerima file PDF.</p>
+                    <div class="flex items-center gap-4">
+                      <FilePicker v-model="filePickerFile2" title="Upload PDF" accept=".pdf" rightAction />
+                    </div>
+                  </div>
                 </div>
               </div>
             </section>
