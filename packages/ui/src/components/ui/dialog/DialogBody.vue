@@ -10,7 +10,7 @@ const props = defineProps<{
 <template>
   <div
     data-slot="dialog-body"
-    :class="cn('p-4 text-omicron text-black-800', props.class)"
+    :class="cn('flex-1 overflow-y-auto p-4 text-omicron text-black-800', props.class)"
   >
     <slot />
   </div>

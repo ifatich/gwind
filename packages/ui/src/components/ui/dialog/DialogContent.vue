@@ -32,11 +32,11 @@ const portalTarget = useGwindPortalTarget()
       :class="
         cn(
           // Base
-          'fixed z-50 bg-white text-black-800 shadow-drop-1 overflow-hidden duration-200',
+          'fixed z-50 flex flex-col bg-white text-black-800 shadow-drop-1 overflow-hidden duration-200',
           // Mobile (Bottom Sheet)
-          'left-0 bottom-0 w-full rounded-t-2xl rounded-b-none',
+          'left-0 bottom-0 w-full max-h-[90dvh] rounded-t-2xl rounded-b-none',
           // Desktop (Dialog)
-          'sm:left-[50%] sm:top-[50%] sm:bottom-auto sm:max-w-lg sm:translate-x-[-50%] sm:translate-y-[-50%] sm:rounded-2xl sm:border sm:border-black-100',
+          'sm:left-[50%] sm:top-[50%] sm:bottom-auto sm:w-full sm:max-w-lg sm:max-h-[85dvh] sm:translate-x-[-50%] sm:translate-y-[-50%] sm:rounded-2xl sm:border sm:border-black-100',
           // Animations (Base)
           'data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0',
           // Animations (Mobile)
