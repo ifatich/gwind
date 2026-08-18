@@ -645,56 +645,76 @@ const shellClass = computed(() =>
     <div class="playground-shell" :class="shellClass">
       <header class="playground-header">
         <div
-          class="playground-container flex h-16 items-center justify-between gap-4"
+          class="playground-container flex h-14 items-center justify-between gap-4"
         >
           <div class="flex min-w-0 items-center gap-3">
             <div
-              class="flex h-9 w-9 items-center justify-center rounded-md bg-primary text-primary-foreground"
+              class="flex h-8 w-8 items-center justify-center rounded-full bg-white/15"
             >
-              <PackageCheck class="h-5 w-5" />
+              <PackageCheck class="h-4 w-4 text-white" />
             </div>
             <div class="min-w-0">
-              <h1 class="text-omicron font-bold text-black-800">
+              <h1 class="text-sigma font-bold tracking-tight text-white">
                 Gwind Playground
               </h1>
-              <p class="text-sigma text-black-500">
-                Local component styling surface
-              </p>
             </div>
           </div>
 
           <div class="flex items-center gap-2">
-            <Button
-              variant="outline"
-              size="sm"
-              :class="compactMode ? 'border-primary text-primary' : ''"
+            <button
+              class="flex items-center gap-1.5 rounded-full px-4 py-1.5 text-omega font-semibold transition-colors"
+              :class="
+                compactMode
+                  ? 'bg-white text-black'
+                  : 'bg-white/15 text-white hover:bg-white/25'
+              "
               @click="compactMode = !compactMode"
             >
-              <SlidersHorizontal class="h-4 w-4" />
+              <SlidersHorizontal class="h-3.5 w-3.5" />
               Compact
-            </Button>
-            <Button size="sm">
-              <Sparkles class="h-4 w-4" />
+            </button>
+            <button
+              class="flex items-center gap-1.5 rounded-full bg-white px-4 py-1.5 text-omega font-semibold text-black transition-colors hover:bg-white/90"
+            >
+              <Sparkles class="h-3.5 w-3.5" />
               Primary
-            </Button>
+            </button>
           </div>
         </div>
       </header>
 
-      <main class="playground-container py-6">
+      <!-- Marquee Ribbon (design.md marquee-strip) -->
+      <div class="border-b border-white/10 bg-black text-white py-2 overflow-hidden">
+        <div class="playground-container flex items-center justify-between gap-6 text-omega tracking-wider font-semibold uppercase opacity-80">
+          <div class="flex items-center gap-6 overflow-x-auto no-scrollbar whitespace-nowrap">
+            <span>⚡️ Gwind Design System</span>
+            <span>•</span>
+            <span>Color-Block Narrative Canvas</span>
+            <span>•</span>
+            <span>Monochrome Chrome & Pill CTAs</span>
+            <span>•</span>
+            <span>Reka UI Accessible Primitives</span>
+            <span>•</span>
+            <span>Tailwind CSS v4 Layered Engine</span>
+            <span>•</span>
+            <span>34 Production UI Components</span>
+          </div>
+          <span class="hidden md:inline-flex items-center gap-1.5 text-lime-400 font-mono text-omega">
+            v1.0.0
+          </span>
+        </div>
+      </div>
+
+      <main class="playground-container py-8">
         <div class="playground-grid">
           <aside class="playground-sidebar">
-            <nav class="playground-panel p-2">
+            <nav class="space-y-0.5 px-1">
               <a
                 v-for="section in sections"
                 :key="section.id"
                 :href="`#${section.id}`"
-                class="flex rounded-md px-3 py-2 text-sigma font-bold text-black-600 transition hover:bg-lime-100 hover:text-lime-600"
-                :class="
-                  activeSection === section.id
-                    ? 'bg-lime-100 text-lime-600'
-                    : ''
-                "
+                class="playground-nav-link"
+                :class="activeSection === section.id ? 'active' : ''"
                 @click="activeSection = section.id"
               >
                 {{ section.label }}
@@ -702,21 +722,46 @@ const shellClass = computed(() =>
             </nav>
           </aside>
 
-          <div class="space-y-6">
+          <div class="space-y-12">
+            <!-- Hero Story Block (design.md editorial display) -->
+            <div class="rounded-3xl bg-white border border-black-100 p-8 md:p-12 space-y-6 shadow-sm">
+              <div class="max-w-2xl space-y-3">
+                <p class="playground-eyebrow">Enterprise Design System</p>
+                <h1 class="text-3xl md:text-5xl font-black tracking-tight text-black-900 leading-[1.05]">
+                  Think bigger. Build faster with Gwind.
+                </h1>
+                <p class="text-omicron text-black-600 font-normal leading-relaxed pt-2">
+                  The unified design system combining accessible Reka UI primitives, layered Tailwind CSS v4 styling, and Figma-inspired color-block storytelling for modern web applications.
+                </p>
+              </div>
+              <div class="flex flex-wrap items-center gap-3 pt-2">
+                <Button size="lg" class="rounded-full px-6 font-bold shadow-sm">
+                  Get started for free
+                </Button>
+                <Button variant="outline" size="lg" class="rounded-full px-6 font-bold bg-white text-black-800 hover:bg-black-100">
+                  Documentation
+                </Button>
+                <span class="text-omega font-semibold text-black-500 pl-2">
+                  34 production components ready to use
+                </span>
+              </div>
+            </div>
+
             <section
               id="inventory"
-              class="playground-section playground-panel p-5"
+              class="playground-section playground-color-block block-lime"
             >
               <div
-                class="mb-5 flex flex-wrap items-center justify-between gap-3"
+                class="mb-6 flex flex-wrap items-center justify-between gap-3"
               >
                 <div>
-                  <h2 class="text-omicron font-bold text-black-800">
+                  <p class="playground-eyebrow">Overview</p>
+                  <h2 class="playground-display">
                     Component Inventory
                   </h2>
-                  <p class="text-sigma text-black-500">
+                  <p class="playground-desc">
                     All Vue component files from
-                    <code>packages/ui/src/components/ui</code> are represented
+                    <code class="rounded bg-black/5 px-1.5 py-0.5 text-omega font-bold">packages/ui/src/components/ui</code> are represented
                     below and used in the playground examples.
                   </p>
                 </div>
@@ -755,19 +800,20 @@ const shellClass = computed(() =>
 
             <section
               id="add-amount"
-              class="playground-section playground-panel p-5"
+              class="playground-section playground-panel p-6 space-y-5"
             >
-              <div class="mb-5">
-                <h2 class="text-omicron font-bold text-black-800">
-                  Add Amount (Quantity Counter)
+              <div>
+                <p class="playground-eyebrow">Numerical Controls</p>
+                <h2 class="text-xl font-bold text-black-900">
+                  Add Amount (Quantity Stepper)
                 </h2>
                 <p class="text-sigma text-black-500">
-                  Komponen penghitung jumlah/kuantitas sesuai desain Figma controls/add-amount/counter.
+                  Add/Subtract controls for quantity selection, seat counts, and numerical incrementors.
                 </p>
               </div>
 
               <div class="grid gap-6 md:grid-cols-2">
-                <div class="space-y-3 rounded-md border border-black-200 bg-white p-4">
+                <div class="space-y-3 rounded-xl border border-black-100 bg-white p-4">
                   <h3 class="text-sigma font-bold text-black-800">Standard Counter (Default min=1)</h3>
                   <div class="flex items-center gap-4">
                     <AddAmount v-model="addAmountVal1" class="w-32" />
@@ -775,7 +821,7 @@ const shellClass = computed(() =>
                   </div>
                 </div>
 
-                <div class="space-y-3 rounded-md border border-black-200 bg-white p-4">
+                <div class="space-y-3 rounded-xl border border-black-100 bg-white p-4">
                   <h3 class="text-sigma font-bold text-black-800">Active State (Value = 2)</h3>
                   <div class="flex items-center gap-4">
                     <AddAmount v-model="addAmountVal2" class="w-32" />
@@ -783,7 +829,7 @@ const shellClass = computed(() =>
                   </div>
                 </div>
 
-                <div class="space-y-3 rounded-md border border-black-200 bg-white p-4">
+                <div class="space-y-3 rounded-xl border border-black-100 bg-white p-4">
                   <h3 class="text-sigma font-bold text-black-800">Disabled State</h3>
                   <div class="flex items-center gap-4">
                     <AddAmount v-model="addAmountValDisabled" disabled class="w-32" />
@@ -791,7 +837,7 @@ const shellClass = computed(() =>
                   </div>
                 </div>
 
-                <div class="space-y-3 rounded-md border border-black-200 bg-white p-4">
+                <div class="space-y-3 rounded-xl border border-black-100 bg-white p-4">
                   <h3 class="text-sigma font-bold text-black-800">Custom Min & Max (Min: 0, Max: 5)</h3>
                   <div class="flex items-center gap-4">
                     <AddAmount :min="0" :max="5" :default-value="3" class="w-36" />
@@ -802,53 +848,64 @@ const shellClass = computed(() =>
 
             <section
               id="button"
-              class="playground-section playground-panel p-5"
+              class="playground-section playground-panel p-6 space-y-6"
             >
-              <div class="mb-5 flex items-center justify-between">
+              <div class="flex flex-wrap items-center justify-between gap-3">
                 <div>
-                  <h2 class="text-omicron font-bold text-black-800">Button</h2>
+                  <p class="playground-eyebrow">Action System</p>
+                  <h2 class="text-xl font-bold text-black-900">Button</h2>
                   <p class="text-sigma text-black-500">
-                    Variants, sizes, icon alignment, disabled state.
+                    Primary monochrome pills, secondary canvas buttons, tertiary links, social auth, and circular icon triggers.
                   </p>
                 </div>
-                <Badge>Action</Badge>
+                <Badge variant="brocoli">Core Component</Badge>
               </div>
 
-              <div class="flex flex-wrap items-center gap-3">
-                <Button>Primary</Button>
-                <Button variant="secondary">Secondary</Button>
-                <Button variant="tertiary">Tertiary</Button>
-                <Button variant="neutral">Neutral</Button>
+              <div>
+                <h3 class="text-omega font-bold uppercase tracking-wider text-black-400 mb-3">Variants</h3>
+                <div class="flex flex-wrap items-center gap-3">
+                  <Button>Primary</Button>
+                  <Button variant="secondary">Secondary</Button>
+                  <Button variant="tertiary">Tertiary</Button>
+                  <Button variant="neutral">Neutral</Button>
+                </div>
               </div>
 
-              <div class="mt-5 flex flex-wrap items-center gap-3">
-                <Button>Enabled</Button>
-                <Button class="bg-lime-600">Hover</Button>
-                <Button class="bg-lime-800">Focused</Button>
-                <Button disabled>Disabled</Button>
-                <Button loading loading-label="Loading button">Loading</Button>
-                <Button class="active:bg-lime-800">Pressed</Button>
+              <div>
+                <h3 class="text-omega font-bold uppercase tracking-wider text-black-400 mb-3">Social & Brand Variants</h3>
+                <div class="flex flex-wrap items-center gap-3">
+                  <Button variant="google">Continue with Google</Button>
+                  <Button variant="apple">Continue with Apple</Button>
+                  <Button variant="facebook">Continue with Facebook</Button>
+                </div>
               </div>
 
-              <div class="mt-5 flex flex-wrap items-center gap-3">
-                <Button><Mail class="h-4 w-4" />Icon Left</Button>
-                <Button>Icon Right <Mail class="h-4 w-4" /></Button>
-                <Button>Default</Button>
-                <Button variant="icon" size="icon"
-                  ><Search class="h-6 w-6"
-                /></Button>
+              <div>
+                <h3 class="text-omega font-bold uppercase tracking-wider text-black-400 mb-3">Interactive States</h3>
+                <div class="flex flex-wrap items-center gap-3">
+                  <Button>Enabled</Button>
+                  <Button class="bg-lime-600">Hover</Button>
+                  <Button class="bg-lime-800">Focused</Button>
+                  <Button disabled>Disabled</Button>
+                  <Button loading loading-label="Loading button">Loading</Button>
+                  <Button class="active:bg-lime-800">Pressed</Button>
+                </div>
               </div>
 
-              <div class="mt-5 flex flex-wrap items-center gap-3">
-                <Button size="xl"
-                  >Extra Large <Settings class="h-6 w-6"
-                /></Button>
-                <Button size="lg">Large <Settings class="h-6 w-6" /></Button>
-                <Button size="md">Medium <Settings class="h-5 w-5" /></Button>
-                <Button size="sm">Small <Settings class="h-4 w-4" /></Button>
+              <div>
+                <h3 class="text-omega font-bold uppercase tracking-wider text-black-400 mb-3">Icons & Sizes</h3>
+                <div class="flex flex-wrap items-center gap-3">
+                  <Button><Mail class="h-4 w-4" />Icon Left</Button>
+                  <Button>Icon Right <Mail class="h-4 w-4" /></Button>
+                  <Button variant="icon" size="icon"><Search class="h-5 w-5" /></Button>
+                  <Button size="xl">Extra Large <Settings class="h-5 w-5" /></Button>
+                  <Button size="lg">Large</Button>
+                  <Button size="md">Medium</Button>
+                  <Button size="sm">Small</Button>
+                </div>
               </div>
 
-              <div class="mt-5 grid gap-3 md:grid-cols-2">
+              <div class="grid gap-3 md:grid-cols-2 pt-2">
                 <Button class="w-full">Large Full Width</Button>
                 <Button size="xl" class="w-full">Extra Large Full Width</Button>
               </div>
@@ -856,14 +913,17 @@ const shellClass = computed(() =>
 
             <section
               id="avatar"
-              class="playground-section playground-panel p-5"
+              class="playground-section playground-panel p-6 space-y-4"
             >
-              <h2 class="mb-1 text-omicron font-bold text-black-800">Avatar</h2>
-              <p class="mb-5 text-sigma text-black-500">
-                Image avatar with initials fallback.
-              </p>
+              <div>
+                <p class="playground-eyebrow">Identity & Team</p>
+                <h2 class="text-xl font-bold text-black-900">Avatar</h2>
+                <p class="text-sigma text-black-500">
+                  Visual identity representations for user accounts, collaborative editors, and workspace teams.
+                </p>
+              </div>
 
-              <div class="flex flex-wrap items-center gap-4">
+              <div class="flex flex-wrap items-center gap-4 pt-2">
                 <Avatar
                   src="https://i.pravatar.cc/96?img=12"
                   alt="Gwind User"
@@ -873,12 +933,30 @@ const shellClass = computed(() =>
               </div>
             </section>
 
-            <section id="input" class="playground-section playground-panel p-5">
-              <h2 class="mb-1 text-omicron font-bold text-black-800">Input</h2>
-              <p class="mb-5 text-sigma text-black-500">
-                Figma Input Field states with label, caption, icon, and action
-                compositions.
-              </p>
+            <!-- Promo Banner (design.md promo-banner-lilac) -->
+            <div class="playground-promo-banner shadow-sm">
+              <div class="flex items-center gap-3">
+                <div class="flex h-9 w-9 items-center justify-center rounded-full bg-black/10 text-black">
+                  <Sparkles class="h-5 w-5" />
+                </div>
+                <div>
+                  <h4 class="text-sigma font-bold text-black-900">Release Notes 2.4 — Config Design Update</h4>
+                  <p class="text-omega text-black-600">Featuring new unified popovers, card-styled tooltips, and simplified counter props.</p>
+                </div>
+              </div>
+              <button class="button-magenta-promo text-omega">
+                Save your spot
+              </button>
+            </div>
+
+            <section id="input" class="playground-section playground-color-block block-lilac">
+              <div class="mb-6">
+                <p class="playground-eyebrow">Forms & Inputs</p>
+                <h2 class="playground-display">Input</h2>
+                <p class="playground-desc">
+                  Single-line inputs, numeric formatters, prefix/suffix adornments, and action buttons.
+                </p>
+              </div>
 
               <div class="grid gap-4 md:grid-cols-2">
                 <Card>
@@ -1247,14 +1325,15 @@ const shellClass = computed(() =>
 
             <section
               id="checkbox"
-              class="playground-section playground-panel p-5"
+              class="playground-section playground-color-block block-cream"
             >
-              <h2 class="mb-1 text-omicron font-bold text-black-800">
-                Checkbox
-              </h2>
-              <p class="mb-5 text-sigma text-black-500">
-                Primitive control and Figma-aligned field composition.
-              </p>
+              <div class="mb-6">
+                <p class="playground-eyebrow">Selection & Consent</p>
+                <h2 class="playground-display">Checkbox</h2>
+                <p class="playground-desc">
+                  Primitive controls and Figma-aligned fields with binary, checked, and indeterminate states.
+                </p>
+              </div>
 
               <div class="grid gap-4 md:grid-cols-2">
                 <Card>
@@ -1394,14 +1473,15 @@ const shellClass = computed(() =>
 
             <section
               id="radio-group"
-              class="playground-section playground-panel p-5"
+              class="playground-section playground-panel p-6 space-y-5"
             >
-              <h2 class="mb-1 text-omicron font-bold text-black-800">
-                Radio Group
-              </h2>
-              <p class="mb-5 text-sigma text-black-500">
-                Primitive control and Figma-aligned field composition.
-              </p>
+              <div>
+                <p class="playground-eyebrow">Options & Segmented Choice</p>
+                <h2 class="text-xl font-bold text-black-900">Radio Group</h2>
+                <p class="text-sigma text-black-500">
+                  Segmented single-choice options in horizontal and vertical configurations.
+                </p>
+              </div>
 
               <div class="grid gap-4 md:grid-cols-2">
                 <Card>
@@ -1554,7 +1634,7 @@ const shellClass = computed(() =>
 
             <section
               id="select"
-              class="playground-section playground-panel p-5"
+              class="playground-section playground-color-block block-mint"
             >
               <h2 class="mb-1 text-omicron font-bold text-black-800">Select</h2>
               <p class="mb-5 text-sigma text-black-500">
@@ -1968,11 +2048,14 @@ const shellClass = computed(() =>
               </div>
             </section>
 
-            <section id="tabs" class="playground-section playground-panel p-5">
-              <h2 class="mb-1 text-omicron font-bold text-black-800">Tabs</h2>
-              <p class="mb-5 text-sigma text-black-500">
-                Native Tab* exports and Tabs* compatibility aliases.
-              </p>
+            <section id="tabs" class="playground-section playground-color-block block-pink">
+              <div class="mb-6">
+                <p class="playground-eyebrow">Viewport & Segments</p>
+                <h2 class="playground-display">Tabs</h2>
+                <p class="playground-desc">
+                  Segmented tab switchers with smooth animated sliding indicators for pricing and views.
+                </p>
+              </div>
 
               <div class="space-y-5">
                 <TabGroup default-value="account">
@@ -2117,12 +2200,14 @@ const shellClass = computed(() =>
               </div>
             </section>
 
-            <section id="table" class="playground-section playground-panel p-5">
-              <h2 class="mb-1 text-omicron font-bold text-black-800">Table</h2>
-              <p class="mb-5 text-sigma text-black-500">
-                Data-driven table with Figma aligned header, border, and striped
-                rows.
-              </p>
+            <section id="table" class="playground-section playground-panel p-6 space-y-5">
+              <div>
+                <p class="playground-eyebrow">Comparison & Records</p>
+                <h2 class="text-xl font-bold text-black-900">Table & Data Table</h2>
+                <p class="text-sigma text-black-500">
+                  Data-driven comparison matrices, zebra striped rows, and dense tabular records.
+                </p>
+              </div>
 
               <div class="grid gap-4">
                 <DataTable :columns="tableColumns" :rows="tableRows" />
@@ -2149,11 +2234,17 @@ const shellClass = computed(() =>
               </div>
             </section>
 
-            <section id="card" class="playground-section playground-panel p-5">
-              <h2 class="mb-1 text-omicron font-bold text-black-800">Card</h2>
-              <p class="mb-5 text-sigma text-black-500">
-                Header, title, description, content, and footer slots.
-              </p>
+            <section id="card" class="playground-section playground-panel p-6 space-y-6">
+              <div class="flex flex-wrap items-center justify-between gap-3">
+                <div>
+                  <p class="playground-eyebrow">Surfaces & Tiers</p>
+                  <h2 class="text-xl font-bold text-black-900">Card</h2>
+                  <p class="text-sigma text-black-500">
+                    Pricing tiers, marketing compositions, structured headers, content, and footer slots.
+                  </p>
+                </div>
+                <Badge variant="brocoli">Container</Badge>
+              </div>
 
               <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
                 <!-- Variant 1: Default Card -->
@@ -2543,22 +2634,19 @@ const shellClass = computed(() =>
 
             <section
               id="tokens"
-              class="playground-section playground-panel p-5"
+              class="playground-section playground-color-block block-navy"
             >
               <div
-                class="mb-5 flex flex-wrap items-center justify-between gap-3"
+                class="mb-6 flex flex-wrap items-center justify-between gap-3"
               >
-                <div class="flex items-center gap-2">
-                  <Palette class="h-5 w-5 text-lime-500" />
-                  <div>
-                    <h2 class="text-omicron font-bold text-black-800">
-                      Tokens
-                    </h2>
-                    <p class="text-sigma text-black-500">
-                      Color, semantic, typography, spacing, and radius tokens
-                      from Gwind.
-                    </p>
-                  </div>
+                <div>
+                  <p class="playground-eyebrow">Developer Mode & Architecture</p>
+                  <h2 class="playground-display">
+                    Design Tokens
+                  </h2>
+                  <p class="playground-desc">
+                    Color palettes, semantic scales, typography hierarchy, spacing constants, and border radius tokens.
+                  </p>
                 </div>
                 <Badge variant="brocoli">
                   {{
@@ -2568,7 +2656,7 @@ const shellClass = computed(() =>
                       0,
                     )
                   }}
-                  color tokens
+                  tokens
                 </Badge>
               </div>
 
@@ -2758,6 +2846,72 @@ const shellClass = computed(() =>
           </div>
         </div>
       </main>
+
+      <!-- Figma-style Marketing Footer (design.md) -->
+      <footer class="playground-footer bg-white border-t border-black-200">
+        <div class="playground-container py-12">
+          <div class="grid grid-cols-2 md:grid-cols-5 gap-8 mb-12">
+            <div class="col-span-2 space-y-4">
+              <div class="flex items-center gap-2">
+                <div class="flex h-7 w-7 items-center justify-center rounded-full bg-black text-white">
+                  <PackageCheck class="h-4 w-4" />
+                </div>
+                <span class="text-omicron font-black tracking-tight text-black">Gwind</span>
+              </div>
+              <p class="text-sigma text-black-500 max-w-sm">
+                Enterprise Design System for Vue 3 and Tailwind CSS v4. Modular, accessible, and ready for high-scale applications.
+              </p>
+              <div class="flex items-center gap-3 pt-2">
+                <span class="inline-flex items-center rounded-full bg-lime-100 px-2.5 py-0.5 text-omega font-bold text-lime-700">
+                  Vue 3.5+
+                </span>
+                <span class="inline-flex items-center rounded-full bg-black-100 px-2.5 py-0.5 text-omega font-bold text-black-700">
+                  Tailwind v4
+                </span>
+                <span class="inline-flex items-center rounded-full bg-blue-100 px-2.5 py-0.5 text-omega font-bold text-blue-700">
+                  Reka UI
+                </span>
+              </div>
+            </div>
+            <div class="space-y-3">
+              <h5 class="text-omega font-bold uppercase tracking-wider text-black-400">Components</h5>
+              <ul class="space-y-2 text-sigma text-black-600">
+                <li><a href="#button" class="hover:text-black transition-colors">Buttons & Pills</a></li>
+                <li><a href="#input" class="hover:text-black transition-colors">Inputs & Forms</a></li>
+                <li><a href="#card" class="hover:text-black transition-colors">Cards & Panels</a></li>
+                <li><a href="#dialog" class="hover:text-black transition-colors">Dialogs & Modals</a></li>
+                <li><a href="#tabs" class="hover:text-black transition-colors">Tabs & Navigation</a></li>
+              </ul>
+            </div>
+            <div class="space-y-3">
+              <h5 class="text-omega font-bold uppercase tracking-wider text-black-400">Design System</h5>
+              <ul class="space-y-2 text-sigma text-black-600">
+                <li><a href="#tokens" class="hover:text-black transition-colors">Design Tokens</a></li>
+                <li><a href="#inventory" class="hover:text-black transition-colors">Component Index</a></li>
+                <li><a href="#badge" class="hover:text-black transition-colors">Color Palette</a></li>
+                <li><a href="#table" class="hover:text-black transition-colors">Feature Matrix</a></li>
+              </ul>
+            </div>
+            <div class="space-y-3">
+              <h5 class="text-omega font-bold uppercase tracking-wider text-black-400">Resources</h5>
+              <ul class="space-y-2 text-sigma text-black-600">
+                <li><a href="http://localhost:5173" target="_blank" class="hover:text-black transition-colors">VitePress Docs</a></li>
+                <li><a href="https://github.com" target="_blank" class="hover:text-black transition-colors">CLI Package</a></li>
+                <li><a href="https://figma.com" target="_blank" class="hover:text-black transition-colors">Figma UI Kit</a></li>
+                <li><a href="#toast" class="hover:text-black transition-colors">Release Notes</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="pt-8 border-t border-black-100 flex flex-col sm:flex-row items-center justify-between gap-4 text-omega text-black-400">
+            <p>© 2026 Gwind Monorepo. Built with precision for enterprise UX.</p>
+            <div class="flex items-center gap-6">
+              <a href="#" class="hover:text-black transition-colors">Privacy Policy</a>
+              <a href="#" class="hover:text-black transition-colors">Terms of Service</a>
+              <a href="#" class="hover:text-black transition-colors">Security</a>
+            </div>
+          </div>
+        </div>
+      </footer>
     </div>
   </TooltipProvider>
 </template>
