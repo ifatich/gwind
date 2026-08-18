@@ -958,27 +958,33 @@ const shellClass = computed(() =>
               </div>
 
               <!-- Real-world Case: Multi-Step Transaction Action Bar -->
-              <div class="rounded-xl border border-black-100 bg-black-50/50 p-4 space-y-3">
-                <div class="flex items-center justify-between">
-                  <div>
-                    <h3 class="text-sigma font-bold text-black-800">Real-World Case: Multi-Step Transaction Action Bar</h3>
-                    <p class="text-omega text-black-500">Aksi navigasi formulir pinjaman dengan state loading asinkron.</p>
+              <div class="playground-case-card">
+                <div class="playground-case-header">
+                  <div class="flex items-center gap-2.5">
+                    <span class="playground-case-badge">
+                      <Sparkles class="h-3 w-3 text-lime-700" />
+                      Real-World Scenario
+                    </span>
+                    <h3 class="text-sigma font-extrabold text-black-900">Multi-Step Transaction Action Bar</h3>
                   </div>
                   <Button variant="outline" size="sm" @click="triggerSubmit">
                     Simulasi Loading
                   </Button>
                 </div>
-                <div class="flex flex-wrap items-center justify-between gap-3 pt-2 border-t border-black-100">
-                  <Button variant="ghost" class="text-black-600">
-                    Batal
-                  </Button>
-                  <div class="flex items-center gap-3">
-                    <Button variant="outline">
-                      Simpan Draft
+                <div class="playground-case-body">
+                  <p class="text-omega text-black-500 mb-3">Aksi navigasi formulir pengajuan pinjaman dengan state loading asinkron.</p>
+                  <div class="flex flex-wrap items-center justify-between gap-3 pt-3 border-t border-black-100">
+                    <Button variant="ghost" class="text-black-600">
+                      Batal
                     </Button>
-                    <Button :loading="isSubmitting" loading-label="Memproses..." @click="triggerSubmit">
-                      Lanjut Pembayaran <ArrowRight class="h-4 w-4" />
-                    </Button>
+                    <div class="flex items-center gap-3">
+                      <Button variant="outline">
+                        Simpan Draft
+                      </Button>
+                      <Button :loading="isSubmitting" loading-label="Memproses..." @click="triggerSubmit">
+                        Lanjut Pembayaran <ArrowRight class="h-4 w-4" />
+                      </Button>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -1044,11 +1050,22 @@ const shellClass = computed(() =>
               </div>
 
               <!-- Real-world Case: Syarat & Ketentuan -->
-              <div class="rounded-xl border border-black-100 bg-white p-4 space-y-2">
-                <h3 class="text-sigma font-bold text-black-800">Real-World Case: Legal & Syarat Ketentuan</h3>
-                <p class="text-sigma text-black-600 leading-relaxed">
-                  Dengan menekan tombol submit, Anda menyetujui <Link href="#" class="font-bold underline text-lime-600">Syarat & Ketentuan Layanan</Link> serta <Link href="#" class="font-bold underline text-lime-600">Kebijakan Privasi PT Pegadaian</Link>.
-                </p>
+              <div class="playground-case-card">
+                <div class="playground-case-header">
+                  <div class="flex items-center gap-2.5">
+                    <span class="playground-case-badge">
+                      <Sparkles class="h-3 w-3 text-lime-700" />
+                      Real-World Scenario
+                    </span>
+                    <h3 class="text-sigma font-extrabold text-black-900">Legal, Persetujuan & Syarat Ketentuan</h3>
+                  </div>
+                  <span class="text-omega text-black-500 font-medium">Inline & External Links</span>
+                </div>
+                <div class="playground-case-body">
+                  <p class="text-sigma text-black-700 leading-relaxed">
+                    Dengan menekan tombol submit, Anda menyetujui <Link href="#" class="font-bold underline text-lime-600">Syarat & Ketentuan Layanan</Link> serta <Link href="#" class="font-bold underline text-lime-600">Kebijakan Privasi PT Pegadaian</Link>.
+                  </p>
+                </div>
               </div>
 
               <div class="flex flex-wrap items-center gap-6 pt-2">
@@ -1076,27 +1093,38 @@ const shellClass = computed(() =>
               </div>
 
               <!-- Real-world Case: Form Login & Identitas Nasabah -->
-              <div class="rounded-xl border border-purple-200 bg-white p-5 space-y-4 mb-6">
-                <h3 class="text-sigma font-bold text-black-800">Real-World Case: Form Identitas Nasabah</h3>
-                <div class="grid gap-4 md:grid-cols-2">
-                  <InputField
-                    id="input-real-ktp"
-                    label="Nomor Induk Kependudukan (NIK)"
-                    placeholder="Contoh: 3171020101900005"
-                  >
-                    <template #label-icon>
-                      <CircleHelp class="h-4 w-4 text-black-400" />
-                    </template>
-                  </InputField>
-                  <InputField
-                    id="input-real-email"
-                    label="Alamat Email Terdaftar"
-                    placeholder="nasabah@pegadaian.co.id"
-                  >
-                    <template #left-icon>
-                      <Mail class="h-4 w-4 text-black-400" />
-                    </template>
-                  </InputField>
+              <div class="playground-case-card mb-6">
+                <div class="playground-case-header">
+                  <div class="flex items-center gap-2.5">
+                    <span class="playground-case-badge">
+                      <Sparkles class="h-3 w-3 text-lime-700" />
+                      Real-World Scenario
+                    </span>
+                    <h3 class="text-sigma font-extrabold text-black-900">Formulir Identitas & Kontak Nasabah</h3>
+                  </div>
+                  <span class="text-omega text-black-500 font-medium">Validasi Field & Prefix/Suffix Adornment</span>
+                </div>
+                <div class="playground-case-body">
+                  <div class="grid gap-4 md:grid-cols-2">
+                    <InputField
+                      id="input-real-ktp"
+                      label="Nomor Induk Kependudukan (NIK)"
+                      placeholder="Contoh: 3171020101900005"
+                    >
+                      <template #label-icon>
+                        <CircleHelp class="h-4 w-4 text-black-400" />
+                      </template>
+                    </InputField>
+                    <InputField
+                      id="input-real-email"
+                      label="Alamat Email Terdaftar"
+                      placeholder="nasabah@pegadaian.co.id"
+                    >
+                      <template #left-icon>
+                        <Mail class="h-4 w-4 text-black-400" />
+                      </template>
+                    </InputField>
+                  </div>
                 </div>
               </div>
 
@@ -1113,6 +1141,138 @@ const shellClass = computed(() =>
                   >
                     <template #label-icon>
                       <CircleHelp class="h-[18px] w-[18px] text-black-500" />
+                    </template>
+                  </InputField>
+                </div>
+
+                <div class="playground-tile space-y-2">
+                  <div class="flex items-center justify-between">
+                    <span class="text-sigma font-bold text-black-800">Long Field</span>
+                    <span class="text-omega font-mono text-black-400">lg</span>
+                  </div>
+                  <InputField
+                    id="input-long"
+                    field-size="long"
+                    label="Title"
+                    placeholder="Placeholder"
+                  >
+                    <template #label-icon>
+                      <CircleHelp class="h-[18px] w-[18px] text-black-500" />
+                    </template>
+                  </InputField>
+                </div>
+
+                <div class="playground-tile space-y-2">
+                  <div class="flex items-center justify-between">
+                    <span class="text-sigma font-bold text-black-800">Placeholder State</span>
+                    <span class="text-omega font-mono text-black-400">default</span>
+                  </div>
+                  <InputField
+                    id="input-placeholder"
+                    label="Title"
+                    placeholder="Placeholder"
+                  >
+                    <template #label-icon>
+                      <CircleHelp class="h-[18px] w-[18px] text-black-500" />
+                    </template>
+                  </InputField>
+                </div>
+
+                <div class="playground-tile space-y-2">
+                  <div class="flex items-center justify-between">
+                    <span class="text-sigma font-bold text-black-800">Hover State</span>
+                    <span class="text-omega font-mono text-black-400">hover</span>
+                  </div>
+                  <InputField
+                    id="input-hover"
+                    label="Title"
+                    input-class="border-lime-600"
+                    placeholder="Hover"
+                  >
+                    <template #label-icon>
+                      <CircleHelp class="h-[18px] w-[18px] text-black-500" />
+                    </template>
+                  </InputField>
+                </div>
+
+                <div class="playground-tile space-y-2">
+                  <div class="flex items-center justify-between">
+                    <span class="text-sigma font-bold text-black-800">Filled State</span>
+                    <span class="text-omega font-mono text-black-400">value</span>
+                  </div>
+                  <InputField
+                    id="input-filled"
+                    label="Title"
+                    value="Text input"
+                  >
+                    <template #label-icon>
+                      <CircleHelp class="h-[18px] w-[18px] text-black-500" />
+                    </template>
+                  </InputField>
+                </div>
+
+                <div class="playground-tile space-y-2">
+                  <div class="flex items-center justify-between">
+                    <span class="text-sigma font-bold text-black-800">Disabled State</span>
+                    <span class="text-omega font-mono text-black-400">disabled</span>
+                  </div>
+                  <InputField
+                    id="input-disabled"
+                    label="Title"
+                    disabled
+                    value="Disabled input"
+                  >
+                    <template #label-icon>
+                      <CircleHelp class="h-[18px] w-[18px] text-black-600" />
+                    </template>
+                  </InputField>
+                </div>
+
+                <div class="playground-tile space-y-2">
+                  <div class="flex items-center justify-between">
+                    <span class="text-sigma font-bold text-black-800">Error State</span>
+                    <span class="text-omega font-mono text-red-500">error</span>
+                  </div>
+                  <InputField
+                    id="input-error"
+                    label="Title"
+                    error="This is an error message."
+                    placeholder="Placeholder"
+                  >
+                    <template #label-icon>
+                      <CircleHelp class="h-[18px] w-[18px] text-black-500" />
+                    </template>
+                  </InputField>
+                </div>
+
+                <div class="playground-tile space-y-2">
+                  <div class="flex items-center justify-between">
+                    <span class="text-sigma font-bold text-black-800">Icon Left</span>
+                    <span class="text-omega font-mono text-black-400">prefix</span>
+                  </div>
+                  <InputField
+                    id="input-icon-left"
+                    label="Title"
+                    placeholder="Placeholder"
+                  >
+                    <template #left-icon>
+                      <Mail class="h-6 w-6" />
+                    </template>
+                  </InputField>
+                </div>
+
+                <div class="playground-tile space-y-2">
+                  <div class="flex items-center justify-between">
+                    <span class="text-sigma font-bold text-black-800">Icon Right</span>
+                    <span class="text-omega font-mono text-black-400">suffix</span>
+                  </div>
+                  <InputField
+                    id="input-icon-right"
+                    label="Title"
+                    placeholder="Placeholder"
+                  >
+                    <template #right-icon>
+                      <Search class="h-6 w-6" />
                     </template>
                   </InputField>
                 </div>
@@ -1172,32 +1332,38 @@ const shellClass = computed(() =>
               </div>
 
               <!-- Real-world Case: Simulasi Pinjaman Gadai -->
-              <div class="rounded-xl border border-purple-200 bg-white p-5 space-y-4 mb-6">
-                <div class="flex flex-wrap items-center justify-between gap-3">
-                  <div>
-                    <h3 class="text-sigma font-bold text-black-800">Real-World Case: Simulasi Pengajuan Pinjaman Gadai Emas</h3>
-                    <p class="text-omega text-black-500">Mendukung format ribuan interaktif dan integrasi data dua arah.</p>
+              <div class="playground-case-card mb-6">
+                <div class="playground-case-header">
+                  <div class="flex items-center gap-2.5">
+                    <span class="playground-case-badge">
+                      <Sparkles class="h-3 w-3 text-lime-700" />
+                      Fintech Scenario
+                    </span>
+                    <h3 class="text-sigma font-extrabold text-black-900">Simulasi Pengajuan Pinjaman Gadai Emas</h3>
                   </div>
                   <div class="flex items-center gap-2">
                     <span class="text-omega font-bold text-black-500">Emit Raw Value:</span>
-                    <code class="rounded bg-black-900 px-3 py-1 font-mono text-omega font-bold text-white">
+                    <code class="rounded bg-black-900 px-3 py-1 font-mono text-omega font-bold text-lime-400">
                       {{ simulasiPinjaman === null ? 'null' : simulasiPinjaman }}
                     </code>
                   </div>
                 </div>
-                <div class="grid gap-4 md:grid-cols-2">
-                  <InputRupiah
-                    id="input-rupiah-simulasi"
-                    v-model="simulasiPinjaman"
-                    label="Uang Pinjaman Diajukan"
-                    placeholder="Masukkan nominal rupiah"
-                  />
-                  <InputRupiah
-                    id="input-rupiah-tabungan"
-                    v-model="tabunganEmas"
-                    label="Top-Up Saldo Tabungan Emas"
-                    placeholder="Nominal top up"
-                  />
+                <div class="playground-case-body space-y-4">
+                  <p class="text-omega text-black-500">Mendukung format ribuan interaktif dan integrasi dua arah otomatis.</p>
+                  <div class="grid gap-4 md:grid-cols-2">
+                    <InputRupiah
+                      id="input-rupiah-simulasi"
+                      v-model="simulasiPinjaman"
+                      label="Uang Pinjaman Diajukan"
+                      placeholder="Masukkan nominal rupiah"
+                    />
+                    <InputRupiah
+                      id="input-rupiah-tabungan"
+                      v-model="tabunganEmas"
+                      label="Top-Up Saldo Tabungan Emas"
+                      placeholder="Nominal top up"
+                    />
+                  </div>
                 </div>
               </div>
 
@@ -1245,31 +1411,45 @@ const shellClass = computed(() =>
               </div>
 
               <!-- Real-world Case: Bunga Pinjaman & Diskon Promo -->
-              <div class="grid gap-4 md:grid-cols-2">
-                <div class="playground-tile space-y-2">
-                  <div class="flex items-center justify-between">
-                    <span class="text-sigma font-bold text-black-800">Sewa Modal / Bunga Bulanan</span>
-                    <span class="text-omega font-mono text-black-500">Emit: {{ bungaPinjaman }}%</span>
+              <div class="playground-case-card">
+                <div class="playground-case-header">
+                  <div class="flex items-center gap-2.5">
+                    <span class="playground-case-badge">
+                      <Sparkles class="h-3 w-3 text-lime-700" />
+                      Fintech Scenario
+                    </span>
+                    <h3 class="text-sigma font-extrabold text-black-900">Perhitungan Tarif Sewa Modal & Promo</h3>
                   </div>
-                  <InputPersentase
-                    id="input-persentase-bunga"
-                    v-model="bungaPinjaman"
-                    label="Tarif Sewa Modal"
-                    placeholder="0.00"
-                  />
+                  <span class="text-omega text-black-500 font-medium">Interest Rates & Discount Stepper</span>
                 </div>
+                <div class="playground-case-body">
+                  <div class="grid gap-4 md:grid-cols-2">
+                    <div class="space-y-2">
+                      <div class="flex items-center justify-between">
+                        <span class="text-sigma font-bold text-black-800">Sewa Modal / Bunga Bulanan</span>
+                        <span class="text-omega font-mono text-black-500">Emit: {{ bungaPinjaman }}%</span>
+                      </div>
+                      <InputPersentase
+                        id="input-persentase-bunga"
+                        v-model="bungaPinjaman"
+                        label="Tarif Sewa Modal"
+                        placeholder="0.00"
+                      />
+                    </div>
 
-                <div class="playground-tile space-y-2">
-                  <div class="flex items-center justify-between">
-                    <span class="text-sigma font-bold text-black-800">Diskon Promo Transaksi</span>
-                    <span class="text-omega font-mono text-black-500">Emit: {{ diskonPromo }}%</span>
+                    <div class="space-y-2">
+                      <div class="flex items-center justify-between">
+                        <span class="text-sigma font-bold text-black-800">Diskon Promo Transaksi</span>
+                        <span class="text-omega font-mono text-black-500">Emit: {{ diskonPromo }}%</span>
+                      </div>
+                      <InputPersentase
+                        id="input-persentase-diskon"
+                        v-model="diskonPromo"
+                        label="Persentase Diskon"
+                        placeholder="0.00"
+                      />
+                    </div>
                   </div>
-                  <InputPersentase
-                    id="input-persentase-diskon"
-                    v-model="diskonPromo"
-                    label="Persentase Diskon"
-                    placeholder="0.00"
-                  />
                 </div>
               </div>
             </section>
@@ -1288,17 +1468,29 @@ const shellClass = computed(() =>
               </div>
 
               <!-- Real-world Case: Pembelian Gramasi Emas -->
-              <div class="rounded-xl border border-black-100 bg-lime-50/40 p-5 space-y-3">
-                <div class="flex flex-wrap items-center justify-between gap-4">
-                  <div>
-                    <h3 class="text-sigma font-bold text-black-800">Real-World Case: Pembelian Gramasi Emas Batangan</h3>
-                    <p class="text-omega text-black-600">Estimasi harga emas Rp 1.450.000 / gram.</p>
+              <div class="playground-case-card">
+                <div class="playground-case-header">
+                  <div class="flex items-center gap-2.5">
+                    <span class="playground-case-badge">
+                      <Sparkles class="h-3 w-3 text-lime-700" />
+                      Fintech Scenario
+                    </span>
+                    <h3 class="text-sigma font-extrabold text-black-900">Pembelian Gramasi Emas Batangan</h3>
                   </div>
-                  <div class="flex items-center gap-6">
-                    <AddAmount v-model="gramEmas" :min="1" :max="100" class="w-36" />
-                    <div class="text-right">
-                      <span class="block text-omega text-black-500 font-semibold">Total Estimasi</span>
-                      <span class="text-omicron font-black text-black-900">Rp {{ totalBeliEmas }}</span>
+                  <span class="text-omega text-black-500 font-medium">Estimasi harga acuan Rp 1.450.000 / gram</span>
+                </div>
+                <div class="playground-case-body">
+                  <div class="flex flex-wrap items-center justify-between gap-4">
+                    <div>
+                      <h4 class="text-sigma font-bold text-black-800">Tentukan Jumlah Gramasi</h4>
+                      <p class="text-omega text-black-500">Kuantitas minimal 1 gram hingga 100 gram per transaksi.</p>
+                    </div>
+                    <div class="flex items-center gap-6">
+                      <AddAmount v-model="gramEmas" :min="1" :max="100" class="w-36" />
+                      <div class="text-right">
+                        <span class="block text-omega text-black-500 font-semibold">Total Estimasi</span>
+                        <span class="text-omicron font-black text-black-900">Rp {{ totalBeliEmas }}</span>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -1339,18 +1531,26 @@ const shellClass = computed(() =>
               </div>
 
               <!-- Real-world Case: Catatan Pengiriman & Keluhan -->
-              <div class="playground-tile space-y-2">
-                <div class="flex items-center justify-between">
-                  <span class="text-sigma font-bold text-black-800">Real-World Case: Catatan Transaksi Khusus (Max 100 Karakter)</span>
-                  <span class="text-omega font-mono text-lime-700 bg-lime-100 px-2 py-0.5 rounded font-bold">Auto show-count</span>
+              <div class="playground-case-card">
+                <div class="playground-case-header">
+                  <div class="flex items-center gap-2.5">
+                    <span class="playground-case-badge">
+                      <Sparkles class="h-3 w-3 text-lime-700" />
+                      Real-World Scenario
+                    </span>
+                    <h3 class="text-sigma font-extrabold text-black-900">Catatan Transaksi Khusus</h3>
+                  </div>
+                  <span class="text-omega font-mono text-lime-700 bg-lime-100 px-2.5 py-0.5 rounded-full font-bold">Auto show-count</span>
                 </div>
-                <TextareaField
-                  id="textarea-catatan"
-                  v-model="catatanTransaksi"
-                  label="Instruksi Pengantaran Barang"
-                  placeholder="Tuliskan catatan detail untuk petugas kurir..."
-                  :maxlength="100"
-                />
+                <div class="playground-case-body">
+                  <TextareaField
+                    id="textarea-catatan"
+                    v-model="catatanTransaksi"
+                    label="Instruksi Pengantaran / Catatan Khusus"
+                    placeholder="Tuliskan catatan detail untuk petugas kurir atau penaksir..."
+                    :maxlength="100"
+                  />
+                </div>
               </div>
 
               <div class="grid gap-4 md:grid-cols-2">
@@ -1404,20 +1604,31 @@ const shellClass = computed(() =>
               </div>
 
               <!-- Real-world Case: Persetujuan Asuransi & Syarat -->
-              <div class="rounded-xl border border-amber-200 bg-white p-5 space-y-3 mb-6">
-                <h3 class="text-sigma font-bold text-black-800">Real-World Case: Opsi Proteksi Transaksi Gadai</h3>
-                <div class="grid gap-3 md:grid-cols-2">
-                  <CheckboxField
-                    id="chk-real-asuransi"
-                    v-model="asuransiBarang"
-                    label="Asuransi Barang Ekstra"
-                    caption="Perlindungan ganti rugi 100% nilai taksiran pasar barang jaminan."
-                  />
-                  <CheckboxField
-                    id="chk-real-syarat"
-                    v-model="syaratKetentuan"
-                    label="Saya menyetujui seluruh ketentuan akad gadai syariah"
-                  />
+              <div class="playground-case-card mb-6">
+                <div class="playground-case-header">
+                  <div class="flex items-center gap-2.5">
+                    <span class="playground-case-badge">
+                      <Sparkles class="h-3 w-3 text-lime-700" />
+                      Real-World Scenario
+                    </span>
+                    <h3 class="text-sigma font-extrabold text-black-900">Opsi Proteksi & Akad Transaksi Gadai</h3>
+                  </div>
+                  <span class="text-omega text-black-500 font-medium">Consent & Multi-Option Selection</span>
+                </div>
+                <div class="playground-case-body">
+                  <div class="grid gap-3 md:grid-cols-2">
+                    <CheckboxField
+                      id="chk-real-asuransi"
+                      v-model="asuransiBarang"
+                      label="Asuransi Barang Ekstra"
+                      caption="Perlindungan ganti rugi 100% nilai taksiran pasar barang jaminan."
+                    />
+                    <CheckboxField
+                      id="chk-real-syarat"
+                      v-model="syaratKetentuan"
+                      label="Saya menyetujui seluruh ketentuan akad gadai syariah"
+                    />
+                  </div>
                 </div>
               </div>
 
@@ -1468,22 +1679,33 @@ const shellClass = computed(() =>
               </div>
 
               <!-- Real-world Case: Pilihan Metode Pengiriman -->
-              <div class="rounded-xl border border-black-100 bg-white p-5 space-y-3 mb-6">
-                <h3 class="text-sigma font-bold text-black-800">Real-World Case: Metode Pengambilan Barang Gadai Lunas</h3>
-                <RadioGroup v-model="metodePengiriman" class="grid gap-3 md:grid-cols-2">
-                  <RadioGroupField
-                    id="radio-metode-cabang"
-                    value="cabang"
-                    label="Ambil Langsung di Kantor Cabang"
-                    caption="Gratis biaya antar, barang dapat diambil pada jam operasional."
-                  />
-                  <RadioGroupField
-                    id="radio-metode-kurir"
-                    value="kurir"
-                    label="Kirim via Kurir Khusus Berasuransi"
-                    caption="Estimasi tiba 1-2 hari kerja dengan pengamanan berlapis."
-                  />
-                </RadioGroup>
+              <div class="playground-case-card">
+                <div class="playground-case-header">
+                  <div class="flex items-center gap-2.5">
+                    <span class="playground-case-badge">
+                      <Sparkles class="h-3 w-3 text-lime-700" />
+                      Real-World Scenario
+                    </span>
+                    <h3 class="text-sigma font-extrabold text-black-900">Metode Pengambilan Barang Gadai Lunas</h3>
+                  </div>
+                  <span class="text-omega text-black-500 font-medium">Single-Choice Segments</span>
+                </div>
+                <div class="playground-case-body">
+                  <RadioGroup v-model="metodePengiriman" class="grid gap-3 md:grid-cols-2">
+                    <RadioGroupField
+                      id="radio-metode-cabang"
+                      value="cabang"
+                      label="Ambil Langsung di Kantor Cabang"
+                      caption="Gratis biaya antar, barang dapat diambil pada jam operasional."
+                    />
+                    <RadioGroupField
+                      id="radio-metode-kurir"
+                      value="kurir"
+                      label="Kirim via Kurir Khusus Berasuransi"
+                      caption="Estimasi tiba 1-2 hari kerja dengan pengamanan berlapis."
+                    />
+                  </RadioGroup>
+                </div>
               </div>
 
               <div class="grid gap-4 md:grid-cols-2">
@@ -1528,28 +1750,39 @@ const shellClass = computed(() =>
               </div>
 
               <!-- Real-world Case: Pilihan Jenis Jaminan -->
-              <div class="rounded-xl border border-emerald-200 bg-white p-5 space-y-3">
-                <h3 class="text-sigma font-bold text-black-800">Real-World Case: Kategori Barang Jaminan Gadai</h3>
-                <Select v-model="jenisJaminan">
-                  <SelectTrigger class="w-full max-w-md bg-white">
-                    <SelectValue placeholder="Pilih jenis jaminan" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectGroup>
-                      <SelectLabel>Logam Mulia</SelectLabel>
-                      <SelectItem value="emas-batangan">Emas Batangan (Antam / UBS / Lotus)</SelectItem>
-                      <SelectItem value="perhiasan-emas">Perhiasan Emas (Kalung / Cincin / Gelang)</SelectItem>
-                      <SelectItem value="dinar-dirham">Koin Dinar & Dirham</SelectItem>
-                    </SelectGroup>
-                    <SelectSeparator />
-                    <SelectGroup>
-                      <SelectLabel>Elektronik & Gadget</SelectLabel>
-                      <SelectItem value="smartphone">Smartphone & Tablet</SelectItem>
-                      <SelectItem value="laptop">Laptop / MacBook</SelectItem>
-                      <SelectItem value="kamera">Kamera DSLR / Mirrorless</SelectItem>
-                    </SelectGroup>
-                  </SelectContent>
-                </Select>
+              <div class="playground-case-card mb-6">
+                <div class="playground-case-header">
+                  <div class="flex items-center gap-2.5">
+                    <span class="playground-case-badge">
+                      <Sparkles class="h-3 w-3 text-lime-700" />
+                      Real-World Scenario
+                    </span>
+                    <h3 class="text-sigma font-extrabold text-black-900">Kategori Barang Jaminan Gadai</h3>
+                  </div>
+                  <span class="text-omega text-black-500 font-medium">Grouped Categories & Separator</span>
+                </div>
+                <div class="playground-case-body">
+                  <Select v-model="jenisJaminan">
+                    <SelectTrigger class="w-full max-w-md bg-white">
+                      <SelectValue placeholder="Pilih jenis jaminan" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectGroup>
+                        <SelectLabel>Logam Mulia</SelectLabel>
+                        <SelectItem value="emas-batangan">Emas Batangan (Antam / UBS / Lotus)</SelectItem>
+                        <SelectItem value="perhiasan-emas">Perhiasan Emas (Kalung / Cincin / Gelang)</SelectItem>
+                        <SelectItem value="dinar-dirham">Koin Dinar & Dirham</SelectItem>
+                      </SelectGroup>
+                      <SelectSeparator />
+                      <SelectGroup>
+                        <SelectLabel>Elektronik & Gadget</SelectLabel>
+                        <SelectItem value="smartphone">Smartphone & Tablet</SelectItem>
+                        <SelectItem value="laptop">Laptop / MacBook</SelectItem>
+                        <SelectItem value="kamera">Kamera DSLR / Mirrorless</SelectItem>
+                      </SelectGroup>
+                    </SelectContent>
+                  </Select>
+                </div>
               </div>
             </section>
 
@@ -1564,38 +1797,46 @@ const shellClass = computed(() =>
               </div>
 
               <!-- Real-world Case: Pencarian Kantor Cabang -->
-              <div class="playground-tile space-y-3">
-                <div class="flex items-center justify-between">
-                  <span class="text-sigma font-bold text-black-800">Real-World Case: Pencarian Kantor Cabang Pegadaian</span>
-                  <span class="text-omega font-mono text-black-400">autocomplete</span>
+              <div class="playground-case-card">
+                <div class="playground-case-header">
+                  <div class="flex items-center gap-2.5">
+                    <span class="playground-case-badge">
+                      <Sparkles class="h-3 w-3 text-lime-700" />
+                      Real-World Scenario
+                    </span>
+                    <h3 class="text-sigma font-extrabold text-black-900">Pencarian Kantor Cabang Pegadaian</h3>
+                  </div>
+                  <span class="text-omega text-black-500 font-medium">Search Autocomplete & Dynamic Filter</span>
                 </div>
-                <Combobox v-model="selectedCabang">
-                  <ComboboxAnchor>
-                    <ComboboxTrigger as-child>
-                      <Button variant="outline" class="w-full max-w-md justify-between bg-white text-black-800">
-                        {{ selectedCabang || 'Cari nama cabang atau kota...' }}
-                        <ChevronDown class="h-4 w-4 opacity-50" />
-                      </Button>
-                    </ComboboxTrigger>
-                  </ComboboxAnchor>
-                  <ComboboxList class="w-full max-w-md">
-                    <ComboboxInput placeholder="Ketik nama cabang..." />
-                    <ComboboxEmpty>Kantor cabang tidak ditemukan.</ComboboxEmpty>
-                    <ComboboxGroup>
-                      <ComboboxItem
-                        v-for="cabang in listCabang"
-                        :key="cabang"
-                        :value="cabang"
-                        @select="selectedCabang = cabang"
-                      >
-                        <ComboboxItemIndicator>
-                          <Check class="h-4 w-4 text-lime-600" />
-                        </ComboboxItemIndicator>
-                        {{ cabang }}
-                      </ComboboxItem>
-                    </ComboboxGroup>
-                  </ComboboxList>
-                </Combobox>
+                <div class="playground-case-body space-y-3">
+                  <Combobox v-model="selectedCabang">
+                    <ComboboxAnchor>
+                      <ComboboxTrigger as-child>
+                        <Button variant="outline" class="w-full max-w-md justify-between bg-white text-black-800">
+                          {{ selectedCabang || 'Cari nama cabang atau kota...' }}
+                          <ChevronDown class="h-4 w-4 opacity-50" />
+                        </Button>
+                      </ComboboxTrigger>
+                    </ComboboxAnchor>
+                    <ComboboxList class="w-full max-w-md">
+                      <ComboboxInput placeholder="Ketik nama cabang..." />
+                      <ComboboxEmpty>Kantor cabang tidak ditemukan.</ComboboxEmpty>
+                      <ComboboxGroup>
+                        <ComboboxItem
+                          v-for="cabang in listCabang"
+                          :key="cabang"
+                          :value="cabang"
+                          @select="selectedCabang = cabang"
+                        >
+                          <ComboboxItemIndicator>
+                            <Check class="h-4 w-4 text-lime-600" />
+                          </ComboboxItemIndicator>
+                          {{ cabang }}
+                        </ComboboxItem>
+                      </ComboboxGroup>
+                    </ComboboxList>
+                  </Combobox>
+                </div>
               </div>
             </section>
 
@@ -1610,25 +1851,39 @@ const shellClass = computed(() =>
               </div>
 
               <!-- Real-world Case: Tanggal Jatuh Tempo & Lahir -->
-              <div class="grid gap-6 md:grid-cols-2">
-                <div class="playground-tile space-y-2">
-                  <span class="text-sigma font-bold text-black-800">Tanggal Jatuh Tempo Pinjaman (Disable Past Dates)</span>
-                  <Datepicker
-                    v-model="tanggalJatuhTempo"
-                    placeholder="Pilih tanggal jatuh tempo"
-                    disable-past-dates
-                    trigger-class="w-full"
-                  />
+              <div class="playground-case-card">
+                <div class="playground-case-header">
+                  <div class="flex items-center gap-2.5">
+                    <span class="playground-case-badge">
+                      <Sparkles class="h-3 w-3 text-lime-700" />
+                      Real-World Scenario
+                    </span>
+                    <h3 class="text-sigma font-extrabold text-black-900">Tanggal Jatuh Tempo & Tanggal Lahir</h3>
+                  </div>
+                  <span class="text-omega text-black-500 font-medium">Min/Max Date Range Restriction</span>
                 </div>
+                <div class="playground-case-body">
+                  <div class="grid gap-6 md:grid-cols-2">
+                    <div class="space-y-2">
+                      <span class="text-sigma font-bold text-black-800">Jatuh Tempo Pinjaman (Disable Past Dates)</span>
+                      <Datepicker
+                        v-model="tanggalJatuhTempo"
+                        placeholder="Pilih tanggal jatuh tempo"
+                        disable-past-dates
+                        trigger-class="w-full"
+                      />
+                    </div>
 
-                <div class="playground-tile space-y-2">
-                  <span class="text-sigma font-bold text-black-800">Tanggal Lahir Nasabah (Disable Future Dates)</span>
-                  <Datepicker
-                    v-model="tanggalLahir"
-                    placeholder="Pilih tanggal lahir"
-                    disable-future-dates
-                    trigger-class="w-full"
-                  />
+                    <div class="space-y-2">
+                      <span class="text-sigma font-bold text-black-800">Tanggal Lahir Nasabah (Disable Future Dates)</span>
+                      <Datepicker
+                        v-model="tanggalLahir"
+                        placeholder="Pilih tanggal lahir"
+                        disable-future-dates
+                        trigger-class="w-full"
+                      />
+                    </div>
+                  </div>
                 </div>
               </div>
             </section>
@@ -1644,21 +1899,35 @@ const shellClass = computed(() =>
               </div>
 
               <!-- Real-world Case: Notifikasi & Autodebet -->
-              <div class="grid gap-4 md:grid-cols-2 pt-2">
-                <div class="rounded-xl border border-black-100 bg-white p-4 flex items-center justify-between">
-                  <div>
-                    <h4 class="text-sigma font-bold text-black-800">Notifikasi Pengingat WhatsApp</h4>
-                    <p class="text-omega text-black-500">Kirim reminder 3 hari sebelum masa gadai jatuh tempo.</p>
+              <div class="playground-case-card">
+                <div class="playground-case-header">
+                  <div class="flex items-center gap-2.5">
+                    <span class="playground-case-badge">
+                      <Sparkles class="h-3 w-3 text-lime-700" />
+                      Real-World Scenario
+                    </span>
+                    <h3 class="text-sigma font-extrabold text-black-900">Pengaturan Notifikasi & Autodebet</h3>
                   </div>
-                  <Switch v-model="notifWhatsapp" />
+                  <span class="text-omega text-black-500 font-medium">Instant State Toggles</span>
                 </div>
+                <div class="playground-case-body">
+                  <div class="grid gap-4 md:grid-cols-2">
+                    <div class="rounded-xl border border-black-100 bg-black-50/40 p-4 flex items-center justify-between">
+                      <div>
+                        <h4 class="text-sigma font-bold text-black-800">Notifikasi Pengingat WhatsApp</h4>
+                        <p class="text-omega text-black-500">Kirim reminder 3 hari sebelum masa gadai jatuh tempo.</p>
+                      </div>
+                      <Switch v-model="notifWhatsapp" />
+                    </div>
 
-                <div class="rounded-xl border border-black-100 bg-white p-4 flex items-center justify-between">
-                  <div>
-                    <h4 class="text-sigma font-bold text-black-800">Autodebet Tabungan Emas</h4>
-                    <p class="text-omega text-black-500">Debet otomatis saldo setiap tanggal 1 awal bulan.</p>
+                    <div class="rounded-xl border border-black-100 bg-black-50/40 p-4 flex items-center justify-between">
+                      <div>
+                        <h4 class="text-sigma font-bold text-black-800">Autodebet Tabungan Emas</h4>
+                        <p class="text-omega text-black-500">Debet otomatis saldo setiap tanggal 1 awal bulan.</p>
+                      </div>
+                      <Switch v-model="autodebetTabungan" />
+                    </div>
                   </div>
-                  <Switch v-model="autodebetTabungan" />
                 </div>
               </div>
             </section>
@@ -1674,20 +1943,34 @@ const shellClass = computed(() =>
               </div>
 
               <!-- Real-world Case: Upload Rekening Koran & NPWP -->
-              <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
-                <div class="rounded-xl border border-black-200 p-4 bg-white space-y-3">
-                  <h4 class="text-sigma font-bold text-black-700">Upload Rekening Koran (PDF Only)</h4>
-                  <p class="text-sm text-black-500">Spesifik hanya menerima dokumen format .pdf resmi dari bank.</p>
-                  <div class="flex items-center gap-4">
-                    <FilePicker v-model="filePickerFile2" title="Upload Dokumen PDF" accept=".pdf" rightAction />
+              <div class="playground-case-card">
+                <div class="playground-case-header">
+                  <div class="flex items-center gap-2.5">
+                    <span class="playground-case-badge">
+                      <Sparkles class="h-3 w-3 text-lime-700" />
+                      Real-World Scenario
+                    </span>
+                    <h3 class="text-sigma font-extrabold text-black-900">Upload Dokumen Persyaratan & Bukti Finansial</h3>
                   </div>
+                  <span class="text-omega text-black-500 font-medium">MIME Type Restriction & Action Button</span>
                 </div>
+                <div class="playground-case-body">
+                  <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
+                    <div class="rounded-xl border border-black-200 p-4 bg-white space-y-3">
+                      <h4 class="text-sigma font-bold text-black-700">Upload Rekening Koran (PDF Only)</h4>
+                      <p class="text-sm text-black-500">Spesifik hanya menerima dokumen format .pdf resmi dari bank.</p>
+                      <div class="flex items-center gap-4">
+                        <FilePicker v-model="filePickerFile2" title="Upload Dokumen PDF" accept=".pdf" rightAction />
+                      </div>
+                    </div>
 
-                <div class="rounded-xl border border-black-200 p-4 bg-white space-y-3">
-                  <h4 class="text-sigma font-bold text-black-700">Upload Dokumen Pendukung Lainnya</h4>
-                  <p class="text-sm text-black-500">Menerima dokumen bukti pendukung (PDF, Excel, CSV).</p>
-                  <div class="flex items-center gap-4">
-                    <FilePicker v-model="filePickerFile1" title="Upload Dokumen" />
+                    <div class="rounded-xl border border-black-200 p-4 bg-white space-y-3">
+                      <h4 class="text-sigma font-bold text-black-700">Upload Dokumen Pendukung Lainnya</h4>
+                      <p class="text-sm text-black-500">Menerima dokumen bukti pendukung (PDF, Excel, CSV).</p>
+                      <div class="flex items-center gap-4">
+                        <FilePicker v-model="filePickerFile1" title="Upload Dokumen" />
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -1703,38 +1986,51 @@ const shellClass = computed(() =>
                 </p>
               </div>
 
-              <div class="space-y-6">
-                <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
-                  <div class="rounded-xl border border-black-200 p-4 bg-white space-y-3">
-                    <h4 class="text-sigma font-bold text-black-700">Foto KTP / Identitas (Size: Small 80x80)</h4>
-                    <p class="text-sm text-black-500">Ukuran ringkas 80x80px untuk pas foto atau avatar identitas.</p>
-                    <div class="flex items-center gap-4">
-                      <ImagePicker v-model="imagePickerSmall" size="small" />
-                    </div>
+              <!-- Real-world Case: Foto KTP & Fisik Jaminan -->
+              <div class="playground-case-card">
+                <div class="playground-case-header">
+                  <div class="flex items-center gap-2.5">
+                    <span class="playground-case-badge">
+                      <Sparkles class="h-3 w-3 text-lime-700" />
+                      Real-World Scenario
+                    </span>
+                    <h3 class="text-sigma font-extrabold text-black-900">Foto Identitas KTP & Fisik Barang Jaminan</h3>
                   </div>
-
-                  <div class="rounded-xl border border-black-200 p-4 bg-white space-y-3">
-                    <h4 class="text-sigma font-bold text-black-700">Foto Barang Jaminan (Size: Large 4:3)</h4>
-                    <p class="text-sm text-black-500">Ukuran besar dengan rasio 4:3 untuk foto detail perhiasan emas.</p>
-                    <div class="flex flex-col gap-2">
-                      <ImagePicker v-model="imagePickerLarge43" size="large" aspectRatio="4:3" />
-                    </div>
-                  </div>
+                  <span class="text-omega text-black-500 font-medium">Aspect Ratio 4:3, Small 80x80 & Multi-Image Slider</span>
                 </div>
+                <div class="playground-case-body space-y-6">
+                  <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
+                    <div class="rounded-xl border border-black-200 p-4 bg-white space-y-3">
+                      <h4 class="text-sigma font-bold text-black-700">Foto KTP / Identitas (Size: Small 80x80)</h4>
+                      <p class="text-sm text-black-500">Ukuran ringkas 80x80px untuk pas foto atau avatar identitas.</p>
+                      <div class="flex items-center gap-4">
+                        <ImagePicker v-model="imagePickerSmall" size="small" />
+                      </div>
+                    </div>
 
-                <div class="rounded-xl border border-black-200 p-4 bg-white space-y-3">
-                  <h4 class="text-sigma font-bold text-black-700">Multi-Image Slider dengan Metadata & CTA</h4>
-                  <p class="text-sm text-black-500">Mendukung upload beberapa foto fisik barang jaminan sekaligus.</p>
-                  <ImagePicker 
-                    v-model="imagePickerMultiple" 
-                    size="large" 
-                    aspectRatio="4:3"
-                    title="Foto Fisik Barang Gadai"
-                    description="Upload 1 hingga 5 foto detail barang dari berbagai sisi"
-                    upload-button-text="Tambah Foto Jaminan"
-                    metadata="Format: JPG/PNG, Maksimal 5MB per file"
-                    multiple
-                  />
+                    <div class="rounded-xl border border-black-200 p-4 bg-white space-y-3">
+                      <h4 class="text-sigma font-bold text-black-700">Foto Barang Jaminan (Size: Large 4:3)</h4>
+                      <p class="text-sm text-black-500">Ukuran besar dengan rasio 4:3 untuk foto detail perhiasan emas.</p>
+                      <div class="flex flex-col gap-2">
+                        <ImagePicker v-model="imagePickerLarge43" size="large" aspectRatio="4:3" />
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="rounded-xl border border-black-200 p-4 bg-white space-y-3">
+                    <h4 class="text-sigma font-bold text-black-700">Multi-Image Slider dengan Metadata & CTA</h4>
+                    <p class="text-sm text-black-500">Mendukung upload beberapa foto fisik barang jaminan sekaligus.</p>
+                    <ImagePicker 
+                      v-model="imagePickerMultiple" 
+                      size="large" 
+                      aspectRatio="4:3"
+                      title="Foto Fisik Barang Gadai"
+                      description="Upload 1 hingga 5 foto detail barang dari berbagai sisi"
+                      upload-button-text="Tambah Foto Jaminan"
+                      metadata="Format: JPG/PNG, Maksimal 5MB per file"
+                      multiple
+                    />
+                  </div>
                 </div>
               </div>
             </section>
@@ -2046,23 +2342,35 @@ const shellClass = computed(() =>
               </div>
 
               <!-- Real-world Case: Tab Dashboard Nasabah -->
-              <div class="rounded-xl border border-rose-200 bg-white p-5 space-y-4">
-                <TabGroup default-value="ringkasan">
-                  <TabTriggerGroup>
-                    <TabTrigger value="ringkasan">Ringkasan Portofolio</TabTrigger>
-                    <TabTrigger value="riwayat">Riwayat Transaksi</TabTrigger>
-                    <TabTrigger value="dokumen">Dokumen & Akad</TabTrigger>
-                  </TabTriggerGroup>
-                  <TabContent value="ringkasan" class="pt-4 text-sigma text-black-600 leading-relaxed">
-                    Total portofolio tabungan emas aktif: <strong>12.5400 gram</strong> dengan estimasi nilai pasar Rp 18.183.000.
-                  </TabContent>
-                  <TabContent value="riwayat" class="pt-4 text-sigma text-black-600 leading-relaxed">
-                    Menampilkan 10 transaksi terakhir: Top-up saldo tabungan emas, perpanjangan gadai, dan cicilan emas.
-                  </TabContent>
-                  <TabContent value="dokumen" class="pt-4 text-sigma text-black-600 leading-relaxed">
-                    Dokumen Surat Bukti Gadai (SBG) dan sertifikat kepemilikan emas digital tersedia untuk diunduh.
-                  </TabContent>
-                </TabGroup>
+              <div class="playground-case-card">
+                <div class="playground-case-header">
+                  <div class="flex items-center gap-2.5">
+                    <span class="playground-case-badge">
+                      <Sparkles class="h-3 w-3 text-lime-700" />
+                      Real-World Scenario
+                    </span>
+                    <h3 class="text-sigma font-extrabold text-black-900">Dashboard Portofolio & Transaksi Nasabah</h3>
+                  </div>
+                  <span class="text-omega text-black-500 font-medium">Animated Sliding Indicator Tabs</span>
+                </div>
+                <div class="playground-case-body">
+                  <TabGroup default-value="ringkasan">
+                    <TabTriggerGroup>
+                      <TabTrigger value="ringkasan">Ringkasan Portofolio</TabTrigger>
+                      <TabTrigger value="riwayat">Riwayat Transaksi</TabTrigger>
+                      <TabTrigger value="dokumen">Dokumen & Akad</TabTrigger>
+                    </TabTriggerGroup>
+                    <TabContent value="ringkasan" class="pt-4 text-sigma text-black-600 leading-relaxed">
+                      Total portofolio tabungan emas aktif: <strong>12.5400 gram</strong> dengan estimasi nilai pasar Rp 18.183.000.
+                    </TabContent>
+                    <TabContent value="riwayat" class="pt-4 text-sigma text-black-600 leading-relaxed">
+                      Menampilkan 10 transaksi terakhir: Top-up saldo tabungan emas, perpanjangan gadai, dan cicilan emas.
+                    </TabContent>
+                    <TabContent value="dokumen" class="pt-4 text-sigma text-black-600 leading-relaxed">
+                      Dokumen Surat Bukti Gadai (SBG) dan sertifikat kepemilikan emas digital tersedia untuk diunduh.
+                    </TabContent>
+                  </TabGroup>
+                </div>
               </div>
             </section>
 
@@ -2191,89 +2499,104 @@ const shellClass = computed(() =>
                 </p>
               </div>
 
-              <div class="flex flex-wrap gap-4 pt-2">
-                <!-- Variant 1: Konfirmasi Pelunasan Gadai -->
-                <Dialog v-model:open="isPelunasanModalOpen">
-                  <DialogTrigger as-child>
-                    <Button>Konfirmasi Pelunasan Gadai</Button>
-                  </DialogTrigger>
-                  <DialogContent>
-                    <DialogHeader>
-                      <DialogTitle>Konfirmasi Pelunasan Pinjaman</DialogTitle>
-                      <DialogDescription>
-                        Periksa rincian pelunasan sebelum menyelesaikan pembayaran.
-                      </DialogDescription>
-                    </DialogHeader>
-                    <DialogBody class="text-sigma text-black-800 space-y-3">
-                      <div class="rounded-lg bg-black-50 p-3 space-y-1">
-                        <div class="flex justify-between text-omega">
-                          <span class="text-black-500">No. Surat Bukti Gadai</span>
-                          <span class="font-bold font-mono text-black-800">SBG-882193</span>
-                        </div>
-                        <div class="flex justify-between text-omega">
-                          <span class="text-black-500">Pokok Pinjaman</span>
-                          <span class="font-bold text-black-800">Rp 15.000.000</span>
-                        </div>
-                        <div class="flex justify-between text-omega">
-                          <span class="text-black-500">Sewa Modal (Bunga)</span>
-                          <span class="font-bold text-black-800">Rp 180.000</span>
-                        </div>
-                      </div>
-                      <p class="text-omega text-black-600">
-                        Setelah pembayaran berhasil, fisik barang jaminan dapat langsung diambil di kantor cabang terdaftar.
-                      </p>
-                    </DialogBody>
-                    <DialogFooter>
-                      <DialogClose as-child>
-                        <Button variant="outline">Batalkan</Button>
-                      </DialogClose>
-                      <Button @click="isPelunasanModalOpen = false">Konfirmasi Bayar</Button>
-                    </DialogFooter>
-                  </DialogContent>
-                </Dialog>
+              <!-- Real-world Case: Konfirmasi Pelunasan Pinjaman Gadai -->
+              <div class="playground-case-card mb-4">
+                <div class="playground-case-header">
+                  <div class="flex items-center gap-2.5">
+                    <span class="playground-case-badge">
+                      <Sparkles class="h-3 w-3 text-lime-700" />
+                      Real-World Scenario
+                    </span>
+                    <h3 class="text-sigma font-extrabold text-black-900">Konfirmasi Pelunasan Pinjaman Gadai SBG</h3>
+                  </div>
+                  <span class="text-omega text-black-500 font-medium">Modal Overlay & Transaction Breakdown</span>
+                </div>
+                <div class="playground-case-body">
+                  <div class="flex flex-wrap gap-4">
+                    <!-- Variant 1: Konfirmasi Pelunasan Gadai -->
+                    <Dialog v-model:open="isPelunasanModalOpen">
+                      <DialogTrigger as-child>
+                        <Button>Konfirmasi Pelunasan Gadai</Button>
+                      </DialogTrigger>
+                      <DialogContent>
+                        <DialogHeader>
+                          <DialogTitle>Konfirmasi Pelunasan Pinjaman</DialogTitle>
+                          <DialogDescription>
+                            Periksa rincian pelunasan sebelum menyelesaikan pembayaran.
+                          </DialogDescription>
+                        </DialogHeader>
+                        <DialogBody class="text-sigma text-black-800 space-y-3">
+                          <div class="rounded-lg bg-black-50 p-3 space-y-1">
+                            <div class="flex justify-between text-omega">
+                              <span class="text-black-500">No. Surat Bukti Gadai</span>
+                              <span class="font-bold font-mono text-black-800">SBG-882193</span>
+                            </div>
+                            <div class="flex justify-between text-omega">
+                              <span class="text-black-500">Pokok Pinjaman</span>
+                              <span class="font-bold text-black-800">Rp 15.000.000</span>
+                            </div>
+                            <div class="flex justify-between text-omega">
+                              <span class="text-black-500">Sewa Modal (Bunga)</span>
+                              <span class="font-bold text-black-800">Rp 180.000</span>
+                            </div>
+                          </div>
+                          <p class="text-omega text-black-600">
+                            Setelah pembayaran berhasil, fisik barang jaminan dapat langsung diambil di kantor cabang terdaftar.
+                          </p>
+                        </DialogBody>
+                        <DialogFooter>
+                          <DialogClose as-child>
+                            <Button variant="outline">Batalkan</Button>
+                          </DialogClose>
+                          <Button @click="isPelunasanModalOpen = false">Konfirmasi Bayar</Button>
+                        </DialogFooter>
+                      </DialogContent>
+                    </Dialog>
 
-                <!-- Variant 2: Dialog with Image -->
-                <Dialog v-model:open="isDialogOpen2">
-                  <DialogTrigger as-child>
-                    <Button variant="secondary">Dialog Media & Ilustrasi</Button>
-                  </DialogTrigger>
-                  <DialogContent>
-                    <DialogHeader>
-                      <DialogTitle>Panduan Pengambilan Jaminan</DialogTitle>
-                    </DialogHeader>
-                    <DialogBody>
-                      <div class="mb-4 h-32 w-full overflow-hidden rounded-lg bg-black-200">
-                        <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=400" alt="Dialog Image" class="h-full w-full object-cover" />
-                      </div>
-                      <p class="text-sigma font-bold text-black-800">Tunjukkan KTP Asli & Bukti SBG</p>
-                      <p class="mt-1 text-sigma text-black-500">
-                        Pengambilan barang jaminan tidak dapat diwakilkan tanpa surat kuasa bermaterai sah.
-                      </p>
-                    </DialogBody>
-                    <DialogFooter>
-                      <DialogClose as-child>
-                        <Button variant="outline">Tutup</Button>
-                      </DialogClose>
-                      <Button @click="isDialogOpen2 = false">Mengerti</Button>
-                    </DialogFooter>
-                  </DialogContent>
-                </Dialog>
+                    <!-- Variant 2: Dialog with Image -->
+                    <Dialog v-model:open="isDialogOpen2">
+                      <DialogTrigger as-child>
+                        <Button variant="secondary">Dialog Media & Ilustrasi</Button>
+                      </DialogTrigger>
+                      <DialogContent>
+                        <DialogHeader>
+                          <DialogTitle>Panduan Pengambilan Jaminan</DialogTitle>
+                        </DialogHeader>
+                        <DialogBody>
+                          <div class="mb-4 h-32 w-full overflow-hidden rounded-lg bg-black-200">
+                            <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=400" alt="Dialog Image" class="h-full w-full object-cover" />
+                          </div>
+                          <p class="text-sigma font-bold text-black-800">Tunjukkan KTP Asli & Bukti SBG</p>
+                          <p class="mt-1 text-sigma text-black-500">
+                            Pengambilan barang jaminan tidak dapat diwakilkan tanpa surat kuasa bermaterai sah.
+                          </p>
+                        </DialogBody>
+                        <DialogFooter>
+                          <DialogClose as-child>
+                            <Button variant="outline">Tutup</Button>
+                          </DialogClose>
+                          <Button @click="isDialogOpen2 = false">Mengerti</Button>
+                        </DialogFooter>
+                      </DialogContent>
+                    </Dialog>
 
-                <!-- Variant 3: Minimal Dialog -->
-                <Dialog v-model:open="isDialogOpen3">
-                  <DialogTrigger as-child>
-                    <Button variant="tertiary">Minimal Dialog</Button>
-                  </DialogTrigger>
-                  <DialogContent>
-                    <DialogHeader>
-                      <DialogTitle>Informasi Pengamanan Data</DialogTitle>
-                      <DialogDescription>Seluruh data nasabah dienkripsi dengan standar TLS 1.3.</DialogDescription>
-                    </DialogHeader>
-                    <DialogBody class="text-omicron">
-                      Klik tombol silang di pojok kanan atas untuk menutup dialog informasi ini.
-                    </DialogBody>
-                  </DialogContent>
-                </Dialog>
+                    <!-- Variant 3: Minimal Dialog -->
+                    <Dialog v-model:open="isDialogOpen3">
+                      <DialogTrigger as-child>
+                        <Button variant="tertiary">Minimal Dialog</Button>
+                      </DialogTrigger>
+                      <DialogContent>
+                        <DialogHeader>
+                          <DialogTitle>Informasi Pengamanan Data</DialogTitle>
+                          <DialogDescription>Seluruh data nasabah dienkripsi dengan standar TLS 1.3.</DialogDescription>
+                        </DialogHeader>
+                        <DialogBody class="text-omicron">
+                          Klik tombol silang di pojok kanan atas untuk menutup dialog informasi ini.
+                        </DialogBody>
+                      </DialogContent>
+                    </Dialog>
+                  </div>
+                </div>
               </div>
             </section>
 
@@ -2288,36 +2611,50 @@ const shellClass = computed(() =>
               </div>
 
               <!-- Real-world Case: Rincian Taksiran Emas -->
-              <div class="flex flex-wrap items-center gap-4">
-                <Popover>
-                  <PopoverAnchor as-child>
-                    <span class="inline-flex h-10 items-center rounded-full bg-white px-4 text-sigma font-bold text-black-800 border border-pink-200">
-                      Anchor Target
+              <div class="playground-case-card">
+                <div class="playground-case-header">
+                  <div class="flex items-center gap-2.5">
+                    <span class="playground-case-badge">
+                      <Sparkles class="h-3 w-3 text-lime-700" />
+                      Real-World Scenario
                     </span>
-                  </PopoverAnchor>
-                  <PopoverTrigger as-child>
-                    <Button>Lihat Rincian Taksiran Emas</Button>
-                  </PopoverTrigger>
-                  <PopoverContent class="w-80" title="Rincian Taksiran Emas (24K)">
-                    <div class="space-y-2 text-sigma text-black-600">
-                      <div class="flex justify-between text-omega">
-                        <span>Kadar Kemurnian</span>
-                        <strong class="text-black-800">99.99% (24 Karat)</strong>
-                      </div>
-                      <div class="flex justify-between text-omega">
-                        <span>Berat Bersih</span>
-                        <strong class="text-black-800">10.50 gram</strong>
-                      </div>
-                      <div class="flex justify-between text-omega">
-                        <span>Nilai Taksiran Pasar</span>
-                        <strong class="text-black-800">Rp 15.225.000</strong>
-                      </div>
-                      <p class="text-omega text-black-500 pt-2 border-t border-black-100">
-                        Nilai taksiran mengikuti harga acuan pasar emas resmi Pegadaian hari ini.
-                      </p>
-                    </div>
-                  </PopoverContent>
-                </Popover>
+                    <h3 class="text-sigma font-extrabold text-black-900">Rincian Taksiran Kadar Emas & Harga Acuan</h3>
+                  </div>
+                  <span class="text-omega text-black-500 font-medium">Card-Styled Popover Content</span>
+                </div>
+                <div class="playground-case-body">
+                  <div class="flex flex-wrap items-center gap-4">
+                    <Popover>
+                      <PopoverAnchor as-child>
+                        <span class="inline-flex h-10 items-center rounded-full bg-slate-100 px-4 text-sigma font-bold text-black-800 border border-slate-300">
+                          Anchor: SBG-2026-88
+                        </span>
+                      </PopoverAnchor>
+                      <PopoverTrigger as-child>
+                        <Button>Lihat Rincian Taksiran Emas</Button>
+                      </PopoverTrigger>
+                      <PopoverContent class="w-80" title="Rincian Taksiran Emas (24K)">
+                        <div class="space-y-2 text-sigma text-black-600">
+                          <div class="flex justify-between text-omega">
+                            <span>Kadar Kemurnian</span>
+                            <strong class="text-black-800">99.99% (24 Karat)</strong>
+                          </div>
+                          <div class="flex justify-between text-omega">
+                            <span>Berat Bersih</span>
+                            <strong class="text-black-800">10.50 gram</strong>
+                          </div>
+                          <div class="flex justify-between text-omega">
+                            <span>Nilai Taksiran Pasar</span>
+                            <strong class="text-black-800">Rp 15.225.000</strong>
+                          </div>
+                          <p class="text-omega text-black-500 pt-2 border-t border-black-100">
+                            Nilai taksiran mengikuti harga acuan pasar emas resmi Pegadaian hari ini.
+                          </p>
+                        </div>
+                      </PopoverContent>
+                    </Popover>
+                  </div>
+                </div>
               </div>
             </section>
 
@@ -2332,30 +2669,44 @@ const shellClass = computed(() =>
               </div>
 
               <!-- Real-world Case: Info Biaya Titip -->
-              <div class="flex flex-wrap items-center gap-6 pt-2">
-                <Tooltip>
-                  <TooltipTrigger as-child>
-                    <Button variant="ghost" class="inline-flex items-center gap-1.5 text-black-700">
-                      <CircleHelp class="h-4 w-4 text-lime-600" />
-                      Apa itu Biaya Titip Emas?
-                    </Button>
-                  </TooltipTrigger>
-                  <TooltipContent title="Biaya Titip Emas Batangan">
-                    Biaya titip fasilitas brankas aman Rp 2.500 per bulan per akun rekening tabungan emas aktif.
-                  </TooltipContent>
-                </Tooltip>
+              <div class="playground-case-card">
+                <div class="playground-case-header">
+                  <div class="flex items-center gap-2.5">
+                    <span class="playground-case-badge">
+                      <Sparkles class="h-3 w-3 text-lime-700" />
+                      Real-World Scenario
+                    </span>
+                    <h3 class="text-sigma font-extrabold text-black-900">Bantuan & Definisi Istilah Fintech</h3>
+                  </div>
+                  <span class="text-omega text-black-500 font-medium">Assistive Micro Tips</span>
+                </div>
+                <div class="playground-case-body">
+                  <div class="flex flex-wrap items-center gap-6">
+                    <Tooltip>
+                      <TooltipTrigger as-child>
+                        <Button variant="ghost" class="inline-flex items-center gap-1.5 text-black-700">
+                          <CircleHelp class="h-4 w-4 text-lime-600" />
+                          Apa itu Biaya Titip Emas?
+                        </Button>
+                      </TooltipTrigger>
+                      <TooltipContent title="Biaya Titip Emas Batangan">
+                        Biaya titip fasilitas brankas aman Rp 2.500 per bulan per akun rekening tabungan emas aktif.
+                      </TooltipContent>
+                    </Tooltip>
 
-                <Tooltip>
-                  <TooltipTrigger as-child>
-                    <Button variant="ghost" class="inline-flex items-center gap-1.5 text-black-700">
-                      <CircleHelp class="h-4 w-4 text-lime-600" />
-                      Rumus Sewa Modal
-                    </Button>
-                  </TooltipTrigger>
-                  <TooltipContent title="Formula Perhitungan Sewa Modal">
-                    (Uang Pinjaman x Tarif Sewa Modal Golongan x Jangka Waktu) / 15 Hari.
-                  </TooltipContent>
-                </Tooltip>
+                    <Tooltip>
+                      <TooltipTrigger as-child>
+                        <Button variant="ghost" class="inline-flex items-center gap-1.5 text-black-700">
+                          <CircleHelp class="h-4 w-4 text-lime-600" />
+                          Rumus Sewa Modal
+                        </Button>
+                      </TooltipTrigger>
+                      <TooltipContent title="Formula Perhitungan Sewa Modal">
+                        (Uang Pinjaman x Tarif Sewa Modal Golongan x Jangka Waktu) / 15 Hari.
+                      </TooltipContent>
+                    </Tooltip>
+                  </div>
+                </div>
               </div>
             </section>
 
@@ -2370,74 +2721,86 @@ const shellClass = computed(() =>
               </div>
 
               <!-- Real-world Case: Pilih Rekening Sumber & Wilayah -->
-              <div class="grid gap-6">
-                <div class="grid gap-4 lg:grid-cols-3">
-                  <!-- Dropdown Rekening Sumber -->
-                  <div class="space-y-2">
-                    <span class="text-sigma font-bold text-black-800">Pilih Rekening Sumber</span>
-                    <Dropdown
-                      v-model:open="dropdownIconOpen"
-                      :model-label="dropdownIconSelected"
-                      placeholder="Pilih rekening"
-                      trigger-class="w-full"
-                    >
-                      <DropdownList>
-                        <DropdownListItem
-                          v-for="(account, index) in accounts"
-                          :key="index"
-                          :label="account.title"
-                          :caption="account.caption"
-                          :selected="dropdownIconSelected === account.title"
-                          @select="dropdownIconSelected = account.title; dropdownIconOpen = false"
-                        >
-                          <template #icon>
-                            <Landmark class="h-6 w-6 text-lime-600" />
-                          </template>
-                        </DropdownListItem>
-                      </DropdownList>
-                    </Dropdown>
+              <div class="playground-case-card">
+                <div class="playground-case-header">
+                  <div class="flex items-center gap-2.5">
+                    <span class="playground-case-badge">
+                      <Sparkles class="h-3 w-3 text-lime-700" />
+                      Real-World Scenario
+                    </span>
+                    <h3 class="text-sigma font-extrabold text-black-900">Pemilihan Rekening Sumber & Proteksi Tambahan</h3>
                   </div>
+                  <span class="text-omega text-black-500 font-medium">Account Badges & Multiple Checkbox Lists</span>
+                </div>
+                <div class="playground-case-body">
+                  <div class="grid gap-4 lg:grid-cols-3">
+                    <!-- Dropdown Rekening Sumber -->
+                    <div class="space-y-2">
+                      <span class="text-sigma font-bold text-black-800">Pilih Rekening Sumber</span>
+                      <Dropdown
+                        v-model:open="dropdownIconOpen"
+                        :model-label="dropdownIconSelected"
+                        placeholder="Pilih rekening"
+                        trigger-class="w-full"
+                      >
+                        <DropdownList>
+                          <DropdownListItem
+                            v-for="(account, index) in accounts"
+                            :key="index"
+                            :label="account.title"
+                            :caption="account.caption"
+                            :selected="dropdownIconSelected === account.title"
+                            @select="dropdownIconSelected = account.title; dropdownIconOpen = false"
+                          >
+                            <template #icon>
+                              <Landmark class="h-6 w-6 text-lime-600" />
+                            </template>
+                          </DropdownListItem>
+                        </DropdownList>
+                      </Dropdown>
+                    </div>
 
-                  <!-- Dropdown Wilayah -->
-                  <div class="space-y-2">
-                    <span class="text-sigma font-bold text-black-800">Pilih Wilayah Operasional</span>
-                    <Dropdown
-                      v-model:open="dropdownOpen"
-                      :model-label="dropdownProvince"
-                      placeholder="Pilih provinsi"
-                      trigger-class="w-full"
-                    >
-                      <DropdownList>
-                        <DropdownListItem
-                          v-for="province in ['Aceh', 'Bali', 'Banten', 'DKI Jakarta', 'Jawa Barat']"
-                          :key="province"
-                          :selected="dropdownProvince === province"
-                          @select="selectDropdownProvince(province)"
-                        >
-                          {{ province }}
-                        </DropdownListItem>
-                      </DropdownList>
-                    </Dropdown>
-                  </div>
+                    <!-- Dropdown Wilayah -->
+                    <div class="space-y-2">
+                      <span class="text-sigma font-bold text-black-800">Pilih Wilayah Operasional</span>
+                      <Dropdown
+                        v-model:open="dropdownOpen"
+                        :model-label="dropdownProvince"
+                        placeholder="Pilih provinsi"
+                        trigger-class="w-full"
+                      >
+                        <DropdownList>
+                          <DropdownListItem
+                            v-for="province in ['Aceh', 'Bali', 'Banten', 'DKI Jakarta', 'Jawa Barat']"
+                            :key="province"
+                            :selected="dropdownProvince === province"
+                            @select="selectDropdownProvince(province)"
+                          >
+                            {{ province }}
+                          </DropdownListItem>
+                        </DropdownList>
+                      </Dropdown>
+                    </div>
 
-                  <!-- Dropdown Multi Opsi -->
-                  <div class="space-y-2">
-                    <span class="text-sigma font-bold text-black-800">Paket Proteksi Tambahan</span>
-                    <Dropdown
-                      v-model:open="dropdownMultipleOpen"
-                      :model-label="dropdownMultipleLabel"
-                      placeholder="Pilih paket"
-                      trigger-class="w-full"
-                    >
-                      <DropdownList variant="multiple">
-                        <DropdownListCheckboxItem v-model="dropdownOptionA">
-                          Asuransi Jiwa Nasabah
-                        </DropdownListCheckboxItem>
-                        <DropdownListCheckboxItem v-model="dropdownOptionB">
-                          Proteksi Khazanah Emas
-                        </DropdownListCheckboxItem>
-                      </DropdownList>
-                    </Dropdown>
+                    <!-- Dropdown Multi Opsi -->
+                    <div class="space-y-2">
+                      <span class="text-sigma font-bold text-black-800">Paket Proteksi Tambahan</span>
+                      <Dropdown
+                        v-model:open="dropdownMultipleOpen"
+                        :model-label="dropdownMultipleLabel"
+                        placeholder="Pilih paket"
+                        trigger-class="w-full"
+                      >
+                        <DropdownList variant="multiple">
+                          <DropdownListCheckboxItem v-model="dropdownOptionA">
+                            Asuransi Jiwa Nasabah
+                          </DropdownListCheckboxItem>
+                          <DropdownListCheckboxItem v-model="dropdownOptionB">
+                            Proteksi Khazanah Emas
+                          </DropdownListCheckboxItem>
+                        </DropdownList>
+                      </Dropdown>
+                    </div>
                   </div>
                 </div>
               </div>
