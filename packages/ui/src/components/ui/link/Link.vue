@@ -25,8 +25,8 @@ const props = withDefaults(
     :tabindex="disabled ? -1 : undefined"
     :class="
       cn(
-        'inline-flex w-fit items-center gap-1 text-omicron font-semibold leading-6 text-lime-600 underline-offset-4 transition-colors hover:text-lime-500 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lime-500 focus-visible:ring-offset-2',
-        disabled && 'pointer-events-none text-black-600',
+        'inline-flex w-fit items-center gap-1 text-omicron font-semibold leading-6 text-lime-500 underline-offset-4 transition-colors hover:text-lime-800 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lime-500 focus-visible:ring-offset-2',
+        disabled && 'pointer-events-none text-black-500',
         props.class,
       )
     "
