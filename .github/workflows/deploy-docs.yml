@@ -1,4 +1,4 @@
-name: Deploy Docs
+name: Deploy Docs & Playground
 
 on:
   push:
@@ -40,6 +40,14 @@ jobs:
 
       - name: Build docs
         run: pnpm --filter docs build
+
+      - name: Build playground
+        run: pnpm --filter playground build
+
+      - name: Merge playground into docs dist
+        run: |
+          mkdir -p apps/docs/.vitepress/dist/playground
+          cp -r apps/playground/dist/* apps/docs/.vitepress/dist/playground/
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
