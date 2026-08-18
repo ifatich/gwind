@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref } from "vue";
+import { computed, ref, onMounted, onUnmounted } from "vue";
 import {
   Accordion,
   AddAmount,
@@ -127,6 +127,62 @@ import {
 } from "lucide-vue-next";
 
 const activeSection = ref("inventory");
+const navContainerRef = ref<HTMLElement | null>(null);
+const isManualNav = ref(false);
+
+function scrollNavPillIntoView(id: string) {
+  const pillEl = document.querySelector(`[data-nav-id="${id}"]`);
+  if (pillEl && navContainerRef.value) {
+    pillEl.scrollIntoView({
+      behavior: "smooth",
+      inline: "center",
+      block: "nearest",
+    });
+  }
+}
+
+function scrollToSection(id: string) {
+  isManualNav.value = true;
+  activeSection.value = id;
+  const el = document.getElementById(id);
+  if (el) {
+    const yOffset = -115;
+    const y = el.getBoundingClientRect().top + window.pageYOffset + yOffset;
+    window.scrollTo({ top: y, behavior: "smooth" });
+  }
+  scrollNavPillIntoView(id);
+  setTimeout(() => {
+    isManualNav.value = false;
+  }, 700);
+}
+
+let scrollObserver: IntersectionObserver | null = null;
+
+onMounted(() => {
+  const sectionEls = document.querySelectorAll("section[id]");
+  scrollObserver = new IntersectionObserver(
+    (entries) => {
+      if (isManualNav.value) return;
+      const visibleEntries = entries.filter((e) => e.isIntersecting);
+      if (visibleEntries.length > 0) {
+        const topEntry = visibleEntries[0];
+        activeSection.value = topEntry.target.id;
+        scrollNavPillIntoView(topEntry.target.id);
+      }
+    },
+    {
+      rootMargin: "-110px 0px -65% 0px",
+      threshold: 0,
+    }
+  );
+
+  sectionEls.forEach((el) => scrollObserver?.observe(el));
+});
+
+onUnmounted(() => {
+  scrollObserver?.disconnect();
+});
+
 const isDialogOpen = ref(false);
 const isDialogOpen2 = ref(false);
 const isDialogOpen3 = ref(false);
@@ -705,19 +761,23 @@ const shellClass = computed(() =>
         </div>
       </div>
 
-      <!-- Sticky Top Navigation Pills -->
+      <!-- Sticky Top Navigation Pills (Auto-scrolling ScrollSpy) -->
       <nav class="playground-top-nav">
-        <div class="playground-container flex items-center gap-2 overflow-x-auto no-scrollbar py-1">
-          <a
+        <div
+          ref="navContainerRef"
+          class="playground-container flex items-center gap-2 overflow-x-auto no-scrollbar py-1"
+        >
+          <button
             v-for="section in sections"
             :key="section.id"
-            :href="`#${section.id}`"
-            class="playground-nav-pill"
+            :data-nav-id="section.id"
+            type="button"
+            class="playground-nav-pill cursor-pointer"
             :class="activeSection === section.id ? 'active' : ''"
-            @click="activeSection = section.id"
+            @click="scrollToSection(section.id)"
           >
             {{ section.label }}
-          </a>
+          </button>
         </div>
       </nav>
 
@@ -1692,13 +1752,15 @@ const shellClass = computed(() =>
 
             <section
               id="dialog"
-              class="playground-section playground-panel p-5"
+              class="playground-section playground-panel p-6 space-y-5"
             >
-              <h2 class="mb-1 text-omicron font-bold text-black-800">Dialog</h2>
-              <p class="mb-5 text-sigma text-black-500">
-                Modal root, trigger, overlay, content, header, title,
-                description, footer, and close.
-              </p>
+              <div>
+                <p class="playground-eyebrow">Modal Overlays & Focus Trap</p>
+                <h2 class="text-xl font-bold text-black-900">Dialog</h2>
+                <p class="text-sigma text-black-500">
+                  Accessible modal dialogs with focus trap, backdrop overlay, header, body, and action footer.
+                </p>
+              </div>
 
               <div class="flex flex-wrap gap-4">
                 <!-- Variant 1: Default Dialog -->
@@ -1773,32 +1835,35 @@ const shellClass = computed(() =>
 
             <section
               id="popover"
-              class="playground-section playground-panel p-5"
+              class="playground-section playground-color-block block-pink space-y-4"
             >
-              <h2 class="mb-1 text-omicron font-bold text-black-800">
-                Popover
-              </h2>
-              <p class="mb-5 text-sigma text-black-500">
-                Anchor, trigger, portal content, shadow, radius, and spacing.
-              </p>
+              <div class="mb-4">
+                <p class="playground-eyebrow">Floating Surfaces & Menus</p>
+                <h2 class="playground-display">Popover</h2>
+                <p class="playground-desc">
+                  Rich floating surfaces with card-styling header slots, anchor positioning, and click-outside dismissal.
+                </p>
+              </div>
 
-              <Popover>
-                <PopoverAnchor as-child>
-                  <span
-                    class="mr-3 inline-flex h-10 items-center rounded-md bg-lime-100 px-3 text-sigma font-bold text-lime-600"
-                  >
-                    Anchor
-                  </span>
-                </PopoverAnchor>
-                <PopoverTrigger as-child>
-                  <Button variant="outline">Open Popover</Button>
-                </PopoverTrigger>
-                <PopoverContent class="w-72" title="Popover content">
-                  <p class="text-sigma text-black-500">
-                    Check shadow, radius, padding, and text color here.
-                  </p>
-                </PopoverContent>
-              </Popover>
+              <div class="flex flex-wrap items-center gap-4">
+                <Popover>
+                  <PopoverAnchor as-child>
+                    <span
+                      class="inline-flex h-10 items-center rounded-full bg-white px-4 text-sigma font-bold text-black-800 border border-pink-200"
+                    >
+                      Anchor Target
+                    </span>
+                  </PopoverAnchor>
+                  <PopoverTrigger as-child>
+                    <Button>Open Popover</Button>
+                  </PopoverTrigger>
+                  <PopoverContent class="w-80" title="Detail Informasi">
+                    <p class="text-sigma text-black-600">
+                      Popover menggunakan struktur card-style dengan header dan slot konten fleksibel.
+                    </p>
+                  </PopoverContent>
+                </Popover>
+              </div>
             </section>
 
             <section
@@ -1949,14 +2014,15 @@ const shellClass = computed(() =>
 
             <section
               id="tooltip"
-              class="playground-section playground-panel p-5"
+              class="playground-section playground-panel p-6 space-y-4"
             >
-              <h2 class="mb-1 text-omicron font-bold text-black-800">
-                Tooltip
-              </h2>
-              <p class="mb-5 text-sigma text-black-500">
-                Provider, trigger, and content.
-              </p>
+              <div>
+                <p class="playground-eyebrow">Assistive Hints & Definitions</p>
+                <h2 class="text-xl font-bold text-black-900">Tooltip</h2>
+                <p class="text-sigma text-black-500">
+                  Hover and focus-triggered micro tooltips with card styling and precise anchor offsets.
+                </p>
+              </div>
 
               <Tooltip>
                 <TooltipTrigger as-child>
@@ -1970,14 +2036,15 @@ const shellClass = computed(() =>
 
             <section
               id="breadcrumb"
-              class="playground-section playground-panel p-5"
+              class="playground-section playground-panel p-6 space-y-4"
             >
-              <h2 class="mb-1 text-omicron font-bold text-black-800">
-                Breadcrumb
-              </h2>
-              <p class="mb-5 text-sigma text-black-500">
-                List, item, link, separator, ellipsis, and page state.
-              </p>
+              <div>
+                <p class="playground-eyebrow">Navigation Trails</p>
+                <h2 class="text-xl font-bold text-black-900">Breadcrumb</h2>
+                <p class="text-sigma text-black-500">
+                  Hierarchical navigation trails with item links, separators, truncation ellipsis, and page state.
+                </p>
+              </div>
 
               <div class="space-y-4">
                 <div>
@@ -2031,8 +2098,8 @@ const shellClass = computed(() =>
               </div>
             </section>
 
-            <section id="tabs" class="playground-section playground-color-block block-pink">
-              <div class="mb-6">
+            <section id="tabs" class="playground-section playground-color-block block-coral space-y-6">
+              <div class="mb-4">
                 <p class="playground-eyebrow">Viewport & Segments</p>
                 <h2 class="playground-display">Tabs</h2>
                 <p class="playground-desc">
@@ -2089,12 +2156,14 @@ const shellClass = computed(() =>
               </div>
             </section>
 
-            <section id="alert" class="playground-section playground-panel p-5">
-              <h2 class="mb-1 text-omicron font-bold text-black-800">Alert</h2>
-              <p class="mb-5 text-sigma text-black-500">
-                Default, destructive, icon, title, description, and close
-                affordance.
-              </p>
+            <section id="alert" class="playground-section playground-panel p-6 space-y-4">
+              <div>
+                <p class="playground-eyebrow">System Banners & Feedback</p>
+                <h2 class="text-xl font-bold text-black-900">Alert</h2>
+                <p class="text-sigma text-black-500">
+                  Status alerts for critical warnings, success feedback, and system notifications with optional close actions.
+                </p>
+              </div>
 
               <div class="space-y-4">
                 <Alert>
@@ -2118,14 +2187,17 @@ const shellClass = computed(() =>
 
             <section
               id="progress"
-              class="playground-section playground-panel p-5"
+              class="playground-section playground-panel p-6 space-y-4"
             >
-              <h2 class="mb-1 text-omicron font-bold text-black-800">
-                Progress
-              </h2>
-              <p class="mb-5 text-sigma text-black-500">
-                Progress indicator and adjustable value.
-              </p>
+              <div>
+                <p class="playground-eyebrow">Deterministic Loaders</p>
+                <h2 class="text-xl font-bold text-black-900">
+                  Progress Bar
+                </h2>
+                <p class="text-sigma text-black-500">
+                  Visual progress indicators for multi-step workflows, uploads, and background tasks.
+                </p>
+              </div>
 
               <div class="space-y-2">
                 <div class="flex items-center justify-between">
@@ -2147,12 +2219,15 @@ const shellClass = computed(() =>
 
             <section
               id="switch"
-              class="playground-section playground-panel p-5"
+              class="playground-section playground-panel p-6 space-y-4"
             >
-              <h2 class="mb-1 text-omicron font-bold text-black-800">Switch</h2>
-              <p class="mb-5 text-sigma text-black-500">
-                On/off and disabled states.
-              </p>
+              <div>
+                <p class="playground-eyebrow">Boolean Controls</p>
+                <h2 class="text-xl font-bold text-black-900">Switch Toggle</h2>
+                <p class="text-sigma text-black-500">
+                  Immediate on/off state toggles for user settings, dark mode, and feature flags.
+                </p>
+              </div>
 
               <div class="flex flex-wrap items-center gap-4">
                 <Switch v-model="switchValue" />
@@ -2166,14 +2241,17 @@ const shellClass = computed(() =>
 
             <section
               id="pagination"
-              class="playground-section playground-panel p-5"
+              class="playground-section playground-panel p-6 space-y-4"
             >
-              <h2 class="mb-1 text-omicron font-bold text-black-800">
-                Pagination
-              </h2>
-              <p class="mb-5 text-sigma text-black-500">
-                Data-driven pages with ellipsis rules from Figma.
-              </p>
+              <div>
+                <p class="playground-eyebrow">Page Navigation</p>
+                <h2 class="text-xl font-bold text-black-900">
+                  Pagination
+                </h2>
+                <p class="text-sigma text-black-500">
+                  Accessible pagination controls with smart truncation ellipsis and page change triggers.
+                </p>
+              </div>
 
               <div class="grid gap-4">
                 <Pagination v-model="paginationPage" :total-pages="20" />
@@ -2217,16 +2295,16 @@ const shellClass = computed(() =>
               </div>
             </section>
 
-            <section id="card" class="playground-section playground-panel p-6 space-y-6">
+            <section id="card" class="playground-section playground-color-block block-cream space-y-6">
               <div class="flex flex-wrap items-center justify-between gap-3">
                 <div>
-                  <p class="playground-eyebrow">Surfaces & Tiers</p>
-                  <h2 class="text-xl font-bold text-black-900">Card</h2>
-                  <p class="text-sigma text-black-500">
-                    Pricing tiers, marketing compositions, structured headers, content, and footer slots.
+                  <p class="playground-eyebrow">Surfaces & Containers</p>
+                  <h2 class="playground-display">Card</h2>
+                  <p class="playground-desc">
+                    Content containers featuring structured header, title, description, content body, and action footer slots.
                   </p>
                 </div>
-                <Badge variant="brocoli">Container</Badge>
+                <Badge variant="brocoli">Container Component</Badge>
               </div>
 
               <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
@@ -2290,14 +2368,17 @@ const shellClass = computed(() =>
 
             <section
               id="divider"
-              class="playground-section playground-panel p-5"
+              class="playground-section playground-panel p-6 space-y-4"
             >
-              <h2 class="mb-1 text-omicron font-bold text-black-800">
-                Divider
-              </h2>
-              <p class="mb-5 text-sigma text-black-500">
-                Horizontal and vertical separators.
-              </p>
+              <div>
+                <p class="playground-eyebrow">Separators & Boundaries</p>
+                <h2 class="text-xl font-bold text-black-900">
+                  Divider
+                </h2>
+                <p class="text-sigma text-black-500">
+                  Hairline visual separators supporting both horizontal and vertical orientations.
+                </p>
+              </div>
 
               <div class="grid gap-4">
                 <Divider />
@@ -2311,14 +2392,17 @@ const shellClass = computed(() =>
 
             <section
               id="spinner"
-              class="playground-section playground-panel p-5"
+              class="playground-section playground-panel p-6 space-y-4"
             >
-              <h2 class="mb-1 text-omicron font-bold text-black-800">
-                Spinner
-              </h2>
-              <p class="mb-5 text-sigma text-black-500">
-                Loading indicator sizes.
-              </p>
+              <div>
+                <p class="playground-eyebrow">Activity Indicators</p>
+                <h2 class="text-xl font-bold text-black-900">
+                  Spinner
+                </h2>
+                <p class="text-sigma text-black-500">
+                  Compact CSS-driven activity spinners for asynchronous operation loading states.
+                </p>
+              </div>
 
               <div class="flex flex-wrap items-center gap-4">
                 <Spinner size="sm" />
@@ -2327,9 +2411,14 @@ const shellClass = computed(() =>
               </div>
             </section>
 
-            <section id="link" class="playground-section playground-panel p-5">
-              <h2 class="mb-1 text-omicron font-bold text-black-800">Link</h2>
-              <p class="mb-5 text-sigma text-black-500">Inline link styles.</p>
+            <section id="link" class="playground-section playground-panel p-6 space-y-4">
+              <div>
+                <p class="playground-eyebrow">Hyperlinks & Anchors</p>
+                <h2 class="text-xl font-bold text-black-900">Link</h2>
+                <p class="text-sigma text-black-500">
+                  Semantic inline links with customizable hover transitions and disabled accessibility states.
+                </p>
+              </div>
 
               <div class="flex flex-wrap items-center gap-4">
                 <Link href="#">Default link</Link>
@@ -2337,11 +2426,14 @@ const shellClass = computed(() =>
               </div>
             </section>
 
-            <section id="toast" class="playground-section playground-panel p-5">
-              <h2 class="mb-1 text-omicron font-bold text-black-800">Toast</h2>
-              <p class="mb-5 text-sigma text-black-500">
-                Snackbar and temporary notification surface.
-              </p>
+            <section id="toast" class="playground-section playground-panel p-6 space-y-4">
+              <div>
+                <p class="playground-eyebrow">Ephemeral Feedback</p>
+                <h2 class="text-xl font-bold text-black-900">Toast & Snackbars</h2>
+                <p class="text-sigma text-black-500">
+                  Floating snackbar notifications for transient feedback on background operations.
+                </p>
+              </div>
 
               <div class="grid gap-4 md:grid-cols-3">
                 <Toast
@@ -2364,14 +2456,17 @@ const shellClass = computed(() =>
 
             <section
               id="accordion"
-              class="playground-section playground-panel p-5"
+              class="playground-section playground-panel p-6 space-y-4"
             >
-              <h2 class="mb-1 text-omicron font-bold text-black-800">
-                Accordion
-              </h2>
-              <p class="mb-5 text-sigma text-black-500">
-                Root, item, trigger, and content states.
-              </p>
+              <div>
+                <p class="playground-eyebrow">Collapsible Disclosures</p>
+                <h2 class="text-xl font-bold text-black-900">
+                  Accordion
+                </h2>
+                <p class="text-sigma text-black-500">
+                  Expandable FAQ and detail sections supporting single-open and multi-collapse modes.
+                </p>
+              </div>
 
               <Accordion type="single" collapsible>
                 <AccordionItem value="one">
@@ -2391,9 +2486,14 @@ const shellClass = computed(() =>
               </Accordion>
             </section>
 
-            <section id="badge" class="playground-section playground-panel p-5">
-              <h2 class="mb-1 text-omicron font-bold text-black-800">Badge</h2>
-              <p class="mb-5 text-sigma text-black-500">All badge variants.</p>
+            <section id="badge" class="playground-section playground-panel p-6 space-y-4">
+              <div>
+                <p class="playground-eyebrow">Taxonomy & Status Pills</p>
+                <h2 class="text-xl font-bold text-black-900">Badge</h2>
+                <p class="text-sigma text-black-500">
+                  Status badges and category tags in semantic color shades (Green, Broccoli, Orange, Blue, Red, Outline).
+                </p>
+              </div>
 
               <div class="flex flex-wrap gap-2">
                 <Badge>Green</Badge>
@@ -2405,13 +2505,16 @@ const shellClass = computed(() =>
               </div>
             </section>
 
-            <section id="carousel" class="playground-section playground-panel p-5">
-              <h2 class="mb-1 text-omicron font-bold text-black-800">
-                Carousel & Banner
-              </h2>
-              <p class="mb-5 text-sigma text-black-500">
-                Figma Banner Carousel preset and compound primitive components.
-              </p>
+            <section id="carousel" class="playground-section playground-panel p-6 space-y-5">
+              <div>
+                <p class="playground-eyebrow">Sliders & Hero Banners</p>
+                <h2 class="text-xl font-bold text-black-900">
+                  Carousel & Banner Slider
+                </h2>
+                <p class="text-sigma text-black-500">
+                  Interactive touch-enabled banner carousels with autoplay, slide indicators, and navigation controls.
+                </p>
+              </div>
 
               <div class="space-y-6">
                 <div class="rounded-md border border-black-200 bg-white p-4">
@@ -2457,17 +2560,16 @@ const shellClass = computed(() =>
 
             <section
               id="file-picker"
-              class="playground-section playground-panel p-5"
+              class="playground-section playground-panel p-6 space-y-5"
             >
-              <div class="mb-5 flex items-center justify-between">
-                <div>
-                  <h2 class="text-omicron font-bold text-black-800">
-                    File Picker
-                  </h2>
-                  <p class="text-sigma text-black-500">
-                    Komponen upload file non-gambar (PDF, CSV, Excel, dll).
-                  </p>
-                </div>
+              <div>
+                <p class="playground-eyebrow">Media & Document Uploads</p>
+                <h2 class="text-xl font-bold text-black-900">
+                  File Picker
+                </h2>
+                <p class="text-sigma text-black-500">
+                  Dropzone file uploaders for non-image documents (PDF, CSV, Excel, Word).
+                </p>
               </div>
 
               <div class="space-y-6">
@@ -2493,17 +2595,16 @@ const shellClass = computed(() =>
 
             <section
               id="image-picker"
-              class="playground-section playground-panel p-5"
+              class="playground-section playground-panel p-6 space-y-5"
             >
-              <div class="mb-5 flex items-center justify-between">
-                <div>
-                  <h2 class="text-omicron font-bold text-black-800">
-                    Form Image (Input) & Image Display
-                  </h2>
-                  <p class="text-sigma text-black-500">
-                    Komponen upload dan penampil gambar (Figma Node 26213:1781).
-                  </p>
-                </div>
+              <div>
+                <p class="playground-eyebrow">Image Assets & Media Displays</p>
+                <h2 class="text-xl font-bold text-black-900">
+                  Form Image (Input) & Image Display
+                </h2>
+                <p class="text-sigma text-black-500">
+                  Image uploaders with aspect ratio previews, multi-image slider, metadata tags, and fallback displays.
+                </p>
               </div>
 
               <!-- Form Image (Input) -->
