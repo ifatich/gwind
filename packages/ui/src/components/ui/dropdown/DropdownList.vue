@@ -112,7 +112,7 @@ watch(showSearch, (enabled) => {
           'flex w-full flex-col',
           showSearch && 'max-h-[480px] max-sm:max-h-[60vh] overflow-y-auto',
           props.variant === 'single'
-            ? 'divide-y divide-black-20'
+            ? 'divide-y divide-black-200'
             : 'gap-1 p-4',
           showSearch && props.variant === 'multiple' && 'p-4 pt-0',
         )

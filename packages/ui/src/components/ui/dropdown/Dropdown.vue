@@ -2,7 +2,9 @@
 import { computed, onBeforeUnmount, provide, ref, watch, type HTMLAttributes } from "vue";
 import { ChevronDown } from "lucide-vue-next";
 import { useMediaQuery } from "@vueuse/core";
-import { Popover, PopoverContent, PopoverTrigger } from "../popover";
+import { Popover, PopoverTrigger } from "../popover";
+import { PopoverContent as RekaPopoverContent, PopoverPortal } from "reka-ui";
+import { useGwindPortalTarget } from "../../../lib/portal";
 import { Label } from "../label";
 import { cn } from "../../../lib/utils";
 import { DROPDOWN_ROOT_CONTEXT_KEY } from "./context";
@@ -32,6 +34,7 @@ const emits = defineEmits<{
 const internalOpen = ref(props.open ?? props.defaultOpen ?? false);
 const openState = computed(() => props.open ?? internalOpen.value);
 const isFilled = computed(() => Boolean(props.modelLabel?.trim()));
+const portalTarget = useGwindPortalTarget();
 
 provide(DROPDOWN_ROOT_CONTEXT_KEY, {
   open: openState,
@@ -118,24 +121,25 @@ function onKeydown(e: KeyboardEvent) {
       </slot>
     </PopoverTrigger>
 
-    <!-- ===== DESKTOP: PopoverContent normal, positioning dihandle floating-ui ===== -->
-    <PopoverContent
-      v-if="!isMobile"
-      align="start"
-      :side-offset="8"
-      update-position-strategy="always"
-      data-slot="dropdown-content"
-      :class="
-        cn(
-          'w-[var(--reka-popover-trigger-width)] overflow-hidden rounded-[6px] border border-black-20 bg-white p-0 shadow-drop-1',
-          props.contentClass,
-        )
-      "
-    >
-      <div :class="cn('min-w-full', props.class)">
-        <slot />
-      </div>
-    </PopoverContent>
+    <!-- ===== DESKTOP: RekaPopoverContent normal, positioning dihandle floating-ui ===== -->
+    <PopoverPortal v-if="!isMobile" :to="portalTarget">
+      <RekaPopoverContent
+        align="start"
+        :side-offset="8"
+        update-position-strategy="always"
+        data-slot="dropdown-content"
+        :class="
+          cn(
+            'z-50 w-[var(--reka-popover-trigger-width)] overflow-hidden rounded-[6px] border border-black-200 bg-white p-0 shadow-drop-1 outline-none data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2',
+            props.contentClass,
+          )
+        "
+      >
+        <div :class="cn('min-w-full', props.class)">
+          <slot />
+        </div>
+      </RekaPopoverContent>
+    </PopoverPortal>
 
     <!-- ===== MOBILE: Bottom sheet lepas dari floating-ui, transform full dikontrol Transition ===== -->
     <Teleport to="body">
