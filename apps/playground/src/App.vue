@@ -1083,11 +1083,11 @@ const shellClass = computed(() =>
 
             <!-- 3. FORM & DATA ENTRY -->
             <!-- Input & InputField -->
-            <section id="input" class="playground-section playground-color-block block-lilac">
-              <div class="mb-6">
+            <section id="input" class="playground-section playground-panel p-6 space-y-6">
+              <div>
                 <p class="playground-eyebrow">Forms & Text Entry</p>
-                <h2 class="playground-display">Input & InputField</h2>
-                <p class="playground-desc">
+                <h2 class="text-xl font-bold text-black-900">Input & InputField</h2>
+                <p class="text-sigma text-black-500">
                   Single-line inputs, numeric formatters, prefix/suffix adornments, and action buttons.
                 </p>
               </div>
@@ -1319,12 +1319,12 @@ const shellClass = computed(() =>
             </section>
 
             <!-- Input Rupiah -->
-            <section id="input-rupiah" class="playground-section playground-color-block block-lilac">
-              <div class="mb-6 flex flex-wrap items-center justify-between gap-3">
+            <section id="input-rupiah" class="playground-section playground-panel p-6 space-y-6">
+              <div class="flex flex-wrap items-center justify-between gap-3">
                 <div>
                   <p class="playground-eyebrow">Currency Formatting & Fintech Input</p>
-                  <h2 class="playground-display">Input Rupiah</h2>
-                  <p class="playground-desc">
+                  <h2 class="text-xl font-bold text-black-900">Input Rupiah</h2>
+                  <p class="text-sigma text-black-500">
                     Functional currency input with automatic thousands separators, paste normalization, and raw integer emitting.
                   </p>
                 </div>
@@ -1577,7 +1577,7 @@ const shellClass = computed(() =>
             </section>
 
             <!-- Label -->
-            <section id="label" class="playground-section playground-panel p-6 space-y-4">
+            <section id="label" class="playground-section playground-panel p-6 space-y-5">
               <div>
                 <p class="playground-eyebrow">Form Field Labels</p>
                 <h2 class="text-xl font-bold text-black-900">Label</h2>
@@ -1586,19 +1586,52 @@ const shellClass = computed(() =>
                 </p>
               </div>
 
-              <div class="flex flex-wrap items-center gap-6 pt-2">
-                <Label>Standard Label</Label>
-                <Label required>Required Field (*)</Label>
-                <Label class="text-black-400">Disabled Field Label</Label>
+              <!-- Real-world Case: Label Form Akad & Syarat Wajib -->
+              <div class="playground-case-card">
+                <div class="playground-case-header">
+                  <div class="flex items-center gap-2.5">
+                    <span class="playground-case-badge">
+                      <Sparkles class="h-3 w-3 text-lime-700" />
+                      Real-World Scenario
+                    </span>
+                    <h3 class="text-sigma font-extrabold text-black-900">Formulir Akad Gadai & Keterangan Label Wajib</h3>
+                  </div>
+                  <span class="text-omega text-black-500 font-medium">Mandatory Asterisk (*) & Accessible States</span>
+                </div>
+                <div class="playground-case-body">
+                  <div class="grid gap-4 md:grid-cols-3">
+                    <div class="space-y-1.5">
+                      <Label required>Nomor KTP / Paspor</Label>
+                      <p class="text-omega text-black-500">Kolom wajib diisi untuk verifikasi identitas nasabah.</p>
+                    </div>
+                    <div class="space-y-1.5">
+                      <Label>NPWP Pribadi (Opsional)</Label>
+                      <p class="text-omega text-black-500">Dibutuhkan khusus untuk pinjaman di atas Rp 50.000.000.</p>
+                    </div>
+                    <div class="space-y-1.5">
+                      <Label class="text-black-400">Kode Referal Agen (Terkunci)</Label>
+                      <p class="text-omega text-black-400">Field dinonaktifkan sesuai data pendaftaran cabang.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                <h3 class="text-omega font-bold uppercase tracking-wider text-black-400 mb-3">Label Primitives</h3>
+                <div class="flex flex-wrap items-center gap-6">
+                  <Label>Standard Label</Label>
+                  <Label required>Required Field (*)</Label>
+                  <Label class="text-black-400">Disabled Field Label</Label>
+                </div>
               </div>
             </section>
 
             <!-- Checkbox -->
-            <section id="checkbox" class="playground-section playground-color-block block-cream space-y-5">
-              <div class="mb-4">
+            <section id="checkbox" class="playground-section playground-panel p-6 space-y-6">
+              <div>
                 <p class="playground-eyebrow">Selection Controls & Consent</p>
-                <h2 class="playground-display">Checkbox</h2>
-                <p class="playground-desc">
+                <h2 class="text-xl font-bold text-black-900">Checkbox</h2>
+                <p class="text-sigma text-black-500">
                   Primitive boxes, desktop and mobile field rows, indeterminate state, and multi-selection groups.
                 </p>
               </div>
@@ -1740,11 +1773,11 @@ const shellClass = computed(() =>
             </section>
 
             <!-- Select -->
-            <section id="select" class="playground-section playground-color-block block-mint space-y-4">
-              <div class="mb-4">
+            <section id="select" class="playground-section playground-panel p-6 space-y-6">
+              <div>
                 <p class="playground-eyebrow">Dropdown List Selection</p>
-                <h2 class="playground-display">Select</h2>
-                <p class="playground-desc">
+                <h2 class="text-xl font-bold text-black-900">Select</h2>
+                <p class="text-sigma text-black-500">
                   Trigger, value, content, grouped categories, labels, separators, and scroll buttons.
                 </p>
               </div>
@@ -2037,7 +2070,7 @@ const shellClass = computed(() =>
 
             <!-- 4. DATA DISPLAY & LAYOUT -->
             <!-- Avatar -->
-            <section id="avatar" class="playground-section playground-panel p-6 space-y-4">
+            <section id="avatar" class="playground-section playground-panel p-6 space-y-5">
               <div>
                 <p class="playground-eyebrow">User Profiles & Identifiers</p>
                 <h2 class="text-xl font-bold text-black-900">Avatar</h2>
@@ -2046,22 +2079,58 @@ const shellClass = computed(() =>
                 </p>
               </div>
 
-              <div class="flex flex-wrap items-center gap-6 pt-2">
-                <div class="flex items-center gap-3">
-                  <Avatar src="https://i.pravatar.cc/96?img=12" alt="Budi Santoso" size="lg" />
-                  <div>
-                    <h4 class="text-sigma font-bold text-black-800">Budi Santoso</h4>
-                    <p class="text-omega text-black-500">Nasabah Prioritas</p>
+              <!-- Real-world Case: Profil Nasabah & Penaksir -->
+              <div class="playground-case-card">
+                <div class="playground-case-header">
+                  <div class="flex items-center gap-2.5">
+                    <span class="playground-case-badge">
+                      <Sparkles class="h-3 w-3 text-lime-700" />
+                      Real-World Scenario
+                    </span>
+                    <h3 class="text-sigma font-extrabold text-black-900">Profil Nasabah & Petugas Penaksir Resmi</h3>
+                  </div>
+                  <span class="text-omega text-black-500 font-medium">User Profiles & Verification Avatars</span>
+                </div>
+                <div class="playground-case-body">
+                  <div class="grid gap-4 md:grid-cols-2">
+                    <div class="flex items-center gap-3.5 rounded-xl border border-black-100 bg-white p-3.5 shadow-sm">
+                      <Avatar src="https://i.pravatar.cc/96?img=12" alt="Budi Santoso" size="lg" />
+                      <div>
+                        <div class="flex items-center gap-2">
+                          <h4 class="text-sigma font-bold text-black-800">Budi Santoso</h4>
+                          <Badge variant="brocoli" class="text-[10px] py-0 px-1.5">KYC Sukses</Badge>
+                        </div>
+                        <p class="text-omega text-black-500">Nasabah Prioritas • Rek: 1029-8821</p>
+                      </div>
+                    </div>
+
+                    <div class="flex items-center gap-3.5 rounded-xl border border-black-100 bg-white p-3.5 shadow-sm">
+                      <Avatar fallback="AG" size="lg" />
+                      <div>
+                        <div class="flex items-center gap-2">
+                          <h4 class="text-sigma font-bold text-black-800">Ahmad Ghozali</h4>
+                          <Badge variant="blue" class="text-[10px] py-0 px-1.5">Appraiser</Badge>
+                        </div>
+                        <p class="text-omega text-black-500">Penaksir Emas Khazanah Cab. Salemba</p>
+                      </div>
+                    </div>
                   </div>
                 </div>
-                <Avatar fallback="PG" size="md" />
-                <Avatar fallback="UI" size="sm" />
-                <Avatar alt="Pegadaian" size="xs" />
+              </div>
+
+              <div>
+                <h3 class="text-omega font-bold uppercase tracking-wider text-black-400 mb-3">Sizes & Fallbacks</h3>
+                <div class="flex flex-wrap items-center gap-6">
+                  <Avatar src="https://i.pravatar.cc/96?img=12" alt="Budi Santoso" size="lg" />
+                  <Avatar fallback="PG" size="md" />
+                  <Avatar fallback="UI" size="sm" />
+                  <Avatar alt="Pegadaian" size="xs" />
+                </div>
               </div>
             </section>
 
             <!-- Badge -->
-            <section id="badge" class="playground-section playground-panel p-6 space-y-4">
+            <section id="badge" class="playground-section playground-panel p-6 space-y-5">
               <div>
                 <p class="playground-eyebrow">Status Pills & Taxonomy</p>
                 <h2 class="text-xl font-bold text-black-900">Badge</h2>
@@ -2071,91 +2140,132 @@ const shellClass = computed(() =>
               </div>
 
               <!-- Real-world Case: Status Pinjaman Gadai -->
-              <div class="flex flex-wrap items-center gap-3 pt-2">
-                <Badge>Lancar (Green)</Badge>
-                <Badge variant="brocoli">Dalam Proses (Broccoli)</Badge>
-                <Badge variant="orange">Mendekati Jatuh Tempo (Orange)</Badge>
-                <Badge variant="blue">Verifikasi Dokumen (Blue)</Badge>
-                <Badge variant="red">Jatuh Tempo / Peringatan (Red)</Badge>
-                <Badge variant="outline">Draft Transaksi</Badge>
+              <div class="playground-case-card">
+                <div class="playground-case-header">
+                  <div class="flex items-center gap-2.5">
+                    <span class="playground-case-badge">
+                      <Sparkles class="h-3 w-3 text-lime-700" />
+                      Real-World Scenario
+                    </span>
+                    <h3 class="text-sigma font-extrabold text-black-900">Pelacakan Status Transaksi Pinjaman Gadai</h3>
+                  </div>
+                  <span class="text-omega text-black-500 font-medium">Lifecycle Badges & Status Workflow</span>
+                </div>
+                <div class="playground-case-body">
+                  <div class="flex flex-wrap items-center gap-3">
+                    <Badge>Lancar (Green)</Badge>
+                    <Badge variant="brocoli">Dalam Proses (Broccoli)</Badge>
+                    <Badge variant="orange">Mendekati Jatuh Tempo (Orange)</Badge>
+                    <Badge variant="blue">Verifikasi Dokumen (Blue)</Badge>
+                    <Badge variant="red">Jatuh Tempo / Peringatan (Red)</Badge>
+                    <Badge variant="outline">Draft Pengajuan</Badge>
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                <h3 class="text-omega font-bold uppercase tracking-wider text-black-400 mb-3">Pill Variants</h3>
+                <div class="flex flex-wrap items-center gap-3">
+                  <Badge>Default Green</Badge>
+                  <Badge variant="brocoli">Broccoli</Badge>
+                  <Badge variant="orange">Orange</Badge>
+                  <Badge variant="blue">Blue</Badge>
+                  <Badge variant="red">Red</Badge>
+                  <Badge variant="outline">Outline</Badge>
+                </div>
               </div>
             </section>
 
             <!-- Card -->
-            <section id="card" class="playground-section playground-color-block block-cream space-y-6">
+            <section id="card" class="playground-section playground-panel p-6 space-y-6">
               <div class="flex flex-wrap items-center justify-between gap-3">
                 <div>
                   <p class="playground-eyebrow">Surfaces & Containers</p>
-                  <h2 class="playground-display">Card</h2>
-                  <p class="playground-desc">
+                  <h2 class="text-xl font-bold text-black-900">Card</h2>
+                  <p class="text-sigma text-black-500">
                     Content containers featuring structured header, title, description, content body, and action footer slots.
                   </p>
                 </div>
                 <Badge variant="brocoli">Container Component</Badge>
               </div>
 
-              <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-                <!-- Variant 1: Portofolio Tabungan Emas -->
-                <Card class="bg-white">
-                  <CardHeader>
-                    <div class="flex items-center justify-between">
-                      <div class="flex flex-col gap-y-1">
-                        <CardTitle>Tabungan Emas</CardTitle>
-                        <CardDescription>No. Rek: 1234-5678-9101</CardDescription>
-                      </div>
-                      <Badge variant="brocoli">Aktif</Badge>
-                    </div>
-                  </CardHeader>
-                  <CardContent>
-                    <div class="rounded-lg bg-lime-50 p-4 border border-lime-200">
-                      <span class="text-omega font-semibold text-lime-700">Saldo Fisik Emas</span>
-                      <p class="text-xl font-black text-black-900 mt-1">12.5400 gr</p>
-                      <p class="text-omega text-black-500 mt-0.5">≈ Rp 18.183.000</p>
-                    </div>
-                  </CardContent>
-                  <CardFooter class="flex gap-2">
-                    <Button class="w-full" size="sm">Top Up</Button>
-                    <Button variant="outline" class="w-full" size="sm">Jual Emas</Button>
-                  </CardFooter>
-                </Card>
+              <!-- Real-world Case: Portofolio Tabungan Emas & Promo -->
+              <div class="playground-case-card">
+                <div class="playground-case-header">
+                  <div class="flex items-center gap-2.5">
+                    <span class="playground-case-badge">
+                      <Sparkles class="h-3 w-3 text-lime-700" />
+                      Real-World Scenario
+                    </span>
+                    <h3 class="text-sigma font-extrabold text-black-900">Kartu Portofolio Finansial, Promo, & Jaminan Khazanah</h3>
+                  </div>
+                  <span class="text-omega text-black-500 font-medium">Header, Media, Content, & Action Footer Slots</span>
+                </div>
+                <div class="playground-case-body">
+                  <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+                    <!-- Variant 1: Portofolio Tabungan Emas -->
+                    <Card class="bg-white">
+                      <CardHeader>
+                        <div class="flex items-center justify-between">
+                          <div class="flex flex-col gap-y-1">
+                            <CardTitle>Tabungan Emas</CardTitle>
+                            <CardDescription>No. Rek: 1234-5678-9101</CardDescription>
+                          </div>
+                          <Badge variant="brocoli">Aktif</Badge>
+                        </div>
+                      </CardHeader>
+                      <CardContent>
+                        <div class="rounded-lg bg-lime-50 p-4 border border-lime-200">
+                          <span class="text-omega font-semibold text-lime-700">Saldo Fisik Emas</span>
+                          <p class="text-xl font-black text-black-900 mt-1">12.5400 gr</p>
+                          <p class="text-omega text-black-500 mt-0.5">≈ Rp 18.183.000</p>
+                        </div>
+                      </CardContent>
+                      <CardFooter class="flex gap-2">
+                        <Button class="w-full" size="sm">Top Up</Button>
+                        <Button variant="outline" class="w-full" size="sm">Jual Emas</Button>
+                      </CardFooter>
+                    </Card>
 
-                <!-- Variant 2: Card with Image Promo -->
-                <Card class="bg-white">
-                  <CardHeader>
-                    <CardTitle>Promo Cashback Gadai</CardTitle>
-                    <CardDescription>Khusus transaksi digital bulan ini</CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <div class="mb-4 h-32 w-full overflow-hidden rounded-lg bg-black-200">
-                      <img src="https://images.unsplash.com/photo-1610375461246-83df859d849d?q=80&w=600" alt="Promo Gold" class="h-full w-full object-cover" />
-                    </div>
-                    <p class="text-sigma font-bold text-black-800">Cashback s.d. Rp 500.000</p>
-                    <p class="mt-1 text-omega text-black-500">
-                      Gunakan kode voucher GADAIBERKAH saat pengajuan di aplikasi Pegadaian Digital.
-                    </p>
-                  </CardContent>
-                  <CardFooter>
-                    <Button class="w-full" size="sm">Klaim Promo</Button>
-                  </CardFooter>
-                </Card>
+                    <!-- Variant 2: Card with Image Promo -->
+                    <Card class="bg-white">
+                      <CardHeader>
+                        <CardTitle>Promo Cashback Gadai</CardTitle>
+                        <CardDescription>Khusus transaksi digital bulan ini</CardDescription>
+                      </CardHeader>
+                      <CardContent>
+                        <div class="mb-4 h-32 w-full overflow-hidden rounded-lg bg-black-200">
+                          <img src="https://images.unsplash.com/photo-1610375461246-83df859d849d?q=80&w=600" alt="Promo Gold" class="h-full w-full object-cover" />
+                        </div>
+                        <p class="text-sigma font-bold text-black-800">Cashback s.d. Rp 500.000</p>
+                        <p class="mt-1 text-omega text-black-500">
+                          Gunakan kode voucher GADAIBERKAH saat pengajuan di aplikasi Pegadaian Digital.
+                        </p>
+                      </CardContent>
+                      <CardFooter>
+                        <Button class="w-full" size="sm">Klaim Promo</Button>
+                      </CardFooter>
+                    </Card>
 
-                <!-- Variant 3: Minimal Card -->
-                <Card class="bg-white">
-                  <CardContent class="pt-6">
-                    <div class="flex items-center gap-3 mb-3">
-                      <div class="flex h-10 w-10 items-center justify-center rounded-full bg-blue-100 text-blue-600">
-                        <ShieldCheck class="h-5 w-5" />
-                      </div>
-                      <div>
-                        <h4 class="text-sigma font-bold text-black-900">Jaminan Aman 100%</h4>
-                        <p class="text-omega text-black-500">Tersimpan di Khazanah Pegadaian</p>
-                      </div>
-                    </div>
-                    <p class="text-omega text-black-600 leading-relaxed">
-                      Barang jaminan disimpan di ruang penyimpanan berspesifikasi keamanan tinggi dengan asuransi penuh.
-                    </p>
-                  </CardContent>
-                </Card>
+                    <!-- Variant 3: Minimal Card -->
+                    <Card class="bg-white">
+                      <CardContent class="pt-6">
+                        <div class="flex items-center gap-3 mb-3">
+                          <div class="flex h-10 w-10 items-center justify-center rounded-full bg-blue-100 text-blue-600">
+                            <ShieldCheck class="h-5 w-5" />
+                          </div>
+                          <div>
+                            <h4 class="text-sigma font-bold text-black-900">Jaminan Aman 100%</h4>
+                            <p class="text-omega text-black-500">Tersimpan di Khazanah Pegadaian</p>
+                          </div>
+                        </div>
+                        <p class="text-omega text-black-600 leading-relaxed">
+                          Barang jaminan disimpan di ruang penyimpanan berspesifikasi keamanan tinggi dengan asuransi penuh.
+                        </p>
+                      </CardContent>
+                    </Card>
+                  </div>
+                </div>
               </div>
             </section>
 
@@ -2169,9 +2279,19 @@ const shellClass = computed(() =>
                 </p>
               </div>
 
-              <div class="grid gap-6">
-                <div class="rounded-xl border border-black-100 bg-white p-4 space-y-4">
-                  <h3 class="text-sigma font-bold text-black-800">Tabel Tarif Sewa Modal dan Premi Pinjaman Pegadaian</h3>
+              <!-- Real-world Case: Tabel Tarif Sewa Modal -->
+              <div class="playground-case-card">
+                <div class="playground-case-header">
+                  <div class="flex items-center gap-2.5">
+                    <span class="playground-case-badge">
+                      <Sparkles class="h-3 w-3 text-lime-700" />
+                      Fintech Scenario
+                    </span>
+                    <h3 class="text-sigma font-extrabold text-black-900">Tabel Tarif Sewa Modal dan Premi Pinjaman</h3>
+                  </div>
+                  <span class="text-omega text-black-500 font-medium">Golongan A s.d. D & Perhitungan 15 Hari</span>
+                </div>
+                <div class="playground-case-body space-y-4">
                   <DataTable :columns="tableColumns" :rows="tableRows" />
                   <Alert variant="destructive" class="border-red-500 bg-red-500 p-3 text-white">
                     <AlertDescription class="!text-omega font-semibold leading-[18px] text-white">
@@ -2183,7 +2303,7 @@ const shellClass = computed(() =>
             </section>
 
             <!-- Accordion -->
-            <section id="accordion" class="playground-section playground-panel p-6 space-y-4">
+            <section id="accordion" class="playground-section playground-panel p-6 space-y-5">
               <div>
                 <p class="playground-eyebrow">Collapsible Disclosures</p>
                 <h2 class="text-xl font-bold text-black-900">Accordion</h2>
@@ -2192,27 +2312,42 @@ const shellClass = computed(() =>
                 </p>
               </div>
 
-              <div class="rounded-xl border border-black-100 bg-white p-4">
-                <Accordion type="single" collapsible default-value="faq-1">
-                  <AccordionItem value="faq-1">
-                    <AccordionTrigger>Apa saja syarat pengajuan Gadai Emas di Pegadaian?</AccordionTrigger>
-                    <AccordionContent class="text-sigma text-black-600 leading-relaxed pt-2">
-                      Syaratnya sangat mudah: Nasabah cukup membawa fisik barang jaminan (emas batangan atau perhiasan) beserta KTP asli yang masih berlaku ke kantor cabang Pegadaian terdekat.
-                    </AccordionContent>
-                  </AccordionItem>
-                  <AccordionItem value="faq-2">
-                    <AccordionTrigger>Bagaimana cara memperpanjang jangka waktu pinjaman gadai?</AccordionTrigger>
-                    <AccordionContent class="text-sigma text-black-600 leading-relaxed pt-2">
-                      Perpanjangan jangka waktu gadai dapat dilakukan dengan membayar sewa modal (bunga) yang telah berjalan langsung melalui aplikasi Pegadaian Digital atau di outlet Pegadaian.
-                    </AccordionContent>
-                  </AccordionItem>
-                  <AccordionItem value="faq-3">
-                    <AccordionTrigger>Apakah emas yang digadaikan dijamin keamanannya?</AccordionTrigger>
-                    <AccordionContent class="text-sigma text-black-600 leading-relaxed pt-2">
-                      Ya, barang jaminan emas nasabah disimpan di ruang penyimpanan besi berstandar perbankan (khazanah) dan diasuransikan 100% dari nilai taksiran pasar.
-                    </AccordionContent>
-                  </AccordionItem>
-                </Accordion>
+              <!-- Real-world Case: FAQ Bantuan Layanan Gadai -->
+              <div class="playground-case-card">
+                <div class="playground-case-header">
+                  <div class="flex items-center gap-2.5">
+                    <span class="playground-case-badge">
+                      <Sparkles class="h-3 w-3 text-lime-700" />
+                      Real-World Scenario
+                    </span>
+                    <h3 class="text-sigma font-extrabold text-black-900">Pusat Bantuan & FAQ Layanan Gadai Emas</h3>
+                  </div>
+                  <span class="text-omega text-black-500 font-medium">Single Collapse & Animated Triggers</span>
+                </div>
+                <div class="playground-case-body">
+                  <div class="rounded-xl border border-black-100 bg-white p-4">
+                    <Accordion type="single" collapsible default-value="faq-1">
+                      <AccordionItem value="faq-1">
+                        <AccordionTrigger>Apa saja syarat pengajuan Gadai Emas di Pegadaian?</AccordionTrigger>
+                        <AccordionContent class="text-sigma text-black-600 leading-relaxed pt-2">
+                          Syaratnya sangat mudah: Nasabah cukup membawa fisik barang jaminan (emas batangan atau perhiasan) beserta KTP asli yang masih berlaku ke kantor cabang Pegadaian terdekat.
+                        </AccordionContent>
+                      </AccordionItem>
+                      <AccordionItem value="faq-2">
+                        <AccordionTrigger>Bagaimana cara memperpanjang jangka waktu pinjaman gadai?</AccordionTrigger>
+                        <AccordionContent class="text-sigma text-black-600 leading-relaxed pt-2">
+                          Perpanjangan jangka waktu gadai dapat dilakukan dengan membayar sewa modal (bunga) yang telah berjalan langsung melalui aplikasi Pegadaian Digital atau di outlet Pegadaian.
+                        </AccordionContent>
+                      </AccordionItem>
+                      <AccordionItem value="faq-3">
+                        <AccordionTrigger>Apakah emas yang digadaikan dijamin keamanannya?</AccordionTrigger>
+                        <AccordionContent class="text-sigma text-black-600 leading-relaxed pt-2">
+                          Ya, barang jaminan emas nasabah disimpan di ruang penyimpanan besi berstandar perbankan (khazanah) dan diasuransikan 100% dari nilai taksiran pasar.
+                        </AccordionContent>
+                      </AccordionItem>
+                    </Accordion>
+                  </div>
+                </div>
               </div>
             </section>
 
@@ -2226,41 +2361,51 @@ const shellClass = computed(() =>
                 </p>
               </div>
 
-              <div class="space-y-6">
-                <div class="rounded-xl border border-black-200 bg-white p-4 space-y-3">
-                  <h3 class="text-sigma font-bold text-black-800">1. BannerCarousel (Figma Preset)</h3>
+              <!-- Real-world Case: Banner Promo Carousel -->
+              <div class="playground-case-card">
+                <div class="playground-case-header">
+                  <div class="flex items-center gap-2.5">
+                    <span class="playground-case-badge">
+                      <Sparkles class="h-3 w-3 text-lime-700" />
+                      Real-World Scenario
+                    </span>
+                    <h3 class="text-sigma font-extrabold text-black-900">Banner Promo Cashback & Informasi Literasi Emas</h3>
+                  </div>
+                  <span class="text-omega text-black-500 font-medium">Autoplay Slider (5s Interval)</span>
+                </div>
+                <div class="playground-case-body">
                   <BannerCarousel
                     :items="carouselBannerSlides"
                     :autoplay="true"
                     :autoplay-interval="5000"
                   />
                 </div>
+              </div>
 
-                <div class="rounded-xl border border-black-200 bg-white p-4 space-y-3">
-                  <h3 class="text-sigma font-bold text-black-800">2. Compound Primitive Carousel</h3>
-                  <Carousel :loop="true" :autoplay="false" class="w-full">
-                    <CarouselContent>
-                      <CarouselItem v-for="i in 3" :key="i">
-                        <div class="flex flex-col items-center justify-center min-h-[160px] p-8 rounded-xl bg-lime-600 text-white font-bold">
-                          <span class="text-zeta">Promo Slide Item {{ i }}</span>
-                          <span class="text-sigma font-normal opacity-90 mt-1">Modular CarouselItem component dengan swipe support</span>
-                        </div>
-                      </CarouselItem>
-                    </CarouselContent>
-                    <div class="mt-4 flex items-center justify-between">
-                      <div class="flex items-center gap-2">
-                        <CarouselPrevious />
-                        <CarouselNext />
+              <div class="rounded-xl border border-black-100 bg-white p-4 space-y-3">
+                <h3 class="text-omega font-bold uppercase tracking-wider text-black-400">Compound Primitive Carousel</h3>
+                <Carousel :loop="true" :autoplay="false" class="w-full">
+                  <CarouselContent>
+                    <CarouselItem v-for="i in 3" :key="i">
+                      <div class="flex flex-col items-center justify-center min-h-[140px] p-6 rounded-xl bg-lime-600 text-white font-bold">
+                        <span class="text-zeta">Promo Slide Item {{ i }}</span>
+                        <span class="text-sigma font-normal opacity-90 mt-1">Modular CarouselItem component dengan swipe support</span>
                       </div>
-                      <CarouselIndicators />
+                    </CarouselItem>
+                  </CarouselContent>
+                  <div class="mt-4 flex items-center justify-between">
+                    <div class="flex items-center gap-2">
+                      <CarouselPrevious />
+                      <CarouselNext />
                     </div>
-                  </Carousel>
-                </div>
+                    <CarouselIndicators />
+                  </div>
+                </Carousel>
               </div>
             </section>
 
             <!-- Divider -->
-            <section id="divider" class="playground-section playground-panel p-6 space-y-4">
+            <section id="divider" class="playground-section playground-panel p-6 space-y-5">
               <div>
                 <p class="playground-eyebrow">Separators & Boundaries</p>
                 <h2 class="text-xl font-bold text-black-900">Divider</h2>
@@ -2269,20 +2414,46 @@ const shellClass = computed(() =>
                 </p>
               </div>
 
-              <div class="grid gap-4 pt-2">
-                <Divider />
-                <div class="flex h-12 items-center gap-4">
-                  <span class="text-sigma font-bold text-black-800">Rincian Pokok</span>
-                  <Divider orientation="vertical" />
-                  <span class="text-sigma font-bold text-black-800">Rincian Sewa Modal</span>
-                  <Divider orientation="vertical" />
-                  <span class="text-sigma font-bold text-black-800">Biaya Administrasi</span>
+              <!-- Real-world Case: Pemisah Rincian Tagihan -->
+              <div class="playground-case-card">
+                <div class="playground-case-header">
+                  <div class="flex items-center gap-2.5">
+                    <span class="playground-case-badge">
+                      <Sparkles class="h-3 w-3 text-lime-700" />
+                      Real-World Scenario
+                    </span>
+                    <h3 class="text-sigma font-extrabold text-black-900">Pemisah Rincian Biaya Surat Bukti Gadai (SBG)</h3>
+                  </div>
+                  <span class="text-omega text-black-500 font-medium">Horizontal & Vertical Segments</span>
+                </div>
+                <div class="playground-case-body space-y-4">
+                  <div class="flex flex-wrap items-center justify-between gap-4 rounded-xl border border-black-100 bg-white p-4">
+                    <div class="flex flex-col">
+                      <span class="text-omega text-black-500 font-medium">Pokok Pinjaman</span>
+                      <strong class="text-sigma font-bold text-black-900">Rp 15.000.000</strong>
+                    </div>
+                    <Divider orientation="vertical" class="hidden sm:block h-10" />
+                    <div class="flex flex-col">
+                      <span class="text-omega text-black-500 font-medium">Sewa Modal (15 Hari)</span>
+                      <strong class="text-sigma font-bold text-black-900">Rp 172.500</strong>
+                    </div>
+                    <Divider orientation="vertical" class="hidden sm:block h-10" />
+                    <div class="flex flex-col">
+                      <span class="text-omega text-black-500 font-medium">Biaya Administrasi</span>
+                      <strong class="text-sigma font-bold text-black-900">Rp 35.000</strong>
+                    </div>
+                    <Divider orientation="vertical" class="hidden sm:block h-10" />
+                    <div class="flex flex-col">
+                      <span class="text-omega text-lime-700 font-semibold">Total Pelunasan</span>
+                      <strong class="text-omicron font-black text-black-900">Rp 15.207.500</strong>
+                    </div>
+                  </div>
                 </div>
               </div>
             </section>
 
             <!-- Breadcrumb -->
-            <section id="breadcrumb" class="playground-section playground-panel p-6 space-y-4">
+            <section id="breadcrumb" class="playground-section playground-panel p-6 space-y-5">
               <div>
                 <p class="playground-eyebrow">Navigation Trails</p>
                 <h2 class="text-xl font-bold text-black-900">Breadcrumb</h2>
@@ -2291,9 +2462,19 @@ const shellClass = computed(() =>
                 </p>
               </div>
 
-              <div class="space-y-4 pt-2">
-                <div class="rounded-xl border border-black-100 bg-white p-4 space-y-2">
-                  <h3 class="text-omega font-bold uppercase tracking-wider text-black-400">Hierarki Standar Transaksi</h3>
+              <!-- Real-world Case: Navigasi Hirarki Portofolio -->
+              <div class="playground-case-card">
+                <div class="playground-case-header">
+                  <div class="flex items-center gap-2.5">
+                    <span class="playground-case-badge">
+                      <Sparkles class="h-3 w-3 text-lime-700" />
+                      Real-World Scenario
+                    </span>
+                    <h3 class="text-sigma font-extrabold text-black-900">Navigasi Hirarki Portofolio Transaksi Gadai</h3>
+                  </div>
+                  <span class="text-omega text-black-500 font-medium">Multi-Level Trail & Current Page</span>
+                </div>
+                <div class="playground-case-body">
                   <Breadcrumb>
                     <BreadcrumbList>
                       <BreadcrumbItem>
@@ -2301,11 +2482,15 @@ const shellClass = computed(() =>
                       </BreadcrumbItem>
                       <BreadcrumbSeparator />
                       <BreadcrumbItem>
-                        <BreadcrumbLink href="#">Portofolio Gadai</BreadcrumbLink>
+                        <BreadcrumbLink href="#">Portofolio Gadai Emas</BreadcrumbLink>
                       </BreadcrumbItem>
                       <BreadcrumbSeparator />
                       <BreadcrumbItem>
-                        <BreadcrumbPage>Detail Pinjaman #PG-88219</BreadcrumbPage>
+                        <BreadcrumbLink href="#">Emas Batangan 10 gr</BreadcrumbLink>
+                      </BreadcrumbItem>
+                      <BreadcrumbSeparator />
+                      <BreadcrumbItem>
+                        <BreadcrumbPage>Detail Surat Bukti Gadai #SBG-88219</BreadcrumbPage>
                       </BreadcrumbItem>
                     </BreadcrumbList>
                   </Breadcrumb>
@@ -2314,7 +2499,7 @@ const shellClass = computed(() =>
             </section>
 
             <!-- Pagination -->
-            <section id="pagination" class="playground-section playground-panel p-6 space-y-4">
+            <section id="pagination" class="playground-section playground-panel p-6 space-y-5">
               <div>
                 <p class="playground-eyebrow">Page Navigation</p>
                 <h2 class="text-xl font-bold text-black-900">Pagination</h2>
@@ -2323,20 +2508,33 @@ const shellClass = computed(() =>
                 </p>
               </div>
 
-              <div class="grid gap-4 pt-2">
-                <div class="rounded-xl border border-black-100 bg-white p-4 flex flex-col sm:flex-row items-center justify-between gap-4">
-                  <span class="text-sigma font-bold text-black-600">Halaman Aktif: {{ paginationPage }} dari 20</span>
-                  <Pagination v-model="paginationPage" :total-pages="20" />
+              <!-- Real-world Case: Paginasi Riwayat Transaksi -->
+              <div class="playground-case-card">
+                <div class="playground-case-header">
+                  <div class="flex items-center gap-2.5">
+                    <span class="playground-case-badge">
+                      <Sparkles class="h-3 w-3 text-lime-700" />
+                      Real-World Scenario
+                    </span>
+                    <h3 class="text-sigma font-extrabold text-black-900">Paginasi Daftar Mutasi Tabungan Emas</h3>
+                  </div>
+                  <span class="text-omega font-mono text-lime-700 bg-lime-100 px-2.5 py-0.5 rounded-full font-bold">Halaman {{ paginationPage }} dari 20</span>
+                </div>
+                <div class="playground-case-body">
+                  <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
+                    <span class="text-omega text-black-500">Menampilkan record transaksi ke-{{ (paginationPage - 1) * 10 + 1 }} sampai {{ paginationPage * 10 }}</span>
+                    <Pagination v-model="paginationPage" :total-pages="20" />
+                  </div>
                 </div>
               </div>
             </section>
 
             <!-- Tabs -->
-            <section id="tabs" class="playground-section playground-color-block block-coral space-y-6">
-              <div class="mb-4">
+            <section id="tabs" class="playground-section playground-panel p-6 space-y-6">
+              <div>
                 <p class="playground-eyebrow">Segmented View Switchers</p>
-                <h2 class="playground-display">Tabs</h2>
-                <p class="playground-desc">
+                <h2 class="text-xl font-bold text-black-900">Tabs</h2>
+                <p class="text-sigma text-black-500">
                   Segmented tab switchers with smooth animated sliding indicators for pricing and views.
                 </p>
               </div>
@@ -2376,7 +2574,7 @@ const shellClass = computed(() =>
 
             <!-- 5. FEEDBACK & FLOATING SURFACES -->
             <!-- Alert -->
-            <section id="alert" class="playground-section playground-panel p-6 space-y-4">
+            <section id="alert" class="playground-section playground-panel p-6 space-y-5">
               <div>
                 <p class="playground-eyebrow">System Banners & Notifications</p>
                 <h2 class="text-xl font-bold text-black-900">Alert</h2>
@@ -2385,26 +2583,39 @@ const shellClass = computed(() =>
                 </p>
               </div>
 
-              <div class="space-y-4 pt-2">
-                <Alert>
-                  <Check class="h-4 w-4 text-lime-600" />
-                  <AlertTitle>Pembayaran Angsuran Berhasil</AlertTitle>
-                  <AlertDescription>
-                    Transaksi pelunasan sewa modal sebesar Rp 150.000 telah berhasil diverifikasi oleh sistem.
-                  </AlertDescription>
-                </Alert>
-                <Alert variant="destructive" show-close>
-                  <AlertCircle class="h-4 w-4" />
-                  <AlertTitle>Peringatan Jatuh Tempo</AlertTitle>
-                  <AlertDescription>
-                    Masa pinjaman gadai nomor SBG-99210 akan jatuh tempo dalam 3 hari ke depan. Harap segera lakukan perpanjangan.
-                  </AlertDescription>
-                </Alert>
+              <!-- Real-world Case: Notifikasi Sistem Real-Time -->
+              <div class="playground-case-card">
+                <div class="playground-case-header">
+                  <div class="flex items-center gap-2.5">
+                    <span class="playground-case-badge">
+                      <Sparkles class="h-3 w-3 text-lime-700" />
+                      Real-World Scenario
+                    </span>
+                    <h3 class="text-sigma font-extrabold text-black-900">Notifikasi Sistem & Peringatan Jatuh Tempo SBG</h3>
+                  </div>
+                  <span class="text-omega text-black-500 font-medium">Inline Banner Feedback</span>
+                </div>
+                <div class="playground-case-body space-y-4">
+                  <Alert>
+                    <Check class="h-4 w-4 text-lime-600" />
+                    <AlertTitle>Pembayaran Angsuran Berhasil Disetujui</AlertTitle>
+                    <AlertDescription>
+                      Transaksi pelunasan sewa modal sebesar Rp 150.000 telah berhasil diverifikasi otomatis oleh sistem core-banking.
+                    </AlertDescription>
+                  </Alert>
+                  <Alert variant="destructive" show-close>
+                    <AlertCircle class="h-4 w-4" />
+                    <AlertTitle>Peringatan Jatuh Tempo Pinjaman</AlertTitle>
+                    <AlertDescription>
+                      Masa pinjaman gadai nomor SBG-99210 akan jatuh tempo dalam 3 hari ke depan. Harap segera lakukan perpanjangan atau pelunasan.
+                    </AlertDescription>
+                  </Alert>
+                </div>
               </div>
             </section>
 
             <!-- Progress -->
-            <section id="progress" class="playground-section playground-panel p-6 space-y-4">
+            <section id="progress" class="playground-section playground-panel p-6 space-y-5">
               <div>
                 <p class="playground-eyebrow">Deterministic Loaders</p>
                 <h2 class="text-xl font-bold text-black-900">Progress Bar</h2>
@@ -2413,26 +2624,36 @@ const shellClass = computed(() =>
                 </p>
               </div>
 
-              <div class="rounded-xl border border-black-100 bg-white p-5 space-y-3">
-                <div class="flex items-center justify-between">
-                  <span class="text-sigma font-bold text-black-800">Kelengkapan Data Verifikasi Nasabah (KYC)</span>
-                  <span class="text-sigma font-mono font-bold text-lime-700 bg-lime-100 px-2 py-0.5 rounded">{{ progressValue }}%</span>
+              <!-- Real-world Case: Kelengkapan KYC -->
+              <div class="playground-case-card">
+                <div class="playground-case-header">
+                  <div class="flex items-center gap-2.5">
+                    <span class="playground-case-badge">
+                      <Sparkles class="h-3 w-3 text-lime-700" />
+                      Real-World Scenario
+                    </span>
+                    <h3 class="text-sigma font-extrabold text-black-900">Kelengkapan Data Verifikasi Nasabah (KYC)</h3>
+                  </div>
+                  <span class="text-omega font-mono font-bold text-lime-700 bg-lime-100 px-2.5 py-0.5 rounded-full">{{ progressValue }}% Selesai</span>
                 </div>
-                <Progress :model-value="progressValue" />
-                <div class="pt-2">
-                  <input
-                    v-model="progressValue"
-                    type="range"
-                    min="0"
-                    max="100"
-                    class="w-full accent-lime-500"
-                  />
+                <div class="playground-case-body space-y-4">
+                  <Progress :model-value="progressValue" />
+                  <div class="pt-2 flex flex-wrap items-center justify-between gap-4">
+                    <span class="text-omega text-black-500">Geser slider untuk simulasi perubahan progres verifikasi form nasabah:</span>
+                    <input
+                      v-model="progressValue"
+                      type="range"
+                      min="0"
+                      max="100"
+                      class="w-48 accent-lime-500"
+                    />
+                  </div>
                 </div>
               </div>
             </section>
 
             <!-- Spinner -->
-            <section id="spinner" class="playground-section playground-panel p-6 space-y-4">
+            <section id="spinner" class="playground-section playground-panel p-6 space-y-5">
               <div>
                 <p class="playground-eyebrow">Activity Indicators</p>
                 <h2 class="text-xl font-bold text-black-900">Spinner</h2>
@@ -2441,27 +2662,42 @@ const shellClass = computed(() =>
                 </p>
               </div>
 
-              <div class="flex flex-wrap items-center gap-6 pt-2">
-                <div class="flex items-center gap-3">
-                  <Spinner size="sm" />
-                  <span class="text-omega font-semibold text-black-600">Small (sm)</span>
+              <!-- Real-world Case: Sinkronisasi Harga Emas -->
+              <div class="playground-case-card">
+                <div class="playground-case-header">
+                  <div class="flex items-center gap-2.5">
+                    <span class="playground-case-badge">
+                      <Sparkles class="h-3 w-3 text-lime-700" />
+                      Real-World Scenario
+                    </span>
+                    <h3 class="text-sigma font-extrabold text-black-900">Sinkronisasi Taksiran Emas & Async Button Trigger</h3>
+                  </div>
+                  <span class="text-omega text-black-500 font-medium">Asynchronous State Feedback</span>
                 </div>
-                <div class="flex items-center gap-3">
-                  <Spinner />
-                  <span class="text-omega font-semibold text-black-600">Medium (md)</span>
+                <div class="playground-case-body">
+                  <div class="flex flex-wrap items-center gap-6">
+                    <div class="flex items-center gap-3">
+                      <Spinner size="sm" />
+                      <span class="text-omega font-semibold text-black-600">Sinkronisasi Mini (sm)</span>
+                    </div>
+                    <div class="flex items-center gap-3">
+                      <Spinner />
+                      <span class="text-omega font-semibold text-black-600">Koneksi Server (md)</span>
+                    </div>
+                    <div class="flex items-center gap-3">
+                      <Spinner size="lg" />
+                      <span class="text-omega font-semibold text-black-600">Proses Verifikasi (lg)</span>
+                    </div>
+                    <Button :loading="true" loading-label="Menghitung taksiran emas...">
+                      Simulasi Taksiran
+                    </Button>
+                  </div>
                 </div>
-                <div class="flex items-center gap-3">
-                  <Spinner size="lg" />
-                  <span class="text-omega font-semibold text-black-600">Large (lg)</span>
-                </div>
-                <Button :loading="true" loading-label="Menghitung taksiran emas...">
-                  Button Loading
-                </Button>
               </div>
             </section>
 
             <!-- Toast -->
-            <section id="toast" class="playground-section playground-panel p-6 space-y-4">
+            <section id="toast" class="playground-section playground-panel p-6 space-y-5">
               <div>
                 <p class="playground-eyebrow">Ephemeral Feedback</p>
                 <h2 class="text-xl font-bold text-black-900">Toast & Snackbars</h2>
@@ -2470,22 +2706,37 @@ const shellClass = computed(() =>
                 </p>
               </div>
 
-              <div class="grid gap-4 md:grid-cols-3 pt-2">
-                <Toast
-                  title="Transaksi Berhasil"
-                  description="Top up saldo tabungan emas Rp 500.000 sukses."
-                  variant="success"
-                />
-                <Toast
-                  title="Peringatan Limit"
-                  description="Maksimum transaksi harian tersisa Rp 2.000.000."
-                  variant="warning"
-                />
-                <Toast
-                  title="Gagal Terhubung"
-                  description="Koneksi ke gateway perbankan mengalami timeout."
-                  variant="error"
-                />
+              <!-- Real-world Case: Notifikasi Feedback Transaksi -->
+              <div class="playground-case-card">
+                <div class="playground-case-header">
+                  <div class="flex items-center gap-2.5">
+                    <span class="playground-case-badge">
+                      <Sparkles class="h-3 w-3 text-lime-700" />
+                      Real-World Scenario
+                    </span>
+                    <h3 class="text-sigma font-extrabold text-black-900">Notifikasi Feedback Transaksi Nasabah</h3>
+                  </div>
+                  <span class="text-omega text-black-500 font-medium">Toast Notification States</span>
+                </div>
+                <div class="playground-case-body">
+                  <div class="grid gap-4 md:grid-cols-3">
+                    <Toast
+                      title="Transaksi Berhasil"
+                      description="Top up saldo tabungan emas Rp 500.000 sukses diproses."
+                      variant="success"
+                    />
+                    <Toast
+                      title="Peringatan Limit Harian"
+                      description="Maksimum sisa transaksi harian tersisa Rp 2.000.000."
+                      variant="warning"
+                    />
+                    <Toast
+                      title="Koneksi Gateway Gagal"
+                      description="Koneksi ke sistem switching perbankan mengalami timeout."
+                      variant="error"
+                    />
+                  </div>
+                </div>
               </div>
             </section>
 
@@ -2601,11 +2852,11 @@ const shellClass = computed(() =>
             </section>
 
             <!-- Popover -->
-            <section id="popover" class="playground-section playground-color-block block-pink space-y-4">
-              <div class="mb-4">
+            <section id="popover" class="playground-section playground-panel p-6 space-y-6">
+              <div>
                 <p class="playground-eyebrow">Floating Surfaces & Menus</p>
-                <h2 class="playground-display">Popover</h2>
-                <p class="playground-desc">
+                <h2 class="text-xl font-bold text-black-900">Popover</h2>
+                <p class="text-sigma text-black-500">
                   Rich floating surfaces with card-styling header slots, anchor positioning, and click-outside dismissal.
                 </p>
               </div>
