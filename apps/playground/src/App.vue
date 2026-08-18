@@ -3056,72 +3056,78 @@ const shellClass = computed(() =>
                   <span class="text-omega text-black-500 font-medium">Search, Status Filter, Kategori, & Sorting</span>
                 </div>
                 <div class="playground-case-body space-y-4">
-                  <!-- Filter Bar -->
-                  <div class="grid gap-3 md:grid-cols-12 items-center bg-white p-3.5 rounded-lg border border-black-200">
-                    <!-- Search input -->
+                  <!-- Filter Bar with Gwind UI Components -->
+                  <div class="grid gap-3 md:grid-cols-12 items-center bg-white p-4 rounded-lg border border-black-200 shadow-sm">
+                    <!-- Search Input via Gwind Input Component -->
                     <div class="relative md:col-span-4">
-                      <Search class="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-black-400 pointer-events-none" />
-                      <input
+                      <Search class="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-black-400 pointer-events-none z-10" />
+                      <Input
                         v-model="dtSearchQuery"
-                        type="text"
                         placeholder="Cari nasabah, SBG, NIK, atau telepon..."
-                        class="w-full pl-9 pr-8 py-1.5 text-xs rounded-md border border-black-200 bg-black-50 focus:bg-white focus:border-lime-600 outline-none"
+                        class="h-10 pl-9 pr-8 !text-xs bg-black-50 focus:bg-white"
                       />
                       <button
                         v-if="dtSearchQuery"
                         type="button"
-                        class="absolute right-2.5 top-1/2 -translate-y-1/2 text-black-400 hover:text-black-700 text-xs font-bold"
+                        class="absolute right-2.5 top-1/2 -translate-y-1/2 text-black-400 hover:text-black-700 text-xs font-bold z-10 cursor-pointer"
                         @click="dtSearchQuery = ''"
                       >
                         <X class="h-3.5 w-3.5" />
                       </button>
                     </div>
 
-                    <!-- Status filter select -->
+                    <!-- Status Filter via Gwind Select Component -->
                     <div class="md:col-span-3">
-                      <select
-                        v-model="dtStatusFilter"
-                        class="w-full px-3 py-1.5 text-xs rounded-md border border-black-200 bg-white text-black-800 focus:border-lime-600 outline-none cursor-pointer"
-                      >
-                        <option value="all">Semua Status Transaksi</option>
-                        <option value="Lancar">Lancar</option>
-                        <option value="Dalam Proses">Dalam Proses</option>
-                        <option value="Mendekati JT">Mendekati Jatuh Tempo</option>
-                        <option value="Lewat JT">Lewat Jatuh Tempo</option>
-                      </select>
+                      <Select v-model="dtStatusFilter">
+                        <SelectTrigger class="h-10 text-xs bg-white border-black-200">
+                          <SelectValue placeholder="Pilih status transaksi" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="all">Semua Status Transaksi</SelectItem>
+                          <SelectItem value="Lancar">Lancar</SelectItem>
+                          <SelectItem value="Dalam Proses">Dalam Proses</SelectItem>
+                          <SelectItem value="Mendekati JT">Mendekati Jatuh Tempo</SelectItem>
+                          <SelectItem value="Lewat JT">Lewat Jatuh Tempo</SelectItem>
+                        </SelectContent>
+                      </Select>
                     </div>
 
-                    <!-- Category filter select -->
+                    <!-- Category Filter via Gwind Select Component -->
                     <div class="md:col-span-3">
-                      <select
-                        v-model="dtCategoryFilter"
-                        class="w-full px-3 py-1.5 text-xs rounded-md border border-black-200 bg-white text-black-800 focus:border-lime-600 outline-none cursor-pointer"
-                      >
-                        <option value="all">Semua Kategori Jaminan</option>
-                        <option value="Emas Batangan">Emas Batangan</option>
-                        <option value="Perhiasan Emas">Perhiasan Emas</option>
-                        <option value="Berlian Mulia">Berlian Mulia</option>
-                        <option value="Elektronik Gadget">Elektronik Gadget</option>
-                      </select>
+                      <Select v-model="dtCategoryFilter">
+                        <SelectTrigger class="h-10 text-xs bg-white border-black-200">
+                          <SelectValue placeholder="Pilih kategori jaminan" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="all">Semua Kategori Jaminan</SelectItem>
+                          <SelectItem value="Emas Batangan">Emas Batangan</SelectItem>
+                          <SelectItem value="Perhiasan Emas">Perhiasan Emas</SelectItem>
+                          <SelectItem value="Berlian Mulia">Berlian Mulia</SelectItem>
+                          <SelectItem value="Elektronik Gadget">Elektronik Gadget</SelectItem>
+                        </SelectContent>
+                      </Select>
                     </div>
 
-                    <!-- Sort / Reset -->
+                    <!-- Sort / Reset Actions via Gwind Button Component -->
                     <div class="md:col-span-2 flex items-center justify-end gap-2">
-                      <button
-                        type="button"
-                        class="px-2.5 py-1.5 text-xs font-semibold rounded-md border border-black-200 bg-black-50 hover:bg-black-100 text-black-700 transition-colors cursor-pointer"
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        class="h-10 px-3 text-xs bg-white font-bold"
                         @click="dtSortOrder = dtSortOrder === 'none' ? 'desc' : dtSortOrder === 'desc' ? 'asc' : 'none'"
                       >
-                        Sort: {{ dtSortOrder === 'desc' ? 'Terbesar ↓' : dtSortOrder === 'asc' ? 'Terkecil ↑' : 'Normal' }}
-                      </button>
-                      <button
+                        <SlidersHorizontal class="h-3.5 w-3.5 mr-1" />
+                        {{ dtSortOrder === 'desc' ? 'Pinjaman ↓' : dtSortOrder === 'asc' ? 'Pinjaman ↑' : 'Sort' }}
+                      </Button>
+                      <Button
                         v-if="dtSearchQuery || dtStatusFilter !== 'all' || dtCategoryFilter !== 'all' || dtSortOrder !== 'none'"
-                        type="button"
-                        class="text-xs font-bold text-red-600 hover:text-red-800 underline cursor-pointer"
+                        variant="ghost"
+                        size="sm"
+                        class="h-10 text-xs font-bold text-red-600 hover:text-red-700 hover:bg-red-50 px-2"
                         @click="dtSearchQuery = ''; dtStatusFilter = 'all'; dtCategoryFilter = 'all'; dtSortOrder = 'none'"
                       >
                         Reset
-                      </button>
+                      </Button>
                     </div>
                   </div>
 
