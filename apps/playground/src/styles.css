@@ -8,35 +8,35 @@
 :root {
   /* Canvas & Surface */
   --pg-canvas: #ffffff;
-  --pg-surface-soft: #f5f5f5;
-  --pg-hairline: #e5e5e5;
-  --pg-hairline-soft: #f0f0f0;
+  --pg-surface-soft: #f8f9fa;
+  --pg-hairline: #e5e7eb;
+  --pg-hairline-soft: #f3f4f6;
 
   /* Ink */
-  --pg-ink: #0f0f0f;
-  --pg-ink-soft: #6b6b6b;
+  --pg-ink: #111827;
+  --pg-ink-soft: #6b7280;
   --pg-inverse-ink: #ffffff;
 
   /* Inverse Canvas */
-  --pg-inverse-canvas: #0f0f0f;
+  --pg-inverse-canvas: #111827;
 
-  /* Color Blocks (pastel) */
-  --pg-block-lime: #e8f5e0;
-  --pg-block-lilac: #ede5f5;
-  --pg-block-cream: #faf5eb;
-  --pg-block-mint: #ddf5f0;
-  --pg-block-pink: #fce8ef;
-  --pg-block-coral: #fce8e0;
-  --pg-block-navy: #181c2b;
+  /* Color Blocks (clean pastel) */
+  --pg-block-lime: #f2f9ed;
+  --pg-block-lilac: #f3eff9;
+  --pg-block-cream: #faf7f0;
+  --pg-block-mint: #eef9f6;
+  --pg-block-pink: #fdf0f4;
+  --pg-block-coral: #fdf2ed;
+  --pg-block-navy: #111827;
   --pg-accent-magenta: #ff2577;
 
   /* Shape */
-  --pg-rounded-pill: 50px;
-  --pg-rounded-lg: 24px;
-  --pg-rounded-md: 8px;
+  --pg-rounded-pill: 9999px;
+  --pg-rounded-lg: 20px;
+  --pg-rounded-md: 12px;
 
   /* Spacing */
-  --pg-section-gap: 48px;
+  --pg-section-gap: 32px;
 
   /* Typography */
   color: var(--pg-ink);
@@ -53,6 +53,7 @@ body {
   min-height: 100vh;
   margin: 0;
   overflow-x: hidden;
+  background: var(--pg-canvas);
 }
 
 #app {
@@ -65,66 +66,70 @@ body {
   background: var(--pg-canvas);
 }
 
-/* ── Header (Inverse Canvas / monochrome bar) ────────────────────── */
+/* ── Header ──────────────────────────────────────────────────────── */
 .playground-header {
   position: sticky;
   top: 0;
-  z-index: 30;
+  z-index: 40;
   background: var(--pg-inverse-canvas);
   color: var(--pg-inverse-ink);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* ── Sticky Top Navigation Bar (replaces side menu) ──────────────── */
+.playground-top-nav {
+  position: sticky;
+  top: 56px;
+  z-index: 30;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--pg-hairline);
+  padding: 8px 0;
 }
 
 /* ── Container ───────────────────────────────────────────────────── */
 .playground-container {
-  width: min(1280px, calc(100vw - 48px));
+  width: min(1200px, calc(100vw - 32px));
   margin: 0 auto;
-}
-
-/* ── Grid ────────────────────────────────────────────────────────── */
-.playground-grid {
-  display: grid;
-  grid-template-columns: 220px minmax(0, 1fr);
-  gap: 32px;
-}
-
-/* ── Sidebar ─────────────────────────────────────────────────────── */
-.playground-sidebar {
-  position: sticky;
-  top: 80px;
-  height: calc(100vh - 104px);
-  overflow: auto;
-  padding: 16px 0;
 }
 
 /* ── Section ─────────────────────────────────────────────────────── */
 .playground-section {
-  scroll-margin-top: 96px;
-  overflow-x: auto;
+  scroll-margin-top: 120px;
 }
 
-/* ── Panel (white card for component demos) ──────────────────────── */
+/* ── Panel (clean flat border, no heavy shadow) ─────────────────── */
 .playground-panel {
   border: 1px solid var(--pg-hairline);
-  border-radius: var(--pg-rounded-md);
-  background: white;
+  border-radius: var(--pg-rounded-lg);
+  background: #ffffff;
+  padding: 24px;
 }
 
-/* ── Color-Block Sections (the Figma signature) ──────────────────── */
+/* ── Demo Tile (flat item tile, replaces nested cards) ────────────── */
+.playground-tile {
+  border: 1px solid var(--pg-hairline);
+  border-radius: var(--pg-rounded-md);
+  background: #ffffff;
+  padding: 16px;
+}
+
+/* ── Color-Block Sections (flat, shadow-free) ────────────────────── */
 .playground-color-block {
   border-radius: var(--pg-rounded-lg);
-  padding: var(--pg-section-gap);
-  border: none;
-  background: var(--pg-block-lime);
+  padding: 32px;
+  border: 1px solid transparent;
 }
-.playground-color-block.block-lime { background: var(--pg-block-lime); }
-.playground-color-block.block-lilac { background: var(--pg-block-lilac); }
-.playground-color-block.block-cream { background: var(--pg-block-cream); }
-.playground-color-block.block-mint { background: var(--pg-block-mint); }
-.playground-color-block.block-pink { background: var(--pg-block-pink); }
-.playground-color-block.block-coral { background: var(--pg-block-coral); }
+.playground-color-block.block-lime { background: var(--pg-block-lime); border-color: #e2f0d9; }
+.playground-color-block.block-lilac { background: var(--pg-block-lilac); border-color: #e7def2; }
+.playground-color-block.block-cream { background: var(--pg-block-cream); border-color: #f2ebd9; }
+.playground-color-block.block-mint { background: var(--pg-block-mint); border-color: #dcf0ea; }
+.playground-color-block.block-pink { background: var(--pg-block-pink); border-color: #f7dce5; }
+.playground-color-block.block-coral { background: var(--pg-block-coral); border-color: #f7e0d6; }
 .playground-color-block.block-navy {
   background: var(--pg-block-navy);
   color: var(--pg-inverse-ink);
+  border-color: #1f2937;
 }
 .playground-color-block.block-navy .playground-eyebrow {
   color: rgba(255, 255, 255, 0.6);
@@ -136,11 +141,12 @@ body {
   color: rgba(255, 255, 255, 0.75);
 }
 
-/* ── Promo Banner (Figma Release Notes banner pattern) ────────────── */
+/* ── Promo Banner ────────────────────────────────────────────────── */
 .playground-promo-banner {
   background: var(--pg-block-lilac);
+  border: 1px solid #e7def2;
   border-radius: var(--pg-rounded-md);
-  padding: 16px 24px;
+  padding: 14px 20px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -151,7 +157,8 @@ body {
   color: #ffffff;
   font-weight: 600;
   border-radius: var(--pg-rounded-pill);
-  padding: 8px 18px;
+  padding: 6px 16px;
+  font-size: 13px;
   transition: opacity 0.15s;
 }
 .button-magenta-promo:hover {
@@ -160,37 +167,38 @@ body {
 
 /* ── Eyebrow (mono uppercase category label) ─────────────────────── */
 .playground-eyebrow {
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 700;
   line-height: 1.0;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--pg-ink-soft);
-  margin-bottom: 8px;
+  margin-bottom: 6px;
 }
 
 /* ── Section Title (display headline) ────────────────────────────── */
 .playground-display {
-  font-size: 28px;
+  font-size: 24px;
   font-weight: 800;
-  line-height: 1.15;
+  line-height: 1.2;
   letter-spacing: -0.02em;
   color: var(--pg-ink);
-  margin-bottom: 6px;
+  margin-bottom: 4px;
 }
 
 /* ── Section Description ─────────────────────────────────────────── */
 .playground-desc {
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 500;
   line-height: 1.45;
   color: var(--pg-ink-soft);
 }
 
-/* ── Nav Link (sidebar) ──────────────────────────────────────────── */
-.playground-nav-link {
-  display: flex;
+/* ── Top Nav Link (pill) ─────────────────────────────────────────── */
+.playground-nav-pill {
+  display: inline-flex;
   align-items: center;
+  white-space: nowrap;
   padding: 6px 14px;
   border-radius: var(--pg-rounded-pill);
   font-size: 13px;
@@ -198,12 +206,13 @@ body {
   color: var(--pg-ink-soft);
   text-decoration: none;
   transition: background 0.15s, color 0.15s;
+  border: 1px solid transparent;
 }
-.playground-nav-link:hover {
+.playground-nav-pill:hover {
   background: var(--pg-surface-soft);
   color: var(--pg-ink);
 }
-.playground-nav-link.active {
+.playground-nav-pill.active {
   background: var(--pg-inverse-canvas);
   color: var(--pg-inverse-ink);
 }
@@ -217,25 +226,16 @@ body {
 
 /* ── Color Swatch ────────────────────────────────────────────────── */
 .playground-swatch {
-  height: 48px;
+  height: 44px;
   border-radius: 6px;
   border: 1px solid var(--pg-hairline);
 }
 
-/* ── Responsive ──────────────────────────────────────────────────── */
-@media (max-width: 960px) {
-  .playground-grid {
-    grid-template-columns: minmax(0, 1fr);
-  }
-
-  .playground-sidebar {
-    position: static;
-    height: auto;
-    padding: 0;
-  }
-
-  .playground-color-block {
-    border-radius: 0;
-    padding: 32px 20px;
-  }
+/* ── Hide scrollbar for clean horizontal nav ─────────────────────── */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
