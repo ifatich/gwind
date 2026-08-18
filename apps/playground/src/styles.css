@@ -265,6 +265,92 @@ body {
   color: var(--pg-ink-soft);
 }
 
+/* ── Hero Story Block & Stat Metrics ─────────────────────────────── */
+.playground-hero-card {
+  position: relative;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: var(--pg-rounded-lg);
+  padding: 36px 32px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03), 0 10px 24px -6px rgba(0, 0, 0, 0.04);
+}
+
+.playground-stat-box {
+  display: flex;
+  flex-direction: column;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: var(--pg-rounded-md);
+  padding: 16px 20px;
+  transition: border-color 0.15s, transform 0.15s, box-shadow 0.15s;
+}
+
+.playground-stat-box:hover {
+  border-color: #86efac;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(22, 163, 74, 0.08);
+}
+
+.playground-cli-terminal {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  background: #0f172a;
+  color: #e2e8f0;
+  border: 1px solid #1e293b;
+  border-radius: var(--pg-rounded-pill);
+  padding: 8px 10px 8px 20px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 13px;
+}
+
+/* ── Interactive Inventory Hub ───────────────────────────────────── */
+.playground-inventory-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: var(--pg-rounded-md);
+  padding: 18px;
+  transition: all 0.18s ease-in-out;
+  cursor: pointer;
+}
+
+.playground-inventory-card:hover {
+  border-color: #16a34a;
+  box-shadow: 0 6px 18px -2px rgba(22, 163, 74, 0.12), 0 2px 6px rgba(0, 0, 0, 0.04);
+  transform: translateY(-2px);
+}
+
+.playground-category-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: var(--pg-rounded-pill);
+  font-size: 13px;
+  font-weight: 700;
+  color: #64748b;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.playground-category-pill:hover {
+  color: #0f172a;
+  background: #e2e8f0;
+}
+
+.playground-category-pill.active {
+  color: #ffffff;
+  background: #0f172a;
+  border-color: #0f172a;
+}
+
 /* ── Top Nav Link (pill) ─────────────────────────────────────────── */
 .playground-nav-pill {
   display: inline-flex;

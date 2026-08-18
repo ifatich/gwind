@@ -115,6 +115,7 @@ import {
   Check,
   ChevronDown,
   CircleHelp,
+  Copy,
   CreditCard,
   ExternalLink,
   FileText,
@@ -481,214 +482,359 @@ const sections = [
   { id: "tokens", label: "Tokens" },
 ];
 
-const componentInventory = [
+const allComponentsCatalog = [
+  // 1. General & Actions
   {
-    group: "Accordion",
-    items: [
-      "Accordion",
-      "AccordionContent",
-      "AccordionItem",
-      "AccordionTrigger",
-    ],
+    id: "button",
+    name: "Button",
+    category: "actions",
+    categoryLabel: "General & Actions",
+    badge: "Core Action",
+    description: "Tombol aksi primer monochrome, sekunder, tertiary, social auth, & icon button.",
+    subItems: ["Button"],
   },
   {
-    group: "Alert",
-    items: ["Alert", "AlertDescription", "AlertTitle"],
+    id: "link",
+    name: "Link",
+    category: "actions",
+    categoryLabel: "General & Actions",
+    badge: "Navigation",
+    description: "Tautan teks semantik inline dengan hover underline & external link icon.",
+    subItems: ["Link"],
+  },
+
+  // 2. Form & Data Entry
+  {
+    id: "input",
+    name: "Input & InputField",
+    category: "forms",
+    categoryLabel: "Form & Data Entry",
+    badge: "Forms",
+    description: "Input teks standar, NIK KTP, email, prefix/suffix text, & clearable action.",
+    subItems: ["Input", "InputField", "InputGroup"],
   },
   {
-    group: "Badge",
-    items: ["Badge"],
+    id: "input-rupiah",
+    name: "Input Rupiah",
+    category: "forms",
+    categoryLabel: "Form & Data Entry",
+    badge: "Fintech",
+    description: "Format nominal mata uang otomatis ribuan & emit raw integer value.",
+    subItems: ["InputRupiah", "InputField"],
   },
   {
-    group: "Carousel",
-    items: [
-      "Carousel",
-      "CarouselContent",
-      "CarouselItem",
-      "CarouselPrevious",
-      "CarouselNext",
-      "CarouselIndicators",
-      "BannerCarousel",
-    ],
+    id: "input-persentase",
+    name: "Input Persentase",
+    category: "forms",
+    categoryLabel: "Form & Data Entry",
+    badge: "Fintech",
+    description: "Input tarif sewa modal pinjaman & persentase margin diskon promo.",
+    subItems: ["InputPersentase", "InputField"],
   },
   {
-    group: "Avatar",
-    items: ["Avatar"],
+    id: "add-amount",
+    name: "Add Amount",
+    category: "forms",
+    categoryLabel: "Form & Data Entry",
+    badge: "Controls",
+    description: "Stepper kuantitas gramasi emas batangan & kalkulasi live total harga.",
+    subItems: ["AddAmount"],
   },
   {
-    group: "Breadcrumb",
-    items: [
-      "Breadcrumb",
-      "BreadcrumbEllipsis",
-      "BreadcrumbItem",
-      "BreadcrumbLink",
-      "BreadcrumbList",
-      "BreadcrumbPage",
-      "BreadcrumbSeparator",
-    ],
+    id: "textarea",
+    name: "Textarea",
+    category: "forms",
+    categoryLabel: "Form & Data Entry",
+    badge: "Forms",
+    description: "Area teks multi-baris dengan live counter karakter (:maxlength='100').",
+    subItems: ["Textarea", "TextareaField"],
   },
   {
-    group: "Button",
-    items: ["Button"],
+    id: "label",
+    name: "Label",
+    category: "forms",
+    categoryLabel: "Form & Data Entry",
+    badge: "Forms",
+    description: "Label kolom formulir dengan asterisk (*) mandatory & accessible states.",
+    subItems: ["Label"],
   },
   {
-    group: "Card",
-    items: [
-      "Card",
-      "CardContent",
-      "CardDescription",
-      "CardFooter",
-      "CardHeader",
-      "CardTitle",
-    ],
+    id: "checkbox",
+    name: "Checkbox",
+    category: "forms",
+    categoryLabel: "Form & Data Entry",
+    badge: "Consent",
+    description: "Kotak centang persetujuan akad syariah & opsi proteksi barang ekstra.",
+    subItems: ["Checkbox", "CheckboxField", "CheckboxGroup"],
   },
   {
-    group: "Checkbox",
-    items: ["Checkbox", "CheckboxField", "CheckboxGroup"],
+    id: "radio-group",
+    name: "Radio Group",
+    category: "forms",
+    categoryLabel: "Form & Data Entry",
+    badge: "Selection",
+    description: "Pilihan metode pengambilan barang lunas (cabang vs kurir ekspedisi).",
+    subItems: ["RadioGroup", "RadioGroupField"],
   },
   {
-    group: "Combobox",
-    items: [
-      "Combobox",
-      "ComboboxAnchor",
-      "ComboboxEmpty",
-      "ComboboxGroup",
-      "ComboboxInput",
-      "ComboboxItem",
-      "ComboboxItemIndicator",
-      "ComboboxList",
-      "ComboboxSeparator",
-      "ComboboxTrigger",
-    ],
+    id: "select",
+    name: "Select",
+    category: "forms",
+    categoryLabel: "Form & Data Entry",
+    badge: "Dropdown",
+    description: "Dropdown opsi kategori barang jaminan dengan grouped labels & separators.",
+    subItems: ["Select", "SelectTrigger", "SelectContent", "SelectItem"],
   },
   {
-    group: "Dialog",
-    items: [
-      "Dialog",
-      "DialogBody",
-      "DialogClose",
-      "DialogContent",
-      "DialogDescription",
-      "DialogFooter",
-      "DialogHeader",
-      "DialogOverlay",
-      "DialogTitle",
-      "DialogTrigger",
-    ],
+    id: "combobox",
+    name: "Combobox",
+    category: "forms",
+    categoryLabel: "Form & Data Entry",
+    badge: "Autocomplete",
+    description: "Pencarian nama kantor cabang Pegadaian dengan autocomplete & empty feedback.",
+    subItems: ["Combobox", "ComboboxInput", "ComboboxList", "ComboboxItem"],
   },
   {
-    group: "Divider",
-    items: ["Divider"],
+    id: "datepicker",
+    name: "Datepicker",
+    category: "forms",
+    categoryLabel: "Form & Data Entry",
+    badge: "Calendar",
+    description: "Kalender pemilih tanggal jatuh tempo (disable past) & tgl lahir (disable future).",
+    subItems: ["Datepicker"],
   },
   {
-    group: "Dropdown",
-    items: [
-      "Dropdown",
-      "DropdownList",
-      "DropdownListCheckboxItem",
-      "DropdownListItem",
-    ],
+    id: "switch",
+    name: "Switch Toggle",
+    category: "forms",
+    categoryLabel: "Form & Data Entry",
+    badge: "Toggle",
+    description: "Toggle on/off instan untuk pengingat WhatsApp & autodebet tabungan emas.",
+    subItems: ["Switch"],
   },
   {
-    group: "Datepicker",
-    items: [
-      "Datepicker",
-      "DatepickerRoot",
-      "DatepickerInput",
-      "DatepickerContent",
-      "Calendar",
-      "CalendarHeading",
-      "YearPicker",
-      "DatepickerScroll",
-    ],
+    id: "file-picker",
+    name: "File Picker",
+    category: "forms",
+    categoryLabel: "Form & Data Entry",
+    badge: "Upload",
+    description: "Dropzone upload rekening koran bank (.pdf only) & berkas persyaratan.",
+    subItems: ["FilePicker"],
   },
   {
-    group: "Input",
-    items: ["FilePicker", "Input", "InputField", "InputPersentase", "InputRupiah"],
+    id: "image-picker",
+    name: "Image Picker",
+    category: "forms",
+    categoryLabel: "Form & Data Entry",
+    badge: "Media",
+    description: "Upload pas foto KTP (80x80) & multi-image slider 4:3 fisik barang jaminan.",
+    subItems: ["ImagePicker", "ImageDisplay"],
+  },
+
+  // 3. Data Display & Layout
+  {
+    id: "avatar",
+    name: "Avatar",
+    category: "data",
+    categoryLabel: "Data Display & Layout",
+    badge: "Identity",
+    description: "Avatar foto nasabah terverifikasi KYC & inisial fallback penaksir emas.",
+    subItems: ["Avatar"],
   },
   {
-    group: "Label",
-    items: ["Label"],
+    id: "badge",
+    name: "Badge",
+    category: "data",
+    categoryLabel: "Data Display & Layout",
+    badge: "Status",
+    description: "Pill status transaksi lancar, proses, H-3, hingga peringatan jatuh tempo.",
+    subItems: ["Badge"],
   },
   {
-    group: "Link",
-    items: ["Link"],
+    id: "card",
+    name: "Card",
+    category: "data",
+    categoryLabel: "Data Display & Layout",
+    badge: "Container",
+    description: "Kartu portofolio tabungan emas, promo cashback gadai, & jaminan khazanah.",
+    subItems: ["Card", "CardHeader", "CardTitle", "CardContent", "CardFooter"],
   },
   {
-    group: "Pagination",
-    items: ["Pagination"],
+    id: "table",
+    name: "Table & DataTable",
+    category: "data",
+    categoryLabel: "Data Display & Layout",
+    badge: "Tabular",
+    description: "Tabel tarif sewa modal & perbandingan matriks golongan pinjaman Pegadaian.",
+    subItems: ["DataTable", "Table", "TableHeader", "TableRow", "TableCell"],
   },
   {
-    group: "Popover",
-    items: ["Popover", "PopoverAnchor", "PopoverContent", "PopoverTrigger"],
+    id: "accordion",
+    name: "Accordion",
+    category: "data",
+    categoryLabel: "Data Display & Layout",
+    badge: "Disclosure",
+    description: "Pusat bantuan & FAQ interaktif syarat gadai dengan single-collapse smooth motion.",
+    subItems: ["Accordion", "AccordionItem", "AccordionTrigger", "AccordionContent"],
   },
   {
-    group: "Progress",
-    items: ["Progress"],
+    id: "carousel",
+    name: "Carousel",
+    category: "data",
+    categoryLabel: "Data Display & Layout",
+    badge: "Slider",
+    description: "Banner carousel promo cashback digital dengan autoplay 5s & touch swipe.",
+    subItems: ["BannerCarousel", "Carousel", "CarouselItem", "CarouselIndicators"],
   },
   {
-    group: "Radio Group",
-    items: ["RadioGroup", "RadioGroupField", "RadioGroupItem"],
+    id: "divider",
+    name: "Divider",
+    category: "data",
+    categoryLabel: "Data Display & Layout",
+    badge: "Layout",
+    description: "Pemisah rincian pokok, bunga sewa modal, biaya admin, & total pelunasan.",
+    subItems: ["Divider"],
   },
   {
-    group: "Select",
-    items: [
-      "Select",
-      "SelectContent",
-      "SelectGroup",
-      "SelectItem",
-      "SelectItemText",
-      "SelectLabel",
-      "SelectScrollDownButton",
-      "SelectScrollUpButton",
-      "SelectSeparator",
-      "SelectTrigger",
-      "SelectValue",
-    ],
+    id: "breadcrumb",
+    name: "Breadcrumb",
+    category: "data",
+    categoryLabel: "Data Display & Layout",
+    badge: "Navigation",
+    description: "Jejak hirarki navigasi dashboard nasabah hingga detail Surat Bukti Gadai (SBG).",
+    subItems: ["Breadcrumb", "BreadcrumbList", "BreadcrumbItem", "BreadcrumbPage"],
   },
   {
-    group: "Spinner",
-    items: ["Spinner"],
+    id: "pagination",
+    name: "Pagination",
+    category: "data",
+    categoryLabel: "Data Display & Layout",
+    badge: "Navigation",
+    description: "Paginasi riwayat transaksi mutasi 20 halaman dengan truncation ellipsis.",
+    subItems: ["Pagination"],
   },
   {
-    group: "Switch",
-    items: ["Switch"],
+    id: "tabs",
+    name: "Tabs",
+    category: "data",
+    categoryLabel: "Data Display & Layout",
+    badge: "Segmented",
+    description: "Segmented tab switch dashboard ringkasan portofolio, riwayat, & akad.",
+    subItems: ["TabGroup", "TabTriggerGroup", "TabTrigger", "TabContent"],
+  },
+
+  // 4. Feedback & Floating Surfaces
+  {
+    id: "alert",
+    name: "Alert",
+    category: "feedback",
+    categoryLabel: "Feedback & Surfaces",
+    badge: "Banner",
+    description: "Notifikasi sistem pembayaran angsuran berhasil & peringatan jatuh tempo.",
+    subItems: ["Alert", "AlertTitle", "AlertDescription"],
   },
   {
-    group: "Table",
-    items: [
-      "DataTable",
-      "Table",
-      "TableBody",
-      "TableCaption",
-      "TableCell",
-      "TableHead",
-      "TableHeader",
-      "TableRow",
-    ],
+    id: "progress",
+    name: "Progress Bar",
+    category: "feedback",
+    categoryLabel: "Feedback & Surfaces",
+    badge: "Loader",
+    description: "Indikator kelengkapan progres formulir verifikasi akun nasabah (KYC).",
+    subItems: ["Progress"],
   },
   {
-    group: "Tabs",
-    items: ["TabContent", "TabGroup", "TabTrigger", "TabTriggerGroup"],
+    id: "spinner",
+    name: "Spinner",
+    category: "feedback",
+    categoryLabel: "Feedback & Surfaces",
+    badge: "Indicator",
+    description: "CSS spinner pemrosesan asinkron taksiran harga emas & button loading.",
+    subItems: ["Spinner"],
   },
   {
-    group: "Textarea",
-    items: ["Textarea", "TextareaField"],
+    id: "toast",
+    name: "Toast",
+    category: "feedback",
+    categoryLabel: "Feedback & Surfaces",
+    badge: "Snackbar",
+    description: "Notifikasi snackbar melayang untuk feedback transaksi top-up & limit.",
+    subItems: ["Toast"],
   },
   {
-    group: "Tooltip",
-    items: ["Tooltip", "TooltipContent", "TooltipProvider", "TooltipTrigger"],
+    id: "dialog",
+    name: "Dialog (Modal)",
+    category: "feedback",
+    categoryLabel: "Feedback & Surfaces",
+    badge: "Modal",
+    description: "Modal konfirmasi pelunasan pinjaman SBG dengan rincian biaya & focus trap.",
+    subItems: ["Dialog", "DialogTrigger", "DialogContent", "DialogHeader", "DialogBody"],
   },
   {
-    group: "Toast",
-    items: ["Toast"],
+    id: "popover",
+    name: "Popover",
+    category: "feedback",
+    categoryLabel: "Feedback & Surfaces",
+    badge: "Floating",
+    description: "Popover melayang dengan header card untuk rincian taksiran kadar emas 24K.",
+    subItems: ["Popover", "PopoverTrigger", "PopoverAnchor", "PopoverContent"],
+  },
+  {
+    id: "tooltip",
+    name: "Tooltip",
+    category: "feedback",
+    categoryLabel: "Feedback & Surfaces",
+    badge: "Micro-hint",
+    description: "Micro-tooltip penjelas definisi istilah fintech biaya titip & formula sewa.",
+    subItems: ["Tooltip", "TooltipTrigger", "TooltipContent"],
+  },
+  {
+    id: "dropdown",
+    name: "Dropdown",
+    category: "feedback",
+    categoryLabel: "Feedback & Surfaces",
+    badge: "Menu",
+    description: "Dropdown pemilihan rekening bank sumber dana & multi-checkbox proteksi.",
+    subItems: ["Dropdown", "DropdownList", "DropdownListItem", "DropdownListCheckboxItem"],
   },
 ];
 
-const componentInventoryCount = componentInventory.reduce(
-  (total, group) => total + group.items.length,
-  0,
-);
+const searchQuery = ref("");
+const selectedCategory = ref("all");
+const copiedCli = ref(false);
+
+const categoryOptions = [
+  { id: "all", label: "Semua Komponen", count: 34 },
+  { id: "actions", label: "General & Actions", count: 2 },
+  { id: "forms", label: "Form & Data Entry", count: 14 },
+  { id: "data", label: "Data Display & Layout", count: 10 },
+  { id: "feedback", label: "Feedback & Surfaces", count: 8 },
+];
+
+function copyCliCommand() {
+  navigator.clipboard.writeText("npx gwind-system-ui add");
+  copiedCli.value = true;
+  setTimeout(() => {
+    copiedCli.value = false;
+  }, 2000);
+}
+
+const filteredCatalog = computed(() => {
+  return allComponentsCatalog.filter((item) => {
+    const matchCategory =
+      selectedCategory.value === "all" ||
+      item.category === selectedCategory.value;
+    const query = searchQuery.value.trim().toLowerCase();
+    const matchQuery =
+      !query ||
+      item.name.toLowerCase().includes(query) ||
+      item.id.toLowerCase().includes(query) ||
+      item.description.toLowerCase().includes(query) ||
+      item.subItems.some((sub) => sub.toLowerCase().includes(query));
+    return matchCategory && matchQuery;
+  });
+});
+
+const componentInventoryCount = allComponentsCatalog.length;
 
 const colorPalettes = [
   {
@@ -786,59 +932,63 @@ const shellClass = computed(() =>
           class="playground-container flex h-14 items-center justify-between gap-4"
         >
           <div class="flex min-w-0 items-center gap-3">
-            <div
-              class="flex h-8 w-8 items-center justify-center rounded-full bg-white/15"
-            >
-              <PackageCheck class="h-4 w-4 text-white" />
+            <div class="flex h-9 w-9 items-center justify-center rounded-full bg-lime-500/20 border border-lime-400/30 text-lime-400">
+              <PackageCheck class="h-5 w-5" />
             </div>
             <div class="min-w-0">
-              <h1 class="text-sigma font-bold tracking-tight text-white">
-                Gwind Playground
-              </h1>
+              <div class="flex items-center gap-2">
+                <h1 class="text-sigma font-extrabold tracking-tight text-white">
+                  Gwind Design System
+                </h1>
+                <span class="rounded-full bg-lime-400/15 border border-lime-400/30 px-2 py-0.5 text-[11px] font-bold text-lime-300">
+                  v1.0.0
+                </span>
+              </div>
+              <p class="text-xs text-white/60 hidden sm:block">
+                Vue 3.5+ • Tailwind CSS v4 • Reka UI Headless Engine
+              </p>
             </div>
           </div>
 
-          <div class="flex items-center gap-2">
+          <div class="flex items-center gap-3">
+            <div class="hidden md:flex items-center gap-2 rounded-full bg-white/10 px-3 py-1.5 text-xs text-white/80 border border-white/10">
+              <Sparkles class="h-3.5 w-3.5 text-lime-400" />
+              <span>34 Production Components</span>
+            </div>
             <button
-              class="flex items-center gap-1.5 rounded-full px-4 py-1.5 text-omega font-semibold transition-colors"
+              class="flex items-center gap-1.5 rounded-full px-4 py-1.5 text-xs font-bold transition-all cursor-pointer"
               :class="
                 compactMode
-                  ? 'bg-white text-black'
-                  : 'bg-white/15 text-white hover:bg-white/25'
+                  ? 'bg-white text-black shadow-sm'
+                  : 'bg-white/15 text-white hover:bg-white/25 border border-white/10'
               "
               @click="compactMode = !compactMode"
             >
               <SlidersHorizontal class="h-3.5 w-3.5" />
-              Compact
-            </button>
-            <button
-              class="flex items-center gap-1.5 rounded-full bg-white px-4 py-1.5 text-omega font-semibold text-black transition-colors hover:bg-white/90"
-            >
-              <Sparkles class="h-3.5 w-3.5" />
-              Primary
+              <span>{{ compactMode ? 'Compact On' : 'Compact Off' }}</span>
             </button>
           </div>
         </div>
       </header>
 
-      <!-- Marquee Ribbon (design.md marquee-strip) -->
-      <div class="border-b border-white/10 bg-black text-white py-2 overflow-hidden">
-        <div class="playground-container flex items-center justify-between gap-6 text-omega tracking-wider font-semibold uppercase opacity-80">
+      <!-- Marquee Ribbon -->
+      <div class="border-b border-white/10 bg-black text-white py-2.5 overflow-hidden">
+        <div class="playground-container flex items-center justify-between gap-6 text-omega tracking-wider font-semibold uppercase opacity-85">
           <div class="flex items-center gap-6 overflow-x-auto no-scrollbar whitespace-nowrap">
-            <span>⚡️ Gwind Design System</span>
+            <span class="flex items-center gap-1.5 text-lime-400 font-bold"><Sparkles class="h-3.5 w-3.5" /> Pegadaian Digital Ecosystem</span>
             <span>•</span>
-            <span>Color-Block Narrative Canvas</span>
+            <span>Zero External Icon Dependencies (Inline Lucide SVGs)</span>
             <span>•</span>
-            <span>Monochrome Chrome & Pill CTAs</span>
+            <span>100% Real-World Fintech & KYC Scenarios</span>
             <span>•</span>
-            <span>Reka UI Accessible Primitives</span>
+            <span>Layered CSS Token Architecture</span>
             <span>•</span>
-            <span>Tailwind CSS v4 Layered Engine</span>
+            <span>Strict TypeScript Contract & No Any Types</span>
             <span>•</span>
-            <span>34 Production UI Components</span>
+            <span>CLI Scaffolding via npx gwind-system-ui add</span>
           </div>
-          <span class="hidden md:inline-flex items-center gap-1.5 text-lime-400 font-mono text-omega">
-            v1.0.0
+          <span class="hidden lg:inline-flex items-center gap-1.5 text-lime-400 font-mono text-xs">
+            ✨ Interactive Playground
           </span>
         </div>
       </div>
@@ -865,80 +1015,207 @@ const shellClass = computed(() =>
 
       <main class="playground-container py-8">
         <div class="space-y-12">
-          <!-- Hero Story Block (design.md editorial display) -->
-          <div class="rounded-2xl bg-white border border-black-100 p-8 md:p-12 space-y-6">
-            <div class="max-w-2xl space-y-3">
-              <p class="playground-eyebrow">Enterprise Design System</p>
-              <h1 class="text-3xl md:text-5xl font-black tracking-tight text-black-900 leading-[1.05]">
-                Think bigger. Build faster with Gwind.
-              </h1>
-              <p class="text-omicron text-black-600 font-normal leading-relaxed pt-2">
-                The unified design system combining accessible Reka UI primitives, layered Tailwind CSS v4 styling, and Figma-inspired color-block storytelling for modern web applications.
-              </p>
+          <!-- Hero Section: Modern Enterprise Command Center -->
+          <div class="playground-hero-card space-y-8">
+            <div class="grid gap-8 lg:grid-cols-12 lg:items-center">
+              <div class="space-y-4 lg:col-span-7">
+                <div class="inline-flex items-center gap-2 rounded-full bg-lime-100 border border-lime-300/80 px-3.5 py-1 text-xs font-extrabold text-lime-800 tracking-wide uppercase">
+                  <Sparkles class="h-3.5 w-3.5 text-lime-700" />
+                  Enterprise Design System & UI Kit
+                </div>
+                <h1 class="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight text-black-900 leading-[1.08]">
+                  Think bigger. Build faster with Gwind.
+                </h1>
+                <p class="text-omicron text-black-600 font-normal leading-relaxed max-w-xl">
+                  Koleksi 34 komponen UI Vue 3 berstandar enterprise yang menggabungkan headless primitives Reka UI, styling modular Tailwind CSS v4, serta 100% skenario interaktif dunia nyata untuk ekosistem fintech dan perbankan modern.
+                </p>
+                <div class="flex flex-wrap items-center gap-3 pt-2">
+                  <Button size="lg" class="rounded-full px-6 font-bold" @click="scrollToSection('inventory')">
+                    Jelajahi 34 Komponen
+                  </Button>
+                  <Button variant="outline" size="lg" class="rounded-full px-6 font-bold bg-white text-black-800 hover:bg-black-100" @click="scrollToSection('button')">
+                    Mulai dari Button →
+                  </Button>
+                </div>
+              </div>
+
+              <!-- Quick CLI Terminal Box & Feature Highlights -->
+              <div class="space-y-4 lg:col-span-5">
+                <div class="rounded-xl border border-black-200 bg-black-50 p-5 space-y-4">
+                  <div class="flex items-center justify-between">
+                    <span class="text-xs font-extrabold text-black-700 tracking-wider uppercase">CLI Quick Scaffolding</span>
+                    <span class="text-[11px] font-mono text-lime-700 bg-lime-100 px-2 py-0.5 rounded font-bold">npm package</span>
+                  </div>
+                  <div class="playground-cli-terminal">
+                    <span class="truncate text-lime-300 font-mono text-xs select-all">npx gwind-system-ui add [komponen]</span>
+                    <button
+                      type="button"
+                      class="flex items-center gap-1 text-xs text-white bg-white/20 hover:bg-white/30 px-2.5 py-1 rounded-full transition-all cursor-pointer font-sans"
+                      @click="copyCliCommand"
+                    >
+                      <Copy class="h-3 w-3" />
+                      {{ copiedCli ? 'Tersalin!' : 'Copy' }}
+                    </button>
+                  </div>
+                  <p class="text-xs text-black-500">
+                    Install komponen mandiri langsung ke codebase aplikasi tanpa bloatware package eksternal.
+                  </p>
+                </div>
+              </div>
             </div>
-            <div class="flex flex-wrap items-center gap-3 pt-2">
-              <Button size="lg" class="rounded-full px-6 font-bold">
-                Get started for free
-              </Button>
-              <Button variant="outline" size="lg" class="rounded-full px-6 font-bold bg-white text-black-800 hover:bg-black-100">
-                Documentation
-              </Button>
-              <span class="text-omega font-semibold text-black-500 pl-2">
-                34 production components ready to use
-              </span>
+
+            <!-- Key Metric Stat Grid -->
+            <div class="grid grid-cols-2 gap-4 sm:grid-cols-2 md:grid-cols-4 pt-4 border-t border-black-100">
+              <div class="playground-stat-box">
+                <span class="text-3xl font-black text-black-900 tracking-tight">34</span>
+                <span class="text-sigma font-bold text-black-800 mt-1">Komponen UI</span>
+                <span class="text-xs text-black-500 mt-0.5">Vue 3 + Reka UI Headless</span>
+              </div>
+              <div class="playground-stat-box">
+                <span class="text-3xl font-black text-lime-700 tracking-tight">100%</span>
+                <span class="text-sigma font-bold text-black-800 mt-1">Real-World Cases</span>
+                <span class="text-xs text-black-500 mt-0.5">Fintech, Gadai, KYC & SBG</span>
+              </div>
+              <div class="playground-stat-box">
+                <span class="text-3xl font-black text-black-900 tracking-tight">v4</span>
+                <span class="text-sigma font-bold text-black-800 mt-1">Tailwind CSS</span>
+                <span class="text-xs text-black-500 mt-0.5">@theme & Design Tokens</span>
+              </div>
+              <div class="playground-stat-box">
+                <span class="text-3xl font-black text-black-900 tracking-tight">0</span>
+                <span class="text-sigma font-bold text-black-800 mt-1">External Icon Deps</span>
+                <span class="text-xs text-black-500 mt-0.5">Custom Inline Lucide SVG</span>
+              </div>
             </div>
           </div>
 
-            <section
-              id="inventory"
-              class="playground-section playground-color-block block-lime"
-            >
-              <div
-                class="mb-6 flex flex-wrap items-center justify-between gap-3"
-              >
-                <div>
-                  <p class="playground-eyebrow">Overview</p>
-                  <h2 class="playground-display">
-                    Component Inventory
-                  </h2>
-                  <p class="playground-desc">
-                    All Vue component files from
-                    <code class="rounded bg-black/5 px-1.5 py-0.5 text-omega font-bold">packages/ui/src/components/ui</code> are represented
-                    below and used in the playground examples.
-                  </p>
+          <!-- Interactive Component Inventory Hub & Directory -->
+          <section
+            id="inventory"
+            class="playground-section playground-panel p-6 sm:p-8 space-y-6"
+          >
+            <div class="flex flex-wrap items-center justify-between gap-4">
+              <div>
+                <div class="flex items-center gap-2">
+                  <p class="playground-eyebrow">Interactive Catalog & Directory</p>
+                  <Badge variant="brocoli">{{ filteredCatalog.length }} dari {{ allComponentsCatalog.length }} Komponen</Badge>
                 </div>
-                <Badge variant="brocoli"
-                  >{{ componentInventoryCount }} components</Badge
+                <h2 class="text-2xl sm:text-3xl font-black text-black-900 tracking-tight">
+                  Direktori Komponen UI Gwind
+                </h2>
+                <p class="text-sigma text-black-600 mt-1">
+                  Cari dan filter seluruh 34 komponen produksi berdasarkan kategori domain atau kata kunci. Klik kartu komponen untuk langsung menuju demo interaktif.
+                </p>
+              </div>
+            </div>
+
+            <!-- Search Bar & Category Filter Pills -->
+            <div class="space-y-4 pt-2">
+              <!-- Search Input Bar -->
+              <div class="relative max-w-xl">
+                <Search class="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-black-400 pointer-events-none" />
+                <input
+                  v-model="searchQuery"
+                  type="text"
+                  placeholder="Cari komponen UI (misal: rupiah, dialog, button, select, avatar, kyc)..."
+                  class="w-full pl-10 pr-10 py-2.5 rounded-full border border-black-200 bg-black-50 focus:bg-white focus:border-lime-600 focus:ring-2 focus:ring-lime-500/20 text-sigma text-black-900 placeholder:text-black-400 outline-none transition-all"
+                />
+                <button
+                  v-if="searchQuery"
+                  type="button"
+                  class="absolute right-3.5 top-1/2 -translate-y-1/2 text-black-400 hover:text-black-700 text-xs font-bold"
+                  @click="searchQuery = ''"
                 >
+                  <X class="h-4 w-4" />
+                </button>
               </div>
 
-              <div class="grid gap-3 md:grid-cols-2 xl:grid-cols-3">
-                <div
-                  v-for="group in componentInventory"
-                  :key="group.group"
-                  class="rounded-md border border-black-200 bg-white p-4"
+              <!-- Category Filter Pills -->
+              <div class="flex flex-wrap items-center gap-2">
+                <button
+                  v-for="cat in categoryOptions"
+                  :key="cat.id"
+                  type="button"
+                  class="playground-category-pill cursor-pointer"
+                  :class="selectedCategory === cat.id ? 'active' : ''"
+                  @click="selectedCategory = cat.id"
                 >
-                  <div class="mb-3 flex items-center justify-between gap-3">
-                    <h3 class="text-sigma font-bold text-black-800">
-                      {{ group.group }}
-                    </h3>
-                    <span class="text-omega font-bold text-black-500">{{
-                      group.items.length
-                    }}</span>
-                  </div>
-                  <div class="flex flex-wrap gap-2">
-                    <Badge
-                      v-for="item in group.items"
-                      :key="item"
-                      variant="outline"
-                      class="border border-black-200 bg-black-100 text-black-600"
+                  <span>{{ cat.label }}</span>
+                  <span
+                    class="px-1.5 py-0.2 rounded-full text-[11px] font-bold"
+                    :class="selectedCategory === cat.id ? 'bg-white/20 text-white' : 'bg-black-200 text-black-600'"
+                  >
+                    {{ cat.count }}
+                  </span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Filtered Component Grid -->
+            <div
+              v-if="filteredCatalog.length > 0"
+              class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 pt-2"
+            >
+              <div
+                v-for="comp in filteredCatalog"
+                :key="comp.id"
+                class="playground-inventory-card group"
+                @click="scrollToSection(comp.id)"
+              >
+                <div class="space-y-2.5">
+                  <div class="flex items-center justify-between gap-2">
+                    <span class="text-[11px] font-extrabold uppercase tracking-wider text-black-400">
+                      {{ comp.categoryLabel }}
+                    </span>
+                    <span
+                      class="text-[11px] font-bold px-2 py-0.5 rounded-full"
+                      :class="
+                        comp.badge === 'Fintech'
+                          ? 'bg-emerald-100 text-emerald-800 border border-emerald-300'
+                          : 'bg-black-100 text-black-700 border border-black-200'
+                      "
                     >
-                      {{ item }}
-                    </Badge>
+                      {{ comp.badge }}
+                    </span>
                   </div>
+                  <h3 class="text-omicron font-extrabold text-black-900 group-hover:text-lime-700 transition-colors">
+                    {{ comp.name }}
+                  </h3>
+                  <p class="text-omega text-black-500 line-clamp-2 leading-relaxed">
+                    {{ comp.description }}
+                  </p>
+                </div>
+
+                <div class="mt-4 pt-3 border-t border-black-100 flex items-center justify-between text-xs">
+                  <span class="text-black-400 font-medium">
+                    {{ comp.subItems.length }} sub-komponen
+                  </span>
+                  <span class="font-bold text-lime-700 group-hover:translate-x-1 transition-transform inline-flex items-center gap-1">
+                    Lihat Demo →
+                  </span>
                 </div>
               </div>
-            </section>
+            </div>
+
+            <!-- Empty Search State -->
+            <div
+              v-else
+              class="rounded-xl border border-dashed border-black-200 bg-black-50 p-8 text-center space-y-3"
+            >
+              <div class="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-black-100 text-black-400">
+                <Search class="h-6 w-6" />
+              </div>
+              <h4 class="text-sigma font-bold text-black-800">
+                Komponen "{{ searchQuery }}" tidak ditemukan
+              </h4>
+              <p class="text-omega text-black-500 max-w-sm mx-auto">
+                Coba kata kunci lain atau reset filter kategori untuk melihat seluruh 34 komponen UI.
+              </p>
+              <Button size="sm" variant="outline" class="rounded-full" @click="searchQuery = ''; selectedCategory = 'all'">
+                Reset Pencarian & Filter
+              </Button>
+            </div>
+          </section>
 
             <!-- 2. GENERAL & ACTIONS -->
             <!-- Button -->
