@@ -4,9 +4,43 @@
 @source "../../../packages/ui/src";
 @source "./**/*.{vue,ts}";
 
+/* ── Design Tokens (from design.md) ─────────────────────────────── */
 :root {
-  color: var(--foreground);
-  background: #f6f8f7;
+  /* Canvas & Surface */
+  --pg-canvas: #ffffff;
+  --pg-surface-soft: #f5f5f5;
+  --pg-hairline: #e5e5e5;
+  --pg-hairline-soft: #f0f0f0;
+
+  /* Ink */
+  --pg-ink: #0f0f0f;
+  --pg-ink-soft: #6b6b6b;
+  --pg-inverse-ink: #ffffff;
+
+  /* Inverse Canvas */
+  --pg-inverse-canvas: #0f0f0f;
+
+  /* Color Blocks (pastel) */
+  --pg-block-lime: #e8f5e0;
+  --pg-block-lilac: #ede5f5;
+  --pg-block-cream: #faf5eb;
+  --pg-block-mint: #ddf5f0;
+  --pg-block-pink: #fce8ef;
+  --pg-block-coral: #fce8e0;
+  --pg-block-navy: #181c2b;
+  --pg-accent-magenta: #ff2577;
+
+  /* Shape */
+  --pg-rounded-pill: 50px;
+  --pg-rounded-lg: 24px;
+  --pg-rounded-md: 8px;
+
+  /* Spacing */
+  --pg-section-gap: 48px;
+
+  /* Typography */
+  color: var(--pg-ink);
+  background: var(--pg-canvas);
   font-family: 'Nunito Sans', Inter, ui-sans-serif, system-ui, sans-serif;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -25,58 +59,170 @@ body {
   min-height: 100vh;
 }
 
+/* ── Shell ───────────────────────────────────────────────────────── */
 .playground-shell {
   min-height: 100vh;
-  background:
-    linear-gradient(180deg, rgba(0, 171, 82, 0.08), rgba(246, 248, 247, 0) 320px),
-    #f6f8f7;
+  background: var(--pg-canvas);
 }
 
+/* ── Header (Inverse Canvas / monochrome bar) ────────────────────── */
 .playground-header {
   position: sticky;
   top: 0;
   z-index: 30;
-  border-bottom: 1px solid rgba(15, 23, 42, 0.08);
-  background: rgba(255, 255, 255, 0.92);
-  backdrop-filter: blur(16px);
+  background: var(--pg-inverse-canvas);
+  color: var(--pg-inverse-ink);
 }
 
+/* ── Container ───────────────────────────────────────────────────── */
 .playground-container {
-  width: min(1440px, calc(100vw - 32px));
+  width: min(1280px, calc(100vw - 48px));
   margin: 0 auto;
 }
 
+/* ── Grid ────────────────────────────────────────────────────────── */
 .playground-grid {
   display: grid;
-  grid-template-columns: 240px minmax(0, 1fr);
-  gap: 24px;
+  grid-template-columns: 220px minmax(0, 1fr);
+  gap: 32px;
 }
 
+/* ── Sidebar ─────────────────────────────────────────────────────── */
 .playground-sidebar {
   position: sticky;
-  top: 88px;
-  height: calc(100vh - 112px);
+  top: 80px;
+  height: calc(100vh - 104px);
   overflow: auto;
   padding: 16px 0;
 }
 
-.playground-panel {
-  border: 1px solid rgba(15, 23, 42, 0.08);
-  border-radius: 8px;
-  background: white;
-}
-
+/* ── Section ─────────────────────────────────────────────────────── */
 .playground-section {
   scroll-margin-top: 96px;
   overflow-x: auto;
 }
 
+/* ── Panel (white card for component demos) ──────────────────────── */
+.playground-panel {
+  border: 1px solid var(--pg-hairline);
+  border-radius: var(--pg-rounded-md);
+  background: white;
+}
+
+/* ── Color-Block Sections (the Figma signature) ──────────────────── */
+.playground-color-block {
+  border-radius: var(--pg-rounded-lg);
+  padding: var(--pg-section-gap);
+  border: none;
+  background: var(--pg-block-lime);
+}
+.playground-color-block.block-lime { background: var(--pg-block-lime); }
+.playground-color-block.block-lilac { background: var(--pg-block-lilac); }
+.playground-color-block.block-cream { background: var(--pg-block-cream); }
+.playground-color-block.block-mint { background: var(--pg-block-mint); }
+.playground-color-block.block-pink { background: var(--pg-block-pink); }
+.playground-color-block.block-coral { background: var(--pg-block-coral); }
+.playground-color-block.block-navy {
+  background: var(--pg-block-navy);
+  color: var(--pg-inverse-ink);
+}
+.playground-color-block.block-navy .playground-eyebrow {
+  color: rgba(255, 255, 255, 0.6);
+}
+.playground-color-block.block-navy .playground-display {
+  color: #ffffff;
+}
+.playground-color-block.block-navy .playground-desc {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+/* ── Promo Banner (Figma Release Notes banner pattern) ────────────── */
+.playground-promo-banner {
+  background: var(--pg-block-lilac);
+  border-radius: var(--pg-rounded-md);
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+.button-magenta-promo {
+  background: var(--pg-accent-magenta);
+  color: #ffffff;
+  font-weight: 600;
+  border-radius: var(--pg-rounded-pill);
+  padding: 8px 18px;
+  transition: opacity 0.15s;
+}
+.button-magenta-promo:hover {
+  opacity: 0.9;
+}
+
+/* ── Eyebrow (mono uppercase category label) ─────────────────────── */
+.playground-eyebrow {
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.0;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--pg-ink-soft);
+  margin-bottom: 8px;
+}
+
+/* ── Section Title (display headline) ────────────────────────────── */
+.playground-display {
+  font-size: 28px;
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: var(--pg-ink);
+  margin-bottom: 6px;
+}
+
+/* ── Section Description ─────────────────────────────────────────── */
+.playground-desc {
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.45;
+  color: var(--pg-ink-soft);
+}
+
+/* ── Nav Link (sidebar) ──────────────────────────────────────────── */
+.playground-nav-link {
+  display: flex;
+  align-items: center;
+  padding: 6px 14px;
+  border-radius: var(--pg-rounded-pill);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--pg-ink-soft);
+  text-decoration: none;
+  transition: background 0.15s, color 0.15s;
+}
+.playground-nav-link:hover {
+  background: var(--pg-surface-soft);
+  color: var(--pg-ink);
+}
+.playground-nav-link.active {
+  background: var(--pg-inverse-canvas);
+  color: var(--pg-inverse-ink);
+}
+
+/* ── Footer ──────────────────────────────────────────────────────── */
+.playground-footer {
+  border-top: 1px solid var(--pg-hairline);
+  padding: 48px 0 32px;
+  margin-top: 64px;
+}
+
+/* ── Color Swatch ────────────────────────────────────────────────── */
 .playground-swatch {
   height: 48px;
   border-radius: 6px;
-  border: 1px solid rgba(15, 23, 42, 0.08);
+  border: 1px solid var(--pg-hairline);
 }
 
+/* ── Responsive ──────────────────────────────────────────────────── */
 @media (max-width: 960px) {
   .playground-grid {
     grid-template-columns: minmax(0, 1fr);
@@ -86,5 +232,10 @@ body {
     position: static;
     height: auto;
     padding: 0;
+  }
+
+  .playground-color-block {
+    border-radius: 0;
+    padding: 32px 20px;
   }
 }
