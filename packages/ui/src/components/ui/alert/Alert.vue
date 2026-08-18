@@ -17,11 +17,11 @@ const emit = defineEmits(['close'])
   <div :class="cn(alertVariants({ variant }), props.class)" role="alert">
     <button
       v-if="showClose"
-      class="absolute right-4 top-4 text-muted-foreground hover:text-foreground focus:outline-none"
+      class="absolute right-4 top-4 text-black-400 hover:text-black-800 focus:outline-none transition-colors"
       aria-label="Close"
       @click="emit('close')"
     >
-      <X class="h-[18px] w-[18px] cursor-pointer" />
+      <X class="h-4.5 w-4.5 cursor-pointer" />
     </button>
     <slot />
   </div>
