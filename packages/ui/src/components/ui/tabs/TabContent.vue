@@ -14,7 +14,7 @@ const props = defineProps<
     v-bind="props"
     :class="
       cn(
-        'px-5 h-[45px] flex-1 flex items-center justify-center text-[15px] leading-none text-black-800 select-none rounded-tl-md hover:text-lime-500 data-[state=active]:text-lime-500 data-[state=active]:animate-in data-[state=active]:fade-in-0 data-[state=active]:slide-in-from-bottom-2 outline-none',
+        'mt-2 outline-none data-[state=active]:animate-in data-[state=active]:fade-in-0 data-[state=active]:duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lime-500 focus-visible:ring-offset-2',
         props.class,
       )
     "

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { TabsListProps, TabsIndicatorProps } from 'reka-ui'
+import type { TabsIndicatorProps, TabsListProps } from 'reka-ui'
 import { TabsIndicator, TabsList } from 'reka-ui'
 import { type HTMLAttributes } from 'vue'
 import { cn } from '../../../lib/utils'
@@ -10,16 +10,16 @@ const props = defineProps<
 </script>
 
 <template>
-  <TabsList v-bind="props" :class="cn('flex border-b border-black-200', props.class)">
+  <TabsList v-bind="props" :class="cn('relative flex border-b border-black-200', props.class)">
+    <slot />
     <TabsIndicator
       :class="
         cn(
-          'absolute px-8 left-0 h-[2px] bottom-0 w-[--reka-tabs-indicator-size] translate-x-[--reka-tabs-indicator-position] translate-y-[1px] rounded-full transition-[width,transform] duration-300',
+          'absolute bottom-0 left-0 h-[2px] w-[var(--reka-tabs-indicator-size,var(--radix-tabs-indicator-size))] translate-x-[var(--reka-tabs-indicator-position,var(--radix-tabs-indicator-position))] transition-[width,transform] duration-300 ease-out z-10 pointer-events-none',
         )
       "
     >
-      <div :class="cn('bg-lime-500 w-full h-full')" />
+      <div class="h-full w-full bg-lime-500" />
     </TabsIndicator>
-    <slot />
   </TabsList>
 </template>
