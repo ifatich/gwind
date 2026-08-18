@@ -1652,16 +1652,16 @@ const shellClass = computed(() =>
                 </div>
                 <div class="playground-case-body">
                   <p class="text-sigma text-black-700 leading-relaxed">
-                    Dengan menekan tombol submit, Anda menyetujui <Link href="#" class="font-bold underline text-lime-600">Syarat & Ketentuan Layanan</Link> serta <Link href="#" class="font-bold underline text-lime-600">Kebijakan Privasi PT Pegadaian</Link>.
+                    Dengan menekan tombol submit, Anda menyetujui <Link href="#">Syarat & Ketentuan Layanan</Link> serta <Link href="#">Kebijakan Privasi PT Pegadaian</Link>.
                   </p>
                 </div>
               </div>
 
               <div class="flex flex-wrap items-center gap-6 pt-2">
-                <Link href="#" class="inline-flex items-center gap-1">
+                <Link href="#">
                   Default Link
                 </Link>
-                <Link href="#" class="inline-flex items-center gap-1 font-semibold text-lime-600 hover:underline">
+                <Link href="#">
                   External Portal <ExternalLink class="h-3.5 w-3.5" />
                 </Link>
                 <Link href="#" disabled>
@@ -3261,28 +3261,26 @@ const shellClass = computed(() =>
                   <span class="text-omega text-black-500 font-medium">Single Collapse & Animated Triggers</span>
                 </div>
                 <div class="playground-case-body">
-                  <div class="rounded-xl border border-black-100 bg-white p-4">
-                    <Accordion type="single" collapsible default-value="faq-1">
-                      <AccordionItem value="faq-1">
-                        <AccordionTrigger>Apa saja syarat pengajuan Gadai Emas di Pegadaian?</AccordionTrigger>
-                        <AccordionContent>
-                          Syaratnya sangat mudah: Nasabah cukup membawa fisik barang jaminan (emas batangan atau perhiasan) beserta KTP asli yang masih berlaku ke kantor cabang Pegadaian terdekat.
-                        </AccordionContent>
-                      </AccordionItem>
-                      <AccordionItem value="faq-2">
-                        <AccordionTrigger>Bagaimana cara memperpanjang jangka waktu pinjaman gadai?</AccordionTrigger>
-                        <AccordionContent>
-                          Perpanjangan jangka waktu gadai dapat dilakukan dengan membayar sewa modal (bunga) yang telah berjalan langsung melalui aplikasi Pegadaian Digital atau di outlet Pegadaian.
-                        </AccordionContent>
-                      </AccordionItem>
-                      <AccordionItem value="faq-3">
-                        <AccordionTrigger>Apakah emas yang digadaikan dijamin keamanannya?</AccordionTrigger>
-                        <AccordionContent>
-                          Ya, barang jaminan emas nasabah disimpan di ruang penyimpanan besi berstandar perbankan (khazanah) dan diasuransikan 100% dari nilai taksiran pasar.
-                        </AccordionContent>
-                      </AccordionItem>
-                    </Accordion>
-                  </div>
+                  <Accordion type="single" collapsible default-value="faq-1">
+                    <AccordionItem value="faq-1">
+                      <AccordionTrigger>Apa saja syarat pengajuan Gadai Emas di Pegadaian?</AccordionTrigger>
+                      <AccordionContent>
+                        Syaratnya sangat mudah: Nasabah cukup membawa fisik barang jaminan (emas batangan atau perhiasan) beserta KTP asli yang masih berlaku ke kantor cabang Pegadaian terdekat.
+                      </AccordionContent>
+                    </AccordionItem>
+                    <AccordionItem value="faq-2">
+                      <AccordionTrigger>Bagaimana cara memperpanjang jangka waktu pinjaman gadai?</AccordionTrigger>
+                      <AccordionContent>
+                        Perpanjangan jangka waktu gadai dapat dilakukan dengan membayar sewa modal (bunga) yang telah berjalan langsung melalui aplikasi Pegadaian Digital atau di outlet Pegadaian.
+                      </AccordionContent>
+                    </AccordionItem>
+                    <AccordionItem value="faq-3">
+                      <AccordionTrigger>Apakah emas yang digadaikan dijamin keamanannya?</AccordionTrigger>
+                      <AccordionContent>
+                        Ya, barang jaminan emas nasabah disimpan di ruang penyimpanan besi berstandar perbankan (khazanah) dan diasuransikan 100% dari nilai taksiran pasar.
+                      </AccordionContent>
+                    </AccordionItem>
+                  </Accordion>
                 </div>
               </div>
             </section>
