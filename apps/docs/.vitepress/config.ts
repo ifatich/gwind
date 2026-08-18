@@ -2,6 +2,9 @@
 import { defineConfig } from "vitepress";
 import { resolve } from "node:path";
 
+const isProd = process.env.NODE_ENV === "production";
+const playgroundUrl = isProd ? "/gwind/playground/" : "http://localhost:3000";
+
 export default defineConfig({
   title: "Gwind",
   description: "A Vue 3 Design System — Accessible, Consistent, Performant",
@@ -30,7 +33,7 @@ export default defineConfig({
       { text: "Guide", link: "/guide/getting-started" },
       { text: "Design", link: "/guide/design" },
       { text: "Components", link: "/components/accordion" },
-      { text: "Playground ↗", link: "/playground/", target: "_self" },
+      { text: "Playground ↗", link: playgroundUrl, target: isProd ? "_self" : "_blank" },
     ],
 
     sidebar: [
