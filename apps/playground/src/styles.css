@@ -56,6 +56,22 @@ body {
   background: var(--pg-canvas);
 }
 
+/* ── Global Scrollbar Suppression for Clean Viewport ─────────────── */
+html,
+body,
+*,
+*::before,
+*::after {
+  scrollbar-width: none !important;
+  -ms-overflow-style: none !important;
+}
+
+::-webkit-scrollbar {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+
 #app {
   min-height: 100vh;
 }
@@ -87,10 +103,28 @@ body {
   padding: 8px 0;
 }
 
-/* ── Container ───────────────────────────────────────────────────── */
+/* ── Container (Proven Responsive Standard: 16px mobile, 24px tablet, 32px desktop) ── */
 .playground-container {
-  width: min(1200px, calc(100vw - 32px));
-  margin: 0 auto;
+  width: 100%;
+  max-width: 1280px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem; /* 16px (px-4) */
+  padding-right: 1rem;
+}
+
+@media (min-width: 640px) {
+  .playground-container {
+    padding-left: 1.5rem; /* 24px (px-6) */
+    padding-right: 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .playground-container {
+    padding-left: 2rem; /* 32px (px-8) */
+    padding-right: 2rem;
+  }
 }
 
 /* ── Section ─────────────────────────────────────────────────────── */
@@ -98,12 +132,24 @@ body {
   scroll-margin-top: 120px;
 }
 
-/* ── Panel (clean flat border, no heavy shadow) ─────────────────── */
+/* ── Panel (clean flat border, responsive proven padding) ────────── */
 .playground-panel {
   border: 1px solid var(--pg-hairline);
   border-radius: var(--pg-rounded-lg);
   background: #ffffff;
-  padding: 24px;
+  padding: 16px;
+}
+
+@media (min-width: 640px) {
+  .playground-panel {
+    padding: 24px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .playground-panel {
+    padding: 32px;
+  }
 }
 
 /* ── Demo Tile (flat item tile, replaces nested cards) ────────────── */
@@ -111,14 +157,32 @@ body {
   border: 1px solid var(--pg-hairline);
   border-radius: var(--pg-rounded-md);
   background: #ffffff;
-  padding: 16px;
+  padding: 14px;
 }
 
-/* ── Color-Block Sections (flat, shadow-free) ────────────────────── */
+@media (min-width: 640px) {
+  .playground-tile {
+    padding: 16px;
+  }
+}
+
+/* ── Color-Block Sections (flat, shadow-free, responsive padding) ── */
 .playground-color-block {
   border-radius: var(--pg-rounded-lg);
-  padding: 32px;
+  padding: 20px 16px;
   border: 1px solid transparent;
+}
+
+@media (min-width: 640px) {
+  .playground-color-block {
+    padding: 28px 24px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .playground-color-block {
+    padding: 36px 32px;
+  }
 }
 
 .playground-color-block.block-lime {
@@ -210,15 +274,34 @@ body {
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  gap: 12px;
-  padding: 12px 18px;
+  gap: 10px;
+  padding: 10px 14px;
   background: #e2e8f0;
   border-bottom: 1px solid #cbd5e1;
 }
 
+@media (min-width: 640px) {
+  .playground-case-header {
+    padding: 12px 18px;
+    gap: 12px;
+  }
+}
+
 .playground-case-body {
-  padding: 18px;
+  padding: 14px;
   background: #f8fafc;
+}
+
+@media (min-width: 640px) {
+  .playground-case-body {
+    padding: 18px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .playground-case-body {
+    padding: 22px;
+  }
 }
 
 .playground-case-badge {
@@ -249,7 +332,7 @@ body {
 
 /* ── Section Title (display headline) ────────────────────────────── */
 .playground-display {
-  font-size: 24px;
+  font-size: 20px;
   font-weight: 800;
   line-height: 1.2;
   letter-spacing: -0.02em;
@@ -257,12 +340,24 @@ body {
   margin-bottom: 4px;
 }
 
+@media (min-width: 640px) {
+  .playground-display {
+    font-size: 24px;
+  }
+}
+
 /* ── Section Description ─────────────────────────────────────────── */
 .playground-desc {
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 500;
   line-height: 1.45;
   color: var(--pg-ink-soft);
+}
+
+@media (min-width: 640px) {
+  .playground-desc {
+    font-size: 14px;
+  }
 }
 
 /* ── Hero Story Block & Stat Metrics ─────────────────────────────── */
@@ -271,8 +366,20 @@ body {
   background: #ffffff;
   border: 1px solid #e2e8f0;
   border-radius: var(--pg-rounded-lg);
-  padding: 36px 32px;
+  padding: 20px 16px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03), 0 10px 24px -6px rgba(0, 0, 0, 0.04);
+}
+
+@media (min-width: 640px) {
+  .playground-hero-card {
+    padding: 28px 24px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .playground-hero-card {
+    padding: 36px 32px;
+  }
 }
 
 .playground-stat-box {
@@ -281,8 +388,14 @@ body {
   background: #f8fafc;
   border: 1px solid #e2e8f0;
   border-radius: var(--pg-rounded-md);
-  padding: 16px 20px;
+  padding: 12px 14px;
   transition: border-color 0.15s, transform 0.15s, box-shadow 0.15s;
+}
+
+@media (min-width: 640px) {
+  .playground-stat-box {
+    padding: 16px 20px;
+  }
 }
 
 .playground-stat-box:hover {
@@ -293,16 +406,27 @@ body {
 
 .playground-cli-terminal {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  gap: 12px;
+  gap: 8px;
   background: #0f172a;
   color: #e2e8f0;
   border: 1px solid #1e293b;
-  border-radius: var(--pg-rounded-pill);
-  padding: 8px 10px 8px 20px;
+  border-radius: var(--pg-rounded-md);
+  padding: 10px 14px;
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-  font-size: 13px;
+  font-size: 12px;
+}
+
+@media (min-width: 640px) {
+  .playground-cli-terminal {
+    flex-wrap: nowrap;
+    border-radius: var(--pg-rounded-pill);
+    padding: 8px 10px 8px 20px;
+    font-size: 13px;
+    gap: 12px;
+  }
 }
 
 /* ── Interactive Inventory Hub ───────────────────────────────────── */

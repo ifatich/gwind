@@ -1245,18 +1245,18 @@ const shellClass = computed(() =>
     <div class="playground-shell" :class="shellClass">
       <header class="playground-header">
         <div
-          class="playground-container flex h-14 items-center justify-between gap-4"
+          class="playground-container flex h-14 sm:h-16 items-center justify-between gap-3 sm:gap-4"
         >
-          <div class="flex min-w-0 items-center gap-3">
-            <div class="flex h-9 w-9 items-center justify-center rounded-full bg-lime-500/20 border border-lime-400/30 text-lime-400">
-              <PackageCheck class="h-5 w-5" />
+          <div class="flex min-w-0 items-center gap-2.5 sm:gap-3">
+            <div class="flex h-8 w-8 sm:h-9 sm:w-9 shrink-0 items-center justify-center rounded-full bg-lime-500/20 border border-lime-400/30 text-lime-400">
+              <PackageCheck class="h-4 w-4 sm:h-5 sm:w-5" />
             </div>
             <div class="min-w-0">
               <div class="flex items-center gap-2">
-                <h1 class="text-sigma font-extrabold tracking-tight text-white">
+                <h1 class="text-sigma font-extrabold tracking-tight text-white truncate">
                   Gwind Design System
                 </h1>
-                <span class="rounded-full bg-lime-400/15 border border-lime-400/30 px-2 py-0.5 text-[11px] font-bold text-lime-300">
+                <span class="shrink-0 rounded-full bg-lime-400/15 border border-lime-400/30 px-2 py-0.5 text-[10px] sm:text-[11px] font-bold text-lime-300">
                   v1.0.0
                 </span>
               </div>
@@ -1266,13 +1266,13 @@ const shellClass = computed(() =>
             </div>
           </div>
 
-          <div class="flex items-center gap-3">
+          <div class="flex items-center gap-2 sm:gap-3 shrink-0">
             <div class="hidden md:flex items-center gap-2 rounded-full bg-white/10 px-3 py-1.5 text-xs text-white/80 border border-white/10">
               <Sparkles class="h-3.5 w-3.5 text-lime-400" />
               <span>34 Production Components</span>
             </div>
             <button
-              class="flex items-center gap-1.5 rounded-full px-4 py-1.5 text-xs font-bold transition-all cursor-pointer"
+              class="flex items-center gap-1.5 rounded-full px-3 sm:px-4 py-1.5 text-xs font-bold transition-all cursor-pointer"
               :class="
                 compactMode
                   ? 'bg-white text-black shadow-sm'
@@ -1313,14 +1313,14 @@ const shellClass = computed(() =>
       <nav class="playground-top-nav">
         <div
           ref="navContainerRef"
-          class="playground-container flex items-center gap-2 overflow-x-auto no-scrollbar py-1"
+          class="playground-container flex items-center gap-1.5 sm:gap-2 overflow-x-auto no-scrollbar py-1 scroll-smooth"
         >
           <button
             v-for="section in sections"
             :key="section.id"
             :data-nav-id="section.id"
             type="button"
-            class="playground-nav-pill cursor-pointer"
+            class="playground-nav-pill cursor-pointer text-xs sm:text-[13px] px-3 sm:px-3.5 py-1.5"
             :class="activeSection === section.id ? 'active' : ''"
             @click="scrollToSection(section.id)"
           >
@@ -1329,27 +1329,27 @@ const shellClass = computed(() =>
         </div>
       </nav>
 
-      <main class="playground-container py-8">
-        <div class="space-y-12">
+      <main class="playground-container py-6 sm:py-8 lg:py-10">
+        <div class="space-y-8 sm:space-y-12">
           <!-- Hero Section: Modern Enterprise Command Center -->
-          <div class="playground-hero-card space-y-8">
-            <div class="grid gap-8 lg:grid-cols-12 lg:items-center">
+          <div class="playground-hero-card space-y-6 sm:space-y-8">
+            <div class="grid gap-6 sm:gap-8 lg:grid-cols-12 lg:items-center">
               <div class="space-y-4 lg:col-span-7">
                 <div class="inline-flex items-center gap-2 rounded-full bg-lime-100 border border-lime-300/80 px-3.5 py-1 text-xs font-extrabold text-lime-800 tracking-wide uppercase">
                   <Sparkles class="h-3.5 w-3.5 text-lime-700" />
                   Enterprise Design System & UI Kit
                 </div>
-                <h1 class="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight text-black-900 leading-[1.08]">
+                <h1 class="text-2xl sm:text-4xl md:text-5xl font-black tracking-tight text-black-900 leading-[1.1]">
                   Think bigger. Build faster with Gwind.
                 </h1>
-                <p class="text-omicron text-black-600 font-normal leading-relaxed max-w-xl">
+                <p class="text-sigma sm:text-omicron text-black-600 font-normal leading-relaxed max-w-xl">
                   Koleksi 34 komponen UI Vue 3 berstandar enterprise yang menggabungkan headless primitives Reka UI, styling modular Tailwind CSS v4, serta 100% skenario interaktif dunia nyata untuk ekosistem fintech dan perbankan modern.
                 </p>
-                <div class="flex flex-wrap items-center gap-3 pt-2">
-                  <Button size="lg" @click="scrollToSection('inventory')">
+                <div class="flex flex-col sm:flex-row sm:items-center gap-2.5 sm:gap-3 pt-2">
+                  <Button size="lg" class="w-full sm:w-auto" @click="scrollToSection('inventory')">
                     Jelajahi 34 Komponen
                   </Button>
-                  <Button variant="outline" size="lg" @click="scrollToSection('button')">
+                  <Button variant="outline" size="lg" class="w-full sm:w-auto" @click="scrollToSection('button')">
                     Mulai dari Button →
                   </Button>
                 </div>
@@ -1357,7 +1357,7 @@ const shellClass = computed(() =>
 
               <!-- Quick CLI Terminal Box & Feature Highlights -->
               <div class="space-y-4 lg:col-span-5">
-                <div class="rounded-xl border border-black-200 bg-black-50 p-5 space-y-4">
+                <div class="rounded-xl border border-black-200 bg-black-50 p-4 sm:p-5 space-y-4">
                   <div class="flex items-center justify-between">
                     <span class="text-xs font-extrabold text-black-700 tracking-wider uppercase">CLI Quick Scaffolding</span>
                     <span class="text-[11px] font-mono text-lime-700 bg-lime-100 px-2 py-0.5 rounded font-bold">npm package</span>
@@ -1366,7 +1366,7 @@ const shellClass = computed(() =>
                     <span class="truncate text-lime-300 font-mono text-xs select-all">npx gwind-system-ui add [komponen]</span>
                     <button
                       type="button"
-                      class="flex items-center gap-1 text-xs text-white bg-white/20 hover:bg-white/30 px-2.5 py-1 rounded-full transition-all cursor-pointer font-sans"
+                      class="flex items-center gap-1 text-xs text-white bg-white/20 hover:bg-white/30 px-2.5 py-1 rounded-full transition-all cursor-pointer font-sans shrink-0"
                       @click="copyCliCommand"
                     >
                       <Copy class="h-3 w-3" />
@@ -1381,24 +1381,24 @@ const shellClass = computed(() =>
             </div>
 
             <!-- Key Metric Stat Grid -->
-            <div class="grid grid-cols-2 gap-4 sm:grid-cols-2 md:grid-cols-4 pt-4 border-t border-black-100">
+            <div class="grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-4 pt-4 border-t border-black-100">
               <div class="playground-stat-box">
-                <span class="text-3xl font-black text-black-900 tracking-tight">34</span>
+                <span class="text-2xl sm:text-3xl font-black text-black-900 tracking-tight">34</span>
                 <span class="text-sigma font-bold text-black-800 mt-1">Komponen UI</span>
                 <span class="text-xs text-black-500 mt-0.5">Vue 3 + Reka UI Headless</span>
               </div>
               <div class="playground-stat-box">
-                <span class="text-3xl font-black text-lime-700 tracking-tight">100%</span>
+                <span class="text-2xl sm:text-3xl font-black text-lime-700 tracking-tight">100%</span>
                 <span class="text-sigma font-bold text-black-800 mt-1">Real-World Cases</span>
                 <span class="text-xs text-black-500 mt-0.5">Fintech, Gadai, KYC & SBG</span>
               </div>
               <div class="playground-stat-box">
-                <span class="text-3xl font-black text-black-900 tracking-tight">v4</span>
+                <span class="text-2xl sm:text-3xl font-black text-black-900 tracking-tight">v4</span>
                 <span class="text-sigma font-bold text-black-800 mt-1">Tailwind CSS</span>
                 <span class="text-xs text-black-500 mt-0.5">@theme & Design Tokens</span>
               </div>
               <div class="playground-stat-box">
-                <span class="text-3xl font-black text-black-900 tracking-tight">0</span>
+                <span class="text-2xl sm:text-3xl font-black text-black-900 tracking-tight">0</span>
                 <span class="text-sigma font-bold text-black-800 mt-1">External Icon Deps</span>
                 <span class="text-xs text-black-500 mt-0.5">Custom Inline Lucide SVG</span>
               </div>
@@ -1408,7 +1408,7 @@ const shellClass = computed(() =>
           <!-- Interactive Component Inventory Hub & Directory -->
           <section
             id="inventory"
-            class="playground-section playground-panel p-6 sm:p-8 space-y-6"
+            class="playground-section playground-panel space-y-6"
           >
             <div class="flex flex-wrap items-center justify-between gap-4">
               <div>
@@ -1534,7 +1534,7 @@ const shellClass = computed(() =>
 
             <!-- 2. GENERAL & ACTIONS -->
             <!-- Button -->
-            <section id="button" class="playground-section playground-panel p-6 space-y-6">
+            <section id="button" class="playground-section playground-panel space-y-6">
               <div class="flex flex-wrap items-center justify-between gap-3">
                 <div>
                   <p class="playground-eyebrow">Interactive Controls</p>
@@ -1629,7 +1629,7 @@ const shellClass = computed(() =>
             </section>
 
             <!-- Link -->
-            <section id="link" class="playground-section playground-panel p-6 space-y-4">
+            <section id="link" class="playground-section playground-panel space-y-4">
               <div>
                 <p class="playground-eyebrow">Hyperlinks & Navigation</p>
                 <h2 class="text-xl font-bold text-black-900">Link</h2>
@@ -1672,7 +1672,7 @@ const shellClass = computed(() =>
 
             <!-- 3. FORM & DATA ENTRY -->
             <!-- Input & InputField -->
-            <section id="input" class="playground-section playground-panel p-6 space-y-6">
+            <section id="input" class="playground-section playground-panel space-y-6">
               <div>
                 <p class="playground-eyebrow">Forms & Text Entry</p>
                 <h2 class="text-xl font-bold text-black-900">Input & InputField</h2>
@@ -1908,7 +1908,7 @@ const shellClass = computed(() =>
             </section>
 
             <!-- Input Rupiah -->
-            <section id="input-rupiah" class="playground-section playground-panel p-6 space-y-6">
+            <section id="input-rupiah" class="playground-section playground-panel space-y-6">
               <div class="flex flex-wrap items-center justify-between gap-3">
                 <div>
                   <p class="playground-eyebrow">Currency Formatting & Fintech Input</p>
@@ -1990,7 +1990,7 @@ const shellClass = computed(() =>
             </section>
 
             <!-- Input Persentase -->
-            <section id="input-persentase" class="playground-section playground-panel p-6 space-y-5">
+            <section id="input-persentase" class="playground-section playground-panel space-y-5">
               <div>
                 <p class="playground-eyebrow">Rate & Percentage Input</p>
                 <h2 class="text-xl font-bold text-black-900">Input Persentase</h2>
@@ -2044,7 +2044,7 @@ const shellClass = computed(() =>
             </section>
 
             <!-- Add Amount -->
-            <section id="add-amount" class="playground-section playground-panel p-6 space-y-5">
+            <section id="add-amount" class="playground-section playground-panel space-y-5">
               <div class="flex flex-wrap items-center justify-between gap-3">
                 <div>
                   <p class="playground-eyebrow">Numerical Controls & Quantity Stepper</p>
@@ -2110,7 +2110,7 @@ const shellClass = computed(() =>
             </section>
 
             <!-- Textarea -->
-            <section id="textarea" class="playground-section playground-panel p-6 space-y-5">
+            <section id="textarea" class="playground-section playground-panel space-y-5">
               <div>
                 <p class="playground-eyebrow">Multi-Line Text & Counter</p>
                 <h2 class="text-xl font-bold text-black-900">Textarea</h2>
@@ -2166,7 +2166,7 @@ const shellClass = computed(() =>
             </section>
 
             <!-- Label -->
-            <section id="label" class="playground-section playground-panel p-6 space-y-5">
+            <section id="label" class="playground-section playground-panel space-y-5">
               <div>
                 <p class="playground-eyebrow">Form Field Labels</p>
                 <h2 class="text-xl font-bold text-black-900">Label</h2>
@@ -2216,7 +2216,7 @@ const shellClass = computed(() =>
             </section>
 
             <!-- Checkbox -->
-            <section id="checkbox" class="playground-section playground-panel p-6 space-y-6">
+            <section id="checkbox" class="playground-section playground-panel space-y-6">
               <div>
                 <p class="playground-eyebrow">Selection Controls & Consent</p>
                 <h2 class="text-xl font-bold text-black-900">Checkbox</h2>
@@ -2291,7 +2291,7 @@ const shellClass = computed(() =>
             </section>
 
             <!-- Radio Group -->
-            <section id="radio-group" class="playground-section playground-panel p-6 space-y-5">
+            <section id="radio-group" class="playground-section playground-panel space-y-5">
               <div>
                 <p class="playground-eyebrow">Segmented Choice & Options</p>
                 <h2 class="text-xl font-bold text-black-900">Radio Group</h2>
@@ -2362,7 +2362,7 @@ const shellClass = computed(() =>
             </section>
 
             <!-- Select -->
-            <section id="select" class="playground-section playground-panel p-6 space-y-6">
+            <section id="select" class="playground-section playground-panel space-y-6">
               <div>
                 <p class="playground-eyebrow">Dropdown List Selection</p>
                 <h2 class="text-xl font-bold text-black-900">Select</h2>
@@ -2409,7 +2409,7 @@ const shellClass = computed(() =>
             </section>
 
             <!-- Combobox -->
-            <section id="combobox" class="playground-section playground-panel p-6 space-y-5">
+            <section id="combobox" class="playground-section playground-panel space-y-5">
               <div>
                 <p class="playground-eyebrow">Autocomplete Search & Filter</p>
                 <h2 class="text-xl font-bold text-black-900">Combobox</h2>
@@ -2463,7 +2463,7 @@ const shellClass = computed(() =>
             </section>
 
             <!-- Datepicker -->
-            <section id="datepicker" class="playground-section playground-panel p-6 space-y-5">
+            <section id="datepicker" class="playground-section playground-panel space-y-5">
               <div>
                 <p class="playground-eyebrow">Calendar & Date Selection</p>
                 <h2 class="text-xl font-bold text-black-900">Datepicker</h2>
@@ -2511,7 +2511,7 @@ const shellClass = computed(() =>
             </section>
 
             <!-- Switch -->
-            <section id="switch" class="playground-section playground-panel p-6 space-y-4">
+            <section id="switch" class="playground-section playground-panel space-y-4">
               <div>
                 <p class="playground-eyebrow">Boolean Toggles & Settings</p>
                 <h2 class="text-xl font-bold text-black-900">Switch Toggle</h2>
@@ -2555,7 +2555,7 @@ const shellClass = computed(() =>
             </section>
 
             <!-- File Picker -->
-            <section id="file-picker" class="playground-section playground-panel p-6 space-y-5">
+            <section id="file-picker" class="playground-section playground-panel space-y-5">
               <div>
                 <p class="playground-eyebrow">Document & Asset Uploads</p>
                 <h2 class="text-xl font-bold text-black-900">File Picker</h2>
@@ -2599,7 +2599,7 @@ const shellClass = computed(() =>
             </section>
 
             <!-- Image Picker & Image Display -->
-            <section id="image-picker" class="playground-section playground-panel p-6 space-y-5">
+            <section id="image-picker" class="playground-section playground-panel space-y-5">
               <div>
                 <p class="playground-eyebrow">Image Assets & Media Displays</p>
                 <h2 class="text-xl font-bold text-black-900">Form Image (Input) & Image Display</h2>
@@ -2659,7 +2659,7 @@ const shellClass = computed(() =>
 
             <!-- 4. DATA DISPLAY & LAYOUT -->
             <!-- Avatar -->
-            <section id="avatar" class="playground-section playground-panel p-6 space-y-5">
+            <section id="avatar" class="playground-section playground-panel space-y-5">
               <div>
                 <p class="playground-eyebrow">User Profiles & Identifiers</p>
                 <h2 class="text-xl font-bold text-black-900">Avatar</h2>
@@ -2719,7 +2719,7 @@ const shellClass = computed(() =>
             </section>
 
             <!-- Badge -->
-            <section id="badge" class="playground-section playground-panel p-6 space-y-5">
+            <section id="badge" class="playground-section playground-panel space-y-5">
               <div>
                 <p class="playground-eyebrow">Status Pills & Taxonomy</p>
                 <h2 class="text-xl font-bold text-black-900">Badge</h2>
@@ -2766,7 +2766,7 @@ const shellClass = computed(() =>
             </section>
 
             <!-- Card -->
-            <section id="card" class="playground-section playground-panel p-6 space-y-6">
+            <section id="card" class="playground-section playground-panel space-y-6">
               <div class="flex flex-wrap items-center justify-between gap-3">
                 <div>
                   <p class="playground-eyebrow">Surfaces & Containers</p>
@@ -2859,7 +2859,7 @@ const shellClass = computed(() =>
             </section>
 
             <!-- Table & Data Table -->
-            <section id="table" class="playground-section playground-panel p-6 space-y-6">
+            <section id="table" class="playground-section playground-panel space-y-6">
               <div class="flex flex-wrap items-center justify-between gap-3">
                 <div>
                   <p class="playground-eyebrow">Data Matrices & Tabular Records</p>
@@ -3239,7 +3239,7 @@ const shellClass = computed(() =>
             </section>
 
             <!-- Accordion -->
-            <section id="accordion" class="playground-section playground-panel p-6 space-y-5">
+            <section id="accordion" class="playground-section playground-panel space-y-5">
               <div>
                 <p class="playground-eyebrow">Collapsible Disclosures</p>
                 <h2 class="text-xl font-bold text-black-900">Accordion</h2>
@@ -3288,7 +3288,7 @@ const shellClass = computed(() =>
             </section>
 
             <!-- Carousel -->
-            <section id="carousel" class="playground-section playground-panel p-6 space-y-5">
+            <section id="carousel" class="playground-section playground-panel space-y-5">
               <div>
                 <p class="playground-eyebrow">Sliders & Hero Banners</p>
                 <h2 class="text-xl font-bold text-black-900">Carousel & Banner Slider</h2>
@@ -3341,7 +3341,7 @@ const shellClass = computed(() =>
             </section>
 
             <!-- Divider -->
-            <section id="divider" class="playground-section playground-panel p-6 space-y-5">
+            <section id="divider" class="playground-section playground-panel space-y-5">
               <div>
                 <p class="playground-eyebrow">Separators & Boundaries</p>
                 <h2 class="text-xl font-bold text-black-900">Divider</h2>
@@ -3389,7 +3389,7 @@ const shellClass = computed(() =>
             </section>
 
             <!-- Breadcrumb -->
-            <section id="breadcrumb" class="playground-section playground-panel p-6 space-y-5">
+            <section id="breadcrumb" class="playground-section playground-panel space-y-5">
               <div>
                 <p class="playground-eyebrow">Navigation Trails</p>
                 <h2 class="text-xl font-bold text-black-900">Breadcrumb</h2>
@@ -3435,7 +3435,7 @@ const shellClass = computed(() =>
             </section>
 
             <!-- Pagination -->
-            <section id="pagination" class="playground-section playground-panel p-6 space-y-5">
+            <section id="pagination" class="playground-section playground-panel space-y-5">
               <div>
                 <p class="playground-eyebrow">Page Navigation</p>
                 <h2 class="text-xl font-bold text-black-900">Pagination</h2>
@@ -3466,7 +3466,7 @@ const shellClass = computed(() =>
             </section>
 
             <!-- Tabs -->
-            <section id="tabs" class="playground-section playground-panel p-6 space-y-6">
+            <section id="tabs" class="playground-section playground-panel space-y-6">
               <div>
                 <p class="playground-eyebrow">Segmented View Switchers</p>
                 <h2 class="text-xl font-bold text-black-900">Tabs</h2>
@@ -3510,7 +3510,7 @@ const shellClass = computed(() =>
 
             <!-- 5. FEEDBACK & FLOATING SURFACES -->
             <!-- Alert -->
-            <section id="alert" class="playground-section playground-panel p-6 space-y-5">
+            <section id="alert" class="playground-section playground-panel space-y-5">
               <div>
                 <p class="playground-eyebrow">System Banners & Notifications</p>
                 <h2 class="text-xl font-bold text-black-900">Alert</h2>
@@ -3551,7 +3551,7 @@ const shellClass = computed(() =>
             </section>
 
             <!-- Progress -->
-            <section id="progress" class="playground-section playground-panel p-6 space-y-5">
+            <section id="progress" class="playground-section playground-panel space-y-5">
               <div>
                 <p class="playground-eyebrow">Deterministic Loaders</p>
                 <h2 class="text-xl font-bold text-black-900">Progress Bar</h2>
@@ -3596,7 +3596,7 @@ const shellClass = computed(() =>
             </section>
 
             <!-- Spinner -->
-            <section id="spinner" class="playground-section playground-panel p-6 space-y-5">
+            <section id="spinner" class="playground-section playground-panel space-y-5">
               <div>
                 <p class="playground-eyebrow">Activity Indicators</p>
                 <h2 class="text-xl font-bold text-black-900">Spinner</h2>
@@ -3640,7 +3640,7 @@ const shellClass = computed(() =>
             </section>
 
             <!-- Toast -->
-            <section id="toast" class="playground-section playground-panel p-6 space-y-5">
+            <section id="toast" class="playground-section playground-panel space-y-5">
               <div>
                 <p class="playground-eyebrow">Ephemeral Feedback</p>
                 <h2 class="text-xl font-bold text-black-900">Toast & Snackbars</h2>
@@ -3684,7 +3684,7 @@ const shellClass = computed(() =>
             </section>
 
             <!-- Dialog -->
-            <section id="dialog" class="playground-section playground-panel p-6 space-y-5">
+            <section id="dialog" class="playground-section playground-panel space-y-5">
               <div>
                 <p class="playground-eyebrow">Modal Overlays & Focus Trap</p>
                 <h2 class="text-xl font-bold text-black-900">Dialog</h2>
@@ -3795,7 +3795,7 @@ const shellClass = computed(() =>
             </section>
 
             <!-- Popover -->
-            <section id="popover" class="playground-section playground-panel p-6 space-y-6">
+            <section id="popover" class="playground-section playground-panel space-y-6">
               <div>
                 <p class="playground-eyebrow">Floating Surfaces & Menus</p>
                 <h2 class="text-xl font-bold text-black-900">Popover</h2>
@@ -3853,7 +3853,7 @@ const shellClass = computed(() =>
             </section>
 
             <!-- Tooltip -->
-            <section id="tooltip" class="playground-section playground-panel p-6 space-y-4">
+            <section id="tooltip" class="playground-section playground-panel space-y-4">
               <div>
                 <p class="playground-eyebrow">Assistive Hints & Definitions</p>
                 <h2 class="text-xl font-bold text-black-900">Tooltip</h2>
@@ -3905,7 +3905,7 @@ const shellClass = computed(() =>
             </section>
 
             <!-- Dropdown -->
-            <section id="dropdown" class="playground-section playground-panel p-6 space-y-5">
+            <section id="dropdown" class="playground-section playground-panel space-y-5">
               <div>
                 <p class="playground-eyebrow">Menu Selections & Accounts</p>
                 <h2 class="text-xl font-bold text-black-900">Dropdown</h2>
@@ -4086,28 +4086,30 @@ const shellClass = computed(() =>
                           >{{ palette.steps.length }} steps</span
                         >
                       </div>
-                      <div
-                        class="grid gap-2"
-                        :style="{
-                          gridTemplateColumns: `repeat(${palette.steps.length}, minmax(0, 1fr))`,
-                        }"
-                      >
+                      <div class="overflow-x-auto no-scrollbar pb-1">
                         <div
-                          v-for="step in palette.steps"
-                          :key="`${palette.name}-${step}`"
-                          class="min-w-0 overflow-hidden rounded-md border border-black-200 bg-white"
+                          class="grid gap-2 min-w-[480px] sm:min-w-0"
+                          :style="{
+                            gridTemplateColumns: `repeat(${palette.steps.length}, minmax(0, 1fr))`,
+                          }"
                         >
                           <div
-                            class="h-12"
-                            :style="{
-                              backgroundColor: `var(--${palette.name}-${step})`,
-                            }"
-                          />
-                          <p
-                            class="truncate px-2 py-1 text-center text-omega font-bold text-black-600"
+                            v-for="step in palette.steps"
+                            :key="`${palette.name}-${step}`"
+                            class="min-w-0 overflow-hidden rounded-md border border-black-200 bg-white"
                           >
-                            {{ step }}
-                          </p>
+                            <div
+                              class="h-10 sm:h-12"
+                              :style="{
+                                backgroundColor: `var(--${palette.name}-${step})`,
+                              }"
+                            />
+                            <p
+                              class="truncate px-1 sm:px-2 py-1 text-center text-[11px] sm:text-omega font-bold text-black-600"
+                            >
+                              {{ step }}
+                            </p>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -4141,12 +4143,12 @@ const shellClass = computed(() =>
                     <h3 class="mb-4 text-sigma font-bold text-black-800">
                       Radius
                     </h3>
-                    <div class="grid grid-cols-3 gap-3">
+                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
                       <div v-for="token in radiusTokens" :key="token.name">
                         <div
                           :class="[
                             token.className,
-                            'h-20 border border-lime-500 bg-lime-100',
+                            'h-16 sm:h-20 border border-lime-500 bg-lime-100',
                           ]"
                         />
                         <p class="mt-2 text-sigma font-bold text-black-800">
