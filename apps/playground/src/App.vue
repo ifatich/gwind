@@ -572,6 +572,153 @@ function handleBulkAction(action: string) {
   }, 4000);
 }
 
+// DataTable Filtering Scenario States
+const dtSearchQuery = ref("");
+const dtStatusFilter = ref("all");
+const dtCategoryFilter = ref("all");
+const dtSortOrder = ref<"none" | "asc" | "desc">("none");
+
+const dtColumns = [
+  { key: "sbgNo", label: "No. SBG", width: "140px" },
+  { key: "nasabah", label: "Nasabah & NIK", width: "220px" },
+  { key: "kategori", label: "Kategori Jaminan", width: "180px" },
+  { key: "pinjaman", label: "Uang Pinjaman", align: "right" as const, width: "160px" },
+  { key: "sewaModal", label: "Sewa Modal", align: "right" as const, width: "140px" },
+  { key: "jatuhTempo", label: "Jatuh Tempo", width: "140px" },
+  { key: "status", label: "Status", align: "center" as const, width: "150px" },
+  { key: "action", label: "Aksi", align: "center" as const, width: "130px" },
+];
+
+const allDataRows = [
+  {
+    id: 1,
+    sbgNo: "SBG-2026-001",
+    nasabah: "Budi Santoso",
+    nik: "3171020101900005",
+    phone: "0812-8899-1001",
+    kategori: "Emas Batangan",
+    pinjamanRaw: 12500000,
+    pinjaman: "Rp 12.500.000",
+    sewaModal: "1.15% / 15hr",
+    jatuhTempo: "24 Mar 2026",
+    status: "Lancar",
+    statusVariant: "brocoli" as const,
+  },
+  {
+    id: 2,
+    sbgNo: "SBG-2026-002",
+    nasabah: "Siti Rahmawati",
+    nik: "3273010405880002",
+    phone: "0813-2233-4455",
+    kategori: "Perhiasan Emas",
+    pinjamanRaw: 6800000,
+    pinjaman: "Rp 6.800.000",
+    sewaModal: "1.20% / 15hr",
+    jatuhTempo: "28 Mar 2026",
+    status: "Dalam Proses",
+    statusVariant: "pear" as const,
+  },
+  {
+    id: 3,
+    sbgNo: "SBG-2026-003",
+    nasabah: "Ahmad Hidayat",
+    nik: "3578031208920003",
+    phone: "0856-7788-9900",
+    kategori: "Berlian Mulia",
+    pinjamanRaw: 18200000,
+    pinjaman: "Rp 18.200.000",
+    sewaModal: "1.15% / 15hr",
+    jatuhTempo: "15 Mar 2026",
+    status: "Mendekati JT",
+    statusVariant: "warning" as const,
+  },
+  {
+    id: 4,
+    sbgNo: "SBG-2026-004",
+    nasabah: "Dewi Lestari",
+    nik: "5171010709950001",
+    phone: "0819-0011-2233",
+    kategori: "Emas Batangan",
+    pinjamanRaw: 31000000,
+    pinjaman: "Rp 31.000.000",
+    sewaModal: "1.00% / 15hr",
+    jatuhTempo: "10 Mar 2026",
+    status: "Lewat JT",
+    statusVariant: "destructive" as const,
+  },
+  {
+    id: 5,
+    sbgNo: "SBG-2026-005",
+    nasabah: "Hendro Wijaya",
+    nik: "3175082004850007",
+    phone: "0811-3344-5566",
+    kategori: "Elektronik Gadget",
+    pinjamanRaw: 4500000,
+    pinjaman: "Rp 4.500.000",
+    sewaModal: "1.25% / 15hr",
+    jatuhTempo: "02 Apr 2026",
+    status: "Lancar",
+    statusVariant: "brocoli" as const,
+  },
+  {
+    id: 6,
+    sbgNo: "SBG-2026-006",
+    nasabah: "Rina Kusuma",
+    nik: "3204125509930004",
+    phone: "0821-4455-6677",
+    kategori: "Perhiasan Emas",
+    pinjamanRaw: 9200000,
+    pinjaman: "Rp 9.200.000",
+    sewaModal: "1.20% / 15hr",
+    jatuhTempo: "05 Apr 2026",
+    status: "Lancar",
+    statusVariant: "brocoli" as const,
+  },
+  {
+    id: 7,
+    sbgNo: "SBG-2026-007",
+    nasabah: "Farhan Maulana",
+    nik: "3374021811890008",
+    phone: "0878-1122-3344",
+    kategori: "Emas Batangan",
+    pinjamanRaw: 22000000,
+    pinjaman: "Rp 22.000.000",
+    sewaModal: "1.10% / 15hr",
+    jatuhTempo: "18 Mar 2026",
+    status: "Mendekati JT",
+    statusVariant: "warning" as const,
+  },
+];
+
+const filteredDataRows = computed(() => {
+  let list = allDataRows.filter((row) => {
+    const q = dtSearchQuery.value.trim().toLowerCase();
+    const matchSearch =
+      !q ||
+      row.nasabah.toLowerCase().includes(q) ||
+      row.sbgNo.toLowerCase().includes(q) ||
+      row.nik.toLowerCase().includes(q) ||
+      row.phone.toLowerCase().includes(q);
+
+    const matchStatus =
+      dtStatusFilter.value === "all" || row.status === dtStatusFilter.value;
+
+    const matchCategory =
+      dtCategoryFilter.value === "all" ||
+      row.kategori === dtCategoryFilter.value;
+
+    return matchSearch && matchStatus && matchCategory;
+  });
+
+  if (dtSortOrder.value === "asc") {
+    list = [...list].sort((a, b) => a.pinjamanRaw - b.pinjamanRaw);
+  } else if (dtSortOrder.value === "desc") {
+    list = [...list].sort((a, b) => b.pinjamanRaw - a.pinjamanRaw);
+  }
+
+  return list;
+});
+
 // Sections in Logical Domain Hierarchy
 const sections = [
   // 1. Overview
@@ -2896,7 +3043,143 @@ const shellClass = computed(() =>
                 </div>
               </div>
 
-              <!-- Skenario 3: Tabel Tarif Sewa Modal (Official Matrix) -->
+              <!-- Skenario 3: Data Table dengan Multi-Filter & Custom Slots -->
+              <div class="playground-case-card">
+                <div class="playground-case-header">
+                  <div class="flex items-center gap-2.5">
+                    <span class="playground-case-badge">
+                      <Sparkles class="h-3 w-3 text-lime-700" />
+                      DataTable with Filters
+                    </span>
+                    <h3 class="text-sigma font-extrabold text-black-900">Data Table dengan Sistem Filter Realtime & Custom Slots</h3>
+                  </div>
+                  <span class="text-omega text-black-500 font-medium">Search, Status Filter, Kategori, & Sorting</span>
+                </div>
+                <div class="playground-case-body space-y-4">
+                  <!-- Filter Bar -->
+                  <div class="grid gap-3 md:grid-cols-12 items-center bg-white p-3.5 rounded-lg border border-black-200">
+                    <!-- Search input -->
+                    <div class="relative md:col-span-4">
+                      <Search class="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-black-400 pointer-events-none" />
+                      <input
+                        v-model="dtSearchQuery"
+                        type="text"
+                        placeholder="Cari nasabah, SBG, NIK, atau telepon..."
+                        class="w-full pl-9 pr-8 py-1.5 text-xs rounded-md border border-black-200 bg-black-50 focus:bg-white focus:border-lime-600 outline-none"
+                      />
+                      <button
+                        v-if="dtSearchQuery"
+                        type="button"
+                        class="absolute right-2.5 top-1/2 -translate-y-1/2 text-black-400 hover:text-black-700 text-xs font-bold"
+                        @click="dtSearchQuery = ''"
+                      >
+                        <X class="h-3.5 w-3.5" />
+                      </button>
+                    </div>
+
+                    <!-- Status filter select -->
+                    <div class="md:col-span-3">
+                      <select
+                        v-model="dtStatusFilter"
+                        class="w-full px-3 py-1.5 text-xs rounded-md border border-black-200 bg-white text-black-800 focus:border-lime-600 outline-none cursor-pointer"
+                      >
+                        <option value="all">Semua Status Transaksi</option>
+                        <option value="Lancar">Lancar</option>
+                        <option value="Dalam Proses">Dalam Proses</option>
+                        <option value="Mendekati JT">Mendekati Jatuh Tempo</option>
+                        <option value="Lewat JT">Lewat Jatuh Tempo</option>
+                      </select>
+                    </div>
+
+                    <!-- Category filter select -->
+                    <div class="md:col-span-3">
+                      <select
+                        v-model="dtCategoryFilter"
+                        class="w-full px-3 py-1.5 text-xs rounded-md border border-black-200 bg-white text-black-800 focus:border-lime-600 outline-none cursor-pointer"
+                      >
+                        <option value="all">Semua Kategori Jaminan</option>
+                        <option value="Emas Batangan">Emas Batangan</option>
+                        <option value="Perhiasan Emas">Perhiasan Emas</option>
+                        <option value="Berlian Mulia">Berlian Mulia</option>
+                        <option value="Elektronik Gadget">Elektronik Gadget</option>
+                      </select>
+                    </div>
+
+                    <!-- Sort / Reset -->
+                    <div class="md:col-span-2 flex items-center justify-end gap-2">
+                      <button
+                        type="button"
+                        class="px-2.5 py-1.5 text-xs font-semibold rounded-md border border-black-200 bg-black-50 hover:bg-black-100 text-black-700 transition-colors cursor-pointer"
+                        @click="dtSortOrder = dtSortOrder === 'none' ? 'desc' : dtSortOrder === 'desc' ? 'asc' : 'none'"
+                      >
+                        Sort: {{ dtSortOrder === 'desc' ? 'Terbesar ↓' : dtSortOrder === 'asc' ? 'Terkecil ↑' : 'Normal' }}
+                      </button>
+                      <button
+                        v-if="dtSearchQuery || dtStatusFilter !== 'all' || dtCategoryFilter !== 'all' || dtSortOrder !== 'none'"
+                        type="button"
+                        class="text-xs font-bold text-red-600 hover:text-red-800 underline cursor-pointer"
+                        @click="dtSearchQuery = ''; dtStatusFilter = 'all'; dtCategoryFilter = 'all'; dtSortOrder = 'none'"
+                      >
+                        Reset
+                      </button>
+                    </div>
+                  </div>
+
+                  <!-- Results Count & Active Tags -->
+                  <div class="flex items-center justify-between text-xs text-black-500 px-1">
+                    <span>Menampilkan <strong>{{ filteredDataRows.length }}</strong> dari {{ allDataRows.length }} data transaksi</span>
+                    <span v-if="filteredDataRows.length === 0" class="text-red-500 font-semibold">Tidak ada data yang sesuai dengan filter</span>
+                  </div>
+
+                  <!-- DataTable with Custom Cell Slots -->
+                  <DataTable
+                    :columns="dtColumns"
+                    :rows="filteredDataRows"
+                    empty-text="Tidak ada data transaksi yang cocok dengan kriteria filter."
+                  >
+                    <!-- Custom Slot: No. SBG -->
+                    <template #cell-sbgNo="{ row }">
+                      <span class="font-mono text-xs font-bold text-black-900">{{ row.sbgNo }}</span>
+                    </template>
+
+                    <!-- Custom Slot: Nasabah & NIK -->
+                    <template #cell-nasabah="{ row }">
+                      <div class="flex flex-col">
+                        <span class="font-bold text-black-900">{{ row.nasabah }}</span>
+                        <span class="text-omega text-black-400 font-mono">{{ row.nik }}</span>
+                      </div>
+                    </template>
+
+                    <!-- Custom Slot: Kategori -->
+                    <template #cell-kategori="{ row }">
+                      <span class="text-xs font-semibold px-2 py-0.5 rounded bg-black-100 text-black-700">
+                        {{ row.kategori }}
+                      </span>
+                    </template>
+
+                    <!-- Custom Slot: Uang Pinjaman -->
+                    <template #cell-pinjaman="{ row }">
+                      <span class="font-bold text-black-900">{{ row.pinjaman }}</span>
+                    </template>
+
+                    <!-- Custom Slot: Status Badge -->
+                    <template #cell-status="{ row }">
+                      <Badge :variant="row.statusVariant">{{ row.status }}</Badge>
+                    </template>
+
+                    <!-- Custom Slot: Action Button -->
+                    <template #cell-action="{ row }">
+                      <div class="flex items-center justify-center gap-1">
+                        <Button size="sm" class="px-2.5 py-1 text-xs" @click="handleTableAction('Detail SBG', row.sbgNo)">
+                          Detail
+                        </Button>
+                      </div>
+                    </template>
+                  </DataTable>
+                </div>
+              </div>
+
+              <!-- Skenario 4: Tabel Tarif Sewa Modal (Official Matrix) -->
               <div class="playground-case-card">
                 <div class="playground-case-header">
                   <div class="flex items-center gap-2.5">
