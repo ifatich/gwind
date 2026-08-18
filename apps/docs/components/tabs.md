@@ -1,13 +1,22 @@
 <script setup>
 import { ref } from 'vue'
 const activeTab = ref('account')
+const activeTabDark = ref('profile')
 </script>
 
 # Tabs
 
-A set of layered sections of content, known as tab panels, that are displayed one at a time.
+A set of layered sections of content, known as tab panels, that are displayed one at a time with a smooth sliding active indicator.
+
+## Installation
+
+```bash
+npx gwind-system-ui add tabs
+```
 
 ## Preview
+
+### Default (Light Background)
 
 <ShadowPreview class="gwind-docs-preview">
   <GwTabGroup v-model="activeTab">
@@ -15,100 +24,149 @@ A set of layered sections of content, known as tab panels, that are displayed on
       <GwTabTrigger value="account">Account</GwTabTrigger>
       <GwTabTrigger value="password">Password</GwTabTrigger>
       <GwTabTrigger value="notifications">Notifications</GwTabTrigger>
+      <GwTabTrigger value="disabled" disabled>Disabled</GwTabTrigger>
     </GwTabTriggerGroup>
-    <GwTabContent value="account" class="mt-4">
-      <GwCard class="w-100">
+    <GwTabContent value="account">
+      <GwCard class="mt-4">
         <GwCardHeader>
           <GwCardTitle>Account</GwCardTitle>
-          <GwCardDescription>Make changes to your account here.</GwCardDescription>
+          <GwCardDescription>Manage your account settings and preferences.</GwCardDescription>
         </GwCardHeader>
         <GwCardContent>
-          <p class="text-sm">Account details content goes here.</p>
+          <p class="text-omicron text-black-600">Account details and profile information are configured here.</p>
         </GwCardContent>
       </GwCard>
     </GwTabContent>
-    <GwTabContent value="password" class="mt-4">
-      <GwCard class="w-100">
+    <GwTabContent value="password">
+      <GwCard class="mt-4">
         <GwCardHeader>
           <GwCardTitle>Password</GwCardTitle>
-          <GwCardDescription>Change your password here.</GwCardDescription>
+          <GwCardDescription>Update your password and security credentials.</GwCardDescription>
         </GwCardHeader>
+        <GwCardContent>
+          <p class="text-omicron text-black-600">Ensure your password is at least 8 characters long.</p>
+        </GwCardContent>
       </GwCard>
     </GwTabContent>
-    <GwTabContent value="notifications" class="mt-4">
-      <GwCard class="w-100">
+    <GwTabContent value="notifications">
+      <GwCard class="mt-4">
         <GwCardHeader>
           <GwCardTitle>Notifications</GwCardTitle>
-          <GwCardDescription>Choose how you want to be notified.</GwCardDescription>
+          <GwCardDescription>Choose how you want to receive alerts and notifications.</GwCardDescription>
         </GwCardHeader>
+        <GwCardContent>
+          <p class="text-omicron text-black-600">Configure email, SMS, and push notification channels.</p>
+        </GwCardContent>
       </GwCard>
+    </GwTabContent>
+  </GwTabGroup>
+</ShadowPreview>
+
+### Non-White / Dark Background
+
+Demonstrating the seamless adaptive border radius (rounded top-left on the first tab and top-right on the last tab) without intermediate notches on colored backgrounds.
+
+<ShadowPreview class="gwind-docs-preview bg-black-900 p-6 rounded-lg">
+  <GwTabGroup v-model="activeTabDark">
+    <GwTabTriggerGroup>
+      <GwTabTrigger value="profile">Profile</GwTabTrigger>
+      <GwTabTrigger value="security">Security</GwTabTrigger>
+      <GwTabTrigger value="billing">Billing</GwTabTrigger>
+    </GwTabTriggerGroup>
+    <GwTabContent value="profile">
+      <div class="mt-4 p-4 rounded-md bg-white text-black-800">
+        <p class="font-bold text-omicron">Profile Panel</p>
+        <p class="text-sigma text-black-600">Adaptive tabs integrate smoothly with dark/brand headers.</p>
+      </div>
+    </GwTabContent>
+    <GwTabContent value="security">
+      <div class="mt-4 p-4 rounded-md bg-white text-black-800">
+        <p class="font-bold text-omicron">Security Panel</p>
+        <p class="text-sigma text-black-600">Two-factor authentication and active sessions.</p>
+      </div>
+    </GwTabContent>
+    <GwTabContent value="billing">
+      <div class="mt-4 p-4 rounded-md bg-white text-black-800">
+        <p class="font-bold text-omicron">Billing Panel</p>
+        <p class="text-sigma text-black-600">Invoices and payment method management.</p>
+      </div>
     </GwTabContent>
   </GwTabGroup>
 </ShadowPreview>
 
 ---
 
-## Variants
-
-- `orientation="vertical"` is supported by the root component for side-by-side layouts.
-- Use the same trigger/content composition for both horizontal and vertical arrangements.
-
-## Installation
-
-### 1. CLI Installation
-
-```bash
-npx gwind-system-ui add tabs
-npx gwind-system-ui add badge
-```
-
-### 2. Manual Installation
-
-Create a folder `src/components/ui/tabs/` and copy the source code for each file.
-
 ## Usage
 
 ```vue
-<script setup>
+<script setup lang="ts">
+import { ref } from 'vue'
 import { 
   TabGroup, 
   TabTriggerGroup, 
   TabTrigger, 
   TabContent 
 } from '@/components/ui/tabs'
-import { ref } from 'vue'
 
-const activeTab = ref('tab1')
+const activeTab = ref('account')
 </script>
 
 <template>
   <TabGroup v-model="activeTab">
     <TabTriggerGroup>
-      <TabTrigger value="tab1">Tab 1</TabTrigger>
-      <TabTrigger value="tab2">Tab 2</TabTrigger>
+      <TabTrigger value="account">Account</TabTrigger>
+      <TabTrigger value="password">Password</TabTrigger>
+      <TabTrigger value="notifications">Notifications</TabTrigger>
     </TabTriggerGroup>
     
-    <TabContent value="tab1">
-      <p>Content for Tab 1</p>
+    <TabContent value="account">
+      <p>Account content goes here.</p>
     </TabContent>
-    <TabContent value="tab2">
-      <p>Content for Tab 2</p>
+    <TabContent value="password">
+      <p>Password content goes here.</p>
+    </TabContent>
+    <TabContent value="notifications">
+      <p>Notifications content goes here.</p>
     </TabContent>
   </TabGroup>
 </template>
 ```
 
+---
+
 ## Sub-components
 
-| Component | Description |
-|-----------|-------------|
-| `TabGroup` | The Root component that manages the active state |
-| `TabTriggerGroup` | The container for tab triggers, includes the animated indicator |
-| `TabTrigger` | A button that activates a specific tab panel |
-| `TabContent` | The panel containing the content for a specific tab |
+| Component | Responsibility |
+| :--- | :--- |
+| `TabGroup` | The root component managing active state via `v-model` / `defaultValue`. |
+| `TabTriggerGroup` | Container for triggers, includes the animated sliding `<TabsIndicator>`. |
+| `TabTrigger` | Individual interactive button that activates a specific tab panel. |
+| `TabContent` | Container for the content associated with a specific tab `value`. |
 
-## Accessibility
+---
 
-- Arrow keys navigate between tabs
-- `Home` / `End` jump to first/last tab
-- Tab panels are properly associated with their triggers via `aria-controls`
+## API Reference
+
+### TabGroup
+
+| Prop | Type | Default | Description |
+| :--- | :--- | :--- | :--- |
+| `modelValue` | `string \| number` | `undefined` | Active tab value (supports `v-model`). |
+| `defaultValue` | `string \| number` | `'tab1'` | Initial active tab when uncontrolled. |
+| `orientation` | `'horizontal' \| 'vertical'` | `'horizontal'` | Orientation of the tab list. |
+| `dir` | `'ltr' \| 'rtl'` | `'ltr'` | Reading direction for keyboard navigation. |
+
+### TabTrigger
+
+| Prop | Type | Default | Description |
+| :--- | :--- | :--- | :--- |
+| `value` | `string \| number` | **Required** | Unique identifier matching corresponding `TabContent`. |
+| `disabled` | `boolean` | `false` | Whether the tab trigger is disabled. |
+| `class` | `string \| HTMLAttributes['class']` | `undefined` | Additional CSS classes. |
+
+### TabContent
+
+| Prop | Type | Default | Description |
+| :--- | :--- | :--- | :--- |
+| `value` | `string \| number` | **Required** | Matches the `value` of the activating `TabTrigger`. |
+| `class` | `string \| HTMLAttributes['class']` | `undefined` | Additional CSS classes. |
