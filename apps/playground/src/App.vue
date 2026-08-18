@@ -119,6 +119,7 @@ import {
 import {
   AlertCircle,
   ArrowRight,
+  BookOpen,
   Check,
   ChevronDown,
   CircleHelp,
@@ -142,6 +143,7 @@ import {
   X,
 } from "lucide-vue-next";
 
+const docsUrl = import.meta.env.PROD ? '/gwind/' : 'http://localhost:5173/gwind/';
 const activeSection = ref("inventory");
 const navContainerRef = ref<HTMLElement | null>(null);
 const isManualNav = ref(false);
@@ -1267,10 +1269,13 @@ const shellClass = computed(() =>
           </div>
 
           <div class="flex items-center gap-2 sm:gap-3 shrink-0">
-            <div class="hidden md:flex items-center gap-2 rounded-full bg-white/10 px-3 py-1.5 text-xs text-white/80 border border-white/10">
-              <Sparkles class="h-3.5 w-3.5 text-lime-400" />
-              <span>34 Production Components</span>
-            </div>
+            <a
+              :href="docsUrl"
+              class="flex items-center gap-1.5 rounded-full px-3 sm:px-4 py-1.5 text-xs font-bold bg-white/15 text-white hover:bg-white/25 border border-white/10 transition-all cursor-pointer"
+            >
+              <BookOpen class="h-3.5 w-3.5 text-lime-400" />
+              <span>Docs ↗</span>
+            </a>
             <button
               class="flex items-center gap-1.5 rounded-full px-3 sm:px-4 py-1.5 text-xs font-bold transition-all cursor-pointer"
               :class="

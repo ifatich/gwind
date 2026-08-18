@@ -3,7 +3,8 @@ import vue from '@vitejs/plugin-vue'
 import tailwindcss from '@tailwindcss/vite'
 import { resolve } from 'node:path'
 
-export default defineConfig({
+export default defineConfig(({ mode }) => ({
+  base: mode === 'production' ? '/gwind/playground/' : '/',
   plugins: [vue(), tailwindcss()],
   resolve: {
     dedupe: ['vue'],
@@ -13,4 +14,4 @@ export default defineConfig({
       vue: resolve(__dirname, 'node_modules/vue'),
     },
   },
-})
+}))
