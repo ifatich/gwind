@@ -458,7 +458,7 @@ const transactionRows = ref([
     pinjaman: "Rp 6.800.000",
     jatuhTempo: "28 Mar 2026",
     status: "Dalam Proses",
-    statusVariant: "pear" as const,
+    statusVariant: "blue" as const,
   },
   {
     id: "SBG-88221",
@@ -468,7 +468,7 @@ const transactionRows = ref([
     pinjaman: "Rp 18.200.000",
     jatuhTempo: "15 Mar 2026",
     status: "Mendekati JT",
-    statusVariant: "warning" as const,
+    statusVariant: "orange" as const,
   },
   {
     id: "SBG-88222",
@@ -478,7 +478,7 @@ const transactionRows = ref([
     pinjaman: "Rp 31.000.000",
     jatuhTempo: "10 Mar 2026",
     status: "Lewat JT",
-    statusVariant: "destructive" as const,
+    statusVariant: "red" as const,
   },
 ]);
 
@@ -644,7 +644,7 @@ const allDataRows = [
     sewaModal: "1.20% / 15hr",
     jatuhTempo: "28 Mar 2026",
     status: "Dalam Proses",
-    statusVariant: "pear" as const,
+    statusVariant: "blue" as const,
   },
   {
     id: 3,
@@ -658,7 +658,7 @@ const allDataRows = [
     sewaModal: "1.15% / 15hr",
     jatuhTempo: "15 Mar 2026",
     status: "Mendekati JT",
-    statusVariant: "warning" as const,
+    statusVariant: "orange" as const,
   },
   {
     id: 4,
@@ -672,7 +672,7 @@ const allDataRows = [
     sewaModal: "1.00% / 15hr",
     jatuhTempo: "10 Mar 2026",
     status: "Lewat JT",
-    statusVariant: "destructive" as const,
+    statusVariant: "red" as const,
   },
   {
     id: 5,
@@ -714,7 +714,7 @@ const allDataRows = [
     sewaModal: "1.10% / 15hr",
     jatuhTempo: "18 Mar 2026",
     status: "Mendekati JT",
-    statusVariant: "warning" as const,
+    statusVariant: "orange" as const,
   },
 ];
 
@@ -1346,10 +1346,10 @@ const shellClass = computed(() =>
                   Koleksi 34 komponen UI Vue 3 berstandar enterprise yang menggabungkan headless primitives Reka UI, styling modular Tailwind CSS v4, serta 100% skenario interaktif dunia nyata untuk ekosistem fintech dan perbankan modern.
                 </p>
                 <div class="flex flex-wrap items-center gap-3 pt-2">
-                  <Button size="lg" class="rounded-full px-6 font-bold" @click="scrollToSection('inventory')">
+                  <Button size="lg" @click="scrollToSection('inventory')">
                     Jelajahi 34 Komponen
                   </Button>
-                  <Button variant="outline" size="lg" class="rounded-full px-6 font-bold bg-white text-black-800 hover:bg-black-100" @click="scrollToSection('button')">
+                  <Button variant="outline" size="lg" @click="scrollToSection('button')">
                     Mulai dari Button →
                   </Button>
                 </div>
@@ -1526,7 +1526,7 @@ const shellClass = computed(() =>
               <p class="text-omega text-black-500 max-w-sm mx-auto">
                 Coba kata kunci lain atau reset filter kategori untuk melihat seluruh 34 komponen UI.
               </p>
-              <Button size="sm" variant="outline" class="rounded-full" @click="searchQuery = ''; selectedCategory = 'all'">
+              <Button size="sm" variant="outline" @click="searchQuery = ''; selectedCategory = 'all'">
                 Reset Pencarian & Filter
               </Button>
             </div>
@@ -1534,22 +1534,19 @@ const shellClass = computed(() =>
 
             <!-- 2. GENERAL & ACTIONS -->
             <!-- Button -->
-            <section
-              id="button"
-              class="playground-section playground-panel p-6 space-y-6"
-            >
+            <section id="button" class="playground-section playground-panel p-6 space-y-6">
               <div class="flex flex-wrap items-center justify-between gap-3">
                 <div>
-                  <p class="playground-eyebrow">Calls to Action & Button Primitives</p>
+                  <p class="playground-eyebrow">Interactive Controls</p>
                   <h2 class="text-xl font-bold text-black-900">Button</h2>
                   <p class="text-sigma text-black-500">
-                    Primary monochrome pills, secondary canvas buttons, tertiary links, social auth, and circular icon triggers.
+                    Primary monochrome branding, multiple functional variants, social auth, sizing scale, and ripple effects.
                   </p>
                 </div>
                 <Badge variant="brocoli">Core Action</Badge>
               </div>
 
-              <!-- Real-world Case: Multi-Step Transaction Action Bar -->
+              <!-- Real-World Scenario Showcase -->
               <div class="playground-case-card">
                 <div class="playground-case-header">
                   <div class="flex items-center gap-2.5">
@@ -1566,7 +1563,7 @@ const shellClass = computed(() =>
                 <div class="playground-case-body">
                   <p class="text-omega text-black-500 mb-3">Aksi navigasi formulir pengajuan pinjaman dengan state loading asinkron.</p>
                   <div class="flex flex-wrap items-center justify-between gap-3 pt-3 border-t border-black-100">
-                    <Button variant="ghost" class="text-black-600">
+                    <Button variant="ghost">
                       Batal
                     </Button>
                     <div class="flex items-center gap-3">
@@ -1601,14 +1598,14 @@ const shellClass = computed(() =>
               </div>
 
               <div>
-                <h3 class="text-omega font-bold uppercase tracking-wider text-black-400 mb-3">Interactive States</h3>
+                <h3 class="text-omega font-bold uppercase tracking-wider text-black-400 mb-3">Interactive States & Feedback</h3>
                 <div class="flex flex-wrap items-center gap-3">
-                  <Button>Enabled</Button>
-                  <Button class="bg-lime-600">Hover</Button>
-                  <Button class="bg-lime-800">Focused</Button>
+                  <Button>Default</Button>
+                  <Button variant="outline">Outline</Button>
                   <Button disabled>Disabled</Button>
                   <Button loading loading-label="Memproses...">Loading State</Button>
-                  <Button class="active:bg-lime-800">Pressed</Button>
+                  <Button variant="destructive">Destructive</Button>
+                  <Button variant="ghost">Ghost</Button>
                 </div>
               </div>
 
@@ -2437,7 +2434,7 @@ const shellClass = computed(() =>
                   <Combobox v-model="selectedCabang">
                     <ComboboxAnchor>
                       <ComboboxTrigger as-child>
-                        <Button variant="outline" class="w-full max-w-md justify-between bg-white text-black-800">
+                        <Button variant="outline" class="w-full max-w-md justify-between">
                           {{ selectedCabang || 'Cari nama cabang atau kota...' }}
                           <ChevronDown class="h-4 w-4 opacity-50" />
                         </Button>
@@ -2652,7 +2649,7 @@ const shellClass = computed(() =>
                       title="Foto Fisik Barang Gadai"
                       description="Upload 1 hingga 5 foto detail barang dari berbagai sisi"
                       upload-button-text="Tambah Foto Jaminan"
-                      metadata="Format: JPG/PNG, Maksimal 5MB per file"
+                      :metadata="{ takenBy: 'Budi Santoso', timestamp: '24 Mar 2026 10:30' }"
                       multiple
                     />
                   </div>
@@ -2690,7 +2687,7 @@ const shellClass = computed(() =>
                       <div>
                         <div class="flex items-center gap-2">
                           <h4 class="text-sigma font-bold text-black-800">Budi Santoso</h4>
-                          <Badge variant="brocoli" class="text-[10px] py-0 px-1.5">KYC Sukses</Badge>
+                          <Badge variant="brocoli">KYC Sukses</Badge>
                         </div>
                         <p class="text-omega text-black-500">Nasabah Prioritas • Rek: 1029-8821</p>
                       </div>
@@ -2701,7 +2698,7 @@ const shellClass = computed(() =>
                       <div>
                         <div class="flex items-center gap-2">
                           <h4 class="text-sigma font-bold text-black-800">Ahmad Ghozali</h4>
-                          <Badge variant="blue" class="text-[10px] py-0 px-1.5">Appraiser</Badge>
+                          <Badge variant="blue">Appraiser</Badge>
                         </div>
                         <p class="text-omega text-black-500">Penaksir Emas Khazanah Cab. Salemba</p>
                       </div>
@@ -2716,7 +2713,7 @@ const shellClass = computed(() =>
                   <Avatar src="https://i.pravatar.cc/96?img=12" alt="Budi Santoso" size="lg" />
                   <Avatar fallback="PG" size="md" />
                   <Avatar fallback="UI" size="sm" />
-                  <Avatar alt="Pegadaian" size="xs" />
+                  <Avatar alt="Pegadaian" size="sm" />
                 </div>
               </div>
             </section>
@@ -2796,7 +2793,7 @@ const shellClass = computed(() =>
                 <div class="playground-case-body">
                   <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
                     <!-- Variant 1: Portofolio Tabungan Emas -->
-                    <Card class="bg-white h-fit">
+                    <Card class="h-fit">
                       <CardHeader>
                         <div class="flex items-center justify-between">
                           <div class="flex flex-col gap-y-1">
@@ -2820,7 +2817,7 @@ const shellClass = computed(() =>
                     </Card>
 
                     <!-- Variant 2: Card with Image Promo -->
-                    <Card class="bg-white">
+                    <Card>
                       <CardHeader>
                         <CardTitle>Promo Cashback Gadai</CardTitle>
                         <CardDescription>Khusus transaksi digital bulan ini</CardDescription>
@@ -2840,7 +2837,7 @@ const shellClass = computed(() =>
                     </Card>
 
                     <!-- Variant 3: Minimal Card -->
-                    <Card class="bg-white h-fit">
+                    <Card class="h-fit">
                       <CardContent class="pt-6">
                         <div class="flex items-center gap-3 mb-3">
                           <div class="flex h-10 w-10 items-center justify-center rounded-full bg-blue-100 text-blue-600">
@@ -2908,10 +2905,10 @@ const shellClass = computed(() =>
                       </span>
                     </div>
                     <div class="flex items-center gap-2">
-                      <Button size="sm" class="rounded-full font-bold" @click="handleBulkAction('Bayar Angsuran')">
+                      <Button size="sm" @click="handleBulkAction('Bayar Angsuran')">
                         Bayar Sekaligus
                       </Button>
-                      <Button size="sm" variant="outline" class="rounded-full bg-white text-black-800 font-bold" @click="handleBulkAction('Cetak Rekap')">
+                      <Button size="sm" variant="outline" @click="handleBulkAction('Cetak Rekap')">
                         Unduh Rekap PDF
                       </Button>
                       <button
@@ -2974,10 +2971,10 @@ const shellClass = computed(() =>
                         </TableCell>
                         <TableCell align="center">
                           <div class="flex items-center justify-center gap-1.5">
-                            <Button size="sm" class="px-3 py-1 text-xs" @click="handleTableAction('Bayar', row.id)">
+                            <Button size="sm" @click="handleTableAction('Bayar', row.id)">
                               Bayar
                             </Button>
-                            <Button size="sm" variant="outline" class="px-2.5 py-1 text-xs bg-white" @click="handleTableAction('Detail', row.id)">
+                            <Button size="sm" variant="outline" @click="handleTableAction('Detail', row.id)">
                               Detail
                             </Button>
                           </div>
@@ -3008,10 +3005,10 @@ const shellClass = computed(() =>
                       Geser tabel ke kanan untuk melihat rincian finansial. Kolom <strong>Aksi Cepat</strong> tetap menempel di kanan (sticky).
                     </span>
                     <div class="flex items-center gap-2">
-                      <Button size="sm" variant="outline" class="px-3 py-1 text-xs bg-white" @click="scrollWideTable(-350)">
+                      <Button size="sm" variant="outline" @click="scrollWideTable(-350)">
                         ◀ Scroll Kiri
                       </Button>
-                      <Button size="sm" variant="outline" class="px-3 py-1 text-xs bg-white" @click="scrollWideTable(350)">
+                      <Button size="sm" variant="outline" @click="scrollWideTable(350)">
                         Scroll Kanan ▶
                       </Button>
                     </div>
@@ -3055,10 +3052,10 @@ const shellClass = computed(() =>
                           <!-- Sticky Body Cell -->
                           <TableCell align="center" class="sticky right-0 z-20 border-l border-black-200 bg-white group-hover:bg-slate-50 shadow-[-6px_0_12px_rgba(0,0,0,0.08)] whitespace-nowrap">
                             <div class="flex items-center justify-center gap-1.5">
-                              <Button size="sm" class="px-3 py-1 text-xs" @click="handleTableAction('Cetak SBG', ctr.contractNo)">
+                              <Button size="sm" @click="handleTableAction('Cetak SBG', ctr.contractNo)">
                                 Cetak
                               </Button>
-                              <Button size="sm" variant="outline" class="px-2.5 py-1 text-xs bg-white" @click="handleTableAction('Taksir Ulang', ctr.contractNo)">
+                              <Button size="sm" variant="outline" @click="handleTableAction('Taksir Ulang', ctr.contractNo)">
                                 Taksir
                               </Button>
                             </div>
@@ -3091,7 +3088,7 @@ const shellClass = computed(() =>
                       <Input
                         v-model="dtSearchQuery"
                         placeholder="Cari nasabah, SBG, NIK, atau telepon..."
-                        class="h-10 pl-9 pr-8 !text-xs bg-black-50 focus:bg-white"
+                        class="pl-9 pr-8"
                       />
                       <button
                         v-if="dtSearchQuery"
@@ -3109,7 +3106,6 @@ const shellClass = computed(() =>
                         v-model:open="dtStatusOpen"
                         :model-label="dtStatusLabel"
                         placeholder="Pilih status..."
-                        trigger-class="h-10 text-xs bg-white border-black-200"
                       >
                         <DropdownList>
                           <DropdownListItem
@@ -3130,7 +3126,6 @@ const shellClass = computed(() =>
                         v-model:open="dtCategoryOpen"
                         :model-label="dtCategoryLabel"
                         placeholder="Pilih kategori..."
-                        trigger-class="h-10 text-xs bg-white border-black-200"
                       >
                         <DropdownList>
                           <DropdownListItem
@@ -3150,7 +3145,6 @@ const shellClass = computed(() =>
                       <Button
                         variant="outline"
                         size="sm"
-                        class="h-10 px-3 text-xs bg-white font-bold"
                         @click="dtSortOrder = dtSortOrder === 'none' ? 'desc' : dtSortOrder === 'desc' ? 'asc' : 'none'"
                       >
                         <SlidersHorizontal class="h-3.5 w-3.5 mr-1" />
@@ -3160,7 +3154,6 @@ const shellClass = computed(() =>
                         v-if="dtSearchQuery || dtStatusFilter !== 'all' || dtCategoryFilter !== 'all' || dtSortOrder !== 'none'"
                         variant="ghost"
                         size="sm"
-                        class="h-10 text-xs font-bold text-red-600 hover:text-red-700 hover:bg-red-50 px-2"
                         @click="dtSearchQuery = ''; dtStatusFilter = 'all'; dtCategoryFilter = 'all'; dtSortOrder = 'none'"
                       >
                         Reset
@@ -3207,13 +3200,13 @@ const shellClass = computed(() =>
 
                     <!-- Custom Slot: Status Badge -->
                     <template #cell-status="{ row }">
-                      <Badge :variant="row.statusVariant">{{ row.status }}</Badge>
+                      <Badge :variant="(row.statusVariant as any)">{{ row.status }}</Badge>
                     </template>
 
                     <!-- Custom Slot: Action Button -->
                     <template #cell-action="{ row }">
                       <div class="flex items-center justify-center gap-1">
-                        <Button size="sm" class="px-2.5 py-1 text-xs" @click="handleTableAction('Detail SBG', row.sbgNo)">
+                        <Button size="sm" @click="handleTableAction('Detail SBG', String(row.sbgNo))">
                           Detail
                         </Button>
                       </div>
@@ -3236,8 +3229,8 @@ const shellClass = computed(() =>
                 </div>
                 <div class="playground-case-body space-y-4">
                   <DataTable :columns="tableColumns" :rows="tableRows" />
-                  <Alert variant="destructive" class="border-red-500 bg-red-500 p-3 text-white">
-                    <AlertDescription class="!text-omega font-semibold leading-[18px] text-white">
+                  <Alert variant="destructive">
+                    <AlertDescription>
                       Penyaluran Produk dihentikan sementara sesuai dengan ID Nomor 42/ID/2020 Penghentian Sementara Penyaluran Produk Pegadaian Kreasi Express Loan.
                     </AlertDescription>
                   </Alert>
@@ -3272,19 +3265,19 @@ const shellClass = computed(() =>
                     <Accordion type="single" collapsible default-value="faq-1">
                       <AccordionItem value="faq-1">
                         <AccordionTrigger>Apa saja syarat pengajuan Gadai Emas di Pegadaian?</AccordionTrigger>
-                        <AccordionContent class="text-sigma text-black-600 leading-relaxed pt-2">
+                        <AccordionContent>
                           Syaratnya sangat mudah: Nasabah cukup membawa fisik barang jaminan (emas batangan atau perhiasan) beserta KTP asli yang masih berlaku ke kantor cabang Pegadaian terdekat.
                         </AccordionContent>
                       </AccordionItem>
                       <AccordionItem value="faq-2">
                         <AccordionTrigger>Bagaimana cara memperpanjang jangka waktu pinjaman gadai?</AccordionTrigger>
-                        <AccordionContent class="text-sigma text-black-600 leading-relaxed pt-2">
+                        <AccordionContent>
                           Perpanjangan jangka waktu gadai dapat dilakukan dengan membayar sewa modal (bunga) yang telah berjalan langsung melalui aplikasi Pegadaian Digital atau di outlet Pegadaian.
                         </AccordionContent>
                       </AccordionItem>
                       <AccordionItem value="faq-3">
                         <AccordionTrigger>Apakah emas yang digadaikan dijamin keamanannya?</AccordionTrigger>
-                        <AccordionContent class="text-sigma text-black-600 leading-relaxed pt-2">
+                        <AccordionContent>
                           Ya, barang jaminan emas nasabah disimpan di ruang penyimpanan besi berstandar perbankan (khazanah) dan diasuransikan 100% dari nilai taksiran pasar.
                         </AccordionContent>
                       </AccordionItem>
@@ -3584,16 +3577,16 @@ const shellClass = computed(() =>
                   <div class="pt-2 flex flex-wrap items-center justify-between gap-4">
                     <span class="text-omega text-black-500">Simulasi perubahan tahapan verifikasi data nasabah:</span>
                     <div class="flex items-center gap-1.5">
-                      <Button size="sm" variant="outline" class="px-2.5 py-1 text-xs bg-white font-bold" :disabled="progressValue <= 0" @click="progressValue = Math.max(0, progressValue - 25)">
+                      <Button size="sm" variant="outline" :disabled="progressValue <= 0" @click="progressValue = Math.max(0, progressValue - 25)">
                         -25%
                       </Button>
-                      <Button size="sm" variant="outline" class="px-2.5 py-1 text-xs bg-white font-bold" :disabled="progressValue >= 100" @click="progressValue = Math.min(100, progressValue + 25)">
+                      <Button size="sm" variant="outline" :disabled="progressValue >= 100" @click="progressValue = Math.min(100, progressValue + 25)">
                         +25%
                       </Button>
-                      <Button size="sm" variant="outline" class="px-2.5 py-1 text-xs bg-white font-bold" @click="progressValue = 100">
+                      <Button size="sm" variant="outline" @click="progressValue = 100">
                         100% (Selesai)
                       </Button>
-                      <Button size="sm" variant="ghost" class="px-2 py-1 text-xs text-black-500 hover:text-black-800" @click="progressValue = 0">
+                      <Button size="sm" variant="ghost" @click="progressValue = 0">
                         Reset
                       </Button>
                     </div>
@@ -3885,7 +3878,7 @@ const shellClass = computed(() =>
                   <div class="flex flex-wrap items-center gap-6">
                     <Tooltip>
                       <TooltipTrigger as-child>
-                        <Button variant="ghost" class="inline-flex items-center gap-1.5 text-black-700">
+                        <Button variant="ghost">
                           <CircleHelp class="h-4 w-4 text-lime-600" />
                           Apa itu Biaya Titip Emas?
                         </Button>
@@ -3897,7 +3890,7 @@ const shellClass = computed(() =>
 
                     <Tooltip>
                       <TooltipTrigger as-child>
-                        <Button variant="ghost" class="inline-flex items-center gap-1.5 text-black-700">
+                        <Button variant="ghost">
                           <CircleHelp class="h-4 w-4 text-lime-600" />
                           Rumus Sewa Modal
                         </Button>
