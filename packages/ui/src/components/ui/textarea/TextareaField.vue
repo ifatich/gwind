@@ -8,19 +8,31 @@ defineOptions({
   inheritAttrs: false,
 })
 
-const props = defineProps<{
-  id?: string
-  label?: string
-  caption?: string
-  error?: string
-  disabled?: boolean
-  defaultValue?: string | number
-  modelValue?: string | number
-  class?: HTMLAttributes['class']
-  labelClass?: HTMLAttributes['class']
-  inputClass?: HTMLAttributes['class']
-  captionClass?: HTMLAttributes['class']
-}>()
+const props = withDefaults(
+  defineProps<{
+    id?: string
+    label?: string
+    caption?: string
+    error?: string
+    disabled?: boolean
+    defaultValue?: string | number
+    modelValue?: string | number
+    maxlength?: number | string
+    maxLength?: number | string
+    showCount?: string | boolean
+    counter?: string | boolean
+    class?: HTMLAttributes['class']
+    labelClass?: HTMLAttributes['class']
+    inputClass?: HTMLAttributes['class']
+    captionClass?: HTMLAttributes['class']
+    counterClass?: HTMLAttributes['class']
+  }>(),
+  {
+    disabled: undefined,
+    showCount: undefined,
+    counter: undefined,
+  },
+)
 
 const emits = defineEmits<{
   (e: 'update:modelValue', payload: string | number): void
@@ -51,24 +63,31 @@ const hasCaption = computed(() => Boolean(props.error || props.caption || slots.
     </Label>
 
     <div class="flex flex-col gap-2">
-      <div class="relative">
-        <Textarea
-          v-bind="attrs"
-          :id="fieldId"
-          :disabled="disabled"
-          :model-value="modelValue"
-          :default-value="defaultValue"
-          :aria-invalid="error ? 'true' : undefined"
-          :aria-describedby="hasCaption ? captionId : undefined"
-          :class="
-            cn(
-              error && '!border-red-500 hover:!border-red-600 focus:!border-red-500',
-              props.inputClass,
-            )
-          "
-          @update:model-value="emits('update:modelValue', $event)"
-        />
-      </div>
+      <Textarea
+        v-bind="attrs"
+        :id="fieldId"
+        :disabled="disabled"
+        :model-value="modelValue"
+        :default-value="defaultValue"
+        :maxlength="maxlength"
+        :max-length="maxLength"
+        :show-count="showCount"
+        :counter="counter"
+        :counter-class="counterClass"
+        :aria-invalid="error ? 'true' : undefined"
+        :aria-describedby="hasCaption ? captionId : undefined"
+        :class="
+          cn(
+            error && '!border-red-500 hover:!border-red-600 focus:!border-red-500',
+            props.inputClass,
+          )
+        "
+        @update:model-value="emits('update:modelValue', $event)"
+      >
+        <template v-for="(_, slotName) in slots" #[slotName]="slotProps">
+          <slot :name="slotName" v-bind="slotProps" />
+        </template>
+      </Textarea>
 
       <p
         v-if="hasCaption"
