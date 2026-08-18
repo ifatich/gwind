@@ -93,6 +93,13 @@ import {
   SelectValue,
   Spinner,
   Switch,
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
   TabContent,
   TabGroup,
   TabTrigger,
@@ -543,6 +550,14 @@ const wideContractRows = [
 ];
 
 const tableFeedbackMsg = ref<string | null>(null);
+const wideTableContainerRef = ref<HTMLElement | null>(null);
+
+function scrollWideTable(offset: number) {
+  if (wideTableContainerRef.value) {
+    wideTableContainerRef.value.scrollBy({ left: offset, behavior: "smooth" });
+  }
+}
+
 function handleTableAction(action: string, id: string) {
   tableFeedbackMsg.value = `Aksi "${action}" berhasil diproses untuk ${id}`;
   setTimeout(() => {
@@ -2809,52 +2824,67 @@ const shellClass = computed(() =>
                     </span>
                     <h3 class="text-sigma font-extrabold text-black-900">Tabel Kontrak Lebar dengan Kolom Aksi Sticky (Tetap di Kanan Saat Scroll)</h3>
                   </div>
-                  <span class="text-omega text-black-500 font-medium">Horizontal Scroll + Fixed Action Column</span>
+                  <span class="text-omega text-black-500 font-medium">Horizontal Scroll (1550px) + Fixed Action Column</span>
                 </div>
-                <div class="playground-case-body space-y-3">
-                  <p class="text-omega text-black-500">
-                    Geser tabel ke kanan untuk melihat rincian finansial lengkap. Kolom <strong>Aksi Cepat</strong> akan tetap menempel di sisi kanan (sticky).
-                  </p>
+                <div class="playground-case-body space-y-4">
+                  <!-- Horizontal Scroll Toolbar & Hint -->
+                  <div class="flex flex-wrap items-center justify-between gap-3 text-omega text-black-600 bg-white p-3 rounded-lg border border-black-200">
+                    <span class="flex items-center gap-1.5 font-semibold text-black-800">
+                      <ArrowRight class="h-4 w-4 text-lime-600" />
+                      Geser tabel ke kanan untuk melihat rincian finansial. Kolom <strong>Aksi Cepat</strong> tetap menempel di kanan (sticky).
+                    </span>
+                    <div class="flex items-center gap-2">
+                      <Button size="sm" variant="outline" class="px-3 py-1 text-xs bg-white" @click="scrollWideTable(-350)">
+                        ◀ Scroll Kiri
+                      </Button>
+                      <Button size="sm" variant="outline" class="px-3 py-1 text-xs bg-white" @click="scrollWideTable(350)">
+                        Scroll Kanan ▶
+                      </Button>
+                    </div>
+                  </div>
                   
-                  <div class="relative w-full overflow-x-auto rounded-lg border border-black-200 bg-white">
-                    <table class="w-full min-w-[1000px] border-separate border-spacing-0 text-left">
+                  <div
+                    ref="wideTableContainerRef"
+                    class="relative w-full overflow-x-auto rounded-lg border border-black-200 bg-white"
+                  >
+                    <table class="w-[1550px] min-w-[1550px] border-separate border-spacing-0 text-left">
                       <thead>
                         <tr>
-                          <th class="bg-lime-500 px-3 py-3 !text-sigma font-extrabold text-white">No. Kontrak</th>
-                          <th class="bg-lime-500 px-3 py-3 !text-sigma font-extrabold text-white">Cabang</th>
-                          <th class="bg-lime-500 px-3 py-3 !text-sigma font-extrabold text-white">Karat Emas</th>
-                          <th class="bg-lime-500 px-3 py-3 !text-sigma font-extrabold text-white text-right">Berat Kotor</th>
-                          <th class="bg-lime-500 px-3 py-3 !text-sigma font-extrabold text-white text-right">Berat Bersih</th>
-                          <th class="bg-lime-500 px-3 py-3 !text-sigma font-extrabold text-white text-right">Nilai Taksiran</th>
-                          <th class="bg-lime-500 px-3 py-3 !text-sigma font-extrabold text-white text-right">Maks Pinjaman</th>
-                          <th class="bg-lime-500 px-3 py-3 !text-sigma font-extrabold text-white text-right">Sewa Modal</th>
-                          <th class="bg-lime-500 px-3 py-3 !text-sigma font-extrabold text-white text-right">Biaya Admin</th>
-                          <th class="bg-lime-500 px-3 py-3 !text-sigma font-extrabold text-white text-right">Total Tagihan</th>
+                          <th class="w-44 min-w-[170px] bg-lime-500 px-4 py-3 !text-sigma font-extrabold text-white whitespace-nowrap">No. Kontrak</th>
+                          <th class="w-48 min-w-[190px] bg-lime-500 px-4 py-3 !text-sigma font-extrabold text-white whitespace-nowrap">Cabang</th>
+                          <th class="w-36 min-w-[140px] bg-lime-500 px-4 py-3 !text-sigma font-extrabold text-white whitespace-nowrap">Karat Emas</th>
+                          <th class="w-32 min-w-[120px] bg-lime-500 px-4 py-3 !text-sigma font-extrabold text-white text-right whitespace-nowrap">Berat Kotor</th>
+                          <th class="w-32 min-w-[120px] bg-lime-500 px-4 py-3 !text-sigma font-extrabold text-white text-right whitespace-nowrap">Berat Bersih</th>
+                          <th class="w-40 min-w-[160px] bg-lime-500 px-4 py-3 !text-sigma font-extrabold text-white text-right whitespace-nowrap">Nilai Taksiran</th>
+                          <th class="w-40 min-w-[160px] bg-lime-500 px-4 py-3 !text-sigma font-extrabold text-white text-right whitespace-nowrap">Maks Pinjaman</th>
+                          <th class="w-36 min-w-[140px] bg-lime-500 px-4 py-3 !text-sigma font-extrabold text-white text-right whitespace-nowrap">Sewa Modal</th>
+                          <th class="w-32 min-w-[130px] bg-lime-500 px-4 py-3 !text-sigma font-extrabold text-white text-right whitespace-nowrap">Biaya Admin</th>
+                          <th class="w-40 min-w-[160px] bg-lime-500 px-4 py-3 !text-sigma font-extrabold text-white text-right whitespace-nowrap">Total Tagihan</th>
                           <!-- Sticky Header Cell -->
-                          <th class="sticky right-0 z-10 bg-lime-600 px-4 py-3 !text-sigma font-extrabold text-white text-center shadow-[-4px_0_12px_rgba(0,0,0,0.12)] border-l border-lime-700">
+                          <th class="sticky right-0 z-20 w-44 min-w-[170px] bg-lime-600 px-4 py-3 !text-sigma font-extrabold text-white text-center shadow-[-6px_0_12px_rgba(0,0,0,0.15)] border-l border-lime-700 whitespace-nowrap">
                             Aksi Cepat (Sticky)
                           </th>
                         </tr>
                       </thead>
                       <tbody>
                         <tr v-for="ctr in wideContractRows" :key="ctr.contractNo" class="hover:bg-black-50/60 group">
-                          <td class="border-b border-r border-black-200 px-3 py-3 font-mono text-xs font-bold text-black-900">{{ ctr.contractNo }}</td>
-                          <td class="border-b border-r border-black-200 px-3 py-3 text-sigma text-black-700">{{ ctr.branch }}</td>
-                          <td class="border-b border-r border-black-200 px-3 py-3 text-sigma font-semibold text-black-900">{{ ctr.karat }}</td>
-                          <td class="border-b border-r border-black-200 px-3 py-3 text-right text-sigma text-black-700">{{ ctr.grossWeight }}</td>
-                          <td class="border-b border-r border-black-200 px-3 py-3 text-right text-sigma font-bold text-black-900">{{ ctr.netWeight }}</td>
-                          <td class="border-b border-r border-black-200 px-3 py-3 text-right text-sigma font-bold text-black-900">{{ ctr.appraisalValue }}</td>
-                          <td class="border-b border-r border-black-200 px-3 py-3 text-right text-sigma text-lime-700 font-bold">{{ ctr.maxLoan }}</td>
-                          <td class="border-b border-r border-black-200 px-3 py-3 text-right text-sigma text-black-600">{{ ctr.sewaModalRate }}</td>
-                          <td class="border-b border-r border-black-200 px-3 py-3 text-right text-sigma text-black-600">{{ ctr.adminFee }}</td>
-                          <td class="border-b border-r border-black-200 px-3 py-3 text-right text-sigma font-black text-black-900">{{ ctr.totalBill }}</td>
+                          <td class="border-b border-r border-black-200 px-4 py-3 font-mono text-xs font-bold text-black-900 whitespace-nowrap">{{ ctr.contractNo }}</td>
+                          <td class="border-b border-r border-black-200 px-4 py-3 text-sigma text-black-700 whitespace-nowrap">{{ ctr.branch }}</td>
+                          <td class="border-b border-r border-black-200 px-4 py-3 text-sigma font-semibold text-black-900 whitespace-nowrap">{{ ctr.karat }}</td>
+                          <td class="border-b border-r border-black-200 px-4 py-3 text-right text-sigma text-black-700 whitespace-nowrap">{{ ctr.grossWeight }}</td>
+                          <td class="border-b border-r border-black-200 px-4 py-3 text-right text-sigma font-bold text-black-900 whitespace-nowrap">{{ ctr.netWeight }}</td>
+                          <td class="border-b border-r border-black-200 px-4 py-3 text-right text-sigma font-bold text-black-900 whitespace-nowrap">{{ ctr.appraisalValue }}</td>
+                          <td class="border-b border-r border-black-200 px-4 py-3 text-right text-sigma text-lime-700 font-bold whitespace-nowrap">{{ ctr.maxLoan }}</td>
+                          <td class="border-b border-r border-black-200 px-4 py-3 text-right text-sigma text-black-600 whitespace-nowrap">{{ ctr.sewaModalRate }}</td>
+                          <td class="border-b border-r border-black-200 px-4 py-3 text-right text-sigma text-black-600 whitespace-nowrap">{{ ctr.adminFee }}</td>
+                          <td class="border-b border-r border-black-200 px-4 py-3 text-right text-sigma font-black text-black-900 whitespace-nowrap">{{ ctr.totalBill }}</td>
                           <!-- Sticky Body Cell -->
-                          <td class="sticky right-0 z-10 border-b border-l border-black-200 bg-white group-hover:bg-slate-50 px-3 py-3 text-center shadow-[-4px_0_12px_rgba(0,0,0,0.06)]">
+                          <td class="sticky right-0 z-20 border-b border-l border-black-200 bg-white group-hover:bg-slate-50 px-4 py-3 text-center shadow-[-6px_0_12px_rgba(0,0,0,0.08)] whitespace-nowrap">
                             <div class="flex items-center justify-center gap-1.5">
-                              <Button size="sm" class="px-2.5 py-1 text-xs" @click="handleTableAction('Cetak SBG', ctr.contractNo)">
+                              <Button size="sm" class="px-3 py-1 text-xs" @click="handleTableAction('Cetak SBG', ctr.contractNo)">
                                 Cetak
                               </Button>
-                              <Button size="sm" variant="outline" class="px-2 py-1 text-xs bg-white" @click="handleTableAction('Taksir Ulang', ctr.contractNo)">
+                              <Button size="sm" variant="outline" class="px-2.5 py-1 text-xs bg-white" @click="handleTableAction('Taksir Ulang', ctr.contractNo)">
                                 Taksir
                               </Button>
                             </div>
