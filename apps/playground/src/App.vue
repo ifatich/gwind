@@ -1730,15 +1730,10 @@ const shellClass = computed(() =>
                 <PopoverTrigger as-child>
                   <Button variant="outline">Open Popover</Button>
                 </PopoverTrigger>
-                <PopoverContent class="w-72">
-                  <div class="space-y-2">
-                    <h3 class="text-omicron font-bold text-black-800">
-                      Popover content
-                    </h3>
-                    <p class="text-sigma text-black-500">
-                      Check shadow, radius, padding, and text color here.
-                    </p>
-                  </div>
+                <PopoverContent class="w-72" title="Popover content">
+                  <p class="text-sigma text-black-500">
+                    Check shadow, radius, padding, and text color here.
+                  </p>
                 </PopoverContent>
               </Popover>
             </section>
