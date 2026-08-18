@@ -16,8 +16,29 @@ npx gwind-system-ui add tooltip
       <GwTooltipTrigger as-child>
         <GwButton variant="outline">Hover</GwButton>
       </GwTooltipTrigger>
-      <GwTooltipContent>
+      <GwTooltipContent title="Action Info">
         <p>Add to library</p>
+      </GwTooltipContent>
+    </GwTooltip>
+  </GwTooltipProvider>
+</ShadowPreview>
+
+---
+
+## Real Case Example
+
+A practical example of using a Tooltip to explain why a button is disabled.
+
+<ShadowPreview class="gwind-docs-preview">
+  <GwTooltipProvider>
+    <GwTooltip>
+      <GwTooltipTrigger as-child>
+        <div class="inline-block">
+            <GwButton disabled>Submit Data</GwButton>
+        </div>
+      </GwTooltipTrigger>
+      <GwTooltipContent title="Missing Requirements" class="w-48">
+        <p>Please fill out all required fields before submitting this form.</p>
       </GwTooltipContent>
     </GwTooltip>
   </GwTooltipProvider>
@@ -55,7 +76,7 @@ import {
       <TooltipTrigger as-child>
         <Button variant="outline">Hover</Button>
       </TooltipTrigger>
-      <TooltipContent>
+      <TooltipContent title="Action Info">
         <p>Add to library</p>
       </TooltipContent>
     </Tooltip>
