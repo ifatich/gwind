@@ -271,20 +271,36 @@ body,
 
 .playground-case-header {
   display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: 10px;
-  padding: 10px 14px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 12px 14px;
   background: #e2e8f0;
   border-bottom: 1px solid #cbd5e1;
 }
 
 @media (min-width: 640px) {
   .playground-case-header {
-    padding: 12px 18px;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
     gap: 12px;
+    padding: 12px 18px;
   }
+}
+
+.playground-case-header > div:first-child {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 10px;
+  min-width: 0;
+}
+
+.playground-case-header h3 {
+  word-break: break-word;
+  line-height: 1.35;
 }
 
 .playground-case-body {
@@ -307,16 +323,19 @@ body,
 .playground-case-badge {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  font-size: 11px;
+  white-space: nowrap;
+  gap: 4px;
+  font-size: 10px;
   font-weight: 800;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
   color: #14532d;
   background: #dcfce7;
   border: 1px solid #86efac;
-  padding: 3px 10px;
+  padding: 2.5px 8px;
   border-radius: var(--pg-rounded-pill);
+  flex-shrink: 0;
+  line-height: 1.2;
 }
 
 /* ── Eyebrow (mono uppercase category label) ─────────────────────── */
