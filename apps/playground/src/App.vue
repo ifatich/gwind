@@ -705,47 +705,47 @@ const shellClass = computed(() =>
         </div>
       </div>
 
-      <main class="playground-container py-8">
-        <div class="playground-grid">
-          <aside class="playground-sidebar">
-            <nav class="space-y-0.5 px-1">
-              <a
-                v-for="section in sections"
-                :key="section.id"
-                :href="`#${section.id}`"
-                class="playground-nav-link"
-                :class="activeSection === section.id ? 'active' : ''"
-                @click="activeSection = section.id"
-              >
-                {{ section.label }}
-              </a>
-            </nav>
-          </aside>
+      <!-- Sticky Top Navigation Pills -->
+      <nav class="playground-top-nav">
+        <div class="playground-container flex items-center gap-2 overflow-x-auto no-scrollbar py-1">
+          <a
+            v-for="section in sections"
+            :key="section.id"
+            :href="`#${section.id}`"
+            class="playground-nav-pill"
+            :class="activeSection === section.id ? 'active' : ''"
+            @click="activeSection = section.id"
+          >
+            {{ section.label }}
+          </a>
+        </div>
+      </nav>
 
-          <div class="space-y-12">
-            <!-- Hero Story Block (design.md editorial display) -->
-            <div class="rounded-3xl bg-white border border-black-100 p-8 md:p-12 space-y-6 shadow-sm">
-              <div class="max-w-2xl space-y-3">
-                <p class="playground-eyebrow">Enterprise Design System</p>
-                <h1 class="text-3xl md:text-5xl font-black tracking-tight text-black-900 leading-[1.05]">
-                  Think bigger. Build faster with Gwind.
-                </h1>
-                <p class="text-omicron text-black-600 font-normal leading-relaxed pt-2">
-                  The unified design system combining accessible Reka UI primitives, layered Tailwind CSS v4 styling, and Figma-inspired color-block storytelling for modern web applications.
-                </p>
-              </div>
-              <div class="flex flex-wrap items-center gap-3 pt-2">
-                <Button size="lg" class="rounded-full px-6 font-bold shadow-sm">
-                  Get started for free
-                </Button>
-                <Button variant="outline" size="lg" class="rounded-full px-6 font-bold bg-white text-black-800 hover:bg-black-100">
-                  Documentation
-                </Button>
-                <span class="text-omega font-semibold text-black-500 pl-2">
-                  34 production components ready to use
-                </span>
-              </div>
+      <main class="playground-container py-8">
+        <div class="space-y-12">
+          <!-- Hero Story Block (design.md editorial display) -->
+          <div class="rounded-2xl bg-white border border-black-100 p-8 md:p-12 space-y-6">
+            <div class="max-w-2xl space-y-3">
+              <p class="playground-eyebrow">Enterprise Design System</p>
+              <h1 class="text-3xl md:text-5xl font-black tracking-tight text-black-900 leading-[1.05]">
+                Think bigger. Build faster with Gwind.
+              </h1>
+              <p class="text-omicron text-black-600 font-normal leading-relaxed pt-2">
+                The unified design system combining accessible Reka UI primitives, layered Tailwind CSS v4 styling, and Figma-inspired color-block storytelling for modern web applications.
+              </p>
             </div>
+            <div class="flex flex-wrap items-center gap-3 pt-2">
+              <Button size="lg" class="rounded-full px-6 font-bold">
+                Get started for free
+              </Button>
+              <Button variant="outline" size="lg" class="rounded-full px-6 font-bold bg-white text-black-800 hover:bg-black-100">
+                Documentation
+              </Button>
+              <span class="text-omega font-semibold text-black-500 pl-2">
+                34 production components ready to use
+              </span>
+            </div>
+          </div>
 
             <section
               id="inventory"
@@ -959,287 +959,272 @@ const shellClass = computed(() =>
               </div>
 
               <div class="grid gap-4 md:grid-cols-2">
-                <Card>
-                  <CardHeader>
-                    <CardTitle>Short</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <InputField
-                      id="input-short"
-                      label="Title"
-                      placeholder="Placeholder"
-                    >
-                      <template #label-icon>
-                        <CircleHelp class="h-[18px] w-[18px] text-black-500" />
-                      </template>
-                    </InputField>
-                  </CardContent>
-                </Card>
+                <div class="playground-tile space-y-2">
+                  <div class="flex items-center justify-between">
+                    <span class="text-sigma font-bold text-black-800">Short Field</span>
+                    <span class="text-omega font-mono text-black-400">sm</span>
+                  </div>
+                  <InputField
+                    id="input-short"
+                    label="Title"
+                    placeholder="Placeholder"
+                  >
+                    <template #label-icon>
+                      <CircleHelp class="h-[18px] w-[18px] text-black-500" />
+                    </template>
+                  </InputField>
+                </div>
 
-                <Card>
-                  <CardHeader>
-                    <CardTitle>Long</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <InputField
-                      id="input-long"
-                      field-size="long"
-                      label="Title"
-                      placeholder="Placeholder"
-                    >
-                      <template #label-icon>
-                        <CircleHelp class="h-[18px] w-[18px] text-black-500" />
-                      </template>
-                    </InputField>
-                  </CardContent>
-                </Card>
+                <div class="playground-tile space-y-2">
+                  <div class="flex items-center justify-between">
+                    <span class="text-sigma font-bold text-black-800">Long Field</span>
+                    <span class="text-omega font-mono text-black-400">lg</span>
+                  </div>
+                  <InputField
+                    id="input-long"
+                    field-size="long"
+                    label="Title"
+                    placeholder="Placeholder"
+                  >
+                    <template #label-icon>
+                      <CircleHelp class="h-[18px] w-[18px] text-black-500" />
+                    </template>
+                  </InputField>
+                </div>
 
-                <Card>
-                  <CardHeader>
-                    <CardTitle>Placeholder</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <InputField
-                      id="input-placeholder"
-                      label="Title"
-                      placeholder="Placeholder"
-                    >
-                      <template #label-icon>
-                        <CircleHelp class="h-[18px] w-[18px] text-black-500" />
-                      </template>
-                    </InputField>
-                  </CardContent>
-                </Card>
+                <div class="playground-tile space-y-2">
+                  <div class="flex items-center justify-between">
+                    <span class="text-sigma font-bold text-black-800">Placeholder State</span>
+                    <span class="text-omega font-mono text-black-400">default</span>
+                  </div>
+                  <InputField
+                    id="input-placeholder"
+                    label="Title"
+                    placeholder="Placeholder"
+                  >
+                    <template #label-icon>
+                      <CircleHelp class="h-[18px] w-[18px] text-black-500" />
+                    </template>
+                  </InputField>
+                </div>
 
-                <Card>
-                  <CardHeader>
-                    <CardTitle>Hover</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <InputField
-                      id="input-hover"
-                      label="Title"
-                      input-class="border-lime-600"
-                      placeholder="Hover"
-                    >
-                      <template #label-icon>
-                        <CircleHelp class="h-[18px] w-[18px] text-black-500" />
-                      </template>
-                    </InputField>
-                  </CardContent>
-                </Card>
+                <div class="playground-tile space-y-2">
+                  <div class="flex items-center justify-between">
+                    <span class="text-sigma font-bold text-black-800">Hover State</span>
+                    <span class="text-omega font-mono text-black-400">hover</span>
+                  </div>
+                  <InputField
+                    id="input-hover"
+                    label="Title"
+                    input-class="border-lime-600"
+                    placeholder="Hover"
+                  >
+                    <template #label-icon>
+                      <CircleHelp class="h-[18px] w-[18px] text-black-500" />
+                    </template>
+                  </InputField>
+                </div>
 
-                <Card>
-                  <CardHeader>
-                    <CardTitle>Filled</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <InputField
-                      id="input-filled"
-                      label="Title"
-                      value="Text input"
-                    >
-                      <template #label-icon>
-                        <CircleHelp class="h-[18px] w-[18px] text-black-500" />
-                      </template>
-                    </InputField>
-                  </CardContent>
-                </Card>
+                <div class="playground-tile space-y-2">
+                  <div class="flex items-center justify-between">
+                    <span class="text-sigma font-bold text-black-800">Filled State</span>
+                    <span class="text-omega font-mono text-black-400">value</span>
+                  </div>
+                  <InputField
+                    id="input-filled"
+                    label="Title"
+                    value="Text input"
+                  >
+                    <template #label-icon>
+                      <CircleHelp class="h-[18px] w-[18px] text-black-500" />
+                    </template>
+                  </InputField>
+                </div>
 
-                <Card>
-                  <CardHeader>
-                    <CardTitle>Disabled</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <InputField
-                      id="input-disabled"
-                      label="Title"
-                      disabled
-                      value="Disabled input"
-                    >
-                      <template #label-icon>
-                        <CircleHelp class="h-[18px] w-[18px] text-black-600" />
-                      </template>
-                    </InputField>
-                  </CardContent>
-                </Card>
+                <div class="playground-tile space-y-2">
+                  <div class="flex items-center justify-between">
+                    <span class="text-sigma font-bold text-black-800">Disabled State</span>
+                    <span class="text-omega font-mono text-black-400">disabled</span>
+                  </div>
+                  <InputField
+                    id="input-disabled"
+                    label="Title"
+                    disabled
+                    value="Disabled input"
+                  >
+                    <template #label-icon>
+                      <CircleHelp class="h-[18px] w-[18px] text-black-600" />
+                    </template>
+                  </InputField>
+                </div>
 
-                <Card>
-                  <CardHeader>
-                    <CardTitle>Error</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <InputField
-                      id="input-error"
-                      label="Title"
-                      error="This is an error message."
-                      placeholder="Placeholder"
-                    >
-                      <template #label-icon>
-                        <CircleHelp class="h-[18px] w-[18px] text-black-500" />
-                      </template>
-                    </InputField>
-                  </CardContent>
-                </Card>
+                <div class="playground-tile space-y-2">
+                  <div class="flex items-center justify-between">
+                    <span class="text-sigma font-bold text-black-800">Error State</span>
+                    <span class="text-omega font-mono text-red-500">error</span>
+                  </div>
+                  <InputField
+                    id="input-error"
+                    label="Title"
+                    error="This is an error message."
+                    placeholder="Placeholder"
+                  >
+                    <template #label-icon>
+                      <CircleHelp class="h-[18px] w-[18px] text-black-500" />
+                    </template>
+                  </InputField>
+                </div>
 
-                <Card>
-                  <CardHeader>
-                    <CardTitle>Icon Left</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <InputField
-                      id="input-icon-left"
-                      label="Title"
-                      placeholder="Placeholder"
-                    >
-                      <template #left-icon>
-                        <Mail class="h-6 w-6" />
-                      </template>
-                    </InputField>
-                  </CardContent>
-                </Card>
+                <div class="playground-tile space-y-2">
+                  <div class="flex items-center justify-between">
+                    <span class="text-sigma font-bold text-black-800">Icon Left</span>
+                    <span class="text-omega font-mono text-black-400">prefix</span>
+                  </div>
+                  <InputField
+                    id="input-icon-left"
+                    label="Title"
+                    placeholder="Placeholder"
+                  >
+                    <template #left-icon>
+                      <Mail class="h-6 w-6" />
+                    </template>
+                  </InputField>
+                </div>
 
-                <Card>
-                  <CardHeader>
-                    <CardTitle>Icon Right</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <InputField
-                      id="input-icon-right"
-                      label="Title"
-                      placeholder="Placeholder"
-                    >
-                      <template #right-icon>
-                        <Search class="h-6 w-6" />
-                      </template>
-                    </InputField>
-                  </CardContent>
-                </Card>
+                <div class="playground-tile space-y-2">
+                  <div class="flex items-center justify-between">
+                    <span class="text-sigma font-bold text-black-800">Icon Right</span>
+                    <span class="text-omega font-mono text-black-400">suffix</span>
+                  </div>
+                  <InputField
+                    id="input-icon-right"
+                    label="Title"
+                    placeholder="Placeholder"
+                  >
+                    <template #right-icon>
+                      <Search class="h-6 w-6" />
+                    </template>
+                  </InputField>
+                </div>
 
-                <Card>
-                  <CardHeader>
-                    <CardTitle>Icon Left Right</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <InputField
-                      id="input-icon-both"
-                      label="Title"
-                      placeholder="Placeholder"
-                    >
-                      <template #left-icon>
-                        <Mail class="h-6 w-6" />
-                      </template>
-                      <template #right-icon>
-                        <X class="h-6 w-6" />
-                      </template>
-                    </InputField>
-                  </CardContent>
-                </Card>
+                <div class="playground-tile space-y-2">
+                  <div class="flex items-center justify-between">
+                    <span class="text-sigma font-bold text-black-800">Dual Icons</span>
+                    <span class="text-omega font-mono text-black-400">both</span>
+                  </div>
+                  <InputField
+                    id="input-icon-both"
+                    label="Title"
+                    placeholder="Placeholder"
+                  >
+                    <template #left-icon>
+                      <Mail class="h-6 w-6" />
+                    </template>
+                    <template #right-icon>
+                      <X class="h-6 w-6" />
+                    </template>
+                  </InputField>
+                </div>
 
-                <Card>
-                  <CardHeader>
-                    <CardTitle>Action</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <InputField
-                      id="input-action"
-                      label="Title"
-                      placeholder="Placeholder"
-                    >
-                      <template #action>
-                        <button type="button">Action</button>
-                      </template>
-                    </InputField>
-                  </CardContent>
-                </Card>
+                <div class="playground-tile space-y-2">
+                  <div class="flex items-center justify-between">
+                    <span class="text-sigma font-bold text-black-800">Action Button</span>
+                    <span class="text-omega font-mono text-black-400">action</span>
+                  </div>
+                  <InputField
+                    id="input-action"
+                    label="Title"
+                    placeholder="Placeholder"
+                  >
+                    <template #action>
+                      <button type="button" class="text-sigma font-bold text-lime-600 hover:text-lime-700">Action</button>
+                    </template>
+                  </InputField>
+                </div>
 
-                <Card>
-                  <CardHeader>
-                    <CardTitle>Icon Action</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <InputField
-                      id="input-icon-action"
-                      label="Title"
-                      placeholder="Placeholder"
-                    >
-                      <template #left-icon>
-                        <Mail class="h-6 w-6" />
-                      </template>
-                      <template #action>
-                        <button type="button">Action</button>
-                      </template>
-                    </InputField>
-                  </CardContent>
-                </Card>
+                <div class="playground-tile space-y-2">
+                  <div class="flex items-center justify-between">
+                    <span class="text-sigma font-bold text-black-800">Icon & Action</span>
+                    <span class="text-omega font-mono text-black-400">combo</span>
+                  </div>
+                  <InputField
+                    id="input-icon-action"
+                    label="Title"
+                    placeholder="Placeholder"
+                  >
+                    <template #left-icon>
+                      <Mail class="h-6 w-6" />
+                    </template>
+                    <template #action>
+                      <button type="button" class="text-sigma font-bold text-lime-600 hover:text-lime-700">Action</button>
+                    </template>
+                  </InputField>
+                </div>
 
-                <Card>
-                  <CardHeader>
-                    <CardTitle>Prefix</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <InputField
-                      id="input-prefix"
-                      prefix="Rupiah"
-                      placeholder="Placeholder"
-                    >
-                      <template #right-icon>
-                        <X class="h-6 w-6" />
-                      </template>
-                    </InputField>
-                  </CardContent>
-                </Card>
+                <div class="playground-tile space-y-2">
+                  <div class="flex items-center justify-between">
+                    <span class="text-sigma font-bold text-black-800">Prefix Text</span>
+                    <span class="text-omega font-mono text-black-400">prefix</span>
+                  </div>
+                  <InputField
+                    id="input-prefix"
+                    prefix="Rupiah"
+                    placeholder="Placeholder"
+                  >
+                    <template #right-icon>
+                      <X class="h-6 w-6" />
+                    </template>
+                  </InputField>
+                </div>
 
-                <Card>
-                  <CardHeader>
-                    <CardTitle>Rupiah</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <InputRupiah
-                      id="input-rupiah"
-                      v-model="rupiahValue"
-                      label="Title"
-                      placeholder="Placeholder"
-                    />
-                  </CardContent>
-                </Card>
+                <div class="playground-tile space-y-2">
+                  <div class="flex items-center justify-between">
+                    <span class="text-sigma font-bold text-black-800">Input Rupiah</span>
+                    <span class="text-omega font-mono text-lime-600">currency</span>
+                  </div>
+                  <InputRupiah
+                    id="input-rupiah"
+                    v-model="rupiahValue"
+                    label="Title"
+                    placeholder="Placeholder"
+                  />
+                </div>
 
-                <Card id="inputpersentase">
-                  <CardHeader>
-                    <CardTitle>Persentase</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <InputPersentase
-                      id="input-persentase"
-                      v-model="persentaseValue"
-                      label="Title"
-                      placeholder="Placeholder"
-                    />
-                  </CardContent>
-                </Card>
+                <div id="inputpersentase" class="playground-tile space-y-2">
+                  <div class="flex items-center justify-between">
+                    <span class="text-sigma font-bold text-black-800">Input Persentase</span>
+                    <span class="text-omega font-mono text-lime-600">percentage</span>
+                  </div>
+                  <InputPersentase
+                    id="input-persentase"
+                    v-model="persentaseValue"
+                    label="Title"
+                    placeholder="Placeholder"
+                  />
+                </div>
 
-                <Card>
-                  <CardHeader>
-                    <CardTitle>Suffix</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <InputField
-                      id="input-suffix"
-                      suffix="%"
-                      placeholder="Placeholder"
-                    />
-                  </CardContent>
-                </Card>
+                <div class="playground-tile space-y-2">
+                  <div class="flex items-center justify-between">
+                    <span class="text-sigma font-bold text-black-800">Suffix Text</span>
+                    <span class="text-omega font-mono text-black-400">suffix</span>
+                  </div>
+                  <InputField
+                    id="input-suffix"
+                    suffix="%"
+                    placeholder="Placeholder"
+                  />
+                </div>
 
-                <Card class="md:col-span-2">
-                  <CardHeader>
-                    <CardTitle>File Upload</CardTitle>
-                  </CardHeader>
-                  <CardContent class="space-y-1">
-                    <Label for="input-file">File Upload</Label>
+                <div class="playground-tile space-y-2 md:col-span-2">
+                  <div class="flex items-center justify-between">
+                    <span class="text-sigma font-bold text-black-800">File Upload Input</span>
+                    <span class="text-omega font-mono text-black-400">file</span>
+                  </div>
+                  <div class="space-y-1">
+                    <Label for="input-file">Upload Document</Label>
                     <Input id="input-file" type="file" />
-                  </CardContent>
-                </Card>
+                  </div>
+                </div>
               </div>
             </section>
 
@@ -1267,59 +1252,55 @@ const shellClass = computed(() =>
 
             <section
               id="textarea"
-              class="playground-section playground-panel p-5"
+              class="playground-section playground-panel p-6 space-y-5"
             >
-              <h2 class="mb-1 text-omicron font-bold text-black-800">
-                Textarea
-              </h2>
-              <p class="mb-5 text-sigma text-black-500">
-                Multi-line entry surface.
-              </p>
+              <div>
+                <p class="playground-eyebrow">Forms & Multi-line Entry</p>
+                <h2 class="text-xl font-bold text-black-900">Textarea</h2>
+                <p class="text-sigma text-black-500">
+                  Multi-line input fields with live character counter, caption text, and error states.
+                </p>
+              </div>
               <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-                <Card>
-                  <CardHeader>
-                    <CardTitle>Default</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <TextareaField id="textarea-default" label="Title" model-value="Value" placeholder="Placeholder" caption="Assistive text" />
-                  </CardContent>
-                </Card>
+                <div class="playground-tile space-y-2">
+                  <div class="flex items-center justify-between">
+                    <span class="text-sigma font-bold text-black-800">Default Field</span>
+                    <span class="text-omega font-mono text-black-400">default</span>
+                  </div>
+                  <TextareaField id="textarea-default" label="Title" model-value="Value" placeholder="Placeholder" caption="Assistive text" />
+                </div>
 
-                <Card>
-                  <CardHeader>
-                    <CardTitle>Empty</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <TextareaField id="textarea-empty" label="Title" placeholder="Placeholder" />
-                  </CardContent>
-                </Card>
+                <div class="playground-tile space-y-2">
+                  <div class="flex items-center justify-between">
+                    <span class="text-sigma font-bold text-black-800">Empty State</span>
+                    <span class="text-omega font-mono text-black-400">empty</span>
+                  </div>
+                  <TextareaField id="textarea-empty" label="Title" placeholder="Placeholder" />
+                </div>
 
-                <Card>
-                  <CardHeader>
-                    <CardTitle>Error</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <TextareaField id="textarea-error" label="Title" model-value="Value" placeholder="Placeholder" error="This is an error message." />
-                  </CardContent>
-                </Card>
+                <div class="playground-tile space-y-2">
+                  <div class="flex items-center justify-between">
+                    <span class="text-sigma font-bold text-black-800">Error State</span>
+                    <span class="text-omega font-mono text-red-500">error</span>
+                  </div>
+                  <TextareaField id="textarea-error" label="Title" model-value="Value" placeholder="Placeholder" error="This is an error message." />
+                </div>
 
-                <Card>
-                  <CardHeader>
-                    <CardTitle>With Character Counter</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <TextareaField id="textarea-counter" label="Keterangan" model-value="Catatan transaksi..." placeholder="Placeholder" :maxlength="100" show-count caption="Maksimal 100 karakter." />
-                  </CardContent>
-                </Card>
+                <div class="playground-tile space-y-2">
+                  <div class="flex items-center justify-between">
+                    <span class="text-sigma font-bold text-black-800">With Character Counter</span>
+                    <span class="text-omega font-mono text-lime-600">counter</span>
+                  </div>
+                  <TextareaField id="textarea-counter" label="Keterangan" model-value="Catatan transaksi..." placeholder="Placeholder" :maxlength="100" show-count caption="Maksimal 100 karakter." />
+                </div>
 
-                <Card>
-                  <CardHeader>
-                    <CardTitle>Disabled</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <TextareaField id="textarea-disabled" label="Title" model-value="Value" placeholder="Placeholder" caption="Assistive text" disabled />
-                  </CardContent>
-                </Card>
+                <div class="playground-tile space-y-2">
+                  <div class="flex items-center justify-between">
+                    <span class="text-sigma font-bold text-black-800">Disabled State</span>
+                    <span class="text-omega font-mono text-black-400">disabled</span>
+                  </div>
+                  <TextareaField id="textarea-disabled" label="Title" model-value="Value" placeholder="Placeholder" caption="Assistive text" disabled />
+                </div>
               </div>
             </section>
 
@@ -1336,11 +1317,12 @@ const shellClass = computed(() =>
               </div>
 
               <div class="grid gap-4 md:grid-cols-2">
-                <Card>
-                  <CardHeader>
-                    <CardTitle>Primitive</CardTitle>
-                  </CardHeader>
-                  <CardContent class="flex flex-wrap items-center gap-3">
+                <div class="playground-tile space-y-3">
+                  <div class="flex items-center justify-between">
+                    <span class="text-sigma font-bold text-black-800">Primitive States</span>
+                    <span class="text-omega font-mono text-black-400">primitive</span>
+                  </div>
+                  <div class="flex flex-wrap items-center gap-3">
                     <Checkbox id="checkbox-unchecked" />
                     <Checkbox
                       id="checkbox-checked"
@@ -1356,14 +1338,15 @@ const shellClass = computed(() =>
                       disabled
                       :model-value="true"
                     />
-                  </CardContent>
-                </Card>
+                  </div>
+                </div>
 
-                <Card>
-                  <CardHeader>
-                    <CardTitle>Website</CardTitle>
-                  </CardHeader>
-                  <CardContent class="grid gap-3">
+                <div class="playground-tile space-y-3">
+                  <div class="flex items-center justify-between">
+                    <span class="text-sigma font-bold text-black-800">Website Field</span>
+                    <span class="text-omega font-mono text-black-400">desktop</span>
+                  </div>
+                  <div class="grid gap-3">
                     <CheckboxField
                       id="checkbox-field-inactive"
                       v-model="checkboxWebsiteInactive"
@@ -1391,14 +1374,15 @@ const shellClass = computed(() =>
                       label="This is an option"
                       disabled
                     />
-                  </CardContent>
-                </Card>
+                  </div>
+                </div>
 
-                <Card>
-                  <CardHeader>
-                    <CardTitle>Mobile Apps</CardTitle>
-                  </CardHeader>
-                  <CardContent class="grid gap-3">
+                <div class="playground-tile space-y-3">
+                  <div class="flex items-center justify-between">
+                    <span class="text-sigma font-bold text-black-800">Mobile Mode</span>
+                    <span class="text-omega font-mono text-black-400">mobile-apps</span>
+                  </div>
+                  <div class="grid gap-3">
                     <CheckboxField
                       id="checkbox-mobile-inactive"
                       v-model="checkboxMobileInactive"
@@ -1424,16 +1408,17 @@ const shellClass = computed(() =>
                       label="This is an option"
                       disabled
                     />
-                  </CardContent>
-                </Card>
+                  </div>
+                </div>
 
-                <Card class="md:col-span-2">
-                  <CardHeader>
-                    <CardTitle>Group</CardTitle>
-                  </CardHeader>
-                  <CardContent class="grid gap-5">
+                <div class="playground-tile space-y-3 md:col-span-2">
+                  <div class="flex items-center justify-between">
+                    <span class="text-sigma font-bold text-black-800">Checkbox Groups</span>
+                    <span class="text-omega font-mono text-black-400">group</span>
+                  </div>
+                  <div class="grid gap-5 md:grid-cols-2">
                     <CheckboxGroup
-                      title="Title"
+                      title="Horizontal Group"
                       alignment="horizontal"
                       error="This is an error message."
                     >
@@ -1449,7 +1434,7 @@ const shellClass = computed(() =>
                       />
                     </CheckboxGroup>
                     <CheckboxGroup
-                      title="Title"
+                      title="Vertical Group"
                       alignment="vertical"
                       caption="This is a helper text."
                     >
@@ -1466,8 +1451,8 @@ const shellClass = computed(() =>
                         caption="This is a subtitle text."
                       />
                     </CheckboxGroup>
-                  </CardContent>
-                </Card>
+                  </div>
+                </div>
               </div>
             </section>
 
@@ -1484,113 +1469,111 @@ const shellClass = computed(() =>
               </div>
 
               <div class="grid gap-4 md:grid-cols-2">
-                <Card>
-                  <CardHeader>
-                    <CardTitle>Primitive</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <RadioGroup
-                      v-model="radioPrimitive"
-                      class="flex flex-wrap items-center gap-3"
-                    >
-                      <RadioGroupItem id="radio-primitive-off" value="off" />
-                      <RadioGroupItem id="radio-primitive-on" value="on" />
-                      <RadioGroupItem
-                        id="radio-primitive-disabled"
-                        value="disabled"
-                        disabled
-                      />
-                      <RadioGroupItem
-                        id="radio-primitive-disabled-on"
-                        value="disabled-on"
-                        disabled
-                      />
-                    </RadioGroup>
-                  </CardContent>
-                </Card>
+                <div class="playground-tile space-y-3">
+                  <div class="flex items-center justify-between">
+                    <span class="text-sigma font-bold text-black-800">Primitive Control</span>
+                    <span class="text-omega font-mono text-black-400">primitive</span>
+                  </div>
+                  <RadioGroup
+                    v-model="radioPrimitive"
+                    class="flex flex-wrap items-center gap-3"
+                  >
+                    <RadioGroupItem id="radio-primitive-off" value="off" />
+                    <RadioGroupItem id="radio-primitive-on" value="on" />
+                    <RadioGroupItem
+                      id="radio-primitive-disabled"
+                      value="disabled"
+                      disabled
+                    />
+                    <RadioGroupItem
+                      id="radio-primitive-disabled-on"
+                      value="disabled-on"
+                      disabled
+                    />
+                  </RadioGroup>
+                </div>
 
-                <Card>
-                  <CardHeader>
-                    <CardTitle>Website</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <RadioGroup v-model="radioWebsite" class="grid gap-3">
-                      <RadioGroupField
-                        id="radio-website-inactive"
-                        value="website-inactive"
-                        label="This is an option"
-                      />
-                      <RadioGroupField
-                        id="radio-website-active"
-                        value="website-active"
-                        label="This is an option"
-                      />
-                      <RadioGroupField
-                        id="radio-website-caption"
-                        value="website-caption"
-                        label="This is an option"
-                        caption="This is a subtitle text."
-                      />
-                      <RadioGroupField
-                        id="radio-website-error"
-                        value="website-error"
-                        label="This is an option"
-                        error="This is an error message."
-                      />
-                      <RadioGroupField
-                        id="radio-website-disabled"
-                        value="website-disabled"
-                        label="This is an option"
-                        disabled
-                      />
-                    </RadioGroup>
-                  </CardContent>
-                </Card>
+                <div class="playground-tile space-y-3">
+                  <div class="flex items-center justify-between">
+                    <span class="text-sigma font-bold text-black-800">Website Fields</span>
+                    <span class="text-omega font-mono text-black-400">desktop</span>
+                  </div>
+                  <RadioGroup v-model="radioWebsite" class="grid gap-3">
+                    <RadioGroupField
+                      id="radio-website-inactive"
+                      value="website-inactive"
+                      label="This is an option"
+                    />
+                    <RadioGroupField
+                      id="radio-website-active"
+                      value="website-active"
+                      label="This is an option"
+                    />
+                    <RadioGroupField
+                      id="radio-website-caption"
+                      value="website-caption"
+                      label="This is an option"
+                      caption="This is a subtitle text."
+                    />
+                    <RadioGroupField
+                      id="radio-website-error"
+                      value="website-error"
+                      label="This is an option"
+                      error="This is an error message."
+                    />
+                    <RadioGroupField
+                      id="radio-website-disabled"
+                      value="website-disabled"
+                      label="This is an option"
+                      disabled
+                    />
+                  </RadioGroup>
+                </div>
 
-                <Card>
-                  <CardHeader>
-                    <CardTitle>Mobile Apps</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <RadioGroup v-model="radioMobile" class="grid gap-3">
-                      <RadioGroupField
-                        id="radio-mobile-inactive"
-                        value="mobile-inactive"
-                        style-mode="mobile-apps"
-                        label="This is an option"
-                      />
-                      <RadioGroupField
-                        id="radio-mobile-active"
-                        value="mobile-active"
-                        style-mode="mobile-apps"
-                        label="This is an option"
-                      />
-                      <RadioGroupField
-                        id="radio-mobile-caption"
-                        value="mobile-caption"
-                        style-mode="mobile-apps"
-                        label="This is an option"
-                        caption="This is a subtitle text."
-                      />
-                      <RadioGroupField
-                        id="radio-mobile-disabled"
-                        value="mobile-disabled"
-                        style-mode="mobile-apps"
-                        label="This is an option"
-                        disabled
-                      />
-                    </RadioGroup>
-                  </CardContent>
-                </Card>
+                <div class="playground-tile space-y-3">
+                  <div class="flex items-center justify-between">
+                    <span class="text-sigma font-bold text-black-800">Mobile Mode</span>
+                    <span class="text-omega font-mono text-black-400">mobile-apps</span>
+                  </div>
+                  <RadioGroup v-model="radioMobile" class="grid gap-3">
+                    <RadioGroupField
+                      id="radio-mobile-inactive"
+                      value="mobile-inactive"
+                      style-mode="mobile-apps"
+                      label="This is an option"
+                    />
+                    <RadioGroupField
+                      id="radio-mobile-active"
+                      value="mobile-active"
+                      style-mode="mobile-apps"
+                      label="This is an option"
+                    />
+                    <RadioGroupField
+                      id="radio-mobile-caption"
+                      value="mobile-caption"
+                      style-mode="mobile-apps"
+                      label="This is an option"
+                      caption="This is a subtitle text."
+                    />
+                    <RadioGroupField
+                      id="radio-mobile-disabled"
+                      value="mobile-disabled"
+                      style-mode="mobile-apps"
+                      label="This is an option"
+                      disabled
+                    />
+                  </RadioGroup>
+                </div>
 
-                <Card class="md:col-span-2">
-                  <CardHeader>
-                    <CardTitle>Group</CardTitle>
-                  </CardHeader>
-                  <CardContent class="grid gap-5">
+                <div class="playground-tile space-y-3 md:col-span-2">
+                  <div class="flex items-center justify-between">
+                    <span class="text-sigma font-bold text-black-800">Radio Groups</span>
+                    <span class="text-omega font-mono text-black-400">group</span>
+                  </div>
+                  <div class="grid gap-5 md:grid-cols-2">
                     <RadioGroup
                       v-model="radioHorizontal"
-                      title="Title"
+                      title="Horizontal Group"
                       subtitle="This is a subtitle text."
                       alignment="horizontal"
                       error="This is an error message."
@@ -1609,7 +1592,7 @@ const shellClass = computed(() =>
 
                     <RadioGroup
                       v-model="radioVertical"
-                      title="Title"
+                      title="Vertical Group"
                       subtitle="This is a subtitle text."
                       alignment="vertical"
                       caption="This is a helper text."
@@ -1627,8 +1610,8 @@ const shellClass = computed(() =>
                         caption="This is a subtitle text."
                       />
                     </RadioGroup>
-                  </CardContent>
-                </Card>
+                  </div>
+                </div>
               </div>
             </section>
 
@@ -2844,7 +2827,6 @@ const shellClass = computed(() =>
               </div>
             </section>
           </div>
-        </div>
       </main>
 
       <!-- Figma-style Marketing Footer (design.md) -->
