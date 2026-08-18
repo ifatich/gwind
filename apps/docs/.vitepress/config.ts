@@ -30,6 +30,7 @@ export default defineConfig({
       { text: "Guide", link: "/guide/getting-started" },
       { text: "Design", link: "/guide/design" },
       { text: "Components", link: "/components/accordion" },
+      { text: "Playground ↗", link: "/playground/", target: "_self" },
     ],
 
     sidebar: [

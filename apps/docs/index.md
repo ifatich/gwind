@@ -12,6 +12,10 @@ hero:
     - theme: alt
       text: View Components
       link: /components/button
+    - theme: alt
+      text: "Interactive Playground ↗"
+      link: /playground/
+      target: _self
 
 features:
   - icon: 🧩
