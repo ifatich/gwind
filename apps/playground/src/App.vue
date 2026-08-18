@@ -1429,17 +1429,16 @@ const shellClass = computed(() =>
             <div class="space-y-4 pt-2">
               <!-- Search Input Bar -->
               <div class="relative max-w-xl">
-                <Search class="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-black-400 pointer-events-none" />
-                <input
+                <Search class="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-black-400 pointer-events-none z-10" />
+                <Input
                   v-model="searchQuery"
-                  type="text"
                   placeholder="Cari komponen UI (misal: rupiah, dialog, button, select, avatar, kyc)..."
-                  class="w-full pl-10 pr-10 py-2.5 rounded-full border border-black-200 bg-black-50 focus:bg-white focus:border-lime-600 focus:ring-2 focus:ring-lime-500/20 text-sigma text-black-900 placeholder:text-black-400 outline-none transition-all"
+                  class="h-11 pl-10 pr-10 rounded-full border-black-200 bg-black-50 focus:bg-white text-sigma"
                 />
                 <button
                   v-if="searchQuery"
                   type="button"
-                  class="absolute right-3.5 top-1/2 -translate-y-1/2 text-black-400 hover:text-black-700 text-xs font-bold"
+                  class="absolute right-3.5 top-1/2 -translate-y-1/2 text-black-400 hover:text-black-700 text-xs font-bold z-10 cursor-pointer"
                   @click="searchQuery = ''"
                 >
                   <X class="h-4 w-4" />
@@ -3022,39 +3021,39 @@ const shellClass = computed(() =>
                     ref="wideTableContainerRef"
                     class="relative w-full overflow-x-auto rounded-lg border border-black-200 bg-white"
                   >
-                    <table class="w-[1550px] min-w-[1550px] border-separate border-spacing-0 text-left">
-                      <thead>
-                        <tr>
-                          <th class="w-44 min-w-[170px] bg-lime-500 px-4 py-3 !text-sigma font-extrabold text-white whitespace-nowrap">No. Kontrak</th>
-                          <th class="w-48 min-w-[190px] bg-lime-500 px-4 py-3 !text-sigma font-extrabold text-white whitespace-nowrap">Cabang</th>
-                          <th class="w-36 min-w-[140px] bg-lime-500 px-4 py-3 !text-sigma font-extrabold text-white whitespace-nowrap">Karat Emas</th>
-                          <th class="w-32 min-w-[120px] bg-lime-500 px-4 py-3 !text-sigma font-extrabold text-white text-right whitespace-nowrap">Berat Kotor</th>
-                          <th class="w-32 min-w-[120px] bg-lime-500 px-4 py-3 !text-sigma font-extrabold text-white text-right whitespace-nowrap">Berat Bersih</th>
-                          <th class="w-40 min-w-[160px] bg-lime-500 px-4 py-3 !text-sigma font-extrabold text-white text-right whitespace-nowrap">Nilai Taksiran</th>
-                          <th class="w-40 min-w-[160px] bg-lime-500 px-4 py-3 !text-sigma font-extrabold text-white text-right whitespace-nowrap">Maks Pinjaman</th>
-                          <th class="w-36 min-w-[140px] bg-lime-500 px-4 py-3 !text-sigma font-extrabold text-white text-right whitespace-nowrap">Sewa Modal</th>
-                          <th class="w-32 min-w-[130px] bg-lime-500 px-4 py-3 !text-sigma font-extrabold text-white text-right whitespace-nowrap">Biaya Admin</th>
-                          <th class="w-40 min-w-[160px] bg-lime-500 px-4 py-3 !text-sigma font-extrabold text-white text-right whitespace-nowrap">Total Tagihan</th>
+                    <Table class="w-[1550px] min-w-[1550px]" wrapper-class="overflow-visible">
+                      <TableHeader>
+                        <TableRow>
+                          <TableHead class="w-44 min-w-[170px] whitespace-nowrap">No. Kontrak</TableHead>
+                          <TableHead class="w-48 min-w-[190px] whitespace-nowrap">Cabang</TableHead>
+                          <TableHead class="w-36 min-w-[140px] whitespace-nowrap">Karat Emas</TableHead>
+                          <TableHead align="right" class="w-32 min-w-[120px] whitespace-nowrap">Berat Kotor</TableHead>
+                          <TableHead align="right" class="w-32 min-w-[120px] whitespace-nowrap">Berat Bersih</TableHead>
+                          <TableHead align="right" class="w-40 min-w-[160px] whitespace-nowrap">Nilai Taksiran</TableHead>
+                          <TableHead align="right" class="w-40 min-w-[160px] whitespace-nowrap">Maks Pinjaman</TableHead>
+                          <TableHead align="right" class="w-36 min-w-[140px] whitespace-nowrap">Sewa Modal</TableHead>
+                          <TableHead align="right" class="w-32 min-w-[130px] whitespace-nowrap">Biaya Admin</TableHead>
+                          <TableHead align="right" class="w-40 min-w-[160px] whitespace-nowrap">Total Tagihan</TableHead>
                           <!-- Sticky Header Cell -->
-                          <th class="sticky right-0 z-20 w-44 min-w-[170px] bg-lime-600 px-4 py-3 !text-sigma font-extrabold text-white text-center shadow-[-6px_0_12px_rgba(0,0,0,0.15)] border-l border-lime-700 whitespace-nowrap">
+                          <TableHead align="center" class="sticky right-0 z-20 w-44 min-w-[170px] bg-lime-600 !text-white text-center shadow-[-6px_0_12px_rgba(0,0,0,0.15)] border-l border-lime-700 whitespace-nowrap">
                             Aksi Cepat (Sticky)
-                          </th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr v-for="ctr in wideContractRows" :key="ctr.contractNo" class="hover:bg-black-50/60 group">
-                          <td class="border-b border-r border-black-200 px-4 py-3 font-mono text-xs font-bold text-black-900 whitespace-nowrap">{{ ctr.contractNo }}</td>
-                          <td class="border-b border-r border-black-200 px-4 py-3 text-sigma text-black-700 whitespace-nowrap">{{ ctr.branch }}</td>
-                          <td class="border-b border-r border-black-200 px-4 py-3 text-sigma font-semibold text-black-900 whitespace-nowrap">{{ ctr.karat }}</td>
-                          <td class="border-b border-r border-black-200 px-4 py-3 text-right text-sigma text-black-700 whitespace-nowrap">{{ ctr.grossWeight }}</td>
-                          <td class="border-b border-r border-black-200 px-4 py-3 text-right text-sigma font-bold text-black-900 whitespace-nowrap">{{ ctr.netWeight }}</td>
-                          <td class="border-b border-r border-black-200 px-4 py-3 text-right text-sigma font-bold text-black-900 whitespace-nowrap">{{ ctr.appraisalValue }}</td>
-                          <td class="border-b border-r border-black-200 px-4 py-3 text-right text-sigma text-lime-700 font-bold whitespace-nowrap">{{ ctr.maxLoan }}</td>
-                          <td class="border-b border-r border-black-200 px-4 py-3 text-right text-sigma text-black-600 whitespace-nowrap">{{ ctr.sewaModalRate }}</td>
-                          <td class="border-b border-r border-black-200 px-4 py-3 text-right text-sigma text-black-600 whitespace-nowrap">{{ ctr.adminFee }}</td>
-                          <td class="border-b border-r border-black-200 px-4 py-3 text-right text-sigma font-black text-black-900 whitespace-nowrap">{{ ctr.totalBill }}</td>
+                          </TableHead>
+                        </TableRow>
+                      </TableHeader>
+                      <TableBody>
+                        <TableRow v-for="ctr in wideContractRows" :key="ctr.contractNo" class="hover:bg-black-50/60 group">
+                          <TableCell class="font-mono text-xs font-bold text-black-900 whitespace-nowrap">{{ ctr.contractNo }}</TableCell>
+                          <TableCell class="text-sigma text-black-700 whitespace-nowrap">{{ ctr.branch }}</TableCell>
+                          <TableCell class="text-sigma font-semibold text-black-900 whitespace-nowrap">{{ ctr.karat }}</TableCell>
+                          <TableCell align="right" class="text-sigma text-black-700 whitespace-nowrap">{{ ctr.grossWeight }}</TableCell>
+                          <TableCell align="right" class="text-sigma font-bold text-black-900 whitespace-nowrap">{{ ctr.netWeight }}</TableCell>
+                          <TableCell align="right" class="text-sigma font-bold text-black-900 whitespace-nowrap">{{ ctr.appraisalValue }}</TableCell>
+                          <TableCell align="right" class="text-sigma text-lime-700 font-bold whitespace-nowrap">{{ ctr.maxLoan }}</TableCell>
+                          <TableCell align="right" class="text-sigma text-black-600 whitespace-nowrap">{{ ctr.sewaModalRate }}</TableCell>
+                          <TableCell align="right" class="text-sigma text-black-600 whitespace-nowrap">{{ ctr.adminFee }}</TableCell>
+                          <TableCell align="right" class="text-sigma font-black text-black-900 whitespace-nowrap">{{ ctr.totalBill }}</TableCell>
                           <!-- Sticky Body Cell -->
-                          <td class="sticky right-0 z-20 border-b border-l border-black-200 bg-white group-hover:bg-slate-50 px-4 py-3 text-center shadow-[-6px_0_12px_rgba(0,0,0,0.08)] whitespace-nowrap">
+                          <TableCell align="center" class="sticky right-0 z-20 border-l border-black-200 bg-white group-hover:bg-slate-50 shadow-[-6px_0_12px_rgba(0,0,0,0.08)] whitespace-nowrap">
                             <div class="flex items-center justify-center gap-1.5">
                               <Button size="sm" class="px-3 py-1 text-xs" @click="handleTableAction('Cetak SBG', ctr.contractNo)">
                                 Cetak
@@ -3063,10 +3062,10 @@ const shellClass = computed(() =>
                                 Taksir
                               </Button>
                             </div>
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
+                          </TableCell>
+                        </TableRow>
+                      </TableBody>
+                    </Table>
                   </div>
                 </div>
               </div>
@@ -3583,14 +3582,21 @@ const shellClass = computed(() =>
                 <div class="playground-case-body space-y-4">
                   <Progress :model-value="progressValue" />
                   <div class="pt-2 flex flex-wrap items-center justify-between gap-4">
-                    <span class="text-omega text-black-500">Geser slider untuk simulasi perubahan progres verifikasi form nasabah:</span>
-                    <input
-                      v-model="progressValue"
-                      type="range"
-                      min="0"
-                      max="100"
-                      class="w-48 accent-lime-500"
-                    />
+                    <span class="text-omega text-black-500">Simulasi perubahan tahapan verifikasi data nasabah:</span>
+                    <div class="flex items-center gap-1.5">
+                      <Button size="sm" variant="outline" class="px-2.5 py-1 text-xs bg-white font-bold" :disabled="progressValue <= 0" @click="progressValue = Math.max(0, progressValue - 25)">
+                        -25%
+                      </Button>
+                      <Button size="sm" variant="outline" class="px-2.5 py-1 text-xs bg-white font-bold" :disabled="progressValue >= 100" @click="progressValue = Math.min(100, progressValue + 25)">
+                        +25%
+                      </Button>
+                      <Button size="sm" variant="outline" class="px-2.5 py-1 text-xs bg-white font-bold" @click="progressValue = 100">
+                        100% (Selesai)
+                      </Button>
+                      <Button size="sm" variant="ghost" class="px-2 py-1 text-xs text-black-500 hover:text-black-800" @click="progressValue = 0">
+                        Reset
+                      </Button>
+                    </div>
                   </div>
                 </div>
               </div>
