@@ -1901,7 +1901,7 @@ const shellClass = computed(() =>
                     ><CircleHelp class="h-4 w-4" />Tooltip</Button
                   >
                 </TooltipTrigger>
-                <TooltipContent>Tooltip content</TooltipContent>
+                <TooltipContent title="Tooltip Example">Tooltip content text</TooltipContent>
               </Tooltip>
             </section>
 
