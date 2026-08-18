@@ -575,8 +575,36 @@ function handleBulkAction(action: string) {
 // DataTable Filtering Scenario States
 const dtSearchQuery = ref("");
 const dtStatusFilter = ref("all");
+const dtStatusOpen = ref(false);
 const dtCategoryFilter = ref("all");
+const dtCategoryOpen = ref(false);
 const dtSortOrder = ref<"none" | "asc" | "desc">("none");
+
+const dtStatusOptions = [
+  { value: "all", label: "Semua Status Transaksi", caption: "Seluruh status SBG" },
+  { value: "Lancar", label: "Lancar", caption: "Angsuran tepat waktu" },
+  { value: "Dalam Proses", label: "Dalam Proses", caption: "Verifikasi akad" },
+  { value: "Mendekati JT", label: "Mendekati Jatuh Tempo", caption: "Sisa tenor < 7 hari" },
+  { value: "Lewat JT", label: "Lewat Jatuh Tempo", caption: "Keterlambatan bayar" },
+];
+
+const dtStatusLabel = computed(() => {
+  const found = dtStatusOptions.find((o) => o.value === dtStatusFilter.value);
+  return found ? found.label : "Pilih status...";
+});
+
+const dtCategoryOptions = [
+  { value: "all", label: "Semua Kategori Jaminan", caption: "Seluruh aset agunan" },
+  { value: "Emas Batangan", label: "Emas Batangan", caption: "Antam / UBS / Lotus" },
+  { value: "Perhiasan Emas", label: "Perhiasan Emas", caption: "Kalung / Cincin / Gelang" },
+  { value: "Berlian Mulia", label: "Berlian Mulia", caption: "Solitaire / Eropa" },
+  { value: "Elektronik Gadget", label: "Elektronik Gadget", caption: "Smartphone / Laptop" },
+];
+
+const dtCategoryLabel = computed(() => {
+  const found = dtCategoryOptions.find((o) => o.value === dtCategoryFilter.value);
+  return found ? found.label : "Pilih kategori...";
+});
 
 const dtColumns = [
   { key: "sbgNo", label: "No. SBG", width: "140px" },
@@ -3076,36 +3104,46 @@ const shellClass = computed(() =>
                       </button>
                     </div>
 
-                    <!-- Status Filter via Gwind Select Component -->
+                    <!-- Status Filter via Gwind Dropdown Component -->
                     <div class="md:col-span-3">
-                      <Select v-model="dtStatusFilter">
-                        <SelectTrigger class="h-10 text-xs bg-white border-black-200">
-                          <SelectValue placeholder="Pilih status transaksi" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="all">Semua Status Transaksi</SelectItem>
-                          <SelectItem value="Lancar">Lancar</SelectItem>
-                          <SelectItem value="Dalam Proses">Dalam Proses</SelectItem>
-                          <SelectItem value="Mendekati JT">Mendekati Jatuh Tempo</SelectItem>
-                          <SelectItem value="Lewat JT">Lewat Jatuh Tempo</SelectItem>
-                        </SelectContent>
-                      </Select>
+                      <Dropdown
+                        v-model:open="dtStatusOpen"
+                        :model-label="dtStatusLabel"
+                        placeholder="Pilih status..."
+                        trigger-class="h-10 text-xs bg-white border-black-200"
+                      >
+                        <DropdownList>
+                          <DropdownListItem
+                            v-for="opt in dtStatusOptions"
+                            :key="opt.value"
+                            :label="opt.label"
+                            :caption="opt.caption"
+                            :selected="dtStatusFilter === opt.value"
+                            @select="dtStatusFilter = opt.value; dtStatusOpen = false"
+                          />
+                        </DropdownList>
+                      </Dropdown>
                     </div>
 
-                    <!-- Category Filter via Gwind Select Component -->
+                    <!-- Category Filter via Gwind Dropdown Component -->
                     <div class="md:col-span-3">
-                      <Select v-model="dtCategoryFilter">
-                        <SelectTrigger class="h-10 text-xs bg-white border-black-200">
-                          <SelectValue placeholder="Pilih kategori jaminan" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="all">Semua Kategori Jaminan</SelectItem>
-                          <SelectItem value="Emas Batangan">Emas Batangan</SelectItem>
-                          <SelectItem value="Perhiasan Emas">Perhiasan Emas</SelectItem>
-                          <SelectItem value="Berlian Mulia">Berlian Mulia</SelectItem>
-                          <SelectItem value="Elektronik Gadget">Elektronik Gadget</SelectItem>
-                        </SelectContent>
-                      </Select>
+                      <Dropdown
+                        v-model:open="dtCategoryOpen"
+                        :model-label="dtCategoryLabel"
+                        placeholder="Pilih kategori..."
+                        trigger-class="h-10 text-xs bg-white border-black-200"
+                      >
+                        <DropdownList>
+                          <DropdownListItem
+                            v-for="opt in dtCategoryOptions"
+                            :key="opt.value"
+                            :label="opt.label"
+                            :caption="opt.caption"
+                            :selected="dtCategoryFilter === opt.value"
+                            @select="dtCategoryFilter = opt.value; dtCategoryOpen = false"
+                          />
+                        </DropdownList>
+                      </Dropdown>
                     </div>
 
                     <!-- Sort / Reset Actions via Gwind Button Component -->
