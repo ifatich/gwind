@@ -2499,8 +2499,8 @@ const shellClass = computed(() =>
                         </div>
                       </CardContent>
                       <CardFooter class="flex gap-2">
-                        <Button class="w-full" size="sm">Top Up</Button>
-                        <Button variant="outline" class="w-full" size="sm">Jual Emas</Button>
+                        <Button class="w-full" size="lg">Top Up</Button>
+                        <Button variant="outline" class="w-full" size="lg">Jual Emas</Button>
                       </CardFooter>
                     </Card>
 
@@ -2520,7 +2520,7 @@ const shellClass = computed(() =>
                         </p>
                       </CardContent>
                       <CardFooter>
-                        <Button class="w-full" size="sm">Klaim Promo</Button>
+                        <Button class="w-full" size="lg">Klaim Promo</Button>
                       </CardFooter>
                     </Card>
 
