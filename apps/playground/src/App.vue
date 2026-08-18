@@ -431,6 +431,132 @@ const tableRows = [
   },
 ];
 
+// Interactive Table Scenarios States
+const transactionRows = ref([
+  {
+    id: "SBG-88219",
+    nasabah: "Budi Santoso",
+    nik: "3171020101900005",
+    barang: "Emas Antam 10 gr",
+    pinjaman: "Rp 12.500.000",
+    jatuhTempo: "24 Mar 2026",
+    status: "Lancar",
+    statusVariant: "brocoli" as const,
+  },
+  {
+    id: "SBG-88220",
+    nasabah: "Siti Rahmawati",
+    nik: "3273010405880002",
+    barang: "Cincin Berlian 5 gr",
+    pinjaman: "Rp 6.800.000",
+    jatuhTempo: "28 Mar 2026",
+    status: "Dalam Proses",
+    statusVariant: "pear" as const,
+  },
+  {
+    id: "SBG-88221",
+    nasabah: "Ahmad Hidayat",
+    nik: "3578031208920003",
+    barang: "Gelang Emas 24K 15 gr",
+    pinjaman: "Rp 18.200.000",
+    jatuhTempo: "15 Mar 2026",
+    status: "Mendekati JT",
+    statusVariant: "warning" as const,
+  },
+  {
+    id: "SBG-88222",
+    nasabah: "Dewi Lestari",
+    nik: "5171010709950001",
+    barang: "Emas UBS 25 gr",
+    pinjaman: "Rp 31.000.000",
+    jatuhTempo: "10 Mar 2026",
+    status: "Lewat JT",
+    statusVariant: "destructive" as const,
+  },
+]);
+
+const selectedTransactions = ref<string[]>(["SBG-88219"]);
+const selectAllTransactions = computed({
+  get: () => selectedTransactions.value.length === transactionRows.value.length,
+  set: (val: boolean) => {
+    if (val) {
+      selectedTransactions.value = transactionRows.value.map((r) => r.id);
+    } else {
+      selectedTransactions.value = [];
+    }
+  },
+});
+
+const wideContractRows = [
+  {
+    contractNo: "CTR-PGD-2026-001",
+    branch: "CP Kramat Raya Jakarta",
+    karat: "24K (99.9%)",
+    grossWeight: "25.40 gr",
+    netWeight: "25.00 gr",
+    appraisalValue: "Rp 36.250.000",
+    maxLoan: "Rp 31.000.000",
+    sewaModalRate: "1.15% / 15 hr",
+    adminFee: "Rp 50.000",
+    totalBill: "Rp 31.406.250",
+    status: "Aktif",
+  },
+  {
+    contractNo: "CTR-PGD-2026-002",
+    branch: "CP Salemba Raya",
+    karat: "22K (91.6%)",
+    grossWeight: "14.20 gr",
+    netWeight: "13.80 gr",
+    appraisalValue: "Rp 18.500.000",
+    maxLoan: "Rp 15.500.000",
+    sewaModalRate: "1.15% / 15 hr",
+    adminFee: "Rp 35.000",
+    totalBill: "Rp 15.713.250",
+    status: "Aktif",
+  },
+  {
+    contractNo: "CTR-PGD-2026-003",
+    branch: "CP Kebayoran Baru",
+    karat: "24K (99.9%)",
+    grossWeight: "50.10 gr",
+    netWeight: "50.00 gr",
+    appraisalValue: "Rp 72.500.000",
+    maxLoan: "Rp 63.000.000",
+    sewaModalRate: "1.00% / 15 hr",
+    adminFee: "Rp 100.000",
+    totalBill: "Rp 63.730.000",
+    status: "Verifikasi",
+  },
+  {
+    contractNo: "CTR-PGD-2026-004",
+    branch: "CP Pondok Indah",
+    karat: "18K (75.0%)",
+    grossWeight: "8.50 gr",
+    netWeight: "8.10 gr",
+    appraisalValue: "Rp 8.900.000",
+    maxLoan: "Rp 7.500.000",
+    sewaModalRate: "1.20% / 15 hr",
+    adminFee: "Rp 25.000",
+    totalBill: "Rp 7.615.000",
+    status: "Lunas",
+  },
+];
+
+const tableFeedbackMsg = ref<string | null>(null);
+function handleTableAction(action: string, id: string) {
+  tableFeedbackMsg.value = `Aksi "${action}" berhasil diproses untuk ${id}`;
+  setTimeout(() => {
+    tableFeedbackMsg.value = null;
+  }, 3500);
+}
+
+function handleBulkAction(action: string) {
+  tableFeedbackMsg.value = `Aksi batch "${action}" dijalankan untuk ${selectedTransactions.value.length} transaksi (${selectedTransactions.value.join(', ')})`;
+  setTimeout(() => {
+    tableFeedbackMsg.value = null;
+  }, 4000);
+}
+
 // Sections in Logical Domain Hierarchy
 const sections = [
   // 1. Overview
@@ -2481,7 +2607,7 @@ const shellClass = computed(() =>
                 <div class="playground-case-body">
                   <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
                     <!-- Variant 1: Portofolio Tabungan Emas -->
-                    <Card class="bg-white">
+                    <Card class="bg-white h-fit">
                       <CardHeader>
                         <div class="flex items-center justify-between">
                           <div class="flex flex-col gap-y-1">
@@ -2525,7 +2651,7 @@ const shellClass = computed(() =>
                     </Card>
 
                     <!-- Variant 3: Minimal Card -->
-                    <Card class="bg-white">
+                    <Card class="bg-white h-fit">
                       <CardContent class="pt-6">
                         <div class="flex items-center gap-3 mb-3">
                           <div class="flex h-10 w-10 items-center justify-center rounded-full bg-blue-100 text-blue-600">
@@ -2547,22 +2673,206 @@ const shellClass = computed(() =>
             </section>
 
             <!-- Table & Data Table -->
-            <section id="table" class="playground-section playground-panel p-6 space-y-5">
-              <div>
-                <p class="playground-eyebrow">Data Matrices & Tabular Records</p>
-                <h2 class="text-xl font-bold text-black-900">Table & Data Table</h2>
-                <p class="text-sigma text-black-500">
-                  Data-driven comparison matrices, zebra striped rows, and dense tabular records.
-                </p>
+            <section id="table" class="playground-section playground-panel p-6 space-y-6">
+              <div class="flex flex-wrap items-center justify-between gap-3">
+                <div>
+                  <p class="playground-eyebrow">Data Matrices & Tabular Records</p>
+                  <h2 class="text-xl font-bold text-black-900">Table & Data Table</h2>
+                  <p class="text-sigma text-black-500">
+                    Data-driven comparison matrices, zebra striped rows, row action buttons, sticky column actions, and bulk selection toolbars.
+                  </p>
+                </div>
+                <Badge variant="brocoli">Tabular Component</Badge>
               </div>
 
-              <!-- Real-world Case: Tabel Tarif Sewa Modal -->
+              <!-- Interactive Feedback Toast Indicator -->
+              <div
+                v-if="tableFeedbackMsg"
+                class="flex items-center gap-2 rounded-lg bg-emerald-50 border border-emerald-200 px-4 py-2.5 text-sigma font-bold text-emerald-800 animate-in fade-in"
+              >
+                <Check class="h-4 w-4 text-emerald-600" />
+                <span>{{ tableFeedbackMsg }}</span>
+              </div>
+
+              <!-- Skenario 1: Tabel Transaksi dengan Action Buttons & Checkbox Selection -->
               <div class="playground-case-card">
                 <div class="playground-case-header">
                   <div class="flex items-center gap-2.5">
                     <span class="playground-case-badge">
                       <Sparkles class="h-3 w-3 text-lime-700" />
-                      Fintech Scenario
+                      Row Actions & Selection
+                    </span>
+                    <h3 class="text-sigma font-extrabold text-black-900">Daftar Transaksi SBG dengan Action Buttons & Multi-Select</h3>
+                  </div>
+                  <span class="text-omega text-black-500 font-medium">Batch Selection & Interactive Action Triggers</span>
+                </div>
+                <div class="playground-case-body space-y-4">
+                  <!-- Bulk Action Toolbar (Active when items selected) -->
+                  <div
+                    v-if="selectedTransactions.length > 0"
+                    class="flex flex-wrap items-center justify-between gap-3 rounded-lg bg-lime-100 border border-lime-300 px-4 py-2.5 animate-in fade-in"
+                  >
+                    <div class="flex items-center gap-2">
+                      <Check class="h-4 w-4 text-lime-700" />
+                      <span class="text-sigma font-bold text-lime-900">
+                        {{ selectedTransactions.length }} Transaksi Terpilih
+                      </span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                      <Button size="sm" class="rounded-full font-bold" @click="handleBulkAction('Bayar Angsuran')">
+                        Bayar Sekaligus
+                      </Button>
+                      <Button size="sm" variant="outline" class="rounded-full bg-white text-black-800 font-bold" @click="handleBulkAction('Cetak Rekap')">
+                        Unduh Rekap PDF
+                      </Button>
+                      <button
+                        type="button"
+                        class="text-xs font-bold text-lime-800 hover:text-lime-900 underline ml-2 cursor-pointer"
+                        @click="selectedTransactions = []"
+                      >
+                        Batal
+                      </button>
+                    </div>
+                  </div>
+
+                  <!-- Table with Actions -->
+                  <Table>
+                    <TableHeader>
+                      <TableRow>
+                        <TableHead class="w-12 text-center">
+                          <Checkbox v-model="selectAllTransactions" />
+                        </TableHead>
+                        <TableHead>No. SBG</TableHead>
+                        <TableHead>Nasabah</TableHead>
+                        <TableHead>Barang Jaminan</TableHead>
+                        <TableHead align="right">Uang Pinjaman</TableHead>
+                        <TableHead>Jatuh Tempo</TableHead>
+                        <TableHead align="center">Status</TableHead>
+                        <TableHead align="center" class="w-44">Aksi</TableHead>
+                      </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                      <TableRow
+                        v-for="row in transactionRows"
+                        :key="row.id"
+                        :class="selectedTransactions.includes(row.id) ? 'bg-lime-50/60' : 'hover:bg-black-50/50'"
+                      >
+                        <TableCell align="center">
+                          <Checkbox
+                            :model-value="selectedTransactions.includes(row.id)"
+                            @update:model-value="(val) => {
+                              if (val) selectedTransactions.push(row.id)
+                              else selectedTransactions = selectedTransactions.filter(id => id !== row.id)
+                            }"
+                          />
+                        </TableCell>
+                        <TableCell class="font-mono text-xs font-bold text-black-900">
+                          {{ row.id }}
+                        </TableCell>
+                        <TableCell>
+                          <div class="flex flex-col">
+                            <span class="font-bold text-black-900">{{ row.nasabah }}</span>
+                            <span class="text-omega text-black-400 font-mono">{{ row.nik }}</span>
+                          </div>
+                        </TableCell>
+                        <TableCell>{{ row.barang }}</TableCell>
+                        <TableCell align="right" class="font-bold text-black-900">
+                          {{ row.pinjaman }}
+                        </TableCell>
+                        <TableCell class="text-black-600">{{ row.jatuhTempo }}</TableCell>
+                        <TableCell align="center">
+                          <Badge :variant="row.statusVariant">{{ row.status }}</Badge>
+                        </TableCell>
+                        <TableCell align="center">
+                          <div class="flex items-center justify-center gap-1.5">
+                            <Button size="sm" class="px-3 py-1 text-xs" @click="handleTableAction('Bayar', row.id)">
+                              Bayar
+                            </Button>
+                            <Button size="sm" variant="outline" class="px-2.5 py-1 text-xs bg-white" @click="handleTableAction('Detail', row.id)">
+                              Detail
+                            </Button>
+                          </div>
+                        </TableCell>
+                      </TableRow>
+                    </TableBody>
+                  </Table>
+                </div>
+              </div>
+
+              <!-- Skenario 2: Tabel Lebar dengan Sticky Action Column di Kanan -->
+              <div class="playground-case-card">
+                <div class="playground-case-header">
+                  <div class="flex items-center gap-2.5">
+                    <span class="playground-case-badge">
+                      <Sparkles class="h-3 w-3 text-lime-700" />
+                      Sticky Column Action
+                    </span>
+                    <h3 class="text-sigma font-extrabold text-black-900">Tabel Kontrak Lebar dengan Kolom Aksi Sticky (Tetap di Kanan Saat Scroll)</h3>
+                  </div>
+                  <span class="text-omega text-black-500 font-medium">Horizontal Scroll + Fixed Action Column</span>
+                </div>
+                <div class="playground-case-body space-y-3">
+                  <p class="text-omega text-black-500">
+                    Geser tabel ke kanan untuk melihat rincian finansial lengkap. Kolom <strong>Aksi Cepat</strong> akan tetap menempel di sisi kanan (sticky).
+                  </p>
+                  
+                  <div class="relative w-full overflow-x-auto rounded-lg border border-black-200 bg-white">
+                    <table class="w-full min-w-[1000px] border-separate border-spacing-0 text-left">
+                      <thead>
+                        <tr>
+                          <th class="bg-lime-500 px-3 py-3 !text-sigma font-extrabold text-white">No. Kontrak</th>
+                          <th class="bg-lime-500 px-3 py-3 !text-sigma font-extrabold text-white">Cabang</th>
+                          <th class="bg-lime-500 px-3 py-3 !text-sigma font-extrabold text-white">Karat Emas</th>
+                          <th class="bg-lime-500 px-3 py-3 !text-sigma font-extrabold text-white text-right">Berat Kotor</th>
+                          <th class="bg-lime-500 px-3 py-3 !text-sigma font-extrabold text-white text-right">Berat Bersih</th>
+                          <th class="bg-lime-500 px-3 py-3 !text-sigma font-extrabold text-white text-right">Nilai Taksiran</th>
+                          <th class="bg-lime-500 px-3 py-3 !text-sigma font-extrabold text-white text-right">Maks Pinjaman</th>
+                          <th class="bg-lime-500 px-3 py-3 !text-sigma font-extrabold text-white text-right">Sewa Modal</th>
+                          <th class="bg-lime-500 px-3 py-3 !text-sigma font-extrabold text-white text-right">Biaya Admin</th>
+                          <th class="bg-lime-500 px-3 py-3 !text-sigma font-extrabold text-white text-right">Total Tagihan</th>
+                          <!-- Sticky Header Cell -->
+                          <th class="sticky right-0 z-10 bg-lime-600 px-4 py-3 !text-sigma font-extrabold text-white text-center shadow-[-4px_0_12px_rgba(0,0,0,0.12)] border-l border-lime-700">
+                            Aksi Cepat (Sticky)
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr v-for="ctr in wideContractRows" :key="ctr.contractNo" class="hover:bg-black-50/60 group">
+                          <td class="border-b border-r border-black-200 px-3 py-3 font-mono text-xs font-bold text-black-900">{{ ctr.contractNo }}</td>
+                          <td class="border-b border-r border-black-200 px-3 py-3 text-sigma text-black-700">{{ ctr.branch }}</td>
+                          <td class="border-b border-r border-black-200 px-3 py-3 text-sigma font-semibold text-black-900">{{ ctr.karat }}</td>
+                          <td class="border-b border-r border-black-200 px-3 py-3 text-right text-sigma text-black-700">{{ ctr.grossWeight }}</td>
+                          <td class="border-b border-r border-black-200 px-3 py-3 text-right text-sigma font-bold text-black-900">{{ ctr.netWeight }}</td>
+                          <td class="border-b border-r border-black-200 px-3 py-3 text-right text-sigma font-bold text-black-900">{{ ctr.appraisalValue }}</td>
+                          <td class="border-b border-r border-black-200 px-3 py-3 text-right text-sigma text-lime-700 font-bold">{{ ctr.maxLoan }}</td>
+                          <td class="border-b border-r border-black-200 px-3 py-3 text-right text-sigma text-black-600">{{ ctr.sewaModalRate }}</td>
+                          <td class="border-b border-r border-black-200 px-3 py-3 text-right text-sigma text-black-600">{{ ctr.adminFee }}</td>
+                          <td class="border-b border-r border-black-200 px-3 py-3 text-right text-sigma font-black text-black-900">{{ ctr.totalBill }}</td>
+                          <!-- Sticky Body Cell -->
+                          <td class="sticky right-0 z-10 border-b border-l border-black-200 bg-white group-hover:bg-slate-50 px-3 py-3 text-center shadow-[-4px_0_12px_rgba(0,0,0,0.06)]">
+                            <div class="flex items-center justify-center gap-1.5">
+                              <Button size="sm" class="px-2.5 py-1 text-xs" @click="handleTableAction('Cetak SBG', ctr.contractNo)">
+                                Cetak
+                              </Button>
+                              <Button size="sm" variant="outline" class="px-2 py-1 text-xs bg-white" @click="handleTableAction('Taksir Ulang', ctr.contractNo)">
+                                Taksir
+                              </Button>
+                            </div>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Skenario 3: Tabel Tarif Sewa Modal (Official Matrix) -->
+              <div class="playground-case-card">
+                <div class="playground-case-header">
+                  <div class="flex items-center gap-2.5">
+                    <span class="playground-case-badge">
+                      <Sparkles class="h-3 w-3 text-lime-700" />
+                      Matrix Rates
                     </span>
                     <h3 class="text-sigma font-extrabold text-black-900">Tabel Tarif Sewa Modal dan Premi Pinjaman</h3>
                   </div>
