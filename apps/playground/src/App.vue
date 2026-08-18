@@ -111,18 +111,26 @@ import {
 } from "@gwind/ui";
 import {
   AlertCircle,
+  ArrowRight,
   Check,
   ChevronDown,
   CircleHelp,
+  CreditCard,
+  ExternalLink,
+  FileText,
   Home,
   Landmark,
+  Lock,
   Mail,
   PackageCheck,
   Palette,
+  RefreshCw,
   Search,
   Settings,
+  ShieldCheck,
   SlidersHorizontal,
   Sparkles,
+  UploadCloud,
   X,
 } from "lucide-vue-next";
 
@@ -183,17 +191,45 @@ onUnmounted(() => {
   scrollObserver?.disconnect();
 });
 
+// Button dynamic loading state
+const isSubmitting = ref(false);
+function triggerSubmit() {
+  isSubmitting.value = true;
+  setTimeout(() => {
+    isSubmitting.value = false;
+  }, 1800);
+}
+
+// Dialog States
 const isDialogOpen = ref(false);
 const isDialogOpen2 = ref(false);
 const isDialogOpen3 = ref(false);
+const isPelunasanModalOpen = ref(false);
+
+// Combobox States
 const selectedFramework = ref("");
-const progressValue = ref(64);
+const selectedCabang = ref("Cabang Kramat Raya - Jakarta Pusat");
+const listCabang = [
+  "Cabang Kramat Raya - Jakarta Pusat",
+  "Cabang Salemba - Jakarta Pusat",
+  "Cabang Depok Timur - Depok",
+  "Cabang Sudirman - Bandung",
+  "Cabang Kayutangan - Malang",
+  "Cabang Darmo - Surabaya",
+  "Cabang Renon - Denpasar",
+  "Cabang Somba Opu - Makassar",
+  "Cabang Putri Hijau - Medan",
+];
+
+// Progress & Pagination States
+const progressValue = ref(85);
 const paginationPage = ref(5);
+
+// Dropdown States
 const dropdownOptionA = ref(true);
 const dropdownOptionB = ref(false);
 const dropdownOpen = ref(false);
 const dropdownProvince = ref("Bali");
-
 const dropdownIconOpen = ref(false);
 const dropdownIconSelected = ref("1.805,0595 gram");
 const dropdownMultipleOpen = ref(false);
@@ -209,13 +245,14 @@ const accounts = [
   { title: "2.500,0000 gram", caption: "9876 5432 1098 7654" },
 ];
 
+// Datepicker States
 const datepickerValue = ref("2026-06-21");
+const tanggalJatuhTempo = ref("2026-09-15");
+const tanggalLahir = ref("1995-08-17");
 
-// FilePicker state
+// FilePicker & ImagePicker States
 const filePickerFile1 = ref<File | null>(null);
 const filePickerFile2 = ref<File | null>(null);
-
-// ImagePicker state
 const imagePickerSmall = ref<string | File | null>(null);
 const imagePickerLarge43 = ref<string | File | null>(null);
 const imagePickerLarge11 = ref<string | File | null>(null);
@@ -228,6 +265,7 @@ function selectDropdownProvince(province: string) {
   dropdownProvince.value = province;
   dropdownOpen.value = false;
 }
+
 const compactMode = ref(false);
 const carouselBannerSlides = [
   {
@@ -251,12 +289,35 @@ const carouselBannerSlides = [
     actionLabel: "Mulai Investasi",
   },
 ];
+
+// Currency & Numbers Real-case States
 const rupiahValue = ref<number | null>(1000000);
+const simulasiPinjaman = ref<number | null>(15000000);
+const tabunganEmas = ref<number | null>(500000);
+const rupiahError = ref<number | null>(10000);
+const rupiahDisabled = ref<number | null>(5000000);
+
 const persentaseValue = ref<number | null>(50);
+const bungaPinjaman = ref<number | null>(1.15);
+const diskonPromo = ref<number | null>(15);
+
 const addAmountVal1 = ref(1);
 const addAmountVal2 = ref(2);
 const addAmountValDisabled = ref(1);
+const gramEmas = ref(5);
+const totalBeliEmas = computed(() =>
+  ((gramEmas.value || 0) * 1450000).toLocaleString("id-ID")
+);
+
+// Form Controls States
+const textareaValue = ref("");
+const catatanTransaksi = ref(
+  "Harap sertakan kwitansi pelunasan dan bukti transfer saat barang diantar ke alamat nasabah."
+);
 const switchValue = ref(true);
+const notifWhatsapp = ref(true);
+const autodebetTabungan = ref(false);
+
 const checkboxPrimitiveChecked = ref(true);
 const checkboxPrimitiveIndeterminate = ref<boolean | "indeterminate">(
   "indeterminate",
@@ -272,11 +333,18 @@ const checkboxGroupA = ref(true);
 const checkboxGroupB = ref(false);
 const checkboxGroupC = ref(true);
 const checkboxGroupD = ref(false);
+const asuransiBarang = ref(true);
+const syaratKetentuan = ref(true);
+
 const radioPrimitive = ref("on");
 const radioWebsite = ref("website-active");
 const radioMobile = ref("mobile-active");
 const radioHorizontal = ref("horizontal-a");
 const radioVertical = ref("vertical-a");
+const metodePengiriman = ref("cabang");
+const jenisJaminan = ref("emas-batangan");
+
+// Table Mock Data
 const tableColumns = [
   { key: "gol", label: "Gol", width: "40px" },
   { key: "uangPinjaman", label: "Uang Pinjaman", width: "238px" },
@@ -362,40 +430,54 @@ const tableRows = [
   },
 ];
 
+// Sections in Logical Domain Hierarchy
 const sections = [
+  // 1. Overview
   { id: "inventory", label: "Inventory" },
-  { id: "add-amount", label: "Add Amount" },
+
+  // 2. General & Actions
   { id: "button", label: "Button" },
-  { id: "avatar", label: "Avatar" },
+  { id: "link", label: "Link" },
+
+  // 3. Form & Data Entry
   { id: "input", label: "Input" },
-  { id: "label", label: "Label" },
+  { id: "input-rupiah", label: "Input Rupiah" },
+  { id: "input-persentase", label: "Input Persentase" },
+  { id: "add-amount", label: "Add Amount" },
   { id: "textarea", label: "Textarea" },
+  { id: "label", label: "Label" },
   { id: "checkbox", label: "Checkbox" },
   { id: "radio-group", label: "Radio Group" },
   { id: "select", label: "Select" },
   { id: "combobox", label: "Combobox" },
-  { id: "dialog", label: "Dialog" },
-  { id: "dropdown", label: "Dropdown" },
   { id: "datepicker", label: "Datepicker" },
-  { id: "popover", label: "Popover" },
-  { id: "tooltip", label: "Tooltip" },
-  { id: "breadcrumb", label: "Breadcrumb" },
-  { id: "tabs", label: "Tabs" },
-  { id: "alert", label: "Alert" },
-  { id: "progress", label: "Progress" },
   { id: "switch", label: "Switch" },
-  { id: "table", label: "Table" },
-  { id: "card", label: "Card" },
-  { id: "divider", label: "Divider" },
-  { id: "spinner", label: "Spinner" },
-  { id: "link", label: "Link" },
-  { id: "pagination", label: "Pagination" },
-  { id: "toast", label: "Toast" },
-  { id: "accordion", label: "Accordion" },
-  { id: "badge", label: "Badge" },
-  { id: "carousel", label: "Carousel" },
   { id: "file-picker", label: "File Picker" },
   { id: "image-picker", label: "Image Picker" },
+
+  // 4. Data Display & Layout
+  { id: "avatar", label: "Avatar" },
+  { id: "badge", label: "Badge" },
+  { id: "card", label: "Card" },
+  { id: "table", label: "Table" },
+  { id: "accordion", label: "Accordion" },
+  { id: "carousel", label: "Carousel" },
+  { id: "divider", label: "Divider" },
+  { id: "breadcrumb", label: "Breadcrumb" },
+  { id: "pagination", label: "Pagination" },
+  { id: "tabs", label: "Tabs" },
+
+  // 5. Feedback & Floating Surfaces
+  { id: "alert", label: "Alert" },
+  { id: "progress", label: "Progress" },
+  { id: "spinner", label: "Spinner" },
+  { id: "toast", label: "Toast" },
+  { id: "dialog", label: "Dialog" },
+  { id: "popover", label: "Popover" },
+  { id: "tooltip", label: "Tooltip" },
+  { id: "dropdown", label: "Dropdown" },
+
+  // 6. Architecture
   { id: "tokens", label: "Tokens" },
 ];
 
@@ -858,67 +940,47 @@ const shellClass = computed(() =>
               </div>
             </section>
 
-            <section
-              id="add-amount"
-              class="playground-section playground-panel p-6 space-y-5"
-            >
-              <div>
-                <p class="playground-eyebrow">Numerical Controls</p>
-                <h2 class="text-xl font-bold text-black-900">
-                  Add Amount (Quantity Stepper)
-                </h2>
-                <p class="text-sigma text-black-500">
-                  Add/Subtract controls for quantity selection, seat counts, and numerical incrementors.
-                </p>
-              </div>
-
-              <div class="grid gap-6 md:grid-cols-2">
-                <div class="space-y-3 rounded-xl border border-black-100 bg-white p-4">
-                  <h3 class="text-sigma font-bold text-black-800">Standard Counter (Default min=1)</h3>
-                  <div class="flex items-center gap-4">
-                    <AddAmount v-model="addAmountVal1" class="w-32" />
-                    <span class="text-sigma text-black-600">Nilai: {{ addAmountVal1 }}</span>
-                  </div>
-                </div>
-
-                <div class="space-y-3 rounded-xl border border-black-100 bg-white p-4">
-                  <h3 class="text-sigma font-bold text-black-800">Active State (Value = 2)</h3>
-                  <div class="flex items-center gap-4">
-                    <AddAmount v-model="addAmountVal2" class="w-32" />
-                    <span class="text-sigma text-black-600">Nilai: {{ addAmountVal2 }}</span>
-                  </div>
-                </div>
-
-                <div class="space-y-3 rounded-xl border border-black-100 bg-white p-4">
-                  <h3 class="text-sigma font-bold text-black-800">Disabled State</h3>
-                  <div class="flex items-center gap-4">
-                    <AddAmount v-model="addAmountValDisabled" disabled class="w-32" />
-                    <span class="text-sigma text-black-600">Disabled</span>
-                  </div>
-                </div>
-
-                <div class="space-y-3 rounded-xl border border-black-100 bg-white p-4">
-                  <h3 class="text-sigma font-bold text-black-800">Custom Min & Max (Min: 0, Max: 5)</h3>
-                  <div class="flex items-center gap-4">
-                    <AddAmount :min="0" :max="5" :default-value="3" class="w-36" />
-                  </div>
-                </div>
-              </div>
-            </section>
-
+            <!-- 2. GENERAL & ACTIONS -->
+            <!-- Button -->
             <section
               id="button"
               class="playground-section playground-panel p-6 space-y-6"
             >
               <div class="flex flex-wrap items-center justify-between gap-3">
                 <div>
-                  <p class="playground-eyebrow">Action System</p>
+                  <p class="playground-eyebrow">Calls to Action & Button Primitives</p>
                   <h2 class="text-xl font-bold text-black-900">Button</h2>
                   <p class="text-sigma text-black-500">
                     Primary monochrome pills, secondary canvas buttons, tertiary links, social auth, and circular icon triggers.
                   </p>
                 </div>
-                <Badge variant="brocoli">Core Component</Badge>
+                <Badge variant="brocoli">Core Action</Badge>
+              </div>
+
+              <!-- Real-world Case: Multi-Step Transaction Action Bar -->
+              <div class="rounded-xl border border-black-100 bg-black-50/50 p-4 space-y-3">
+                <div class="flex items-center justify-between">
+                  <div>
+                    <h3 class="text-sigma font-bold text-black-800">Real-World Case: Multi-Step Transaction Action Bar</h3>
+                    <p class="text-omega text-black-500">Aksi navigasi formulir pinjaman dengan state loading asinkron.</p>
+                  </div>
+                  <Button variant="outline" size="sm" @click="triggerSubmit">
+                    Simulasi Loading
+                  </Button>
+                </div>
+                <div class="flex flex-wrap items-center justify-between gap-3 pt-2 border-t border-black-100">
+                  <Button variant="ghost" class="text-black-600">
+                    Batal
+                  </Button>
+                  <div class="flex items-center gap-3">
+                    <Button variant="outline">
+                      Simpan Draft
+                    </Button>
+                    <Button :loading="isSubmitting" loading-label="Memproses..." @click="triggerSubmit">
+                      Lanjut Pembayaran <ArrowRight class="h-4 w-4" />
+                    </Button>
+                  </div>
+                </div>
               </div>
 
               <div>
@@ -947,7 +1009,7 @@ const shellClass = computed(() =>
                   <Button class="bg-lime-600">Hover</Button>
                   <Button class="bg-lime-800">Focused</Button>
                   <Button disabled>Disabled</Button>
-                  <Button loading loading-label="Loading button">Loading</Button>
+                  <Button loading loading-label="Memproses...">Loading State</Button>
                   <Button class="active:bg-lime-800">Pressed</Button>
                 </div>
               </div>
@@ -971,51 +1033,71 @@ const shellClass = computed(() =>
               </div>
             </section>
 
-            <section
-              id="avatar"
-              class="playground-section playground-panel p-6 space-y-4"
-            >
+            <!-- Link -->
+            <section id="link" class="playground-section playground-panel p-6 space-y-4">
               <div>
-                <p class="playground-eyebrow">Identity & Team</p>
-                <h2 class="text-xl font-bold text-black-900">Avatar</h2>
+                <p class="playground-eyebrow">Hyperlinks & Navigation</p>
+                <h2 class="text-xl font-bold text-black-900">Link</h2>
                 <p class="text-sigma text-black-500">
-                  Visual identity representations for user accounts, collaborative editors, and workspace teams.
+                  Semantic inline links with hover transitions, external indicators, and accessibility states.
                 </p>
               </div>
 
-              <div class="flex flex-wrap items-center gap-4 pt-2">
-                <Avatar
-                  src="https://i.pravatar.cc/96?img=12"
-                  alt="Gwind User"
-                />
-                <Avatar alt="Pegadaian Design" />
-                <Avatar fallback="UI" size="lg" />
+              <!-- Real-world Case: Syarat & Ketentuan -->
+              <div class="rounded-xl border border-black-100 bg-white p-4 space-y-2">
+                <h3 class="text-sigma font-bold text-black-800">Real-World Case: Legal & Syarat Ketentuan</h3>
+                <p class="text-sigma text-black-600 leading-relaxed">
+                  Dengan menekan tombol submit, Anda menyetujui <Link href="#" class="font-bold underline text-lime-600">Syarat & Ketentuan Layanan</Link> serta <Link href="#" class="font-bold underline text-lime-600">Kebijakan Privasi PT Pegadaian</Link>.
+                </p>
+              </div>
+
+              <div class="flex flex-wrap items-center gap-6 pt-2">
+                <Link href="#" class="inline-flex items-center gap-1">
+                  Default Link
+                </Link>
+                <Link href="#" class="inline-flex items-center gap-1 font-semibold text-lime-600 hover:underline">
+                  External Portal <ExternalLink class="h-3.5 w-3.5" />
+                </Link>
+                <Link href="#" disabled>
+                  Disabled Link State
+                </Link>
               </div>
             </section>
 
-            <!-- Promo Banner (design.md promo-banner-lilac) -->
-            <div class="playground-promo-banner shadow-sm">
-              <div class="flex items-center gap-3">
-                <div class="flex h-9 w-9 items-center justify-center rounded-full bg-black/10 text-black">
-                  <Sparkles class="h-5 w-5" />
-                </div>
-                <div>
-                  <h4 class="text-sigma font-bold text-black-900">Release Notes 2.4 — Config Design Update</h4>
-                  <p class="text-omega text-black-600">Featuring new unified popovers, card-styled tooltips, and simplified counter props.</p>
-                </div>
-              </div>
-              <button class="button-magenta-promo text-omega">
-                Save your spot
-              </button>
-            </div>
-
+            <!-- 3. FORM & DATA ENTRY -->
+            <!-- Input & InputField -->
             <section id="input" class="playground-section playground-color-block block-lilac">
               <div class="mb-6">
-                <p class="playground-eyebrow">Forms & Inputs</p>
-                <h2 class="playground-display">Input</h2>
+                <p class="playground-eyebrow">Forms & Text Entry</p>
+                <h2 class="playground-display">Input & InputField</h2>
                 <p class="playground-desc">
                   Single-line inputs, numeric formatters, prefix/suffix adornments, and action buttons.
                 </p>
+              </div>
+
+              <!-- Real-world Case: Form Login & Identitas Nasabah -->
+              <div class="rounded-xl border border-purple-200 bg-white p-5 space-y-4 mb-6">
+                <h3 class="text-sigma font-bold text-black-800">Real-World Case: Form Identitas Nasabah</h3>
+                <div class="grid gap-4 md:grid-cols-2">
+                  <InputField
+                    id="input-real-ktp"
+                    label="Nomor Induk Kependudukan (NIK)"
+                    placeholder="Contoh: 3171020101900005"
+                  >
+                    <template #label-icon>
+                      <CircleHelp class="h-4 w-4 text-black-400" />
+                    </template>
+                  </InputField>
+                  <InputField
+                    id="input-real-email"
+                    label="Alamat Email Terdaftar"
+                    placeholder="nasabah@pegadaian.co.id"
+                  >
+                    <template #left-icon>
+                      <Mail class="h-4 w-4 text-black-400" />
+                    </template>
+                  </InputField>
+                </div>
               </div>
 
               <div class="grid gap-4 md:grid-cols-2">
@@ -1037,228 +1119,13 @@ const shellClass = computed(() =>
 
                 <div class="playground-tile space-y-2">
                   <div class="flex items-center justify-between">
-                    <span class="text-sigma font-bold text-black-800">Long Field</span>
-                    <span class="text-omega font-mono text-black-400">lg</span>
-                  </div>
-                  <InputField
-                    id="input-long"
-                    field-size="long"
-                    label="Title"
-                    placeholder="Placeholder"
-                  >
-                    <template #label-icon>
-                      <CircleHelp class="h-[18px] w-[18px] text-black-500" />
-                    </template>
-                  </InputField>
-                </div>
-
-                <div class="playground-tile space-y-2">
-                  <div class="flex items-center justify-between">
-                    <span class="text-sigma font-bold text-black-800">Placeholder State</span>
-                    <span class="text-omega font-mono text-black-400">default</span>
-                  </div>
-                  <InputField
-                    id="input-placeholder"
-                    label="Title"
-                    placeholder="Placeholder"
-                  >
-                    <template #label-icon>
-                      <CircleHelp class="h-[18px] w-[18px] text-black-500" />
-                    </template>
-                  </InputField>
-                </div>
-
-                <div class="playground-tile space-y-2">
-                  <div class="flex items-center justify-between">
-                    <span class="text-sigma font-bold text-black-800">Hover State</span>
-                    <span class="text-omega font-mono text-black-400">hover</span>
-                  </div>
-                  <InputField
-                    id="input-hover"
-                    label="Title"
-                    input-class="border-lime-600"
-                    placeholder="Hover"
-                  >
-                    <template #label-icon>
-                      <CircleHelp class="h-[18px] w-[18px] text-black-500" />
-                    </template>
-                  </InputField>
-                </div>
-
-                <div class="playground-tile space-y-2">
-                  <div class="flex items-center justify-between">
-                    <span class="text-sigma font-bold text-black-800">Filled State</span>
-                    <span class="text-omega font-mono text-black-400">value</span>
-                  </div>
-                  <InputField
-                    id="input-filled"
-                    label="Title"
-                    value="Text input"
-                  >
-                    <template #label-icon>
-                      <CircleHelp class="h-[18px] w-[18px] text-black-500" />
-                    </template>
-                  </InputField>
-                </div>
-
-                <div class="playground-tile space-y-2">
-                  <div class="flex items-center justify-between">
-                    <span class="text-sigma font-bold text-black-800">Disabled State</span>
-                    <span class="text-omega font-mono text-black-400">disabled</span>
-                  </div>
-                  <InputField
-                    id="input-disabled"
-                    label="Title"
-                    disabled
-                    value="Disabled input"
-                  >
-                    <template #label-icon>
-                      <CircleHelp class="h-[18px] w-[18px] text-black-600" />
-                    </template>
-                  </InputField>
-                </div>
-
-                <div class="playground-tile space-y-2">
-                  <div class="flex items-center justify-between">
-                    <span class="text-sigma font-bold text-black-800">Error State</span>
-                    <span class="text-omega font-mono text-red-500">error</span>
-                  </div>
-                  <InputField
-                    id="input-error"
-                    label="Title"
-                    error="This is an error message."
-                    placeholder="Placeholder"
-                  >
-                    <template #label-icon>
-                      <CircleHelp class="h-[18px] w-[18px] text-black-500" />
-                    </template>
-                  </InputField>
-                </div>
-
-                <div class="playground-tile space-y-2">
-                  <div class="flex items-center justify-between">
-                    <span class="text-sigma font-bold text-black-800">Icon Left</span>
-                    <span class="text-omega font-mono text-black-400">prefix</span>
-                  </div>
-                  <InputField
-                    id="input-icon-left"
-                    label="Title"
-                    placeholder="Placeholder"
-                  >
-                    <template #left-icon>
-                      <Mail class="h-6 w-6" />
-                    </template>
-                  </InputField>
-                </div>
-
-                <div class="playground-tile space-y-2">
-                  <div class="flex items-center justify-between">
-                    <span class="text-sigma font-bold text-black-800">Icon Right</span>
-                    <span class="text-omega font-mono text-black-400">suffix</span>
-                  </div>
-                  <InputField
-                    id="input-icon-right"
-                    label="Title"
-                    placeholder="Placeholder"
-                  >
-                    <template #right-icon>
-                      <Search class="h-6 w-6" />
-                    </template>
-                  </InputField>
-                </div>
-
-                <div class="playground-tile space-y-2">
-                  <div class="flex items-center justify-between">
-                    <span class="text-sigma font-bold text-black-800">Dual Icons</span>
-                    <span class="text-omega font-mono text-black-400">both</span>
-                  </div>
-                  <InputField
-                    id="input-icon-both"
-                    label="Title"
-                    placeholder="Placeholder"
-                  >
-                    <template #left-icon>
-                      <Mail class="h-6 w-6" />
-                    </template>
-                    <template #right-icon>
-                      <X class="h-6 w-6" />
-                    </template>
-                  </InputField>
-                </div>
-
-                <div class="playground-tile space-y-2">
-                  <div class="flex items-center justify-between">
-                    <span class="text-sigma font-bold text-black-800">Action Button</span>
-                    <span class="text-omega font-mono text-black-400">action</span>
-                  </div>
-                  <InputField
-                    id="input-action"
-                    label="Title"
-                    placeholder="Placeholder"
-                  >
-                    <template #action>
-                      <button type="button" class="text-sigma font-bold text-lime-600 hover:text-lime-700">Action</button>
-                    </template>
-                  </InputField>
-                </div>
-
-                <div class="playground-tile space-y-2">
-                  <div class="flex items-center justify-between">
-                    <span class="text-sigma font-bold text-black-800">Icon & Action</span>
-                    <span class="text-omega font-mono text-black-400">combo</span>
-                  </div>
-                  <InputField
-                    id="input-icon-action"
-                    label="Title"
-                    placeholder="Placeholder"
-                  >
-                    <template #left-icon>
-                      <Mail class="h-6 w-6" />
-                    </template>
-                    <template #action>
-                      <button type="button" class="text-sigma font-bold text-lime-600 hover:text-lime-700">Action</button>
-                    </template>
-                  </InputField>
-                </div>
-
-                <div class="playground-tile space-y-2">
-                  <div class="flex items-center justify-between">
                     <span class="text-sigma font-bold text-black-800">Prefix Text</span>
-                    <span class="text-omega font-mono text-black-400">prefix</span>
+                    <span class="text-omega font-mono text-black-400">prefix-text</span>
                   </div>
                   <InputField
                     id="input-prefix"
-                    prefix="Rupiah"
-                    placeholder="Placeholder"
-                  >
-                    <template #right-icon>
-                      <X class="h-6 w-6" />
-                    </template>
-                  </InputField>
-                </div>
-
-                <div class="playground-tile space-y-2">
-                  <div class="flex items-center justify-between">
-                    <span class="text-sigma font-bold text-black-800">Input Rupiah</span>
-                    <span class="text-omega font-mono text-lime-600">currency</span>
-                  </div>
-                  <InputRupiah
-                    id="input-rupiah"
-                    v-model="rupiahValue"
                     label="Title"
-                    placeholder="Placeholder"
-                  />
-                </div>
-
-                <div id="inputpersentase" class="playground-tile space-y-2">
-                  <div class="flex items-center justify-between">
-                    <span class="text-sigma font-bold text-black-800">Input Persentase</span>
-                    <span class="text-omega font-mono text-lime-600">percentage</span>
-                  </div>
-                  <InputPersentase
-                    id="input-persentase"
-                    v-model="persentaseValue"
-                    label="Title"
+                    prefix="https://"
                     placeholder="Placeholder"
                   />
                 </div>
@@ -1266,266 +1133,292 @@ const shellClass = computed(() =>
                 <div class="playground-tile space-y-2">
                   <div class="flex items-center justify-between">
                     <span class="text-sigma font-bold text-black-800">Suffix Text</span>
-                    <span class="text-omega font-mono text-black-400">suffix</span>
+                    <span class="text-omega font-mono text-black-400">suffix-text</span>
                   </div>
                   <InputField
                     id="input-suffix"
-                    suffix="%"
+                    label="Title"
+                    suffix=".com"
                     placeholder="Placeholder"
                   />
                 </div>
 
-                <div class="playground-tile space-y-2 md:col-span-2">
+                <div class="playground-tile space-y-2">
                   <div class="flex items-center justify-between">
-                    <span class="text-sigma font-bold text-black-800">File Upload Input</span>
-                    <span class="text-omega font-mono text-black-400">file</span>
+                    <span class="text-sigma font-bold text-black-800">Clearable Field</span>
+                    <span class="text-omega font-mono text-black-400">clearable</span>
                   </div>
-                  <div class="space-y-1">
-                    <Label for="input-file">Upload Document</Label>
-                    <Input id="input-file" type="file" />
-                  </div>
-                </div>
-              </div>
-            </section>
-
-            <section id="label" class="playground-section playground-panel p-5">
-              <h2 class="mb-1 text-omicron font-bold text-black-800">Label</h2>
-              <p class="mb-5 text-sigma text-black-500">
-                Form label alignment and disabled pairing.
-              </p>
-
-              <div class="grid gap-4 md:grid-cols-2">
-                <div class="space-y-2">
-                  <Label for="labeled-email">Email</Label>
-                  <Input id="labeled-email" placeholder="name@company.com" />
-                </div>
-                <div class="space-y-2">
-                  <Label for="labeled-disabled">Disabled label</Label>
-                  <Input
-                    id="labeled-disabled"
-                    disabled
-                    value="disabled input"
+                  <InputField
+                    id="input-clearable"
+                    label="Title"
+                    clearable
+                    value="Clear me"
                   />
                 </div>
               </div>
             </section>
 
-            <section
-              id="textarea"
-              class="playground-section playground-panel p-6 space-y-5"
-            >
-              <div>
-                <p class="playground-eyebrow">Forms & Multi-line Entry</p>
-                <h2 class="text-xl font-bold text-black-900">Textarea</h2>
-                <p class="text-sigma text-black-500">
-                  Multi-line input fields with live character counter, caption text, and error states.
-                </p>
+            <!-- Input Rupiah -->
+            <section id="input-rupiah" class="playground-section playground-color-block block-lilac">
+              <div class="mb-6 flex flex-wrap items-center justify-between gap-3">
+                <div>
+                  <p class="playground-eyebrow">Currency Formatting & Fintech Input</p>
+                  <h2 class="playground-display">Input Rupiah</h2>
+                  <p class="playground-desc">
+                    Functional currency input with automatic thousands separators, paste normalization, and raw integer emitting.
+                  </p>
+                </div>
+                <Badge variant="brocoli">Fintech Component</Badge>
               </div>
-              <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-                <div class="playground-tile space-y-2">
-                  <div class="flex items-center justify-between">
-                    <span class="text-sigma font-bold text-black-800">Default Field</span>
-                    <span class="text-omega font-mono text-black-400">default</span>
+
+              <!-- Real-world Case: Simulasi Pinjaman Gadai -->
+              <div class="rounded-xl border border-purple-200 bg-white p-5 space-y-4 mb-6">
+                <div class="flex flex-wrap items-center justify-between gap-3">
+                  <div>
+                    <h3 class="text-sigma font-bold text-black-800">Real-World Case: Simulasi Pengajuan Pinjaman Gadai Emas</h3>
+                    <p class="text-omega text-black-500">Mendukung format ribuan interaktif dan integrasi data dua arah.</p>
                   </div>
-                  <TextareaField id="textarea-default" label="Title" model-value="Value" placeholder="Placeholder" caption="Assistive text" />
+                  <div class="flex items-center gap-2">
+                    <span class="text-omega font-bold text-black-500">Emit Raw Value:</span>
+                    <code class="rounded bg-black-900 px-3 py-1 font-mono text-omega font-bold text-white">
+                      {{ simulasiPinjaman === null ? 'null' : simulasiPinjaman }}
+                    </code>
+                  </div>
+                </div>
+                <div class="grid gap-4 md:grid-cols-2">
+                  <InputRupiah
+                    id="input-rupiah-simulasi"
+                    v-model="simulasiPinjaman"
+                    label="Uang Pinjaman Diajukan"
+                    placeholder="Masukkan nominal rupiah"
+                  />
+                  <InputRupiah
+                    id="input-rupiah-tabungan"
+                    v-model="tabunganEmas"
+                    label="Top-Up Saldo Tabungan Emas"
+                    placeholder="Nominal top up"
+                  />
+                </div>
+              </div>
+
+              <div class="grid gap-4 md:grid-cols-3">
+                <div class="playground-tile space-y-2">
+                  <span class="text-sigma font-bold text-black-800">Default (Rp 1.000.000)</span>
+                  <InputRupiah
+                    id="input-rupiah-default"
+                    v-model="rupiahValue"
+                    label="Rupiah"
+                    placeholder="Placeholder"
+                  />
                 </div>
 
                 <div class="playground-tile space-y-2">
-                  <div class="flex items-center justify-between">
-                    <span class="text-sigma font-bold text-black-800">Empty State</span>
-                    <span class="text-omega font-mono text-black-400">empty</span>
-                  </div>
-                  <TextareaField id="textarea-empty" label="Title" placeholder="Placeholder" />
+                  <span class="text-sigma font-bold text-black-800">Error State (Batas Minimum)</span>
+                  <InputRupiah
+                    id="input-rupiah-error"
+                    v-model="rupiahError"
+                    label="Rupiah"
+                    error="Jumlah pinjaman minimal Rp 50.000"
+                  />
                 </div>
 
                 <div class="playground-tile space-y-2">
-                  <div class="flex items-center justify-between">
-                    <span class="text-sigma font-bold text-black-800">Error State</span>
-                    <span class="text-omega font-mono text-red-500">error</span>
-                  </div>
-                  <TextareaField id="textarea-error" label="Title" model-value="Value" placeholder="Placeholder" error="This is an error message." />
-                </div>
-
-                <div class="playground-tile space-y-2">
-                  <div class="flex items-center justify-between">
-                    <span class="text-sigma font-bold text-black-800">With Character Counter</span>
-                    <span class="text-omega font-mono text-lime-600">counter</span>
-                  </div>
-                  <TextareaField id="textarea-counter" label="Keterangan" model-value="Catatan transaksi..." placeholder="Placeholder" :maxlength="100" show-count caption="Maksimal 100 karakter." />
-                </div>
-
-                <div class="playground-tile space-y-2">
-                  <div class="flex items-center justify-between">
-                    <span class="text-sigma font-bold text-black-800">Disabled State</span>
-                    <span class="text-omega font-mono text-black-400">disabled</span>
-                  </div>
-                  <TextareaField id="textarea-disabled" label="Title" model-value="Value" placeholder="Placeholder" caption="Assistive text" disabled />
+                  <span class="text-sigma font-bold text-black-800">Disabled State</span>
+                  <InputRupiah
+                    id="input-rupiah-disabled"
+                    v-model="rupiahDisabled"
+                    label="Maksimum Limit"
+                    disabled
+                  />
                 </div>
               </div>
             </section>
 
-            <section
-              id="checkbox"
-              class="playground-section playground-color-block block-cream"
-            >
-              <div class="mb-6">
-                <p class="playground-eyebrow">Selection & Consent</p>
-                <h2 class="playground-display">Checkbox</h2>
-                <p class="playground-desc">
-                  Primitive controls and Figma-aligned fields with binary, checked, and indeterminate states.
+            <!-- Input Persentase -->
+            <section id="input-persentase" class="playground-section playground-panel p-6 space-y-5">
+              <div>
+                <p class="playground-eyebrow">Rate & Percentage Input</p>
+                <h2 class="text-xl font-bold text-black-900">Input Persentase</h2>
+                <p class="text-sigma text-black-500">
+                  Input formatted for interest rates, discount margins, and percentage adjustments.
                 </p>
+              </div>
+
+              <!-- Real-world Case: Bunga Pinjaman & Diskon Promo -->
+              <div class="grid gap-4 md:grid-cols-2">
+                <div class="playground-tile space-y-2">
+                  <div class="flex items-center justify-between">
+                    <span class="text-sigma font-bold text-black-800">Sewa Modal / Bunga Bulanan</span>
+                    <span class="text-omega font-mono text-black-500">Emit: {{ bungaPinjaman }}%</span>
+                  </div>
+                  <InputPersentase
+                    id="input-persentase-bunga"
+                    v-model="bungaPinjaman"
+                    label="Tarif Sewa Modal"
+                    placeholder="0.00"
+                  />
+                </div>
+
+                <div class="playground-tile space-y-2">
+                  <div class="flex items-center justify-between">
+                    <span class="text-sigma font-bold text-black-800">Diskon Promo Transaksi</span>
+                    <span class="text-omega font-mono text-black-500">Emit: {{ diskonPromo }}%</span>
+                  </div>
+                  <InputPersentase
+                    id="input-persentase-diskon"
+                    v-model="diskonPromo"
+                    label="Persentase Diskon"
+                    placeholder="0.00"
+                  />
+                </div>
+              </div>
+            </section>
+
+            <!-- Add Amount -->
+            <section id="add-amount" class="playground-section playground-panel p-6 space-y-5">
+              <div class="flex flex-wrap items-center justify-between gap-3">
+                <div>
+                  <p class="playground-eyebrow">Numerical Controls & Quantity Stepper</p>
+                  <h2 class="text-xl font-bold text-black-900">Add Amount</h2>
+                  <p class="text-sigma text-black-500">
+                    Quantity counter stepper control for increments, grammage selection, and unit counts.
+                  </p>
+                </div>
+                <Badge variant="brocoli">Controls</Badge>
+              </div>
+
+              <!-- Real-world Case: Pembelian Gramasi Emas -->
+              <div class="rounded-xl border border-black-100 bg-lime-50/40 p-5 space-y-3">
+                <div class="flex flex-wrap items-center justify-between gap-4">
+                  <div>
+                    <h3 class="text-sigma font-bold text-black-800">Real-World Case: Pembelian Gramasi Emas Batangan</h3>
+                    <p class="text-omega text-black-600">Estimasi harga emas Rp 1.450.000 / gram.</p>
+                  </div>
+                  <div class="flex items-center gap-6">
+                    <AddAmount v-model="gramEmas" :min="1" :max="100" class="w-36" />
+                    <div class="text-right">
+                      <span class="block text-omega text-black-500 font-semibold">Total Estimasi</span>
+                      <span class="text-omicron font-black text-black-900">Rp {{ totalBeliEmas }}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="grid gap-4 md:grid-cols-3">
+                <div class="playground-tile space-y-2">
+                  <span class="text-sigma font-bold text-black-800">Default (Value = 1)</span>
+                  <div class="flex items-center gap-4">
+                    <AddAmount v-model="addAmountVal1" class="w-32" />
+                  </div>
+                </div>
+
+                <div class="playground-tile space-y-2">
+                  <span class="text-sigma font-bold text-black-800">Active State (Value = 2)</span>
+                  <div class="flex items-center gap-4">
+                    <AddAmount v-model="addAmountVal2" class="w-32" />
+                  </div>
+                </div>
+
+                <div class="playground-tile space-y-2">
+                  <span class="text-sigma font-bold text-black-800">Disabled State</span>
+                  <div class="flex items-center gap-4">
+                    <AddAmount v-model="addAmountValDisabled" disabled class="w-32" />
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <!-- Textarea -->
+            <section id="textarea" class="playground-section playground-panel p-6 space-y-5">
+              <div>
+                <p class="playground-eyebrow">Multi-Line Text & Counter</p>
+                <h2 class="text-xl font-bold text-black-900">Textarea</h2>
+                <p class="text-sigma text-black-500">
+                  Multiline fields with automatic character count tracking, placeholder, error, and auto-growing height.
+                </p>
+              </div>
+
+              <!-- Real-world Case: Catatan Pengiriman & Keluhan -->
+              <div class="playground-tile space-y-2">
+                <div class="flex items-center justify-between">
+                  <span class="text-sigma font-bold text-black-800">Real-World Case: Catatan Transaksi Khusus (Max 100 Karakter)</span>
+                  <span class="text-omega font-mono text-lime-700 bg-lime-100 px-2 py-0.5 rounded font-bold">Auto show-count</span>
+                </div>
+                <TextareaField
+                  id="textarea-catatan"
+                  v-model="catatanTransaksi"
+                  label="Instruksi Pengantaran Barang"
+                  placeholder="Tuliskan catatan detail untuk petugas kurir..."
+                  :maxlength="100"
+                />
               </div>
 
               <div class="grid gap-4 md:grid-cols-2">
-                <div class="playground-tile space-y-3">
-                  <div class="flex items-center justify-between">
-                    <span class="text-sigma font-bold text-black-800">Primitive States</span>
-                    <span class="text-omega font-mono text-black-400">primitive</span>
-                  </div>
-                  <div class="flex flex-wrap items-center gap-3">
-                    <Checkbox id="checkbox-unchecked" />
-                    <Checkbox
-                      id="checkbox-checked"
-                      v-model="checkboxPrimitiveChecked"
-                    />
-                    <Checkbox
-                      id="checkbox-indeterminate"
-                      v-model="checkboxPrimitiveIndeterminate"
-                    />
-                    <Checkbox id="checkbox-disabled" disabled />
-                    <Checkbox
-                      id="checkbox-disabled-checked"
-                      disabled
-                      :model-value="true"
-                    />
-                  </div>
+                <div class="playground-tile space-y-2">
+                  <span class="text-sigma font-bold text-black-800">Error State</span>
+                  <TextareaField
+                    id="textarea-error"
+                    label="Catatan Keluhan"
+                    error="Deskripsi keluhan wajib diisi minimal 20 karakter."
+                    placeholder="Tuliskan kendala yang Anda alami..."
+                  />
                 </div>
 
-                <div class="playground-tile space-y-3">
-                  <div class="flex items-center justify-between">
-                    <span class="text-sigma font-bold text-black-800">Website Field</span>
-                    <span class="text-omega font-mono text-black-400">desktop</span>
-                  </div>
-                  <div class="grid gap-3">
-                    <CheckboxField
-                      id="checkbox-field-inactive"
-                      v-model="checkboxWebsiteInactive"
-                      label="This is an option"
-                    />
-                    <CheckboxField
-                      id="checkbox-field-active"
-                      v-model="checkboxWebsiteActive"
-                      label="This is an option"
-                    />
-                    <CheckboxField
-                      id="checkbox-field-caption"
-                      v-model="checkboxWebsiteCaption"
-                      label="This is an option"
-                      caption="This is a subtitle text."
-                    />
-                    <CheckboxField
-                      id="checkbox-field-error"
-                      v-model="checkboxWebsiteError"
-                      label="This is an option"
-                      error="This is an error message."
-                    />
-                    <CheckboxField
-                      id="checkbox-field-disabled"
-                      label="This is an option"
-                      disabled
-                    />
-                  </div>
-                </div>
-
-                <div class="playground-tile space-y-3">
-                  <div class="flex items-center justify-between">
-                    <span class="text-sigma font-bold text-black-800">Mobile Mode</span>
-                    <span class="text-omega font-mono text-black-400">mobile-apps</span>
-                  </div>
-                  <div class="grid gap-3">
-                    <CheckboxField
-                      id="checkbox-mobile-inactive"
-                      v-model="checkboxMobileInactive"
-                      style-mode="mobile-apps"
-                      label="This is an option"
-                    />
-                    <CheckboxField
-                      id="checkbox-mobile-active"
-                      v-model="checkboxMobileActive"
-                      style-mode="mobile-apps"
-                      label="This is an option"
-                    />
-                    <CheckboxField
-                      id="checkbox-mobile-caption"
-                      v-model="checkboxMobileCaption"
-                      style-mode="mobile-apps"
-                      label="This is an option"
-                      caption="This is a subtitle text."
-                    />
-                    <CheckboxField
-                      id="checkbox-mobile-disabled"
-                      style-mode="mobile-apps"
-                      label="This is an option"
-                      disabled
-                    />
-                  </div>
-                </div>
-
-                <div class="playground-tile space-y-3 md:col-span-2">
-                  <div class="flex items-center justify-between">
-                    <span class="text-sigma font-bold text-black-800">Checkbox Groups</span>
-                    <span class="text-omega font-mono text-black-400">group</span>
-                  </div>
-                  <div class="grid gap-5 md:grid-cols-2">
-                    <CheckboxGroup
-                      title="Horizontal Group"
-                      alignment="horizontal"
-                      error="This is an error message."
-                    >
-                      <CheckboxField
-                        id="checkbox-group-a"
-                        v-model="checkboxGroupA"
-                        label="This is an option"
-                      />
-                      <CheckboxField
-                        id="checkbox-group-b"
-                        v-model="checkboxGroupB"
-                        label="This is an option"
-                      />
-                    </CheckboxGroup>
-                    <CheckboxGroup
-                      title="Vertical Group"
-                      alignment="vertical"
-                      caption="This is a helper text."
-                    >
-                      <CheckboxField
-                        id="checkbox-group-c"
-                        v-model="checkboxGroupC"
-                        label="This is an option"
-                        caption="This is a subtitle text."
-                      />
-                      <CheckboxField
-                        id="checkbox-group-d"
-                        v-model="checkboxGroupD"
-                        label="This is an option"
-                        caption="This is a subtitle text."
-                      />
-                    </CheckboxGroup>
-                  </div>
+                <div class="playground-tile space-y-2">
+                  <span class="text-sigma font-bold text-black-800">Disabled State</span>
+                  <TextareaField
+                    id="textarea-disabled"
+                    label="Syarat Tambahan (Readonly)"
+                    disabled
+                    value="Data catatan ini telah terkunci dan tidak dapat disunting kembali."
+                  />
                 </div>
               </div>
             </section>
 
-            <section
-              id="radio-group"
-              class="playground-section playground-panel p-6 space-y-5"
-            >
+            <!-- Label -->
+            <section id="label" class="playground-section playground-panel p-6 space-y-4">
               <div>
-                <p class="playground-eyebrow">Options & Segmented Choice</p>
-                <h2 class="text-xl font-bold text-black-900">Radio Group</h2>
+                <p class="playground-eyebrow">Form Field Labels</p>
+                <h2 class="text-xl font-bold text-black-900">Label</h2>
                 <p class="text-sigma text-black-500">
-                  Segmented single-choice options in horizontal and vertical configurations.
+                  Accessible labels supporting required indicators, tooltips, captions, and disabled states.
                 </p>
+              </div>
+
+              <div class="flex flex-wrap items-center gap-6 pt-2">
+                <Label>Standard Label</Label>
+                <Label required>Required Field (*)</Label>
+                <Label class="text-black-400">Disabled Field Label</Label>
+              </div>
+            </section>
+
+            <!-- Checkbox -->
+            <section id="checkbox" class="playground-section playground-color-block block-cream space-y-5">
+              <div class="mb-4">
+                <p class="playground-eyebrow">Selection Controls & Consent</p>
+                <h2 class="playground-display">Checkbox</h2>
+                <p class="playground-desc">
+                  Primitive boxes, desktop and mobile field rows, indeterminate state, and multi-selection groups.
+                </p>
+              </div>
+
+              <!-- Real-world Case: Persetujuan Asuransi & Syarat -->
+              <div class="rounded-xl border border-amber-200 bg-white p-5 space-y-3 mb-6">
+                <h3 class="text-sigma font-bold text-black-800">Real-World Case: Opsi Proteksi Transaksi Gadai</h3>
+                <div class="grid gap-3 md:grid-cols-2">
+                  <CheckboxField
+                    id="chk-real-asuransi"
+                    v-model="asuransiBarang"
+                    label="Asuransi Barang Ekstra"
+                    caption="Perlindungan ganti rugi 100% nilai taksiran pasar barang jaminan."
+                  />
+                  <CheckboxField
+                    id="chk-real-syarat"
+                    v-model="syaratKetentuan"
+                    label="Saya menyetujui seluruh ketentuan akad gadai syariah"
+                  />
+                </div>
               </div>
 
               <div class="grid gap-4 md:grid-cols-2">
@@ -1534,226 +1427,762 @@ const shellClass = computed(() =>
                     <span class="text-sigma font-bold text-black-800">Primitive Control</span>
                     <span class="text-omega font-mono text-black-400">primitive</span>
                   </div>
-                  <RadioGroup
-                    v-model="radioPrimitive"
-                    class="flex flex-wrap items-center gap-3"
-                  >
-                    <RadioGroupItem id="radio-primitive-off" value="off" />
-                    <RadioGroupItem id="radio-primitive-on" value="on" />
-                    <RadioGroupItem
-                      id="radio-primitive-disabled"
-                      value="disabled"
-                      disabled
-                    />
-                    <RadioGroupItem
-                      id="radio-primitive-disabled-on"
-                      value="disabled-on"
-                      disabled
-                    />
-                  </RadioGroup>
+                  <div class="flex flex-wrap items-center gap-3">
+                    <Checkbox id="chk-primitive-off" />
+                    <Checkbox id="chk-primitive-on" v-model="checkboxPrimitiveChecked" />
+                    <Checkbox id="chk-primitive-indet" v-model="checkboxPrimitiveIndeterminate" />
+                    <Checkbox id="chk-primitive-disabled" disabled />
+                  </div>
                 </div>
 
                 <div class="playground-tile space-y-3">
                   <div class="flex items-center justify-between">
-                    <span class="text-sigma font-bold text-black-800">Website Fields</span>
+                    <span class="text-sigma font-bold text-black-800">Website Desktop Mode</span>
                     <span class="text-omega font-mono text-black-400">desktop</span>
                   </div>
-                  <RadioGroup v-model="radioWebsite" class="grid gap-3">
-                    <RadioGroupField
-                      id="radio-website-inactive"
-                      value="website-inactive"
-                      label="This is an option"
+                  <div class="grid gap-2">
+                    <CheckboxField
+                      id="chk-desktop-a"
+                      v-model="checkboxWebsiteActive"
+                      label="Opsi Terpilih (Active)"
                     />
-                    <RadioGroupField
-                      id="radio-website-active"
-                      value="website-active"
-                      label="This is an option"
+                    <CheckboxField
+                      id="chk-desktop-caption"
+                      v-model="checkboxWebsiteCaption"
+                      label="Opsi dengan Keterangan"
+                      caption="Sub-teks penjelas tambahan yang informatif."
                     />
-                    <RadioGroupField
-                      id="radio-website-caption"
-                      value="website-caption"
-                      label="This is an option"
-                      caption="This is a subtitle text."
-                    />
-                    <RadioGroupField
-                      id="radio-website-error"
-                      value="website-error"
-                      label="This is an option"
-                      error="This is an error message."
-                    />
-                    <RadioGroupField
-                      id="radio-website-disabled"
-                      value="website-disabled"
-                      label="This is an option"
-                      disabled
-                    />
-                  </RadioGroup>
-                </div>
-
-                <div class="playground-tile space-y-3">
-                  <div class="flex items-center justify-between">
-                    <span class="text-sigma font-bold text-black-800">Mobile Mode</span>
-                    <span class="text-omega font-mono text-black-400">mobile-apps</span>
-                  </div>
-                  <RadioGroup v-model="radioMobile" class="grid gap-3">
-                    <RadioGroupField
-                      id="radio-mobile-inactive"
-                      value="mobile-inactive"
-                      style-mode="mobile-apps"
-                      label="This is an option"
-                    />
-                    <RadioGroupField
-                      id="radio-mobile-active"
-                      value="mobile-active"
-                      style-mode="mobile-apps"
-                      label="This is an option"
-                    />
-                    <RadioGroupField
-                      id="radio-mobile-caption"
-                      value="mobile-caption"
-                      style-mode="mobile-apps"
-                      label="This is an option"
-                      caption="This is a subtitle text."
-                    />
-                    <RadioGroupField
-                      id="radio-mobile-disabled"
-                      value="mobile-disabled"
-                      style-mode="mobile-apps"
-                      label="This is an option"
-                      disabled
-                    />
-                  </RadioGroup>
-                </div>
-
-                <div class="playground-tile space-y-3 md:col-span-2">
-                  <div class="flex items-center justify-between">
-                    <span class="text-sigma font-bold text-black-800">Radio Groups</span>
-                    <span class="text-omega font-mono text-black-400">group</span>
-                  </div>
-                  <div class="grid gap-5 md:grid-cols-2">
-                    <RadioGroup
-                      v-model="radioHorizontal"
-                      title="Horizontal Group"
-                      subtitle="This is a subtitle text."
-                      alignment="horizontal"
-                      error="This is an error message."
-                    >
-                      <RadioGroupField
-                        id="radio-horizontal-a"
-                        value="horizontal-a"
-                        label="This is an option"
-                      />
-                      <RadioGroupField
-                        id="radio-horizontal-b"
-                        value="horizontal-b"
-                        label="This is an option"
-                      />
-                    </RadioGroup>
-
-                    <RadioGroup
-                      v-model="radioVertical"
-                      title="Vertical Group"
-                      subtitle="This is a subtitle text."
-                      alignment="vertical"
-                      caption="This is a helper text."
-                    >
-                      <RadioGroupField
-                        id="radio-vertical-a"
-                        value="vertical-a"
-                        label="This is an option"
-                        caption="This is a subtitle text."
-                      />
-                      <RadioGroupField
-                        id="radio-vertical-b"
-                        value="vertical-b"
-                        label="This is an option"
-                        caption="This is a subtitle text."
-                      />
-                    </RadioGroup>
                   </div>
                 </div>
               </div>
             </section>
 
-            <section
-              id="select"
-              class="playground-section playground-color-block block-mint"
-            >
-              <h2 class="mb-1 text-omicron font-bold text-black-800">Select</h2>
-              <p class="mb-5 text-sigma text-black-500">
-                Trigger, value, content, groups, labels, items, separators, and
-                scroll buttons.
-              </p>
+            <!-- Radio Group -->
+            <section id="radio-group" class="playground-section playground-panel p-6 space-y-5">
+              <div>
+                <p class="playground-eyebrow">Segmented Choice & Options</p>
+                <h2 class="text-xl font-bold text-black-900">Radio Group</h2>
+                <p class="text-sigma text-black-500">
+                  Segmented single-choice options in horizontal and vertical configurations.
+                </p>
+              </div>
 
-              <Select>
-                <SelectTrigger class="w-full max-w-sm">
-                  <SelectValue placeholder="Select a fruit" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectGroup>
-                    <SelectLabel>Fruits</SelectLabel>
-                    <SelectItem value="apple">Apple</SelectItem>
-                    <SelectItem value="banana">
-                      <SelectItemText>Banana</SelectItemText>
-                    </SelectItem>
-                    <SelectItem value="grape">Grape</SelectItem>
+              <!-- Real-world Case: Pilihan Metode Pengiriman -->
+              <div class="rounded-xl border border-black-100 bg-white p-5 space-y-3 mb-6">
+                <h3 class="text-sigma font-bold text-black-800">Real-World Case: Metode Pengambilan Barang Gadai Lunas</h3>
+                <RadioGroup v-model="metodePengiriman" class="grid gap-3 md:grid-cols-2">
+                  <RadioGroupField
+                    id="radio-metode-cabang"
+                    value="cabang"
+                    label="Ambil Langsung di Kantor Cabang"
+                    caption="Gratis biaya antar, barang dapat diambil pada jam operasional."
+                  />
+                  <RadioGroupField
+                    id="radio-metode-kurir"
+                    value="kurir"
+                    label="Kirim via Kurir Khusus Berasuransi"
+                    caption="Estimasi tiba 1-2 hari kerja dengan pengamanan berlapis."
+                  />
+                </RadioGroup>
+              </div>
+
+              <div class="grid gap-4 md:grid-cols-2">
+                <div class="playground-tile space-y-3">
+                  <div class="flex items-center justify-between">
+                    <span class="text-sigma font-bold text-black-800">Horizontal Group</span>
+                    <span class="text-omega font-mono text-black-400">horizontal</span>
+                  </div>
+                  <RadioGroup
+                    v-model="radioHorizontal"
+                    alignment="horizontal"
+                  >
+                    <RadioGroupField id="radio-h-1" value="horizontal-a" label="Pilihan A" />
+                    <RadioGroupField id="radio-h-2" value="horizontal-b" label="Pilihan B" />
+                  </RadioGroup>
+                </div>
+
+                <div class="playground-tile space-y-3">
+                  <div class="flex items-center justify-between">
+                    <span class="text-sigma font-bold text-black-800">Vertical Group</span>
+                    <span class="text-omega font-mono text-black-400">vertical</span>
+                  </div>
+                  <RadioGroup
+                    v-model="radioVertical"
+                    alignment="vertical"
+                  >
+                    <RadioGroupField id="radio-v-1" value="vertical-a" label="Opsi Reguler" caption="Proses standar 24 jam" />
+                    <RadioGroupField id="radio-v-2" value="vertical-b" label="Opsi Kilat" caption="Proses instan 15 menit" />
+                  </RadioGroup>
+                </div>
+              </div>
+            </section>
+
+            <!-- Select -->
+            <section id="select" class="playground-section playground-color-block block-mint space-y-4">
+              <div class="mb-4">
+                <p class="playground-eyebrow">Dropdown List Selection</p>
+                <h2 class="playground-display">Select</h2>
+                <p class="playground-desc">
+                  Trigger, value, content, grouped categories, labels, separators, and scroll buttons.
+                </p>
+              </div>
+
+              <!-- Real-world Case: Pilihan Jenis Jaminan -->
+              <div class="rounded-xl border border-emerald-200 bg-white p-5 space-y-3">
+                <h3 class="text-sigma font-bold text-black-800">Real-World Case: Kategori Barang Jaminan Gadai</h3>
+                <Select v-model="jenisJaminan">
+                  <SelectTrigger class="w-full max-w-md bg-white">
+                    <SelectValue placeholder="Pilih jenis jaminan" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectGroup>
+                      <SelectLabel>Logam Mulia</SelectLabel>
+                      <SelectItem value="emas-batangan">Emas Batangan (Antam / UBS / Lotus)</SelectItem>
+                      <SelectItem value="perhiasan-emas">Perhiasan Emas (Kalung / Cincin / Gelang)</SelectItem>
+                      <SelectItem value="dinar-dirham">Koin Dinar & Dirham</SelectItem>
+                    </SelectGroup>
                     <SelectSeparator />
-                    <SelectScrollUpButton />
-                    <SelectScrollDownButton />
-                  </SelectGroup>
-                </SelectContent>
-              </Select>
+                    <SelectGroup>
+                      <SelectLabel>Elektronik & Gadget</SelectLabel>
+                      <SelectItem value="smartphone">Smartphone & Tablet</SelectItem>
+                      <SelectItem value="laptop">Laptop / MacBook</SelectItem>
+                      <SelectItem value="kamera">Kamera DSLR / Mirrorless</SelectItem>
+                    </SelectGroup>
+                  </SelectContent>
+                </Select>
+              </div>
             </section>
 
-            <section
-              id="combobox"
-              class="playground-section playground-panel p-5"
-            >
-              <h2 class="mb-1 text-omicron font-bold text-black-800">
-                Combobox
-              </h2>
-              <p class="mb-5 text-sigma text-black-500">
-                Searchable selection with anchor, trigger, input, item
-                indicator, empty state, group, list, and separator.
-              </p>
+            <!-- Combobox -->
+            <section id="combobox" class="playground-section playground-panel p-6 space-y-5">
+              <div>
+                <p class="playground-eyebrow">Autocomplete Search & Filter</p>
+                <h2 class="text-xl font-bold text-black-900">Combobox</h2>
+                <p class="text-sigma text-black-500">
+                  Searchable input trigger with popover list filter, empty results handling, and item check indicators.
+                </p>
+              </div>
 
-              <Combobox v-model="selectedFramework">
-                <ComboboxAnchor as-child>
-                  <ComboboxTrigger as-child>
-                    <Button
-                      variant="outline"
-                      role="combobox"
-                      class="w-full max-w-sm justify-between"
-                    >
-                      {{ selectedFramework || "Select framework..." }}
-                      <ChevronDown class="h-4 w-4 opacity-50" />
-                    </Button>
-                  </ComboboxTrigger>
-                </ComboboxAnchor>
-                <ComboboxList>
-                  <ComboboxInput placeholder="Search framework..." />
-                  <ComboboxEmpty>No framework found.</ComboboxEmpty>
-                  <ComboboxGroup>
-                    <ComboboxItem
-                      v-for="framework in frameworks"
-                      :key="framework"
-                      :value="framework"
-                    >
-                      <ComboboxItemIndicator>
-                        <Check class="mr-2 h-4 w-4" />
-                      </ComboboxItemIndicator>
-                      {{ framework }}
-                    </ComboboxItem>
-                  </ComboboxGroup>
-                  <ComboboxSeparator />
-                </ComboboxList>
-              </Combobox>
+              <!-- Real-world Case: Pencarian Kantor Cabang -->
+              <div class="playground-tile space-y-3">
+                <div class="flex items-center justify-between">
+                  <span class="text-sigma font-bold text-black-800">Real-World Case: Pencarian Kantor Cabang Pegadaian</span>
+                  <span class="text-omega font-mono text-black-400">autocomplete</span>
+                </div>
+                <Combobox v-model="selectedCabang">
+                  <ComboboxAnchor>
+                    <ComboboxTrigger as-child>
+                      <Button variant="outline" class="w-full max-w-md justify-between bg-white text-black-800">
+                        {{ selectedCabang || 'Cari nama cabang atau kota...' }}
+                        <ChevronDown class="h-4 w-4 opacity-50" />
+                      </Button>
+                    </ComboboxTrigger>
+                  </ComboboxAnchor>
+                  <ComboboxList class="w-full max-w-md">
+                    <ComboboxInput placeholder="Ketik nama cabang..." />
+                    <ComboboxEmpty>Kantor cabang tidak ditemukan.</ComboboxEmpty>
+                    <ComboboxGroup>
+                      <ComboboxItem
+                        v-for="cabang in listCabang"
+                        :key="cabang"
+                        :value="cabang"
+                        @select="selectedCabang = cabang"
+                      >
+                        <ComboboxItemIndicator>
+                          <Check class="h-4 w-4 text-lime-600" />
+                        </ComboboxItemIndicator>
+                        {{ cabang }}
+                      </ComboboxItem>
+                    </ComboboxGroup>
+                  </ComboboxList>
+                </Combobox>
+              </div>
             </section>
 
-            <section
-              id="dialog"
-              class="playground-section playground-panel p-6 space-y-5"
-            >
+            <!-- Datepicker -->
+            <section id="datepicker" class="playground-section playground-panel p-6 space-y-5">
+              <div>
+                <p class="playground-eyebrow">Calendar & Date Selection</p>
+                <h2 class="text-xl font-bold text-black-900">Datepicker</h2>
+                <p class="text-sigma text-black-500">
+                  Input-style trigger with calendar popup for selecting dates with min/max restrictions.
+                </p>
+              </div>
+
+              <!-- Real-world Case: Tanggal Jatuh Tempo & Lahir -->
+              <div class="grid gap-6 md:grid-cols-2">
+                <div class="playground-tile space-y-2">
+                  <span class="text-sigma font-bold text-black-800">Tanggal Jatuh Tempo Pinjaman (Disable Past Dates)</span>
+                  <Datepicker
+                    v-model="tanggalJatuhTempo"
+                    placeholder="Pilih tanggal jatuh tempo"
+                    disable-past-dates
+                    trigger-class="w-full"
+                  />
+                </div>
+
+                <div class="playground-tile space-y-2">
+                  <span class="text-sigma font-bold text-black-800">Tanggal Lahir Nasabah (Disable Future Dates)</span>
+                  <Datepicker
+                    v-model="tanggalLahir"
+                    placeholder="Pilih tanggal lahir"
+                    disable-future-dates
+                    trigger-class="w-full"
+                  />
+                </div>
+              </div>
+            </section>
+
+            <!-- Switch -->
+            <section id="switch" class="playground-section playground-panel p-6 space-y-4">
+              <div>
+                <p class="playground-eyebrow">Boolean Toggles & Settings</p>
+                <h2 class="text-xl font-bold text-black-900">Switch Toggle</h2>
+                <p class="text-sigma text-black-500">
+                  Immediate on/off state toggles for user settings, dark mode, and feature flags.
+                </p>
+              </div>
+
+              <!-- Real-world Case: Notifikasi & Autodebet -->
+              <div class="grid gap-4 md:grid-cols-2 pt-2">
+                <div class="rounded-xl border border-black-100 bg-white p-4 flex items-center justify-between">
+                  <div>
+                    <h4 class="text-sigma font-bold text-black-800">Notifikasi Pengingat WhatsApp</h4>
+                    <p class="text-omega text-black-500">Kirim reminder 3 hari sebelum masa gadai jatuh tempo.</p>
+                  </div>
+                  <Switch v-model="notifWhatsapp" />
+                </div>
+
+                <div class="rounded-xl border border-black-100 bg-white p-4 flex items-center justify-between">
+                  <div>
+                    <h4 class="text-sigma font-bold text-black-800">Autodebet Tabungan Emas</h4>
+                    <p class="text-omega text-black-500">Debet otomatis saldo setiap tanggal 1 awal bulan.</p>
+                  </div>
+                  <Switch v-model="autodebetTabungan" />
+                </div>
+              </div>
+            </section>
+
+            <!-- File Picker -->
+            <section id="file-picker" class="playground-section playground-panel p-6 space-y-5">
+              <div>
+                <p class="playground-eyebrow">Document & Asset Uploads</p>
+                <h2 class="text-xl font-bold text-black-900">File Picker</h2>
+                <p class="text-sigma text-black-500">
+                  Dropzone file uploaders for non-image documents (PDF, CSV, Excel, Word).
+                </p>
+              </div>
+
+              <!-- Real-world Case: Upload Rekening Koran & NPWP -->
+              <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
+                <div class="rounded-xl border border-black-200 p-4 bg-white space-y-3">
+                  <h4 class="text-sigma font-bold text-black-700">Upload Rekening Koran (PDF Only)</h4>
+                  <p class="text-sm text-black-500">Spesifik hanya menerima dokumen format .pdf resmi dari bank.</p>
+                  <div class="flex items-center gap-4">
+                    <FilePicker v-model="filePickerFile2" title="Upload Dokumen PDF" accept=".pdf" rightAction />
+                  </div>
+                </div>
+
+                <div class="rounded-xl border border-black-200 p-4 bg-white space-y-3">
+                  <h4 class="text-sigma font-bold text-black-700">Upload Dokumen Pendukung Lainnya</h4>
+                  <p class="text-sm text-black-500">Menerima dokumen bukti pendukung (PDF, Excel, CSV).</p>
+                  <div class="flex items-center gap-4">
+                    <FilePicker v-model="filePickerFile1" title="Upload Dokumen" />
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <!-- Image Picker & Image Display -->
+            <section id="image-picker" class="playground-section playground-panel p-6 space-y-5">
+              <div>
+                <p class="playground-eyebrow">Image Assets & Media Displays</p>
+                <h2 class="text-xl font-bold text-black-900">Form Image (Input) & Image Display</h2>
+                <p class="text-sigma text-black-500">
+                  Image uploaders with aspect ratio previews, multi-image slider, metadata tags, and fallback displays.
+                </p>
+              </div>
+
+              <div class="space-y-6">
+                <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
+                  <div class="rounded-xl border border-black-200 p-4 bg-white space-y-3">
+                    <h4 class="text-sigma font-bold text-black-700">Foto KTP / Identitas (Size: Small 80x80)</h4>
+                    <p class="text-sm text-black-500">Ukuran ringkas 80x80px untuk pas foto atau avatar identitas.</p>
+                    <div class="flex items-center gap-4">
+                      <ImagePicker v-model="imagePickerSmall" size="small" />
+                    </div>
+                  </div>
+
+                  <div class="rounded-xl border border-black-200 p-4 bg-white space-y-3">
+                    <h4 class="text-sigma font-bold text-black-700">Foto Barang Jaminan (Size: Large 4:3)</h4>
+                    <p class="text-sm text-black-500">Ukuran besar dengan rasio 4:3 untuk foto detail perhiasan emas.</p>
+                    <div class="flex flex-col gap-2">
+                      <ImagePicker v-model="imagePickerLarge43" size="large" aspectRatio="4:3" />
+                    </div>
+                  </div>
+                </div>
+
+                <div class="rounded-xl border border-black-200 p-4 bg-white space-y-3">
+                  <h4 class="text-sigma font-bold text-black-700">Multi-Image Slider dengan Metadata & CTA</h4>
+                  <p class="text-sm text-black-500">Mendukung upload beberapa foto fisik barang jaminan sekaligus.</p>
+                  <ImagePicker 
+                    v-model="imagePickerMultiple" 
+                    size="large" 
+                    aspectRatio="4:3"
+                    title="Foto Fisik Barang Gadai"
+                    description="Upload 1 hingga 5 foto detail barang dari berbagai sisi"
+                    upload-button-text="Tambah Foto Jaminan"
+                    metadata="Format: JPG/PNG, Maksimal 5MB per file"
+                    multiple
+                  />
+                </div>
+              </div>
+            </section>
+
+            <!-- 4. DATA DISPLAY & LAYOUT -->
+            <!-- Avatar -->
+            <section id="avatar" class="playground-section playground-panel p-6 space-y-4">
+              <div>
+                <p class="playground-eyebrow">User Profiles & Identifiers</p>
+                <h2 class="text-xl font-bold text-black-900">Avatar</h2>
+                <p class="text-sigma text-black-500">
+                  Visual identity representations for user accounts, collaborative editors, and workspace teams.
+                </p>
+              </div>
+
+              <div class="flex flex-wrap items-center gap-6 pt-2">
+                <div class="flex items-center gap-3">
+                  <Avatar src="https://i.pravatar.cc/96?img=12" alt="Budi Santoso" size="lg" />
+                  <div>
+                    <h4 class="text-sigma font-bold text-black-800">Budi Santoso</h4>
+                    <p class="text-omega text-black-500">Nasabah Prioritas</p>
+                  </div>
+                </div>
+                <Avatar fallback="PG" size="md" />
+                <Avatar fallback="UI" size="sm" />
+                <Avatar alt="Pegadaian" size="xs" />
+              </div>
+            </section>
+
+            <!-- Badge -->
+            <section id="badge" class="playground-section playground-panel p-6 space-y-4">
+              <div>
+                <p class="playground-eyebrow">Status Pills & Taxonomy</p>
+                <h2 class="text-xl font-bold text-black-900">Badge</h2>
+                <p class="text-sigma text-black-500">
+                  Status badges and category tags in semantic color shades (Green, Broccoli, Orange, Blue, Red, Outline).
+                </p>
+              </div>
+
+              <!-- Real-world Case: Status Pinjaman Gadai -->
+              <div class="flex flex-wrap items-center gap-3 pt-2">
+                <Badge>Lancar (Green)</Badge>
+                <Badge variant="brocoli">Dalam Proses (Broccoli)</Badge>
+                <Badge variant="orange">Mendekati Jatuh Tempo (Orange)</Badge>
+                <Badge variant="blue">Verifikasi Dokumen (Blue)</Badge>
+                <Badge variant="red">Jatuh Tempo / Peringatan (Red)</Badge>
+                <Badge variant="outline">Draft Transaksi</Badge>
+              </div>
+            </section>
+
+            <!-- Card -->
+            <section id="card" class="playground-section playground-color-block block-cream space-y-6">
+              <div class="flex flex-wrap items-center justify-between gap-3">
+                <div>
+                  <p class="playground-eyebrow">Surfaces & Containers</p>
+                  <h2 class="playground-display">Card</h2>
+                  <p class="playground-desc">
+                    Content containers featuring structured header, title, description, content body, and action footer slots.
+                  </p>
+                </div>
+                <Badge variant="brocoli">Container Component</Badge>
+              </div>
+
+              <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+                <!-- Variant 1: Portofolio Tabungan Emas -->
+                <Card class="bg-white">
+                  <CardHeader>
+                    <div class="flex items-center justify-between">
+                      <div class="flex flex-col gap-y-1">
+                        <CardTitle>Tabungan Emas</CardTitle>
+                        <CardDescription>No. Rek: 1234-5678-9101</CardDescription>
+                      </div>
+                      <Badge variant="brocoli">Aktif</Badge>
+                    </div>
+                  </CardHeader>
+                  <CardContent>
+                    <div class="rounded-lg bg-lime-50 p-4 border border-lime-200">
+                      <span class="text-omega font-semibold text-lime-700">Saldo Fisik Emas</span>
+                      <p class="text-xl font-black text-black-900 mt-1">12.5400 gr</p>
+                      <p class="text-omega text-black-500 mt-0.5">≈ Rp 18.183.000</p>
+                    </div>
+                  </CardContent>
+                  <CardFooter class="flex gap-2">
+                    <Button class="w-full" size="sm">Top Up</Button>
+                    <Button variant="outline" class="w-full" size="sm">Jual Emas</Button>
+                  </CardFooter>
+                </Card>
+
+                <!-- Variant 2: Card with Image Promo -->
+                <Card class="bg-white">
+                  <CardHeader>
+                    <CardTitle>Promo Cashback Gadai</CardTitle>
+                    <CardDescription>Khusus transaksi digital bulan ini</CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <div class="mb-4 h-32 w-full overflow-hidden rounded-lg bg-black-200">
+                      <img src="https://images.unsplash.com/photo-1610375461246-83df859d849d?q=80&w=600" alt="Promo Gold" class="h-full w-full object-cover" />
+                    </div>
+                    <p class="text-sigma font-bold text-black-800">Cashback s.d. Rp 500.000</p>
+                    <p class="mt-1 text-omega text-black-500">
+                      Gunakan kode voucher GADAIBERKAH saat pengajuan di aplikasi Pegadaian Digital.
+                    </p>
+                  </CardContent>
+                  <CardFooter>
+                    <Button class="w-full" size="sm">Klaim Promo</Button>
+                  </CardFooter>
+                </Card>
+
+                <!-- Variant 3: Minimal Card -->
+                <Card class="bg-white">
+                  <CardContent class="pt-6">
+                    <div class="flex items-center gap-3 mb-3">
+                      <div class="flex h-10 w-10 items-center justify-center rounded-full bg-blue-100 text-blue-600">
+                        <ShieldCheck class="h-5 w-5" />
+                      </div>
+                      <div>
+                        <h4 class="text-sigma font-bold text-black-900">Jaminan Aman 100%</h4>
+                        <p class="text-omega text-black-500">Tersimpan di Khazanah Pegadaian</p>
+                      </div>
+                    </div>
+                    <p class="text-omega text-black-600 leading-relaxed">
+                      Barang jaminan disimpan di ruang penyimpanan berspesifikasi keamanan tinggi dengan asuransi penuh.
+                    </p>
+                  </CardContent>
+                </Card>
+              </div>
+            </section>
+
+            <!-- Table & Data Table -->
+            <section id="table" class="playground-section playground-panel p-6 space-y-5">
+              <div>
+                <p class="playground-eyebrow">Data Matrices & Tabular Records</p>
+                <h2 class="text-xl font-bold text-black-900">Table & Data Table</h2>
+                <p class="text-sigma text-black-500">
+                  Data-driven comparison matrices, zebra striped rows, and dense tabular records.
+                </p>
+              </div>
+
+              <div class="grid gap-6">
+                <div class="rounded-xl border border-black-100 bg-white p-4 space-y-4">
+                  <h3 class="text-sigma font-bold text-black-800">Tabel Tarif Sewa Modal dan Premi Pinjaman Pegadaian</h3>
+                  <DataTable :columns="tableColumns" :rows="tableRows" />
+                  <Alert variant="destructive" class="border-red-500 bg-red-500 p-3 text-white">
+                    <AlertDescription class="!text-omega font-semibold leading-[18px] text-white">
+                      Penyaluran Produk dihentikan sementara sesuai dengan ID Nomor 42/ID/2020 Penghentian Sementara Penyaluran Produk Pegadaian Kreasi Express Loan.
+                    </AlertDescription>
+                  </Alert>
+                </div>
+              </div>
+            </section>
+
+            <!-- Accordion -->
+            <section id="accordion" class="playground-section playground-panel p-6 space-y-4">
+              <div>
+                <p class="playground-eyebrow">Collapsible Disclosures</p>
+                <h2 class="text-xl font-bold text-black-900">Accordion</h2>
+                <p class="text-sigma text-black-500">
+                  Expandable FAQ and detail sections supporting single-open and multi-collapse modes.
+                </p>
+              </div>
+
+              <div class="rounded-xl border border-black-100 bg-white p-4">
+                <Accordion type="single" collapsible default-value="faq-1">
+                  <AccordionItem value="faq-1">
+                    <AccordionTrigger>Apa saja syarat pengajuan Gadai Emas di Pegadaian?</AccordionTrigger>
+                    <AccordionContent class="text-sigma text-black-600 leading-relaxed pt-2">
+                      Syaratnya sangat mudah: Nasabah cukup membawa fisik barang jaminan (emas batangan atau perhiasan) beserta KTP asli yang masih berlaku ke kantor cabang Pegadaian terdekat.
+                    </AccordionContent>
+                  </AccordionItem>
+                  <AccordionItem value="faq-2">
+                    <AccordionTrigger>Bagaimana cara memperpanjang jangka waktu pinjaman gadai?</AccordionTrigger>
+                    <AccordionContent class="text-sigma text-black-600 leading-relaxed pt-2">
+                      Perpanjangan jangka waktu gadai dapat dilakukan dengan membayar sewa modal (bunga) yang telah berjalan langsung melalui aplikasi Pegadaian Digital atau di outlet Pegadaian.
+                    </AccordionContent>
+                  </AccordionItem>
+                  <AccordionItem value="faq-3">
+                    <AccordionTrigger>Apakah emas yang digadaikan dijamin keamanannya?</AccordionTrigger>
+                    <AccordionContent class="text-sigma text-black-600 leading-relaxed pt-2">
+                      Ya, barang jaminan emas nasabah disimpan di ruang penyimpanan besi berstandar perbankan (khazanah) dan diasuransikan 100% dari nilai taksiran pasar.
+                    </AccordionContent>
+                  </AccordionItem>
+                </Accordion>
+              </div>
+            </section>
+
+            <!-- Carousel -->
+            <section id="carousel" class="playground-section playground-panel p-6 space-y-5">
+              <div>
+                <p class="playground-eyebrow">Sliders & Hero Banners</p>
+                <h2 class="text-xl font-bold text-black-900">Carousel & Banner Slider</h2>
+                <p class="text-sigma text-black-500">
+                  Interactive touch-enabled banner carousels with autoplay, slide indicators, and navigation controls.
+                </p>
+              </div>
+
+              <div class="space-y-6">
+                <div class="rounded-xl border border-black-200 bg-white p-4 space-y-3">
+                  <h3 class="text-sigma font-bold text-black-800">1. BannerCarousel (Figma Preset)</h3>
+                  <BannerCarousel
+                    :items="carouselBannerSlides"
+                    :autoplay="true"
+                    :autoplay-interval="5000"
+                  />
+                </div>
+
+                <div class="rounded-xl border border-black-200 bg-white p-4 space-y-3">
+                  <h3 class="text-sigma font-bold text-black-800">2. Compound Primitive Carousel</h3>
+                  <Carousel :loop="true" :autoplay="false" class="w-full">
+                    <CarouselContent>
+                      <CarouselItem v-for="i in 3" :key="i">
+                        <div class="flex flex-col items-center justify-center min-h-[160px] p-8 rounded-xl bg-lime-600 text-white font-bold">
+                          <span class="text-zeta">Promo Slide Item {{ i }}</span>
+                          <span class="text-sigma font-normal opacity-90 mt-1">Modular CarouselItem component dengan swipe support</span>
+                        </div>
+                      </CarouselItem>
+                    </CarouselContent>
+                    <div class="mt-4 flex items-center justify-between">
+                      <div class="flex items-center gap-2">
+                        <CarouselPrevious />
+                        <CarouselNext />
+                      </div>
+                      <CarouselIndicators />
+                    </div>
+                  </Carousel>
+                </div>
+              </div>
+            </section>
+
+            <!-- Divider -->
+            <section id="divider" class="playground-section playground-panel p-6 space-y-4">
+              <div>
+                <p class="playground-eyebrow">Separators & Boundaries</p>
+                <h2 class="text-xl font-bold text-black-900">Divider</h2>
+                <p class="text-sigma text-black-500">
+                  Hairline visual separators supporting both horizontal and vertical orientations.
+                </p>
+              </div>
+
+              <div class="grid gap-4 pt-2">
+                <Divider />
+                <div class="flex h-12 items-center gap-4">
+                  <span class="text-sigma font-bold text-black-800">Rincian Pokok</span>
+                  <Divider orientation="vertical" />
+                  <span class="text-sigma font-bold text-black-800">Rincian Sewa Modal</span>
+                  <Divider orientation="vertical" />
+                  <span class="text-sigma font-bold text-black-800">Biaya Administrasi</span>
+                </div>
+              </div>
+            </section>
+
+            <!-- Breadcrumb -->
+            <section id="breadcrumb" class="playground-section playground-panel p-6 space-y-4">
+              <div>
+                <p class="playground-eyebrow">Navigation Trails</p>
+                <h2 class="text-xl font-bold text-black-900">Breadcrumb</h2>
+                <p class="text-sigma text-black-500">
+                  Hierarchical navigation trails with item links, separators, truncation ellipsis, and page state.
+                </p>
+              </div>
+
+              <div class="space-y-4 pt-2">
+                <div class="rounded-xl border border-black-100 bg-white p-4 space-y-2">
+                  <h3 class="text-omega font-bold uppercase tracking-wider text-black-400">Hierarki Standar Transaksi</h3>
+                  <Breadcrumb>
+                    <BreadcrumbList>
+                      <BreadcrumbItem>
+                        <BreadcrumbLink href="#">Dashboard Nasabah</BreadcrumbLink>
+                      </BreadcrumbItem>
+                      <BreadcrumbSeparator />
+                      <BreadcrumbItem>
+                        <BreadcrumbLink href="#">Portofolio Gadai</BreadcrumbLink>
+                      </BreadcrumbItem>
+                      <BreadcrumbSeparator />
+                      <BreadcrumbItem>
+                        <BreadcrumbPage>Detail Pinjaman #PG-88219</BreadcrumbPage>
+                      </BreadcrumbItem>
+                    </BreadcrumbList>
+                  </Breadcrumb>
+                </div>
+              </div>
+            </section>
+
+            <!-- Pagination -->
+            <section id="pagination" class="playground-section playground-panel p-6 space-y-4">
+              <div>
+                <p class="playground-eyebrow">Page Navigation</p>
+                <h2 class="text-xl font-bold text-black-900">Pagination</h2>
+                <p class="text-sigma text-black-500">
+                  Accessible pagination controls with smart truncation ellipsis and page change triggers.
+                </p>
+              </div>
+
+              <div class="grid gap-4 pt-2">
+                <div class="rounded-xl border border-black-100 bg-white p-4 flex flex-col sm:flex-row items-center justify-between gap-4">
+                  <span class="text-sigma font-bold text-black-600">Halaman Aktif: {{ paginationPage }} dari 20</span>
+                  <Pagination v-model="paginationPage" :total-pages="20" />
+                </div>
+              </div>
+            </section>
+
+            <!-- Tabs -->
+            <section id="tabs" class="playground-section playground-color-block block-coral space-y-6">
+              <div class="mb-4">
+                <p class="playground-eyebrow">Segmented View Switchers</p>
+                <h2 class="playground-display">Tabs</h2>
+                <p class="playground-desc">
+                  Segmented tab switchers with smooth animated sliding indicators for pricing and views.
+                </p>
+              </div>
+
+              <!-- Real-world Case: Tab Dashboard Nasabah -->
+              <div class="rounded-xl border border-rose-200 bg-white p-5 space-y-4">
+                <TabGroup default-value="ringkasan">
+                  <TabTriggerGroup>
+                    <TabTrigger value="ringkasan">Ringkasan Portofolio</TabTrigger>
+                    <TabTrigger value="riwayat">Riwayat Transaksi</TabTrigger>
+                    <TabTrigger value="dokumen">Dokumen & Akad</TabTrigger>
+                  </TabTriggerGroup>
+                  <TabContent value="ringkasan" class="pt-4 text-sigma text-black-600 leading-relaxed">
+                    Total portofolio tabungan emas aktif: <strong>12.5400 gram</strong> dengan estimasi nilai pasar Rp 18.183.000.
+                  </TabContent>
+                  <TabContent value="riwayat" class="pt-4 text-sigma text-black-600 leading-relaxed">
+                    Menampilkan 10 transaksi terakhir: Top-up saldo tabungan emas, perpanjangan gadai, dan cicilan emas.
+                  </TabContent>
+                  <TabContent value="dokumen" class="pt-4 text-sigma text-black-600 leading-relaxed">
+                    Dokumen Surat Bukti Gadai (SBG) dan sertifikat kepemilikan emas digital tersedia untuk diunduh.
+                  </TabContent>
+                </TabGroup>
+              </div>
+            </section>
+
+            <!-- 5. FEEDBACK & FLOATING SURFACES -->
+            <!-- Alert -->
+            <section id="alert" class="playground-section playground-panel p-6 space-y-4">
+              <div>
+                <p class="playground-eyebrow">System Banners & Notifications</p>
+                <h2 class="text-xl font-bold text-black-900">Alert</h2>
+                <p class="text-sigma text-black-500">
+                  Status alerts for critical warnings, success feedback, and system notifications with optional close actions.
+                </p>
+              </div>
+
+              <div class="space-y-4 pt-2">
+                <Alert>
+                  <Check class="h-4 w-4 text-lime-600" />
+                  <AlertTitle>Pembayaran Angsuran Berhasil</AlertTitle>
+                  <AlertDescription>
+                    Transaksi pelunasan sewa modal sebesar Rp 150.000 telah berhasil diverifikasi oleh sistem.
+                  </AlertDescription>
+                </Alert>
+                <Alert variant="destructive" show-close>
+                  <AlertCircle class="h-4 w-4" />
+                  <AlertTitle>Peringatan Jatuh Tempo</AlertTitle>
+                  <AlertDescription>
+                    Masa pinjaman gadai nomor SBG-99210 akan jatuh tempo dalam 3 hari ke depan. Harap segera lakukan perpanjangan.
+                  </AlertDescription>
+                </Alert>
+              </div>
+            </section>
+
+            <!-- Progress -->
+            <section id="progress" class="playground-section playground-panel p-6 space-y-4">
+              <div>
+                <p class="playground-eyebrow">Deterministic Loaders</p>
+                <h2 class="text-xl font-bold text-black-900">Progress Bar</h2>
+                <p class="text-sigma text-black-500">
+                  Visual progress indicators for multi-step workflows, uploads, and background tasks.
+                </p>
+              </div>
+
+              <div class="rounded-xl border border-black-100 bg-white p-5 space-y-3">
+                <div class="flex items-center justify-between">
+                  <span class="text-sigma font-bold text-black-800">Kelengkapan Data Verifikasi Nasabah (KYC)</span>
+                  <span class="text-sigma font-mono font-bold text-lime-700 bg-lime-100 px-2 py-0.5 rounded">{{ progressValue }}%</span>
+                </div>
+                <Progress :model-value="progressValue" />
+                <div class="pt-2">
+                  <input
+                    v-model="progressValue"
+                    type="range"
+                    min="0"
+                    max="100"
+                    class="w-full accent-lime-500"
+                  />
+                </div>
+              </div>
+            </section>
+
+            <!-- Spinner -->
+            <section id="spinner" class="playground-section playground-panel p-6 space-y-4">
+              <div>
+                <p class="playground-eyebrow">Activity Indicators</p>
+                <h2 class="text-xl font-bold text-black-900">Spinner</h2>
+                <p class="text-sigma text-black-500">
+                  Compact CSS-driven activity spinners for asynchronous operation loading states.
+                </p>
+              </div>
+
+              <div class="flex flex-wrap items-center gap-6 pt-2">
+                <div class="flex items-center gap-3">
+                  <Spinner size="sm" />
+                  <span class="text-omega font-semibold text-black-600">Small (sm)</span>
+                </div>
+                <div class="flex items-center gap-3">
+                  <Spinner />
+                  <span class="text-omega font-semibold text-black-600">Medium (md)</span>
+                </div>
+                <div class="flex items-center gap-3">
+                  <Spinner size="lg" />
+                  <span class="text-omega font-semibold text-black-600">Large (lg)</span>
+                </div>
+                <Button :loading="true" loading-label="Menghitung taksiran emas...">
+                  Button Loading
+                </Button>
+              </div>
+            </section>
+
+            <!-- Toast -->
+            <section id="toast" class="playground-section playground-panel p-6 space-y-4">
+              <div>
+                <p class="playground-eyebrow">Ephemeral Feedback</p>
+                <h2 class="text-xl font-bold text-black-900">Toast & Snackbars</h2>
+                <p class="text-sigma text-black-500">
+                  Floating snackbar notifications for transient feedback on background operations.
+                </p>
+              </div>
+
+              <div class="grid gap-4 md:grid-cols-3 pt-2">
+                <Toast
+                  title="Transaksi Berhasil"
+                  description="Top up saldo tabungan emas Rp 500.000 sukses."
+                  variant="success"
+                />
+                <Toast
+                  title="Peringatan Limit"
+                  description="Maksimum transaksi harian tersisa Rp 2.000.000."
+                  variant="warning"
+                />
+                <Toast
+                  title="Gagal Terhubung"
+                  description="Koneksi ke gateway perbankan mengalami timeout."
+                  variant="error"
+                />
+              </div>
+            </section>
+
+            <!-- Dialog -->
+            <section id="dialog" class="playground-section playground-panel p-6 space-y-5">
               <div>
                 <p class="playground-eyebrow">Modal Overlays & Focus Trap</p>
                 <h2 class="text-xl font-bold text-black-900">Dialog</h2>
@@ -1762,28 +2191,43 @@ const shellClass = computed(() =>
                 </p>
               </div>
 
-              <div class="flex flex-wrap gap-4">
-                <!-- Variant 1: Default Dialog -->
-                <Dialog v-model:open="isDialogOpen">
+              <div class="flex flex-wrap gap-4 pt-2">
+                <!-- Variant 1: Konfirmasi Pelunasan Gadai -->
+                <Dialog v-model:open="isPelunasanModalOpen">
                   <DialogTrigger as-child>
-                    <Button>Default Dialog</Button>
+                    <Button>Konfirmasi Pelunasan Gadai</Button>
                   </DialogTrigger>
                   <DialogContent>
                     <DialogHeader>
-                      <DialogTitle>Review component style</DialogTitle>
+                      <DialogTitle>Konfirmasi Pelunasan Pinjaman</DialogTitle>
                       <DialogDescription>
-                        Dialog surfaces should be visually independent from the
-                        page behind it.
+                        Periksa rincian pelunasan sebelum menyelesaikan pembayaran.
                       </DialogDescription>
                     </DialogHeader>
-                    <DialogBody class="text-sigma text-black-800">
-                      Ini adalah contoh konten utama dialog. Struktur styling dialog identik dengan Card, sehingga padding diserahkan kepada child komponen.
+                    <DialogBody class="text-sigma text-black-800 space-y-3">
+                      <div class="rounded-lg bg-black-50 p-3 space-y-1">
+                        <div class="flex justify-between text-omega">
+                          <span class="text-black-500">No. Surat Bukti Gadai</span>
+                          <span class="font-bold font-mono text-black-800">SBG-882193</span>
+                        </div>
+                        <div class="flex justify-between text-omega">
+                          <span class="text-black-500">Pokok Pinjaman</span>
+                          <span class="font-bold text-black-800">Rp 15.000.000</span>
+                        </div>
+                        <div class="flex justify-between text-omega">
+                          <span class="text-black-500">Sewa Modal (Bunga)</span>
+                          <span class="font-bold text-black-800">Rp 180.000</span>
+                        </div>
+                      </div>
+                      <p class="text-omega text-black-600">
+                        Setelah pembayaran berhasil, fisik barang jaminan dapat langsung diambil di kantor cabang terdaftar.
+                      </p>
                     </DialogBody>
                     <DialogFooter>
                       <DialogClose as-child>
-                        <Button variant="outline">Cancel</Button>
+                        <Button variant="outline">Batalkan</Button>
                       </DialogClose>
-                      <Button @click="isDialogOpen = false">Save</Button>
+                      <Button @click="isPelunasanModalOpen = false">Konfirmasi Bayar</Button>
                     </DialogFooter>
                   </DialogContent>
                 </Dialog>
@@ -1791,52 +2235,50 @@ const shellClass = computed(() =>
                 <!-- Variant 2: Dialog with Image -->
                 <Dialog v-model:open="isDialogOpen2">
                   <DialogTrigger as-child>
-                    <Button variant="secondary">Dialog with Image</Button>
+                    <Button variant="secondary">Dialog Media & Ilustrasi</Button>
                   </DialogTrigger>
                   <DialogContent>
                     <DialogHeader>
-                      <DialogTitle>Confirm Action</DialogTitle>
+                      <DialogTitle>Panduan Pengambilan Jaminan</DialogTitle>
                     </DialogHeader>
                     <DialogBody>
                       <div class="mb-4 h-32 w-full overflow-hidden rounded-lg bg-black-200">
-                        <img src="https://picsum.photos/400/200" alt="Dialog Image" class="h-full w-full object-cover" />
+                        <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=400" alt="Dialog Image" class="h-full w-full object-cover" />
                       </div>
-                      <p class="text-sigma font-bold text-black-800">Warning Headline</p>
+                      <p class="text-sigma font-bold text-black-800">Tunjukkan KTP Asli & Bukti SBG</p>
                       <p class="mt-1 text-sigma text-black-500">
-                        This action has consequences related to the image above. Please be careful.
+                        Pengambilan barang jaminan tidak dapat diwakilkan tanpa surat kuasa bermaterai sah.
                       </p>
                     </DialogBody>
                     <DialogFooter>
                       <DialogClose as-child>
-                        <Button variant="outline">Cancel</Button>
+                        <Button variant="outline">Tutup</Button>
                       </DialogClose>
-                      <Button @click="isDialogOpen2 = false">Confirm</Button>
+                      <Button @click="isDialogOpen2 = false">Mengerti</Button>
                     </DialogFooter>
                   </DialogContent>
                 </Dialog>
 
-                <!-- Variant 3: Minimal Dialog (No Footer) -->
+                <!-- Variant 3: Minimal Dialog -->
                 <Dialog v-model:open="isDialogOpen3">
                   <DialogTrigger as-child>
                     <Button variant="tertiary">Minimal Dialog</Button>
                   </DialogTrigger>
                   <DialogContent>
                     <DialogHeader>
-                      <DialogTitle>Information</DialogTitle>
-                      <DialogDescription>Just a simple informational dialog without footer actions.</DialogDescription>
+                      <DialogTitle>Informasi Pengamanan Data</DialogTitle>
+                      <DialogDescription>Seluruh data nasabah dienkripsi dengan standar TLS 1.3.</DialogDescription>
                     </DialogHeader>
                     <DialogBody class="text-omicron">
-                      You can click the close button at the top right to dismiss this dialog.
+                      Klik tombol silang di pojok kanan atas untuk menutup dialog informasi ini.
                     </DialogBody>
                   </DialogContent>
                 </Dialog>
               </div>
             </section>
 
-            <section
-              id="popover"
-              class="playground-section playground-color-block block-pink space-y-4"
-            >
+            <!-- Popover -->
+            <section id="popover" class="playground-section playground-color-block block-pink space-y-4">
               <div class="mb-4">
                 <p class="playground-eyebrow">Floating Surfaces & Menus</p>
                 <h2 class="playground-display">Popover</h2>
@@ -1845,62 +2287,94 @@ const shellClass = computed(() =>
                 </p>
               </div>
 
+              <!-- Real-world Case: Rincian Taksiran Emas -->
               <div class="flex flex-wrap items-center gap-4">
                 <Popover>
                   <PopoverAnchor as-child>
-                    <span
-                      class="inline-flex h-10 items-center rounded-full bg-white px-4 text-sigma font-bold text-black-800 border border-pink-200"
-                    >
+                    <span class="inline-flex h-10 items-center rounded-full bg-white px-4 text-sigma font-bold text-black-800 border border-pink-200">
                       Anchor Target
                     </span>
                   </PopoverAnchor>
                   <PopoverTrigger as-child>
-                    <Button>Open Popover</Button>
+                    <Button>Lihat Rincian Taksiran Emas</Button>
                   </PopoverTrigger>
-                  <PopoverContent class="w-80" title="Detail Informasi">
-                    <p class="text-sigma text-black-600">
-                      Popover menggunakan struktur card-style dengan header dan slot konten fleksibel.
-                    </p>
+                  <PopoverContent class="w-80" title="Rincian Taksiran Emas (24K)">
+                    <div class="space-y-2 text-sigma text-black-600">
+                      <div class="flex justify-between text-omega">
+                        <span>Kadar Kemurnian</span>
+                        <strong class="text-black-800">99.99% (24 Karat)</strong>
+                      </div>
+                      <div class="flex justify-between text-omega">
+                        <span>Berat Bersih</span>
+                        <strong class="text-black-800">10.50 gram</strong>
+                      </div>
+                      <div class="flex justify-between text-omega">
+                        <span>Nilai Taksiran Pasar</span>
+                        <strong class="text-black-800">Rp 15.225.000</strong>
+                      </div>
+                      <p class="text-omega text-black-500 pt-2 border-t border-black-100">
+                        Nilai taksiran mengikuti harga acuan pasar emas resmi Pegadaian hari ini.
+                      </p>
+                    </div>
                   </PopoverContent>
                 </Popover>
               </div>
             </section>
 
-            <section
-              id="dropdown"
-              class="playground-section playground-panel p-5"
-            >
-              <h2 class="mb-1 text-omicron font-bold text-black-800">
-                Dropdown
-              </h2>
-              <p class="mb-5 text-sigma text-black-500">
-                Single option, selected row, icon row, and multiple checkbox
-                rows.
-              </p>
+            <!-- Tooltip -->
+            <section id="tooltip" class="playground-section playground-panel p-6 space-y-4">
+              <div>
+                <p class="playground-eyebrow">Assistive Hints & Definitions</p>
+                <h2 class="text-xl font-bold text-black-900">Tooltip</h2>
+                <p class="text-sigma text-black-500">
+                  Hover and focus-triggered micro tooltips with card styling and precise anchor offsets.
+                </p>
+              </div>
 
+              <!-- Real-world Case: Info Biaya Titip -->
+              <div class="flex flex-wrap items-center gap-6 pt-2">
+                <Tooltip>
+                  <TooltipTrigger as-child>
+                    <Button variant="ghost" class="inline-flex items-center gap-1.5 text-black-700">
+                      <CircleHelp class="h-4 w-4 text-lime-600" />
+                      Apa itu Biaya Titip Emas?
+                    </Button>
+                  </TooltipTrigger>
+                  <TooltipContent title="Biaya Titip Emas Batangan">
+                    Biaya titip fasilitas brankas aman Rp 2.500 per bulan per akun rekening tabungan emas aktif.
+                  </TooltipContent>
+                </Tooltip>
+
+                <Tooltip>
+                  <TooltipTrigger as-child>
+                    <Button variant="ghost" class="inline-flex items-center gap-1.5 text-black-700">
+                      <CircleHelp class="h-4 w-4 text-lime-600" />
+                      Rumus Sewa Modal
+                    </Button>
+                  </TooltipTrigger>
+                  <TooltipContent title="Formula Perhitungan Sewa Modal">
+                    (Uang Pinjaman x Tarif Sewa Modal Golongan x Jangka Waktu) / 15 Hari.
+                  </TooltipContent>
+                </Tooltip>
+              </div>
+            </section>
+
+            <!-- Dropdown -->
+            <section id="dropdown" class="playground-section playground-panel p-6 space-y-5">
+              <div>
+                <p class="playground-eyebrow">Menu Selections & Accounts</p>
+                <h2 class="text-xl font-bold text-black-900">Dropdown</h2>
+                <p class="text-sigma text-black-500">
+                  Single option, selected row, icon row with account balances, and multiple checkbox rows.
+                </p>
+              </div>
+
+              <!-- Real-world Case: Pilih Rekening Sumber & Wilayah -->
               <div class="grid gap-6">
-                <!-- Interactive Dropdowns -->
-                <div>
-                  <h3 class="mb-3 text-pi font-semibold text-black-800">Interactive Dropdowns</h3>
-                  <div class="grid gap-4 lg:grid-cols-3">
-                    <Dropdown
-                      v-model:open="dropdownOpen"
-                      :model-label="dropdownProvince"
-                      placeholder="Pilih provinsi"
-                      trigger-class="w-full"
-                    >
-                      <DropdownList>
-                        <DropdownListItem
-                          v-for="province in ['Aceh', 'Bali', 'Banten']"
-                          :key="province"
-                          :selected="dropdownProvince === province"
-                          @select="selectDropdownProvince(province)"
-                        >
-                          {{ province }}
-                        </DropdownListItem>
-                      </DropdownList>
-                    </Dropdown>
-
+                <div class="grid gap-4 lg:grid-cols-3">
+                  <!-- Dropdown Rekening Sumber -->
+                  <div class="space-y-2">
+                    <span class="text-sigma font-bold text-black-800">Pilih Rekening Sumber</span>
                     <Dropdown
                       v-model:open="dropdownIconOpen"
                       :model-label="dropdownIconSelected"
@@ -1917,800 +2391,53 @@ const shellClass = computed(() =>
                           @select="dropdownIconSelected = account.title; dropdownIconOpen = false"
                         >
                           <template #icon>
-                            <Landmark class="h-6 w-6" />
+                            <Landmark class="h-6 w-6 text-lime-600" />
                           </template>
                         </DropdownListItem>
                       </DropdownList>
                     </Dropdown>
+                  </div>
 
+                  <!-- Dropdown Wilayah -->
+                  <div class="space-y-2">
+                    <span class="text-sigma font-bold text-black-800">Pilih Wilayah Operasional</span>
+                    <Dropdown
+                      v-model:open="dropdownOpen"
+                      :model-label="dropdownProvince"
+                      placeholder="Pilih provinsi"
+                      trigger-class="w-full"
+                    >
+                      <DropdownList>
+                        <DropdownListItem
+                          v-for="province in ['Aceh', 'Bali', 'Banten', 'DKI Jakarta', 'Jawa Barat']"
+                          :key="province"
+                          :selected="dropdownProvince === province"
+                          @select="selectDropdownProvince(province)"
+                        >
+                          {{ province }}
+                        </DropdownListItem>
+                      </DropdownList>
+                    </Dropdown>
+                  </div>
+
+                  <!-- Dropdown Multi Opsi -->
+                  <div class="space-y-2">
+                    <span class="text-sigma font-bold text-black-800">Paket Proteksi Tambahan</span>
                     <Dropdown
                       v-model:open="dropdownMultipleOpen"
                       :model-label="dropdownMultipleLabel"
-                      placeholder="Pilih opsi"
+                      placeholder="Pilih paket"
                       trigger-class="w-full"
                     >
                       <DropdownList variant="multiple">
                         <DropdownListCheckboxItem v-model="dropdownOptionA">
-                          Option A
+                          Asuransi Jiwa Nasabah
                         </DropdownListCheckboxItem>
                         <DropdownListCheckboxItem v-model="dropdownOptionB">
-                          Option B
+                          Proteksi Khazanah Emas
                         </DropdownListCheckboxItem>
                       </DropdownList>
                     </Dropdown>
-                  </div>
-                </div>
-
-                <!-- Dropdown List Surface Previews -->
-                <div>
-                  <h3 class="mb-3 text-pi font-semibold text-black-800">Dropdown List Surfaces</h3>
-                  <div class="grid gap-4 lg:grid-cols-3">
-                    <DropdownList>
-                      <DropdownListItem>Aceh</DropdownListItem>
-                      <DropdownListItem selected>Bali</DropdownListItem>
-                      <DropdownListItem>Banten</DropdownListItem>
-                      <DropdownListItem>Bengkulu</DropdownListItem>
-                    </DropdownList>
-
-                    <DropdownList>
-                      <DropdownListItem
-                        label="1.805,0595 gram"
-                        caption="1234 5678 9101 2345"
-                        selected
-                      >
-                        <template #icon>
-                          <Landmark class="h-6 w-6" />
-                        </template>
-                      </DropdownListItem>
-                      <DropdownListItem
-                        label="1.805,0595 gram"
-                        caption="1234 5678 9101 2345"
-                      >
-                        <template #icon>
-                          <Landmark class="h-6 w-6" />
-                        </template>
-                      </DropdownListItem>
-                    </DropdownList>
-
-                    <DropdownList variant="multiple">
-                      <DropdownListCheckboxItem v-model="dropdownOptionA">
-                        This is an option
-                      </DropdownListCheckboxItem>
-                      <DropdownListCheckboxItem v-model="dropdownOptionB">
-                        This is an option
-                      </DropdownListCheckboxItem>
-                    </DropdownList>
-                  </div>
-                </div>
-              </div>
-            </section>
-
-            <section
-              id="datepicker"
-              class="playground-section playground-panel p-5"
-            >
-              <h2 class="mb-1 text-omicron font-bold text-black-800">
-                Datepicker
-              </h2>
-              <p class="mb-5 text-sigma text-black-500">
-                Input-style trigger with calendar popup for single date
-                selection.
-              </p>
-
-              <div class="grid gap-4 lg:grid-cols-2">
-                <Datepicker
-                  v-model="datepickerValue"
-                  placeholder="Pilih tanggal"
-                  trigger-class="max-w-md"
-                />
-                <Datepicker
-                  default-open
-                  model-value="2026-06-21"
-                  placeholder="Pilih tanggal"
-                  trigger-class="max-w-md"
-                />
-              </div>
-            </section>
-
-            <section
-              id="tooltip"
-              class="playground-section playground-panel p-6 space-y-4"
-            >
-              <div>
-                <p class="playground-eyebrow">Assistive Hints & Definitions</p>
-                <h2 class="text-xl font-bold text-black-900">Tooltip</h2>
-                <p class="text-sigma text-black-500">
-                  Hover and focus-triggered micro tooltips with card styling and precise anchor offsets.
-                </p>
-              </div>
-
-              <Tooltip>
-                <TooltipTrigger as-child>
-                  <Button variant="ghost"
-                    ><CircleHelp class="h-4 w-4" />Tooltip</Button
-                  >
-                </TooltipTrigger>
-                <TooltipContent title="Tooltip Example">Tooltip content text</TooltipContent>
-              </Tooltip>
-            </section>
-
-            <section
-              id="breadcrumb"
-              class="playground-section playground-panel p-6 space-y-4"
-            >
-              <div>
-                <p class="playground-eyebrow">Navigation Trails</p>
-                <h2 class="text-xl font-bold text-black-900">Breadcrumb</h2>
-                <p class="text-sigma text-black-500">
-                  Hierarchical navigation trails with item links, separators, truncation ellipsis, and page state.
-                </p>
-              </div>
-
-              <div class="space-y-4">
-                <div>
-                  <h3 class="mb-2 text-sigma font-semibold text-black-600">Default (Figma Pattern)</h3>
-                  <Breadcrumb>
-                    <BreadcrumbList>
-                      <BreadcrumbItem>
-                        <BreadcrumbLink href="#">Root</BreadcrumbLink>
-                      </BreadcrumbItem>
-                      <BreadcrumbSeparator />
-                      <BreadcrumbItem>
-                        <BreadcrumbLink href="#">Lv1</BreadcrumbLink>
-                      </BreadcrumbItem>
-                      <BreadcrumbSeparator />
-                      <BreadcrumbItem>
-                        <BreadcrumbLink href="#">Lv2</BreadcrumbLink>
-                      </BreadcrumbItem>
-                      <BreadcrumbSeparator />
-                      <BreadcrumbItem>
-                        <BreadcrumbLink href="#">lv3</BreadcrumbLink>
-                      </BreadcrumbItem>
-                      <BreadcrumbSeparator />
-                      <BreadcrumbItem>
-                        <BreadcrumbPage>lv4</BreadcrumbPage>
-                      </BreadcrumbItem>
-                    </BreadcrumbList>
-                  </Breadcrumb>
-                </div>
-                <div>
-                  <h3 class="mb-2 text-sigma font-semibold text-black-600">With Ellipsis</h3>
-                  <Breadcrumb>
-                    <BreadcrumbList>
-                      <BreadcrumbItem>
-                        <BreadcrumbLink href="#">Dashboard</BreadcrumbLink>
-                      </BreadcrumbItem>
-                      <BreadcrumbSeparator />
-                      <BreadcrumbItem>
-                        <BreadcrumbLink href="#">Projects</BreadcrumbLink>
-                      </BreadcrumbItem>
-                      <BreadcrumbSeparator />
-                      <BreadcrumbItem>
-                        <BreadcrumbEllipsis />
-                      </BreadcrumbItem>
-                      <BreadcrumbSeparator />
-                      <BreadcrumbItem>
-                        <BreadcrumbPage>Playground</BreadcrumbPage>
-                      </BreadcrumbItem>
-                    </BreadcrumbList>
-                  </Breadcrumb>
-                </div>
-              </div>
-            </section>
-
-            <section id="tabs" class="playground-section playground-color-block block-coral space-y-6">
-              <div class="mb-4">
-                <p class="playground-eyebrow">Viewport & Segments</p>
-                <h2 class="playground-display">Tabs</h2>
-                <p class="playground-desc">
-                  Segmented tab switchers with smooth animated sliding indicators for pricing and views.
-                </p>
-              </div>
-
-              <div class="space-y-5">
-                <TabGroup default-value="account">
-                  <TabTriggerGroup>
-                    <TabTrigger value="account">Account</TabTrigger>
-                    <TabTrigger value="security">Security</TabTrigger>
-                    <TabTrigger value="billing">Billing</TabTrigger>
-                  </TabTriggerGroup>
-                  <TabContent
-                    value="account"
-                    class="pt-4 text-sigma text-black-600"
-                  >
-                    Account tab content.
-                  </TabContent>
-                  <TabContent
-                    value="security"
-                    class="pt-4 text-sigma text-black-600"
-                  >
-                    Security tab content.
-                  </TabContent>
-                  <TabContent
-                    value="billing"
-                    class="pt-4 text-sigma text-black-600"
-                  >
-                    Billing tab content.
-                  </TabContent>
-                </TabGroup>
-
-                <Tabs default-value="preview">
-                  <TabsList>
-                    <TabsTrigger value="preview">Preview alias</TabsTrigger>
-                    <TabsTrigger value="code">Code alias</TabsTrigger>
-                  </TabsList>
-                  <TabsContent
-                    value="preview"
-                    class="pt-4 text-sigma text-black-600"
-                  >
-                    Compatibility aliases render the same tab primitives.
-                  </TabsContent>
-                  <TabsContent
-                    value="code"
-                    class="pt-4 text-sigma text-black-600"
-                  >
-                    This covers Tabs, TabsList, TabsTrigger, and TabsContent
-                    exports.
-                  </TabsContent>
-                </Tabs>
-              </div>
-            </section>
-
-            <section id="alert" class="playground-section playground-panel p-6 space-y-4">
-              <div>
-                <p class="playground-eyebrow">System Banners & Feedback</p>
-                <h2 class="text-xl font-bold text-black-900">Alert</h2>
-                <p class="text-sigma text-black-500">
-                  Status alerts for critical warnings, success feedback, and system notifications with optional close actions.
-                </p>
-              </div>
-
-              <div class="space-y-4">
-                <Alert>
-                  <Check class="h-4 w-4" />
-                  <AlertTitle>Success state</AlertTitle>
-                  <AlertDescription
-                    >Use this surface to validate alert spacing and icon
-                    alignment.</AlertDescription
-                  >
-                </Alert>
-                <Alert variant="destructive" show-close>
-                  <AlertCircle class="h-4 w-4" />
-                  <AlertTitle>Error state</AlertTitle>
-                  <AlertDescription
-                    >Destructive alerts should stay legible and
-                    balanced.</AlertDescription
-                  >
-                </Alert>
-              </div>
-            </section>
-
-            <section
-              id="progress"
-              class="playground-section playground-panel p-6 space-y-4"
-            >
-              <div>
-                <p class="playground-eyebrow">Deterministic Loaders</p>
-                <h2 class="text-xl font-bold text-black-900">
-                  Progress Bar
-                </h2>
-                <p class="text-sigma text-black-500">
-                  Visual progress indicators for multi-step workflows, uploads, and background tasks.
-                </p>
-              </div>
-
-              <div class="space-y-2">
-                <div class="flex items-center justify-between">
-                  <Label>Progress</Label>
-                  <span class="text-sigma font-bold text-black-500"
-                    >{{ progressValue }}%</span
-                  >
-                </div>
-                <Progress :model-value="progressValue" />
-                <input
-                  v-model="progressValue"
-                  type="range"
-                  min="0"
-                  max="100"
-                  class="w-full accent-lime-500"
-                />
-              </div>
-            </section>
-
-            <section
-              id="switch"
-              class="playground-section playground-panel p-6 space-y-4"
-            >
-              <div>
-                <p class="playground-eyebrow">Boolean Controls</p>
-                <h2 class="text-xl font-bold text-black-900">Switch Toggle</h2>
-                <p class="text-sigma text-black-500">
-                  Immediate on/off state toggles for user settings, dark mode, and feature flags.
-                </p>
-              </div>
-
-              <div class="flex flex-wrap items-center gap-4">
-                <Switch v-model="switchValue" />
-                <Switch />
-                <Switch disabled />
-                <span class="text-sigma font-bold text-black-500"
-                  >Value: {{ switchValue }}</span
-                >
-              </div>
-            </section>
-
-            <section
-              id="pagination"
-              class="playground-section playground-panel p-6 space-y-4"
-            >
-              <div>
-                <p class="playground-eyebrow">Page Navigation</p>
-                <h2 class="text-xl font-bold text-black-900">
-                  Pagination
-                </h2>
-                <p class="text-sigma text-black-500">
-                  Accessible pagination controls with smart truncation ellipsis and page change triggers.
-                </p>
-              </div>
-
-              <div class="grid gap-4">
-                <Pagination v-model="paginationPage" :total-pages="20" />
-                <div class="text-sigma font-bold text-black-500">
-                  Page: {{ paginationPage }}
-                </div>
-              </div>
-            </section>
-
-            <section id="table" class="playground-section playground-panel p-6 space-y-5">
-              <div>
-                <p class="playground-eyebrow">Comparison & Records</p>
-                <h2 class="text-xl font-bold text-black-900">Table & Data Table</h2>
-                <p class="text-sigma text-black-500">
-                  Data-driven comparison matrices, zebra striped rows, and dense tabular records.
-                </p>
-              </div>
-
-              <div class="grid gap-4">
-                <DataTable :columns="tableColumns" :rows="tableRows" />
-                <div class="grid max-w-[720px] gap-4 rounded-md bg-white p-4">
-                  <div
-                    class="text-sigma font-extrabold leading-5 text-black-800"
-                  >
-                    Tarif Sewa Modal dan Premi
-                  </div>
-                  <DataTable :columns="tableColumns" :rows="tableRows" />
-                  <Alert
-                    variant="destructive"
-                    class="border-red-500 bg-red-500 p-3 text-white"
-                  >
-                    <AlertDescription
-                      class="!text-omega font-semibold leading-[18px] text-white"
-                    >
-                      Penyaluran Produk dihentikan sementara sesuai dengan: ID
-                      Nomor 42/ID/2020 Penghentian Sementara Penyaluran Produk
-                      Pegadaian Kreasi Express Loan
-                    </AlertDescription>
-                  </Alert>
-                </div>
-              </div>
-            </section>
-
-            <section id="card" class="playground-section playground-color-block block-cream space-y-6">
-              <div class="flex flex-wrap items-center justify-between gap-3">
-                <div>
-                  <p class="playground-eyebrow">Surfaces & Containers</p>
-                  <h2 class="playground-display">Card</h2>
-                  <p class="playground-desc">
-                    Content containers featuring structured header, title, description, content body, and action footer slots.
-                  </p>
-                </div>
-                <Badge variant="brocoli">Container Component</Badge>
-              </div>
-
-              <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-                <!-- Variant 1: Default Card -->
-                <Card>
-                  <CardHeader>
-                    <div class="flex items-center justify-between">
-                      <div class="flex flex-col gap-y-1">
-                        <CardTitle>Card Title</CardTitle>
-                        <CardDescription>Card Description Subtitle</CardDescription>
-                      </div>
-                      <Button variant="icon" size="icon" class="h-6 w-6">
-                        <X class="h-4 w-4" />
-                      </Button>
-                    </div>
-                  </CardHeader>
-                  <CardContent>
-                    <div class="rounded-lg bg-black-100 p-4">
-                      <p class="text-sigma font-bold text-black-800">Content Title</p>
-                      <p class="mt-1 text-sigma text-black-500">
-                        This is the main content area for the card where you can put any information.
-                      </p>
-                    </div>
-                  </CardContent>
-                  <CardFooter>
-                    <Button class="w-full">Action</Button>
-                    <Button variant="outline" class="w-full">Cancel</Button>
-                  </CardFooter>
-                </Card>
-
-                <!-- Variant 2: Card with Image -->
-                <Card>
-                  <CardHeader>
-                    <CardTitle>Card with Image</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <div class="mb-4 h-32 w-full overflow-hidden rounded-lg bg-black-200">
-                      <img src="https://picsum.photos/400/200" alt="Card Image" class="h-full w-full object-cover" />
-                    </div>
-                    <p class="text-sigma font-bold text-black-800">Headline</p>
-                    <p class="mt-1 text-sigma text-black-500">
-                      Supporting text or description related to the image above.
-                    </p>
-                  </CardContent>
-                  <CardFooter>
-                    <Button class="w-full">Confirm</Button>
-                  </CardFooter>
-                </Card>
-
-                <!-- Variant 3: Minimal Content Only -->
-                <Card>
-                  <CardContent class="pt-4">
-                    <p class="text-sigma font-bold text-black-800">Minimal Card</p>
-                    <p class="mt-1 text-sigma text-black-500">
-                      Card without header and footer, just displaying simple information.
-                    </p>
-                  </CardContent>
-                </Card>
-              </div>
-            </section>
-
-            <section
-              id="divider"
-              class="playground-section playground-panel p-6 space-y-4"
-            >
-              <div>
-                <p class="playground-eyebrow">Separators & Boundaries</p>
-                <h2 class="text-xl font-bold text-black-900">
-                  Divider
-                </h2>
-                <p class="text-sigma text-black-500">
-                  Hairline visual separators supporting both horizontal and vertical orientations.
-                </p>
-              </div>
-
-              <div class="grid gap-4">
-                <Divider />
-                <div class="flex h-12 items-center gap-4">
-                  <span class="text-sigma font-bold text-black-800">Left</span>
-                  <Divider orientation="vertical" />
-                  <span class="text-sigma font-bold text-black-800">Right</span>
-                </div>
-              </div>
-            </section>
-
-            <section
-              id="spinner"
-              class="playground-section playground-panel p-6 space-y-4"
-            >
-              <div>
-                <p class="playground-eyebrow">Activity Indicators</p>
-                <h2 class="text-xl font-bold text-black-900">
-                  Spinner
-                </h2>
-                <p class="text-sigma text-black-500">
-                  Compact CSS-driven activity spinners for asynchronous operation loading states.
-                </p>
-              </div>
-
-              <div class="flex flex-wrap items-center gap-4">
-                <Spinner size="sm" />
-                <Spinner />
-                <Spinner size="lg" />
-              </div>
-            </section>
-
-            <section id="link" class="playground-section playground-panel p-6 space-y-4">
-              <div>
-                <p class="playground-eyebrow">Hyperlinks & Anchors</p>
-                <h2 class="text-xl font-bold text-black-900">Link</h2>
-                <p class="text-sigma text-black-500">
-                  Semantic inline links with customizable hover transitions and disabled accessibility states.
-                </p>
-              </div>
-
-              <div class="flex flex-wrap items-center gap-4">
-                <Link href="#">Default link</Link>
-                <Link href="#" disabled>Disabled link</Link>
-              </div>
-            </section>
-
-            <section id="toast" class="playground-section playground-panel p-6 space-y-4">
-              <div>
-                <p class="playground-eyebrow">Ephemeral Feedback</p>
-                <h2 class="text-xl font-bold text-black-900">Toast & Snackbars</h2>
-                <p class="text-sigma text-black-500">
-                  Floating snackbar notifications for transient feedback on background operations.
-                </p>
-              </div>
-
-              <div class="grid gap-4 md:grid-cols-3">
-                <Toast
-                  title="Saved"
-                  description="Your changes have been saved."
-                  variant="success"
-                />
-                <Toast
-                  title="Warning"
-                  description="Please review the form."
-                  variant="warning"
-                />
-                <Toast
-                  title="Error"
-                  description="The request could not be completed."
-                  variant="error"
-                />
-              </div>
-            </section>
-
-            <section
-              id="accordion"
-              class="playground-section playground-panel p-6 space-y-4"
-            >
-              <div>
-                <p class="playground-eyebrow">Collapsible Disclosures</p>
-                <h2 class="text-xl font-bold text-black-900">
-                  Accordion
-                </h2>
-                <p class="text-sigma text-black-500">
-                  Expandable FAQ and detail sections supporting single-open and multi-collapse modes.
-                </p>
-              </div>
-
-              <Accordion type="single" collapsible>
-                <AccordionItem value="one">
-                  <AccordionTrigger>Spacing system</AccordionTrigger>
-                  <AccordionContent
-                    >Accordion content checks text rhythm and collapse
-                    behavior.</AccordionContent
-                  >
-                </AccordionItem>
-                <AccordionItem value="two">
-                  <AccordionTrigger>Interaction state</AccordionTrigger>
-                  <AccordionContent
-                    >Use open and closed states while adjusting component
-                    styles.</AccordionContent
-                  >
-                </AccordionItem>
-              </Accordion>
-            </section>
-
-            <section id="badge" class="playground-section playground-panel p-6 space-y-4">
-              <div>
-                <p class="playground-eyebrow">Taxonomy & Status Pills</p>
-                <h2 class="text-xl font-bold text-black-900">Badge</h2>
-                <p class="text-sigma text-black-500">
-                  Status badges and category tags in semantic color shades (Green, Broccoli, Orange, Blue, Red, Outline).
-                </p>
-              </div>
-
-              <div class="flex flex-wrap gap-2">
-                <Badge>Green</Badge>
-                <Badge variant="brocoli">Broccoli</Badge>
-                <Badge variant="orange">Orange</Badge>
-                <Badge variant="blue">Blue</Badge>
-                <Badge variant="red">Red</Badge>
-                <Badge variant="outline">Outline</Badge>
-              </div>
-            </section>
-
-            <section id="carousel" class="playground-section playground-panel p-6 space-y-5">
-              <div>
-                <p class="playground-eyebrow">Sliders & Hero Banners</p>
-                <h2 class="text-xl font-bold text-black-900">
-                  Carousel & Banner Slider
-                </h2>
-                <p class="text-sigma text-black-500">
-                  Interactive touch-enabled banner carousels with autoplay, slide indicators, and navigation controls.
-                </p>
-              </div>
-
-              <div class="space-y-6">
-                <div class="rounded-md border border-black-200 bg-white p-4">
-                  <h3 class="mb-3 text-sigma font-bold text-black-800">
-                    1. BannerCarousel (Figma Preset)
-                  </h3>
-                  <BannerCarousel
-                    :items="carouselBannerSlides"
-                    :autoplay="true"
-                    :autoplay-interval="5000"
-                  />
-                </div>
-
-                <div class="rounded-md border border-black-200 bg-white p-4">
-                  <h3 class="mb-3 text-sigma font-bold text-black-800">
-                    2. Custom Compound Carousel
-                  </h3>
-                  <Carousel :loop="true" :autoplay="false" class="w-full">
-                    <CarouselContent>
-                      <CarouselItem v-for="i in 3" :key="i">
-                        <div
-                          class="flex flex-col items-center justify-center min-h-[180px] p-8 rounded-xl bg-lime-500 text-white font-bold"
-                        >
-                          <span class="text-zeta">Custom Slide Item {{ i }}</span>
-                          <span class="text-sigma font-normal opacity-90 mt-1"
-                            >Modular CarouselItem component</span
-                          >
-                        </div>
-                      </CarouselItem>
-                    </CarouselContent>
-
-                    <div class="mt-4 flex items-center justify-between">
-                      <div class="flex items-center gap-2">
-                        <CarouselPrevious />
-                        <CarouselNext />
-                      </div>
-                      <CarouselIndicators />
-                    </div>
-                  </Carousel>
-                </div>
-              </div>
-            </section>
-
-            <section
-              id="file-picker"
-              class="playground-section playground-panel p-6 space-y-5"
-            >
-              <div>
-                <p class="playground-eyebrow">Media & Document Uploads</p>
-                <h2 class="text-xl font-bold text-black-900">
-                  File Picker
-                </h2>
-                <p class="text-sigma text-black-500">
-                  Dropzone file uploaders for non-image documents (PDF, CSV, Excel, Word).
-                </p>
-              </div>
-
-              <div class="space-y-6">
-                <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
-                  <div class="rounded-xl border border-black-200 p-4 bg-white space-y-3">
-                    <h4 class="text-sigma font-bold text-black-700">Default</h4>
-                    <p class="text-sm text-black-500">Menerima dokumen (kecuali gambar).</p>
-                    <div class="flex items-center gap-4">
-                      <FilePicker v-model="filePickerFile1" title="Upload Dokumen" />
-                    </div>
-                  </div>
-
-                  <div class="rounded-xl border border-black-200 p-4 bg-white space-y-3">
-                    <h4 class="text-sigma font-bold text-black-700">With Right Action</h4>
-                    <p class="text-sm text-black-500">Spesifik hanya menerima file PDF.</p>
-                    <div class="flex items-center gap-4">
-                      <FilePicker v-model="filePickerFile2" title="Upload PDF" accept=".pdf" rightAction />
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </section>
-
-            <section
-              id="image-picker"
-              class="playground-section playground-panel p-6 space-y-5"
-            >
-              <div>
-                <p class="playground-eyebrow">Image Assets & Media Displays</p>
-                <h2 class="text-xl font-bold text-black-900">
-                  Form Image (Input) & Image Display
-                </h2>
-                <p class="text-sigma text-black-500">
-                  Image uploaders with aspect ratio previews, multi-image slider, metadata tags, and fallback displays.
-                </p>
-              </div>
-
-              <!-- Form Image (Input) -->
-              <div class="space-y-6">
-                <h3 class="text-omicron font-bold text-black-800">1. Form Image (Input)</h3>
-                
-                <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
-                  <div class="rounded-xl border border-black-200 p-4 bg-white space-y-3">
-                    <h4 class="text-sigma font-bold text-black-700">Size: Small</h4>
-                    <p class="text-sm text-black-500">Ukuran 80x80px untuk bentuk form ringkas.</p>
-                    <div class="flex items-center gap-4">
-                      <ImagePicker v-model="imagePickerSmall" size="small" />
-                    </div>
-                  </div>
-
-                  <div class="rounded-xl border border-black-200 p-4 bg-white space-y-3">
-                    <h4 class="text-sigma font-bold text-black-700">Size: Large (4:3)</h4>
-                    <p class="text-sm text-black-500">Ukuran 328x160px dengan rasio pratinjau 4:3.</p>
-                    <!-- 4:3 Ratio -->
-                    <div class="flex flex-col gap-2">
-                      <Label class="text-omicron">Large Variant (4:3)</Label>
-                      <ImagePicker v-model="imagePickerLarge43" size="large" aspectRatio="4:3" />
-                    </div>
-                    <!-- Multiple Images (Carousel) -->
-                    <div class="flex flex-col gap-2">
-                      <Label class="text-omicron">Multiple Images (Slider) + CTA & Metadata</Label>
-                      <ImagePicker 
-                        v-model="imagePickerMultiple" 
-                        multiple 
-                        size="large" 
-                        showDownload
-                        showRetake
-                        :metadata="{ takenBy: 'P12345', timestamp: '20 Jan 2025, 12.00' }"
-                      />
-                    </div>
-                  </div>
-
-                  <div class="rounded-xl border border-black-200 p-4 bg-white space-y-3">
-                    <h4 class="text-sigma font-bold text-black-700">Size: Large (1:1)</h4>
-                    <p class="text-sm text-black-500">Ukuran 328x160px dengan rasio pratinjau 1:1.</p>
-                    <ImagePicker v-model="imagePickerLarge11" size="large" aspectRatio="1:1" />
-                  </div>
-
-                  <div class="rounded-xl border border-black-200 p-4 bg-white space-y-3">
-                    <h4 class="text-sigma font-bold text-black-700">State: Filled with Pre-filled URL</h4>
-                    <p class="text-sm text-black-500">Kondisi saat gambar sudah diunggah/diisi.</p>
-                    <ImagePicker
-                      v-model="imagePickerPrefilled"
-                      size="large"
-                      aspectRatio="4:3"
-                    />
-                  </div>
-
-                  <div class="rounded-xl border border-black-200 p-4 bg-white space-y-3">
-                    <h4 class="text-sigma font-bold text-black-700">Validation: Max Size (Error Simulation)</h4>
-                    <p class="text-sm text-black-500">Menyertakan pesan error untuk pembatasan ukuran (`maxSize="1"`).</p>
-                    <ImagePicker
-                      size="large"
-                      aspectRatio="4:3"
-                      :maxSize="1"
-                    />
-                  </div>
-                </div>
-
-                <!-- Image Display -->
-                <h3 class="text-omicron font-bold text-black-800 pt-4">2. Image Display</h3>
-                
-                <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
-                  <div class="rounded-xl border border-black-200 p-4 bg-white space-y-3">
-                    <h4 class="text-sigma font-bold text-black-700">Sizes (Small, Large 4:3, Large 1:1)</h4>
-                    <div class="flex flex-wrap items-end gap-4">
-                      <div class="flex flex-col items-center gap-1">
-                        <ImageDisplay size="small" src="https://images.unsplash.com/photo-1542291026-7eec264c27ff" />
-                        <span class="text-xs text-black-500">Small</span>
-                      </div>
-                      <div class="flex flex-col items-center gap-1">
-                        <ImageDisplay size="large-4:3" src="https://images.unsplash.com/photo-1542291026-7eec264c27ff" />
-                        <span class="text-xs text-black-500">Large 4:3</span>
-                      </div>
-                      <div class="flex flex-col items-center gap-1">
-                        <ImageDisplay size="large-1:1" src="https://images.unsplash.com/photo-1542291026-7eec264c27ff" />
-                        <span class="text-xs text-black-500">Large 1:1</span>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="rounded-xl border border-black-200 p-4 bg-white space-y-3">
-                    <h4 class="text-sigma font-bold text-black-700">States (Filled, Multiple, Empty, Broken)</h4>
-                    <div class="flex flex-wrap items-end gap-4">
-                      <div class="flex flex-col items-center gap-1">
-                        <ImageDisplay size="small" status="filled-more" :count="1" src="https://images.unsplash.com/photo-1542291026-7eec264c27ff" />
-                        <span class="text-xs text-black-500">Multiple</span>
-                      </div>
-                      <div class="flex flex-col items-center gap-1">
-                        <ImageDisplay size="small" status="filled" src="https://images.unsplash.com/photo-1542291026-7eec264c27ff" />
-                        <span class="text-xs text-black-500">Filled</span>
-                      </div>
-                      <div class="flex flex-col items-center gap-1">
-                        <ImageDisplay size="small" status="empty" />
-                        <span class="text-xs text-black-500">Empty</span>
-                      </div>
-                      <div class="flex flex-col items-center gap-1">
-                        <ImageDisplay size="small" status="broken" />
-                        <span class="text-xs text-black-500">Broken</span>
-                      </div>
-                    </div>
                   </div>
                 </div>
               </div>
