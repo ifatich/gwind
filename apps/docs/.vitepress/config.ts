@@ -3,7 +3,9 @@ import { defineConfig } from "vitepress";
 import { resolve } from "node:path";
 
 const isProd = process.env.NODE_ENV === "production";
-const playgroundUrl = isProd ? "/gwind/playground/" : "http://localhost:3000";
+const playgroundUrl = isProd
+  ? "https://ifatich.github.io/gwind/playground/"
+  : "http://localhost:3000";
 
 export default defineConfig({
   title: "Gwind",

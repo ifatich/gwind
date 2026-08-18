@@ -143,7 +143,7 @@ import {
   X,
 } from "lucide-vue-next";
 
-const docsUrl = import.meta.env.PROD ? '/gwind/' : 'http://localhost:5173/gwind/';
+const docsUrl = import.meta.env.PROD ? 'https://ifatich.github.io/gwind/' : 'http://localhost:5173/gwind/';
 const activeSection = ref("inventory");
 const navContainerRef = ref<HTMLElement | null>(null);
 const isManualNav = ref(false);
