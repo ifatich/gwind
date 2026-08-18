@@ -41,8 +41,8 @@
  * so VitePress element resets can override component utilities. Keep this
  * scoped to preview only and reveal the layered Gwind utility values again.
  */
-.vp-doc .gwind-docs-preview :where(button, [role='button'], input, select, textarea),
-:is([data-radix-portal], [data-reka-portal], [data-radix-popper-content-wrapper], [data-reka-popper-content-wrapper], .gwind-datepicker-content, .z-50) :where(button, [role='button'], input, select, textarea) {
+.vp-doc .gwind-docs-preview :where(*),
+:is([data-radix-portal], [data-reka-portal], [data-radix-popper-content-wrapper], [data-reka-popper-content-wrapper], .gwind-datepicker-content, .z-50) :where(*) {
   appearance: revert-layer;
   background-color: revert-layer;
   background-image: revert-layer;
@@ -58,10 +58,13 @@
   line-height: revert-layer;
   margin: revert-layer;
   padding: revert-layer;
+  text-decoration: revert-layer;
+  text-underline-offset: revert-layer;
+  box-sizing: border-box;
 }
 
-.vp-doc .gwind-docs-preview :where(button:focus, button:focus-visible, input:focus, select:focus, textarea:focus),
-:is([data-radix-portal], [data-reka-portal], [data-radix-popper-content-wrapper], [data-reka-popper-content-wrapper], .gwind-datepicker-content, .z-50) :where(button:focus, button:focus-visible, input:focus, select:focus, textarea:focus) {
+.vp-doc .gwind-docs-preview :where(*:focus, *:focus-visible),
+:is([data-radix-portal], [data-reka-portal], [data-radix-popper-content-wrapper], [data-reka-popper-content-wrapper], .gwind-datepicker-content, .z-50) :where(*:focus, *:focus-visible) {
   outline: revert-layer;
 }
 
@@ -140,13 +143,6 @@
   border: none;
 }
 
-.vp-doc .gwind-docs-preview :where(a),
-:is([data-radix-portal], [data-reka-portal], [data-radix-popper-content-wrapper], [data-reka-popper-content-wrapper], .gwind-datepicker-content, .z-50) :where(a) {
-  color: inherit;
-  font-weight: inherit;
-  text-decoration: none;
-  text-underline-offset: auto;
-}
 
 .vp-doc .gwind-docs-preview :where(.text-alpha) { font-size: 4.5rem; line-height: 1; }
 .vp-doc .gwind-docs-preview :where(.text-beta) { font-size: 3.75rem; line-height: 1; }
