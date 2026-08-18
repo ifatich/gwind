@@ -1,18 +1,19 @@
 ---
 title: Textarea
-description: Multi-line entry surface for capturing longer user input.
+description: Multi-line entry surface for capturing longer user input with character counter support.
 ---
 
 <script setup lang="ts">
 import { ref } from 'vue'
 const demoValue = ref('')
+const counterValue = ref('Catatan transaksi nasabah...')
 const disabledValue = ref('1.000.000')
 const errorValue = ref('10.000')
 </script>
 
 # Textarea
 
-Multi-line entry surface for capturing longer user input, with support for labels, captions, and error states.
+Multi-line entry surface for capturing longer user input, with support for labels, captions, error states, and flexible character counters.
 
 ## Installation
 
@@ -36,7 +37,7 @@ npx gwind-system-ui add textarea
 
 ## Behavior / Usage
 
-Use the `TextareaField` component for a fully composed text area that includes a label and a caption/error message. For a raw text area without any label, use the primitive `Textarea` component.
+Use the `TextareaField` component for a fully composed text area that includes a label, counter, and a caption/error message. For a raw text area without any label, use the primitive `Textarea` component.
 
 ```vue
 <script setup lang="ts">
@@ -52,14 +53,46 @@ const description = ref('')
     v-model="description"
     label="Description"
     placeholder="Write a short description..."
-    caption="Maximum 500 characters."
+    :maxlength="200"
+    caption="Maximum 200 characters."
   />
 </template>
 ```
 
 ---
 
-## States
+## States & Variants
+
+### With Character Counter (Auto-enabled with `:maxlength`)
+Passing `:maxlength` automatically activates the character counter in the bottom-right corner. You can also explicitly control it with `show-count` or disable the visual counter using `:show-count="false"`.
+
+<ShadowPreview class="gwind-docs-preview">
+  <GwTextareaField
+    id="state-counter"
+    v-model="counterValue"
+    label="Keterangan Transaksi"
+    placeholder="Tuliskan keterangan..."
+    :maxlength="100"
+    caption="Maksimal 100 karakter."
+  />
+</ShadowPreview>
+
+```vue
+<!-- Counter otomatis aktif ketika maxlength didefinisikan -->
+<TextareaField
+  v-model="notes"
+  label="Keterangan"
+  placeholder="Tuliskan keterangan..."
+  :maxlength="100"
+/>
+
+<!-- Atau sembunyikan counter visual jika hanya butuh limit karakter bawaan -->
+<TextareaField
+  v-model="notes"
+  :maxlength="100"
+  :show-count="false"
+/>
+```
 
 ### Default & Empty
 The default state allows the user to input text. The placeholder is visible when empty.
@@ -103,20 +136,32 @@ When `disabled` is set to true, the text area becomes inactive and greyed out, p
 
 ## API Reference
 
-### Props
+### Props (`Textarea` & `TextareaField`)
 
 | Name | Type | Default | Description |
-| --- | --- | --- | --- |
-| `id` | `string` | `useId()` | The unique identifier for the text area and label. |
-| `label` | `string` | `undefined` | The label text displayed above the text area. |
-| `caption` | `string` | `undefined` | Assistive text displayed below the text area. |
-| `error` | `string` | `undefined` | Error message displayed below the text area. Triggers error styling. |
-| `disabled` | `boolean` | `false` | Disables the text area interaction. |
-| `defaultValue` | `string \| number` | `undefined` | The default value when initially rendered. |
-| `modelValue` | `string \| number` | `undefined` | The bound v-model value. |
+| :--- | :--- | :--- | :--- |
+| `id` | `string` | `useId()` | Unique identifier for the textarea and its label. |
+| `label` | `string` | `undefined` | The label text displayed above the textarea (*TextareaField*). |
+| `caption` | `string` | `undefined` | Assistive text displayed below the textarea (*TextareaField*). |
+| `error` | `string` | `undefined` | Error message displayed below the textarea. Triggers red border. |
+| `disabled` | `boolean` | `false` | Disables textarea interaction and applies disabled styles. |
+| `maxlength` / `maxLength` | `number \| string` | `undefined` | Maximum allowed character length and counter denominator. |
+| `showCount` / `counter` | `boolean` | `false` | When true, renders character counter at the bottom-right corner. |
+| `counterClass` | `string \| HTMLAttributes['class']` | `undefined` | Custom styling classes for the counter badge. |
+| `defaultValue` | `string \| number` | `undefined` | Initial value when uncontrolled. |
+| `modelValue` | `string \| number` | `undefined` | Bound `v-model` reactive value. |
+
+### Slots
+
+| Name | Scoped Props | Description |
+| :--- | :--- | :--- |
+| `label` | — | Custom label content (*TextareaField*). |
+| `label-icon` | — | Optional icon slot next to label (*TextareaField*). |
+| `caption` | — | Custom caption or error container content (*TextareaField*). |
+| `counter` | `{ count: number, max?: number }` | Custom bottom-right counter element. |
 
 ### Emits
 
 | Name | Payload | Description |
-| --- | --- | --- |
-| `update:modelValue` | `string \| number` | Emitted when the text area value changes. |
+| :--- | :--- | :--- |
+| `update:modelValue` | `string \| number` | Emitted when textarea content changes. |

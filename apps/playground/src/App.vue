@@ -1227,6 +1227,15 @@ const shellClass = computed(() =>
 
                 <Card>
                   <CardHeader>
+                    <CardTitle>With Character Counter</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <TextareaField id="textarea-counter" label="Keterangan" model-value="Catatan transaksi..." placeholder="Placeholder" :maxlength="100" show-count caption="Maksimal 100 karakter." />
+                  </CardContent>
+                </Card>
+
+                <Card>
+                  <CardHeader>
                     <CardTitle>Disabled</CardTitle>
                   </CardHeader>
                   <CardContent>
