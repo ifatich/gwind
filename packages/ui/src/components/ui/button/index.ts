@@ -21,9 +21,9 @@ export const buttonVariants = cva(
           'border border-black-400 bg-white text-black-600 hover:border-black-500 hover:text-black-800 active:border-black-600',
         tertiary: 'bg-white text-primary hover:text-lime-600 active:text-lime-800',
         icon: 'bg-primary text-primary-foreground hover:bg-lime-600 focus-visible:bg-lime-800 active:bg-lime-800',
-        google: 'border border-black-400 bg-white text-black-600 hover:border-black-500 hover:text-black-800',
-        apple: 'border border-black-400 bg-white text-black-600 hover:border-black-500 hover:text-black-800',
-        facebook: 'border border-black-400 bg-white text-black-600 hover:border-black-500 hover:text-black-800',
+        google: 'border border-black-400 bg-white text-black-800 hover:bg-black-200 active:bg-black-400',
+        apple: 'border-transparent bg-black-800 text-white hover:bg-black-600 active:bg-black-500',
+        facebook: 'border-transparent bg-blue-600 text-white hover:bg-blue-500 active:bg-blue-400',
       },
       size: {
         sm: 'h-6 rounded px-2.5 py-[3px] !text-omega',
