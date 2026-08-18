@@ -11,7 +11,7 @@ const forwardedProps = useForwardProps(props)
 <template>
   <AccordionItem
     v-bind="forwardedProps"
-    :class="cn('rounded-md bg-background border border-input flex flex-col', props.class)"
+    :class="cn('rounded-md bg-white border border-black-200 flex flex-col overflow-hidden', props.class)"
   >
     <slot />
   </AccordionItem>
