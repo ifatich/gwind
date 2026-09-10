@@ -103,6 +103,12 @@ body,
   padding: 8px 0;
 }
 
+@media (min-width: 640px) {
+  .playground-top-nav {
+    top: 64px;
+  }
+}
+
 /* ── Container (Proven Responsive Standard: 16px mobile, 24px tablet, 32px desktop) ── */
 .playground-container {
   width: 100%;
