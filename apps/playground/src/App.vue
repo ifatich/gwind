@@ -293,7 +293,7 @@ const carouselBannerSlides = [
     tag: "Promo Special",
     title: "Investasi Emas Mulai dari 10 Ribu Rupiah",
     description:
-      "Wujudkan masa depan finansial yang aman dan berkilau dengan Tabungan Emas Pegadaian. Kemudahan bertransaksi kapan saja dan di mana saja.",
+      "Wujudkan masa depan finansial yang aman dan berkilau dengan Tabungan Emas. Kemudahan bertransaksi kapan saja dan di mana saja.",
     image:
       "https://images.unsplash.com/photo-1610375461246-83df859d849d?q=80&w=1600&auto=format&fit=crop",
     actionLabel: "Mulai Investasi",
@@ -909,7 +909,7 @@ const allComponentsCatalog = [
     category: "forms",
     categoryLabel: "Form & Data Entry",
     badge: "Autocomplete",
-    description: "Pencarian nama kantor cabang Pegadaian dengan autocomplete & empty feedback.",
+    description: "Pencarian nama kantor cabang dengan autocomplete & empty feedback.",
     subItems: ["Combobox", "ComboboxInput", "ComboboxList", "ComboboxItem"],
   },
   {
@@ -983,7 +983,7 @@ const allComponentsCatalog = [
     category: "data",
     categoryLabel: "Data Display & Layout",
     badge: "Tabular",
-    description: "Tabel tarif sewa modal & perbandingan matriks golongan pinjaman Pegadaian.",
+    description: "Tabel tarif sewa modal & perbandingan matriks golongan pinjaman.",
     subItems: ["DataTable", "Table", "TableHeader", "TableRow", "TableCell"],
   },
   {
@@ -1296,7 +1296,7 @@ const shellClass = computed(() =>
       <div class="border-b border-white/10 bg-black text-white py-2.5 overflow-hidden">
         <div class="playground-container flex items-center justify-between gap-6 text-omega tracking-wider font-semibold uppercase opacity-85">
           <div class="flex items-center gap-6 overflow-x-auto no-scrollbar whitespace-nowrap">
-            <span class="flex items-center gap-1.5 text-lime-400 font-bold"><Sparkles class="h-3.5 w-3.5" /> Pegadaian Digital Ecosystem</span>
+            <span class="flex items-center gap-1.5 text-lime-400 font-bold"><Sparkles class="h-3.5 w-3.5" /> Digital Ecosystem</span>
             <span>•</span>
             <span>Zero External Icon Dependencies (Inline Lucide SVGs)</span>
             <span>•</span>
@@ -1362,7 +1362,7 @@ const shellClass = computed(() =>
 
               <!-- Quick CLI Terminal Box & Feature Highlights -->
               <div class="space-y-4 lg:col-span-5">
-                <div class="rounded-xl border border-black-200 bg-black-50 p-4 sm:p-5 space-y-4">
+                <div class="rounded-xl border border-black-200 bg-black-100 p-4 sm:p-5 space-y-4">
                   <div class="flex items-center justify-between">
                     <span class="text-xs font-extrabold text-black-700 tracking-wider uppercase">CLI Quick Scaffolding</span>
                     <span class="text-[11px] font-mono text-lime-700 bg-lime-100 px-2 py-0.5 rounded font-bold">npm package</span>
@@ -1438,7 +1438,7 @@ const shellClass = computed(() =>
                 <Input
                   v-model="searchQuery"
                   placeholder="Cari komponen UI (misal: rupiah, dialog, button, select, avatar, kyc)..."
-                  class="h-11 pl-10 pr-10 rounded-full border-black-200 bg-black-50 focus:bg-white text-sigma"
+                  class="h-11 pl-10 pr-10 rounded-full border-black-200 bg-white focus:bg-white text-sigma"
                 />
                 <button
                   v-if="searchQuery"
@@ -1520,7 +1520,7 @@ const shellClass = computed(() =>
             <!-- Empty Search State -->
             <div
               v-else
-              class="rounded-xl border border-dashed border-black-200 bg-black-50 p-8 text-center space-y-3"
+              class="rounded-xl border border-dashed border-black-200 bg-black-100 p-8 text-center space-y-3"
             >
               <div class="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-black-100 text-black-400">
                 <Search class="h-6 w-6" />
@@ -1657,7 +1657,7 @@ const shellClass = computed(() =>
                 </div>
                 <div class="playground-case-body">
                   <p class="text-sigma text-black-700 leading-relaxed">
-                    Dengan menekan tombol submit, Anda menyetujui <Link href="#">Syarat & Ketentuan Layanan</Link> serta <Link href="#">Kebijakan Privasi PT Pegadaian</Link>.
+                    Dengan menekan tombol submit, Anda menyetujui <Link href="#">Syarat & Ketentuan Layanan</Link> serta <Link href="#">Kebijakan Privasi</Link>.
                   </p>
                 </div>
               </div>
@@ -1712,7 +1712,7 @@ const shellClass = computed(() =>
                     <InputField
                       id="input-real-email"
                       label="Alamat Email Terdaftar"
-                      placeholder="nasabah@pegadaian.co.id"
+                      placeholder="nasabah@example.com"
                     >
                       <template #left-icon>
                         <Mail class="h-4 w-4 text-black-400" />
@@ -2431,7 +2431,7 @@ const shellClass = computed(() =>
                       <Sparkles class="h-3 w-3 text-lime-700" />
                       Real-World Scenario
                     </span>
-                    <h3 class="text-sigma font-extrabold text-black-900">Pencarian Kantor Cabang Pegadaian</h3>
+                    <h3 class="text-sigma font-extrabold text-black-900">Pencarian Kantor Cabang</h3>
                   </div>
                   <span class="text-omega text-black-500 font-medium">Search Autocomplete & Dynamic Filter</span>
                 </div>
@@ -2539,7 +2539,7 @@ const shellClass = computed(() =>
                 </div>
                 <div class="playground-case-body">
                   <div class="grid gap-4 md:grid-cols-2">
-                    <div class="rounded-xl border border-black-100 bg-black-50/40 p-4 flex items-center justify-between">
+                    <div class="rounded-xl border border-black-100 bg-black-100/60 p-4 flex items-center justify-between">
                       <div>
                         <h4 class="text-sigma font-bold text-black-800">Notifikasi Pengingat WhatsApp</h4>
                         <p class="text-omega text-black-500">Kirim reminder 3 hari sebelum masa gadai jatuh tempo.</p>
@@ -2547,7 +2547,7 @@ const shellClass = computed(() =>
                       <Switch v-model="notifWhatsapp" />
                     </div>
 
-                    <div class="rounded-xl border border-black-100 bg-black-50/40 p-4 flex items-center justify-between">
+                    <div class="rounded-xl border border-black-100 bg-black-100/60 p-4 flex items-center justify-between">
                       <div>
                         <h4 class="text-sigma font-bold text-black-800">Autodebet Tabungan Emas</h4>
                         <p class="text-omega text-black-500">Debet otomatis saldo setiap tanggal 1 awal bulan.</p>
@@ -2718,7 +2718,7 @@ const shellClass = computed(() =>
                   <Avatar src="https://i.pravatar.cc/96?img=12" alt="Budi Santoso" size="lg" />
                   <Avatar fallback="PG" size="md" />
                   <Avatar fallback="UI" size="sm" />
-                  <Avatar alt="Pegadaian" size="sm" />
+                  <Avatar alt="User" size="sm" />
                 </div>
               </div>
             </section>
@@ -2809,7 +2809,7 @@ const shellClass = computed(() =>
                         </div>
                       </CardHeader>
                       <CardContent>
-                        <div class="rounded-lg bg-lime-50 p-4 border border-lime-200">
+                        <div class="rounded-lg bg-lime-100 p-4 border border-lime-200">
                           <span class="text-omega font-semibold text-lime-700">Saldo Fisik Emas</span>
                           <p class="text-xl font-black text-black-900 mt-1">12.5400 gr</p>
                           <p class="text-omega text-black-500 mt-0.5">≈ Rp 18.183.000</p>
@@ -2833,7 +2833,7 @@ const shellClass = computed(() =>
                         </div>
                         <p class="text-sigma font-bold text-black-800">Cashback s.d. Rp 500.000</p>
                         <p class="mt-1 text-omega text-black-500">
-                          Gunakan kode voucher GADAIBERKAH saat pengajuan di aplikasi Pegadaian Digital.
+                          Gunakan kode voucher GADAIBERKAH saat pengajuan di aplikasi Digital.
                         </p>
                       </CardContent>
                       <CardFooter>
@@ -2850,7 +2850,7 @@ const shellClass = computed(() =>
                           </div>
                           <div>
                             <h4 class="text-sigma font-bold text-black-900">Jaminan Aman 100%</h4>
-                            <p class="text-omega text-black-500">Tersimpan di Khazanah Pegadaian</p>
+                            <p class="text-omega text-black-500">Tersimpan di Khazanah</p>
                           </div>
                         </div>
                         <p class="text-omega text-black-600 leading-relaxed">
@@ -2946,7 +2946,7 @@ const shellClass = computed(() =>
                       <TableRow
                         v-for="row in transactionRows"
                         :key="row.id"
-                        :class="selectedTransactions.includes(row.id) ? 'bg-lime-50/60' : 'hover:bg-black-50/50'"
+                        :class="selectedTransactions.includes(row.id) ? 'bg-lime-100' : 'hover:bg-black-100/60'"
                       >
                         <TableCell align="center">
                           <Checkbox
@@ -3043,7 +3043,7 @@ const shellClass = computed(() =>
                         </TableRow>
                       </TableHeader>
                       <TableBody>
-                        <TableRow v-for="ctr in wideContractRows" :key="ctr.contractNo" class="hover:bg-black-50/60 group">
+                        <TableRow v-for="ctr in wideContractRows" :key="ctr.contractNo" class="hover:bg-black-100/60 group">
                           <TableCell class="font-mono text-xs font-bold text-black-900 whitespace-nowrap">{{ ctr.contractNo }}</TableCell>
                           <TableCell class="text-sigma text-black-700 whitespace-nowrap">{{ ctr.branch }}</TableCell>
                           <TableCell class="text-sigma font-semibold text-black-900 whitespace-nowrap">{{ ctr.karat }}</TableCell>
@@ -3236,7 +3236,7 @@ const shellClass = computed(() =>
                   <DataTable :columns="tableColumns" :rows="tableRows" />
                   <Alert variant="destructive">
                     <AlertDescription>
-                      Penyaluran Produk dihentikan sementara sesuai dengan ID Nomor 42/ID/2020 Penghentian Sementara Penyaluran Produk Pegadaian Kreasi Express Loan.
+                      Penyaluran Produk dihentikan sementara sesuai dengan ID Nomor 42/ID/2020 Penghentian Sementara Penyaluran Produk Kreasi Express Loan.
                     </AlertDescription>
                   </Alert>
                 </div>
@@ -3268,15 +3268,15 @@ const shellClass = computed(() =>
                 <div class="playground-case-body">
                   <Accordion type="single" collapsible default-value="faq-1">
                     <AccordionItem value="faq-1">
-                      <AccordionTrigger>Apa saja syarat pengajuan Gadai Emas di Pegadaian?</AccordionTrigger>
+                      <AccordionTrigger>Apa saja syarat pengajuan Gadai Emas?</AccordionTrigger>
                       <AccordionContent>
-                        Syaratnya sangat mudah: Nasabah cukup membawa fisik barang jaminan (emas batangan atau perhiasan) beserta KTP asli yang masih berlaku ke kantor cabang Pegadaian terdekat.
+                        Syaratnya sangat mudah: Nasabah cukup membawa fisik barang jaminan (emas batangan atau perhiasan) beserta KTP asli yang masih berlaku ke kantor cabang terdekat.
                       </AccordionContent>
                     </AccordionItem>
                     <AccordionItem value="faq-2">
                       <AccordionTrigger>Bagaimana cara memperpanjang jangka waktu pinjaman gadai?</AccordionTrigger>
                       <AccordionContent>
-                        Perpanjangan jangka waktu gadai dapat dilakukan dengan membayar sewa modal (bunga) yang telah berjalan langsung melalui aplikasi Pegadaian Digital atau di outlet Pegadaian.
+                        Perpanjangan jangka waktu gadai dapat dilakukan dengan membayar sewa modal (bunga) yang telah berjalan langsung melalui aplikasi Digital atau di outlet.
                       </AccordionContent>
                     </AccordionItem>
                     <AccordionItem value="faq-3">
@@ -3723,7 +3723,7 @@ const shellClass = computed(() =>
                           </DialogDescription>
                         </DialogHeader>
                         <DialogBody class="text-sigma text-black-800 space-y-3">
-                          <div class="rounded-lg bg-black-50 p-3 space-y-1">
+                          <div class="rounded-lg bg-black-100 p-3 space-y-1">
                             <div class="flex justify-between text-omega">
                               <span class="text-black-500">No. Surat Bukti Gadai</span>
                               <span class="font-bold font-mono text-black-800">SBG-882193</span>
@@ -3845,7 +3845,7 @@ const shellClass = computed(() =>
                             <strong class="text-black-800">Rp 15.225.000</strong>
                           </div>
                           <p class="text-omega text-black-500 pt-2 border-t border-black-100">
-                            Nilai taksiran mengikuti harga acuan pasar emas resmi Pegadaian hari ini.
+                            Nilai taksiran mengikuti harga acuan pasar emas resmi hari ini.
                           </p>
                         </div>
                       </PopoverContent>

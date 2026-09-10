@@ -67,7 +67,7 @@ const notes = [
         </div>
         <Alert variant="destructive" class="border-red-500 bg-red-500 p-3 text-white">
           <AlertDescription class="!text-omega font-semibold leading-[18px] text-white">
-            Penyaluran Produk dihentikan sementara sesuai dengan: ID Nomor 42/ID/2020 Penghentian Sementara Penyaluran Produk Pegadaian Kreasi Express Loan
+            Penyaluran Produk dihentikan sementara sesuai dengan: ID Nomor 42/ID/2020 Penghentian Sementara Penyaluran Produk Kreasi Express Loan
           </AlertDescription>
         </Alert>
       </div>

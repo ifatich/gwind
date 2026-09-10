@@ -275,7 +275,7 @@ cli
       }
 
       console.log(
-        chalk.hex('#8b5cf6')('\nBuild with ❤️ by Pegadaian Design || F.I.AL Arasy || Pegadaian')
+        chalk.hex('#8b5cf6')('\nBuild with ❤️ by Gwind Design || F.I.AL Arasy || Gwind')
       )
 
     } catch (error: any) {

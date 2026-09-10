@@ -23,7 +23,7 @@ const sampleBannerItems = [
     tag: 'Promo Special',
     title: 'Investasi Emas Mulai dari 10 Ribu Rupiah',
     description:
-      'Wujudkan masa depan finansial yang aman dan berkilau dengan Tabungan Emas Pegadaian. Kemudahan bertransaksi kapan saja dan di mana saja.',
+      'Wujudkan masa depan finansial yang aman dan berkilau dengan Tabungan Emas. Kemudahan bertransaksi kapan saja dan di mana saja.',
     image:
       'https://images.unsplash.com/photo-1610375461246-83df859d849d?q=80&w=1600&auto=format&fit=crop',
     actionLabel: 'Mulai Investasi',
@@ -33,7 +33,7 @@ const sampleBannerItems = [
     tag: 'Edukasi',
     title: 'Tips Kelola Keuangan Usaha Mikro',
     description:
-      'Tingkatkan kapasitas bisnis UMKM Anda dengan solusi pembiayaan usaha Pegadaian. Dapatkan kemudahan modal dengan agunan fleksibel.',
+      'Tingkatkan kapasitas bisnis UMKM Anda dengan solusi pembiayaan usaha. Dapatkan kemudahan modal dengan agunan fleksibel.',
     image:
       'https://images.unsplash.com/photo-1556742049-0a67e0e7a2b9?q=80&w=1600&auto=format&fit=crop',
     actionLabel: 'Pelajari Selengkapnya',
