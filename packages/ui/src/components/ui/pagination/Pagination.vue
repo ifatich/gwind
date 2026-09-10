@@ -85,7 +85,7 @@ function updatePage(page: number) {
       <li class="m-0 list-none p-0">
         <button
           type="button"
-          class="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-md border border-black-200 bg-white text-black-600 transition-[background-color,border-color,box-shadow,transform] duration-150 ease-out hover:border-lime-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lime-500 focus-visible:ring-offset-2 active:scale-[var(--gwind-motion-scale-icon-press)] disabled:cursor-not-allowed disabled:opacity-50 disabled:active:scale-100"
+          class="inline-flex h-10 w-10 shrink-0 cursor-pointer items-center justify-center rounded-md border border-black-200 bg-white text-black-600 transition-[background-color,border-color,box-shadow,transform] duration-150 ease-out hover:border-lime-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lime-500 focus-visible:ring-offset-2 active:scale-[var(--gwind-motion-scale-icon-press)] disabled:cursor-not-allowed disabled:opacity-50 disabled:active:scale-100"
           :disabled="!canGoPrevious"
           aria-label="Previous page"
           @click="updatePage(currentPage - 1)"
@@ -107,7 +107,7 @@ function updatePage(page: number) {
           type="button"
           :class="
             cn(
-              'inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-md border text-omicron font-semibold transition-[background-color,border-color,color,box-shadow,transform] duration-150 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lime-500 focus-visible:ring-offset-2 active:scale-[var(--gwind-motion-scale-icon-press)] disabled:cursor-not-allowed disabled:opacity-50 disabled:active:scale-100',
+              'inline-flex h-10 w-10 shrink-0 cursor-pointer items-center justify-center rounded-md border text-omicron font-semibold transition-[background-color,border-color,color,box-shadow,transform] duration-150 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lime-500 focus-visible:ring-offset-2 active:scale-[var(--gwind-motion-scale-icon-press)] disabled:cursor-not-allowed disabled:opacity-50 disabled:active:scale-100',
               item === currentPage
                 ? 'border-lime-500 bg-lime-500 text-white'
                 : 'border-black-200 bg-white text-black-800 hover:border-lime-600 hover:text-lime-600',
@@ -125,7 +125,7 @@ function updatePage(page: number) {
       <li class="m-0 list-none p-0">
         <button
           type="button"
-          class="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-md border border-black-200 bg-white text-black-600 transition-[background-color,border-color,box-shadow,transform] duration-150 ease-out hover:border-lime-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lime-500 focus-visible:ring-offset-2 active:scale-[var(--gwind-motion-scale-icon-press)] disabled:cursor-not-allowed disabled:opacity-50 disabled:active:scale-100"
+          class="inline-flex h-10 w-10 shrink-0 cursor-pointer items-center justify-center rounded-md border border-black-200 bg-white text-black-600 transition-[background-color,border-color,box-shadow,transform] duration-150 ease-out hover:border-lime-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lime-500 focus-visible:ring-offset-2 active:scale-[var(--gwind-motion-scale-icon-press)] disabled:cursor-not-allowed disabled:opacity-50 disabled:active:scale-100"
           :disabled="!canGoNext"
           aria-label="Next page"
           @click="updatePage(currentPage + 1)"
