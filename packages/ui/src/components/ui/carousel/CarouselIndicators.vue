@@ -31,7 +31,7 @@ if (!context) {
       :aria-label="`Go to slide ${index}`"
       :class="
         cn(
-          'h-1 rounded-[3px] transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lime-500',
+          'h-1 cursor-pointer rounded-[3px] transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lime-500',
           context.selectedIndex.value === index - 1
             ? 'w-12 bg-white opacity-100'
             : 'w-6 bg-white opacity-20 hover:opacity-50',
