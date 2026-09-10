@@ -11,6 +11,7 @@ import { DROPDOWN_ROOT_CONTEXT_KEY } from "./context";
 
 const props = withDefaults(
   defineProps<{
+    id?: string;
     label?: string;
     open?: boolean;
     defaultOpen?: boolean;
@@ -82,12 +83,13 @@ function onKeydown(e: KeyboardEvent) {
 </script>
 
 <template>
-  <div class="flex w-full flex-col gap-2">
-    <Label v-if="label">{{ label }}</Label>
+  <div :class="cn('flex w-full flex-col gap-2', props.class)">
+    <Label v-if="label" :for="props.id">{{ label }}</Label>
     <Popover :open="openState" @update:open="updateOpen" :modal="isMobile">
       <PopoverTrigger as-child>
         <slot name="trigger">
           <button
+            :id="props.id"
             type="button"
             role="combobox"
             :disabled="props.disabled"
