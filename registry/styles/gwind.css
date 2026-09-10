@@ -2,8 +2,6 @@
 @import "gwind-v2/theme.css";
 
 :root {
-  --black-10: hsl(0 0% 100%);
-  --black-20: hsl(0 0% 97.3%);
   --gwind-motion-duration-instant: 80ms;
   --gwind-motion-duration-fast: 120ms;
   --gwind-motion-duration-base: 160ms;
@@ -17,75 +15,12 @@
 }
 
 @theme {
-  --color-black-10: var(--black-10);
-  --color-black-20: var(--black-20);
-
   /* Override gwind-v2 theme tokens */
   --font-weight-semibold: 600;
 
   /* Mapping gwind-token CSS variables to Tailwind v4 utilities */
-  --shadow-drop-1: 0 2px 6px 0 rgba(0, 0, 0, 0.14), 0 0 2px 0 rgba(0, 0, 0, 0.08);
-  --shadow-drop-2: 0 6px 14px rgba(0, 0, 0, 0.16), 0 0 4px rgba(0, 0, 0, 0.10);
-}
-
-@utility text-alpha {
-  font-size: 4.5rem;
-  line-height: 1;
-}
-
-@utility text-beta {
-  font-size: 3.75rem;
-  line-height: 1;
-}
-
-@utility text-gamma {
-  font-size: 3rem;
-  line-height: 1;
-}
-
-@utility text-delta {
-  font-size: 2.25rem;
-  line-height: 2.5rem;
-}
-
-@utility text-epsilon {
-  font-size: 1.875rem;
-  line-height: 2.25rem;
-}
-
-@utility text-zeta {
-  font-size: 1.5rem;
-  line-height: 2rem;
-}
-
-@utility text-kappa {
-  font-size: 1.25rem;
-  line-height: 1.75rem;
-}
-
-@utility text-lambda {
-  font-size: 1.125rem;
-  line-height: 1.75rem;
-}
-
-@utility text-omicron {
-  font-size: 1rem;
-  line-height: 1.5rem;
-}
-
-@utility text-sigma {
-  font-size: 0.875rem;
-  line-height: 1.25rem;
-}
-
-@utility text-omega {
-  font-size: 0.75rem;
-  line-height: 1rem;
-}
-
-@utility text-atom {
-  font-size: 0.625rem;
-  line-height: 0.875rem;
+  --shadow-drop-1: var(--shadow-drop-1);
+  --shadow-drop-2: var(--shadow-drop-2);
 }
 
 @keyframes gwind-enter {

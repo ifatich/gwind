@@ -144,8 +144,8 @@ Didefinisikan di `packages/ui/src/styles/main.css`:
   Urutan: alpha, beta, gamma, delta, epsilon, zeta, kappa, lambda, omicron, sigma, omega, atom
 - **Motion tokens:** `--gwind-motion-duration-*`, `--gwind-motion-ease-*`
 - **Animation utilities:** `animate-in`, `animate-out`, `fade-in-0`, `zoom-in-95`, dll
-- **Color:** Menggunakan `gwind-v2` base + `--black-10`, `--black-20` custom
-- **Shadow:** `shadow-drop-1`, `shadow-drop-2`
+- **Color:** Menggunakan `gwind-v2` dual-scale system (`100`–`900` & `10`–`90` termasuk `--black-10`, `--black-20` native)
+- **Shadow:** `shadow-drop-1`, `shadow-drop-2` via token mapping `var(--shadow-drop-*)`
 
 ### VitePress Docs — Registrasi Komponen
 

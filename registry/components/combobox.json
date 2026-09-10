@@ -17,7 +17,7 @@
     },
     {
       "name": "ComboboxEmpty.vue",
-      "content": "<script setup lang=\"ts\">\nimport { ComboboxEmpty, type ComboboxEmptyProps } from 'reka-ui'\nimport { computed, type HTMLAttributes } from 'vue'\nimport { cn } from '../../../lib/utils'\n\nconst props = defineProps<ComboboxEmptyProps & { class?: HTMLAttributes['class'] }>()\n\nconst delegatedProps = computed(() => {\n  const { class: _, ...delegated } = props\n  return delegated\n})\n</script>\n\n<template>\n  <ComboboxEmpty v-bind=\"delegatedProps\" :class=\"cn('py-6 text-center text-sm', props.class)\">\n    <slot />\n  </ComboboxEmpty>\n</template>\n"
+      "content": "<script setup lang=\"ts\">\nimport { ComboboxEmpty, type ComboboxEmptyProps } from 'reka-ui'\nimport { computed, type HTMLAttributes } from 'vue'\nimport { cn } from '../../../lib/utils'\n\nconst props = defineProps<ComboboxEmptyProps & { class?: HTMLAttributes['class'] }>()\n\nconst delegatedProps = computed(() => {\n  const { class: _, ...delegated } = props\n  return delegated\n})\n</script>\n\n<template>\n  <ComboboxEmpty v-bind=\"delegatedProps\" :class=\"cn('py-6 text-center text-sigma', props.class)\">\n    <slot />\n  </ComboboxEmpty>\n</template>\n"
     },
     {
       "name": "ComboboxGroup.vue",
@@ -29,7 +29,7 @@
     },
     {
       "name": "ComboboxItem.vue",
-      "content": "<script setup lang=\"ts\">\nimport { ComboboxItem, type ComboboxItemEmits, type ComboboxItemProps, useForwardPropsEmits } from 'reka-ui'\nimport { computed, type HTMLAttributes } from 'vue'\nimport { cn } from '../../../lib/utils'\n\nconst props = defineProps<ComboboxItemProps & { class?: HTMLAttributes['class'] }>()\nconst emits = defineEmits<ComboboxItemEmits>()\n\nconst delegatedProps = computed(() => {\n  const { class: _, ...delegated } = props\n  return delegated\n})\n\nconst forwarded = useForwardPropsEmits(delegatedProps, emits)\n</script>\n\n<template>\n  <ComboboxItem\n    v-bind=\"forwarded\"\n    :class=\"\n      cn(\n        'relative flex w-full cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none data-[disabled]:pointer-events-none data-[highlighted]:bg-accent data-[highlighted]:text-accent-foreground data-[disabled]:opacity-50',\n        props.class,\n      )\n    \"\n  >\n    <slot />\n  </ComboboxItem>\n</template>\n"
+      "content": "<script setup lang=\"ts\">\nimport { ComboboxItem, type ComboboxItemEmits, type ComboboxItemProps, useForwardPropsEmits } from 'reka-ui'\nimport { computed, type HTMLAttributes } from 'vue'\nimport { cn } from '../../../lib/utils'\n\nconst props = defineProps<ComboboxItemProps & { class?: HTMLAttributes['class'] }>()\nconst emits = defineEmits<ComboboxItemEmits>()\n\nconst delegatedProps = computed(() => {\n  const { class: _, ...delegated } = props\n  return delegated\n})\n\nconst forwarded = useForwardPropsEmits(delegatedProps, emits)\n</script>\n\n<template>\n  <ComboboxItem\n    v-bind=\"forwarded\"\n    :class=\"\n      cn(\n        'relative flex w-full cursor-pointer select-none items-center rounded-sm px-2 py-1.5 text-sigma outline-none data-[disabled]:cursor-not-allowed data-[disabled]:pointer-events-none data-[highlighted]:bg-accent data-[highlighted]:text-accent-foreground data-[disabled]:opacity-50',\n        props.class,\n      )\n    \"\n  >\n    <slot />\n  </ComboboxItem>\n</template>\n"
     },
     {
       "name": "ComboboxItemIndicator.vue",

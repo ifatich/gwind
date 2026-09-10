@@ -37,7 +37,7 @@
     },
     {
       "name": "DialogOverlay.vue",
-      "content": "<script setup lang=\"ts\">\nimport type { HTMLAttributes } from 'vue'\nimport { reactiveOmit } from '@vueuse/core'\nimport { DialogOverlay, type DialogOverlayProps } from 'reka-ui'\nimport { cn } from '../../../lib/utils'\n\nconst props = defineProps<\n  DialogOverlayProps & { class?: HTMLAttributes['class'] }\n>()\n\nconst delegatedProps = reactiveOmit(props, 'class')\n</script>\n\n<template>\n  <DialogOverlay\n    data-slot=\"dialog-overlay\"\n    v-bind=\"delegatedProps\"\n    :class=\"\n      cn(\n        'data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 fixed inset-0 z-50 bg-[rgba(0,0,0,0.8)]',\n        props.class,\n      )\n    \"\n  >\n    <slot />\n  </DialogOverlay>\n</template>\n"
+      "content": "<script setup lang=\"ts\">\nimport type { HTMLAttributes } from 'vue'\nimport { reactiveOmit } from '@vueuse/core'\nimport { DialogOverlay, type DialogOverlayProps } from 'reka-ui'\nimport { cn } from '../../../lib/utils'\n\nconst props = defineProps<\n  DialogOverlayProps & { class?: HTMLAttributes['class'] }\n>()\n\nconst delegatedProps = reactiveOmit(props, 'class')\n</script>\n\n<template>\n  <DialogOverlay\n    data-slot=\"dialog-overlay\"\n    v-bind=\"delegatedProps\"\n    :class=\"\n      cn(\n        'data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 fixed inset-0 z-50 bg-black-800/80',\n        props.class,\n      )\n    \"\n  >\n    <slot />\n  </DialogOverlay>\n</template>\n"
     },
     {
       "name": "DialogTitle.vue",

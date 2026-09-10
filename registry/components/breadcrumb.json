@@ -21,7 +21,7 @@
     },
     {
       "name": "BreadcrumbLink.vue",
-      "content": "<script setup lang=\"ts\">\nimport type { HTMLAttributes } from 'vue'\nimport { Primitive, type PrimitiveProps } from 'reka-ui'\nimport { cn } from '../../../lib/utils'\n\nconst props = withDefaults(defineProps<PrimitiveProps & { class?: HTMLAttributes['class'] }>(), {\n  as: 'a',\n})\n</script>\n\n<template>\n  <Primitive\n    :as=\"as\"\n    :as-child=\"asChild\"\n    :class=\"cn('transition-colors hover:opacity-80 font-semibold', props.class)\"\n  >\n    <slot />\n  </Primitive>\n</template>\n"
+      "content": "<script setup lang=\"ts\">\nimport type { HTMLAttributes } from 'vue'\nimport { Primitive, type PrimitiveProps } from 'reka-ui'\nimport { cn } from '../../../lib/utils'\n\nconst props = withDefaults(defineProps<PrimitiveProps & { class?: HTMLAttributes['class'] }>(), {\n  as: 'a',\n})\n</script>\n\n<template>\n  <Primitive\n    :as=\"as\"\n    :as-child=\"asChild\"\n    :class=\"cn('cursor-pointer transition-colors hover:opacity-80 font-semibold', props.class)\"\n  >\n    <slot />\n  </Primitive>\n</template>\n"
     },
     {
       "name": "BreadcrumbList.vue",
