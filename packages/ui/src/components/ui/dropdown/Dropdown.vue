@@ -95,7 +95,7 @@ function onKeydown(e: KeyboardEvent) {
           aria-haspopup="listbox"
           :class="
             cn(
-              'group relative flex h-12 w-full items-center rounded-md border bg-white px-3 py-3 pr-11 text-left text-omicron font-semibold outline-none transition-[border-color,transform] duration-100',
+              'group relative flex h-12 w-full cursor-pointer items-center rounded-md border bg-white px-3 py-3 pr-11 text-left text-omicron font-semibold outline-none transition-[border-color,transform] duration-100',
               'border-black-200 hover:border-lime-600 focus-visible:border-lime-500 focus-visible:outline-none focus-visible:ring-0',
               'data-[state=open]:border-lime-500 data-[state=open]:hover:border-lime-500',
               'disabled:cursor-not-allowed disabled:border-black-200 disabled:bg-black-200 disabled:text-black-600 disabled:hover:border-black-200',
