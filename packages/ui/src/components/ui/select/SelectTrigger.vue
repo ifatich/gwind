@@ -26,7 +26,7 @@ const forwardedProps = useForwardProps(props)
     v-bind="forwardedProps"
     :class="
       cn(
-        'group flex h-10 w-full items-center justify-between rounded-md border border-black-200 bg-white px-3 py-2 text-sigma text-black-800 transition-[border-color,box-shadow,transform] duration-150 ease-out active:scale-[var(--gwind-motion-scale-press)] data-[placeholder]:text-black-400 data-[state=open]:border-lime-500 focus:outline-none focus:ring-2 focus:ring-lime-500 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 disabled:active:scale-100 [&>span]:truncate text-start',
+        'group flex h-10 w-full cursor-pointer items-center justify-between rounded-md border border-black-200 bg-white px-3 py-2 text-sigma text-black-800 transition-[border-color,box-shadow,transform] duration-150 ease-out active:scale-[var(--gwind-motion-scale-press)] data-[placeholder]:text-black-400 data-[state=open]:border-lime-500 focus:outline-none focus:ring-2 focus:ring-lime-500 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 disabled:active:scale-100 [&>span]:truncate text-start',
         props.class,
         { 'justify-between': props.showIcon, 'justify-center': !props.showIcon },
       )
