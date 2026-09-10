@@ -241,7 +241,7 @@ function isYearSelected(year: number): boolean {
             {{ title }}
           </div>
           <DatePickerClose
-            class="inline-flex h-6 w-6 items-center justify-center text-black-600 transition-colors hover:text-black-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lime-500 focus-visible:ring-offset-2"
+            class="inline-flex h-6 w-6 cursor-pointer items-center justify-center text-black-600 transition-colors hover:text-black-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lime-500 focus-visible:ring-offset-2"
             aria-label="Tutup date picker"
           >
             <X class="h-6 w-6" aria-hidden="true" />
@@ -255,7 +255,7 @@ function isYearSelected(year: number): boolean {
           <div class="px-4 pb-10 pt-4">
             <div class="relative flex h-6 items-center justify-between">
               <DatePickerPrev
-                class="inline-flex h-6 w-6 items-center justify-center text-black-600 transition-colors hover:text-black-800 disabled:pointer-events-none disabled:opacity-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lime-500 focus-visible:ring-offset-2"
+                class="inline-flex h-6 w-6 cursor-pointer items-center justify-center text-black-600 transition-colors hover:text-black-800 disabled:pointer-events-none disabled:opacity-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lime-500 focus-visible:ring-offset-2"
               >
                 <ChevronLeft class="h-6 w-6" aria-hidden="true" />
               </DatePickerPrev>
@@ -264,7 +264,7 @@ function isYearSelected(year: number): boolean {
               <div class="absolute left-1/2 inline-flex -translate-x-1/2 items-center gap-4 !text-omicron font-extrabold">
                 <button
                   type="button"
-                  class="text-lime-500 transition-colors hover:text-lime-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lime-500 focus-visible:ring-offset-2"
+                  class="cursor-pointer text-lime-500 transition-colors hover:text-lime-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lime-500 focus-visible:ring-offset-2"
                   @click="openMonthView"
                   @keydown.enter="openMonthView"
                   @keydown.space.prevent="openMonthView"
@@ -273,7 +273,7 @@ function isYearSelected(year: number): boolean {
                 </button>
                 <button
                   type="button"
-                  class="text-lime-500 transition-colors hover:text-lime-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lime-500 focus-visible:ring-offset-2"
+                  class="cursor-pointer text-lime-500 transition-colors hover:text-lime-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lime-500 focus-visible:ring-offset-2"
                   @click="openYearView"
                   @keydown.enter="openYearView"
                   @keydown.space.prevent="openYearView"
@@ -283,7 +283,7 @@ function isYearSelected(year: number): boolean {
               </div>
 
               <DatePickerNext
-                class="inline-flex h-6 w-6 items-center justify-center text-black-600 transition-colors hover:text-black-800 disabled:pointer-events-none disabled:opacity-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lime-500 focus-visible:ring-offset-2"
+                class="inline-flex h-6 w-6 cursor-pointer items-center justify-center text-black-600 transition-colors hover:text-black-800 disabled:pointer-events-none disabled:opacity-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lime-500 focus-visible:ring-offset-2"
               >
                 <ChevronRight class="h-6 w-6" aria-hidden="true" />
               </DatePickerNext>
@@ -343,7 +343,7 @@ function isYearSelected(year: number): boolean {
             <div class="relative flex h-6 items-center justify-between">
               <button
                 type="button"
-                class="inline-flex h-6 w-6 items-center justify-center text-black-600 transition-colors hover:text-black-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lime-500 focus-visible:ring-offset-2"
+                class="inline-flex h-6 w-6 cursor-pointer items-center justify-center text-black-600 transition-colors hover:text-black-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lime-500 focus-visible:ring-offset-2"
                 aria-label="Tahun Sebelumnya"
                 @click="monthPickerYear--"
               >
@@ -356,7 +356,7 @@ function isYearSelected(year: number): boolean {
                 </span>
                 <button
                   type="button"
-                  class="text-lime-500 transition-colors hover:text-lime-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lime-500 focus-visible:ring-offset-2"
+                  class="cursor-pointer text-lime-500 transition-colors hover:text-lime-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lime-500 focus-visible:ring-offset-2"
                   @click="openYearView"
                   @keydown.enter="openYearView"
                   @keydown.space.prevent="openYearView"
@@ -367,7 +367,7 @@ function isYearSelected(year: number): boolean {
 
               <button
                 type="button"
-                class="inline-flex h-6 w-6 items-center justify-center text-black-600 transition-colors hover:text-black-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lime-500 focus-visible:ring-offset-2"
+                class="inline-flex h-6 w-6 cursor-pointer items-center justify-center text-black-600 transition-colors hover:text-black-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lime-500 focus-visible:ring-offset-2"
                 aria-label="Tahun Berikutnya"
                 @click="monthPickerYear++"
               >
@@ -382,7 +382,7 @@ function isYearSelected(year: number): boolean {
                 v-for="(month, idx) in MONTH_NAMES"
                 :key="month"
                 type="button"
-                class="inline-flex h-10 items-center justify-center rounded-lg !text-omicron font-semibold text-black-800 transition-colors hover:bg-black-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lime-500 focus-visible:ring-offset-2"
+                class="inline-flex h-10 cursor-pointer items-center justify-center rounded-lg !text-omicron font-semibold text-black-800 transition-colors hover:bg-black-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lime-500 focus-visible:ring-offset-2"
                 :class="{
                   '!bg-lime-500 !text-white hover:!bg-lime-600': isMonthSelected(idx + 1),
                 }"
@@ -401,7 +401,7 @@ function isYearSelected(year: number): boolean {
               <div class="absolute left-1/2 inline-flex -translate-x-1/2 items-center gap-4 !text-omicron font-extrabold">
                 <button
                   type="button"
-                  class="text-lime-500 transition-colors hover:text-lime-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lime-500 focus-visible:ring-offset-2"
+                  class="cursor-pointer text-lime-500 transition-colors hover:text-lime-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lime-500 focus-visible:ring-offset-2"
                   @click="openMonthView"
                   @keydown.enter="openMonthView"
                   @keydown.space.prevent="openMonthView"
@@ -422,7 +422,7 @@ function isYearSelected(year: number): boolean {
                 :key="year"
                 :data-year="year"
                 type="button"
-                class="inline-flex h-[34px] items-center justify-center rounded-lg !text-lambda font-semibold text-black-800 transition-colors hover:bg-black-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lime-500 focus-visible:ring-offset-2"
+                class="inline-flex h-[34px] cursor-pointer items-center justify-center rounded-lg !text-lambda font-semibold text-black-800 transition-colors hover:bg-black-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lime-500 focus-visible:ring-offset-2"
                 :class="{
                   '!bg-lime-500 !text-white hover:!bg-lime-600': isYearSelected(year),
                 }"

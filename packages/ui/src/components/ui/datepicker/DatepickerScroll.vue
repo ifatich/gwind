@@ -44,7 +44,7 @@ function selectItem(value: string) {
         type="button"
         :class="
           cn(
-            'flex h-12 shrink-0 snap-center items-center justify-center rounded-lg px-3 text-center transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lime-500 focus-visible:ring-offset-2',
+            'flex h-12 shrink-0 snap-center cursor-pointer items-center justify-center rounded-lg px-3 text-center transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lime-500 focus-visible:ring-offset-2',
             modelValue === item.value
               ? 'bg-lime-500 !text-lambda font-semibold text-white'
               : 'bg-white !text-lambda font-semibold text-black-800 hover:bg-black-200',

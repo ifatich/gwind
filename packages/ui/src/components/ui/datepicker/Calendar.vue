@@ -73,7 +73,7 @@ const calendarGrid = ref<any[][]>([])
       </div>
       <button
         type="button"
-        class="inline-flex h-6 w-6 items-center justify-center text-black-600 transition-colors hover:text-black-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lime-500 focus-visible:ring-offset-2"
+        class="inline-flex h-6 w-6 cursor-pointer items-center justify-center text-black-600 transition-colors hover:text-black-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lime-500 focus-visible:ring-offset-2"
         aria-label="Tutup date picker"
         @click="emits('close')"
       >
@@ -86,21 +86,21 @@ const calendarGrid = ref<any[][]>([])
     <div :class="cn('px-4 pb-10 pt-4', showPanelHeader ? '' : '')">
       <CalendarHeader class="relative flex h-6 items-center justify-between">
         <CalendarPrev
-          class="inline-flex h-6 w-6 items-center justify-center text-black-600 transition-colors hover:text-black-800 disabled:pointer-events-none disabled:opacity-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lime-500 focus-visible:ring-offset-2"
+          class="inline-flex h-6 w-6 cursor-pointer items-center justify-center text-black-600 transition-colors hover:text-black-800 disabled:pointer-events-none disabled:opacity-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lime-500 focus-visible:ring-offset-2"
         >
           <ChevronLeft class="h-6 w-6" aria-hidden="true" />
         </CalendarPrev>
 
         <button
           type="button"
-          class="absolute left-1/2 inline-flex -translate-x-1/2 items-center gap-1 !text-omicron font-extrabold text-lime-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lime-500 focus-visible:ring-offset-2"
+          class="absolute left-1/2 inline-flex -translate-x-1/2 cursor-pointer items-center gap-1 !text-omicron font-extrabold text-lime-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lime-500 focus-visible:ring-offset-2"
         >
           <CalendarHeading />
           <ChevronDown class="h-6 w-6" aria-hidden="true" />
         </button>
 
         <CalendarNext
-          class="inline-flex h-6 w-6 items-center justify-center text-black-600 transition-colors hover:text-black-800 disabled:pointer-events-none disabled:opacity-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lime-500 focus-visible:ring-offset-2"
+          class="inline-flex h-6 w-6 cursor-pointer items-center justify-center text-black-600 transition-colors hover:text-black-800 disabled:pointer-events-none disabled:opacity-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lime-500 focus-visible:ring-offset-2"
         >
           <ChevronRight class="h-6 w-6" aria-hidden="true" />
         </CalendarNext>
@@ -137,7 +137,7 @@ const calendarGrid = ref<any[][]>([])
                 :month="date"
                 :class="
                   cn(
-                    'relative inline-flex h-8 w-8 items-center justify-center rounded-full !text-sigma font-semibold text-black-800 transition-colors hover:bg-black-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lime-500 focus-visible:ring-offset-2',
+                    'relative inline-flex h-8 w-8 cursor-pointer items-center justify-center rounded-full !text-sigma font-semibold text-black-800 transition-colors hover:bg-black-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lime-500 focus-visible:ring-offset-2',
                     'data-[selected]:bg-lime-500 data-[selected]:text-white',
                     'data-[outside-view]:text-black-500',
                     'data-[disabled]:cursor-not-allowed data-[disabled]:text-black-500 data-[disabled]:line-through',

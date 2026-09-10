@@ -62,7 +62,7 @@ const yearGrid = ref<any[][]>([])
       </div>
       <button
         type="button"
-        class="inline-flex h-6 w-6 items-center justify-center text-black-600 transition-colors hover:text-black-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lime-500 focus-visible:ring-offset-2"
+        class="inline-flex h-6 w-6 cursor-pointer items-center justify-center text-black-600 transition-colors hover:text-black-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lime-500 focus-visible:ring-offset-2"
         aria-label="Tutup date picker"
         @click="emits('close')"
       >
@@ -75,21 +75,21 @@ const yearGrid = ref<any[][]>([])
     <div class="px-4 py-4">
       <YearPickerHeader class="relative flex h-6 items-center justify-between">
         <YearPickerPrev
-          class="inline-flex h-6 w-6 items-center justify-center text-black-600 transition-colors hover:text-black-800 disabled:pointer-events-none disabled:opacity-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lime-500 focus-visible:ring-offset-2"
+          class="inline-flex h-6 w-6 cursor-pointer items-center justify-center text-black-600 transition-colors hover:text-black-800 disabled:pointer-events-none disabled:opacity-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lime-500 focus-visible:ring-offset-2"
         >
           <ChevronLeft class="h-6 w-6" aria-hidden="true" />
         </YearPickerPrev>
 
         <button
           type="button"
-          class="absolute left-1/2 inline-flex -translate-x-1/2 items-center gap-1 !text-omicron font-extrabold text-lime-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lime-500 focus-visible:ring-offset-2"
+          class="absolute left-1/2 inline-flex -translate-x-1/2 cursor-pointer items-center gap-1 !text-omicron font-extrabold text-lime-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lime-500 focus-visible:ring-offset-2"
         >
           <YearPickerHeading />
           <ChevronDown class="h-6 w-6 rotate-180" aria-hidden="true" />
         </button>
 
         <YearPickerNext
-          class="inline-flex h-6 w-6 items-center justify-center text-black-600 transition-colors hover:text-black-800 disabled:pointer-events-none disabled:opacity-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lime-500 focus-visible:ring-offset-2"
+          class="inline-flex h-6 w-6 cursor-pointer items-center justify-center text-black-600 transition-colors hover:text-black-800 disabled:pointer-events-none disabled:opacity-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lime-500 focus-visible:ring-offset-2"
         >
           <ChevronRight class="h-6 w-6" aria-hidden="true" />
         </YearPickerNext>
@@ -110,7 +110,7 @@ const yearGrid = ref<any[][]>([])
             >
               <YearPickerCellTrigger
                 :year="date"
-                class="inline-flex h-[34px] w-[76px] items-center justify-center rounded-lg !text-lambda font-semibold text-black-800 transition-colors hover:bg-black-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lime-500 focus-visible:ring-offset-2 data-[selected]:bg-lime-500 data-[selected]:text-white"
+                class="inline-flex h-[34px] w-[76px] cursor-pointer items-center justify-center rounded-lg !text-lambda font-semibold text-black-800 transition-colors hover:bg-black-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lime-500 focus-visible:ring-offset-2 data-[selected]:bg-lime-500 data-[selected]:text-white"
               >
                 {{ date.year }}
               </YearPickerCellTrigger>
