@@ -13,7 +13,7 @@ npx gwind-system-ui add avatar
 <ShadowPreview>
   <div class="flex items-center gap-4">
     <GwAvatar src="https://i.pravatar.cc/96?img=12" alt="Gwind User" />
-    <GwAvatar alt="Pegadaian Design" />
+    <GwAvatar alt="Gwind Design" />
     <GwAvatar fallback="UI" size="lg" />
   </div>
 </ShadowPreview>
@@ -28,6 +28,6 @@ import { Avatar } from '@/components/ui/avatar'
 </script>
 
 <template>
-  <Avatar src="/avatar.png" alt="Pegadaian Design" />
+  <Avatar src="/avatar.png" alt="Gwind Design" />
 </template>
 ```

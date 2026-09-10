@@ -4,7 +4,7 @@ import CarouselPreview from './previews/CarouselPreview.vue'
 
 # Carousel / Banner
 
-Solusi banner slide dan komposer carousel responsif dengan dukungan sentuhan/swipe, navigasi keyboard, indikator baris (pill indicators), serta kontrol tombol melingkar sesuai standar Figma Pegadaian UI Kit (`24643-22126`).
+Solusi banner slide dan komposer carousel responsif dengan dukungan sentuhan/swipe, navigasi keyboard, indikator baris (pill indicators), serta kontrol tombol melingkar sesuai standar Figma Gwind UI Kit (`24643-22126`).
 
 ## Installation
 

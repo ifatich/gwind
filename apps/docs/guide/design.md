@@ -4,7 +4,7 @@ Dokumen ini adalah sumber aturan desain Gwind untuk designer, engineer, dan AI a
 
 ## Product Intent
 
-Gwind adalah design system Vue 3 untuk produk internal Pegadaian. Sistem ini harus terasa stabil, jelas, cepat dipindai, dan cocok untuk aplikasi operasional. Prioritaskan kepadatan informasi yang rapi, state yang eksplisit, aksesibilitas, dan konsistensi antar aplikasi.
+Gwind adalah enterprise design system Vue 3 dan Tailwind CSS v4. Sistem ini harus terasa stabil, jelas, cepat dipindai, dan cocok untuk aplikasi operasional. Prioritaskan kepadatan informasi yang rapi, state yang eksplisit, aksesibilitas, dan konsistensi antar aplikasi.
 
 Gwind bukan landing-page kit. Hindari visual yang terlalu dekoratif, layout promosi, gradient berlebihan, dan komposisi hero marketing ketika konteksnya aplikasi kerja.
 
@@ -54,7 +54,7 @@ Use semantic color roles from `gwind-v2` and Tailwind theme mappings.
 | `border` / `input` | Structural boundaries and input borders. |
 | `destructive` | Error, destructive action, or critical state. |
 
-Do not create a screen dominated by one hue. Use the Pegadaian greens as brand anchors, balanced with neutral surfaces, readable foregrounds, and limited accents.
+Do not create a screen dominated by one hue. Use the brand greens (Lime & Broccoli) as brand anchors, balanced with neutral surfaces, readable foregrounds, and limited accents.
 
 ## Typography
 
