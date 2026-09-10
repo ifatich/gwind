@@ -345,7 +345,7 @@ const handleRetake = () => {
           <button
             type="button"
             aria-label="Hapus gambar"
-            class="absolute -right-2 -top-2 z-10 flex size-6 items-center justify-center rounded-full bg-white text-black-600 transition-transform hover:scale-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lime-500 shadow-drop-1"
+            class="cursor-pointer absolute -right-2 -top-2 z-10 flex size-6 items-center justify-center rounded-full bg-white text-black-600 transition-transform hover:scale-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lime-500 shadow-drop-1"
             @click="handleRemove"
           >
             <!-- Icon: Cross SVG Bootstrap Match -->
@@ -458,7 +458,7 @@ const handleRetake = () => {
             <button
               type="button"
               aria-label="Hapus gambar"
-              class="absolute right-1 top-1 z-10 flex size-5 items-center justify-center rounded-full bg-red-500 text-white shadow-xs transition-transform hover:scale-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lime-500"
+              class="cursor-pointer absolute right-1 top-1 z-10 flex size-5 items-center justify-center rounded-full bg-red-500 text-white shadow-xs transition-transform hover:scale-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lime-500"
               @click="handleRemove"
             >
               <!-- Icon: Cross SVG Bootstrap Match -->

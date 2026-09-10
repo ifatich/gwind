@@ -144,7 +144,7 @@ const handleRemove = (event: Event) => {
       <button 
         v-if="rightAction && !isFilled"
         type="button"
-        class="text-omega font-extrabold text-lime-500 bg-white px-[10px] py-[3px] rounded-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-lime-500"
+        class="cursor-pointer text-omega font-extrabold text-lime-500 bg-white px-[10px] py-[3px] rounded-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-lime-500"
         @click="emit('action-click')"
       >
         Action
@@ -204,7 +204,7 @@ const handleRemove = (event: Event) => {
       <button
         type="button"
         aria-label="Hapus file"
-        class="shrink-0 flex size-5 items-center justify-center rounded-full transition-transform hover:scale-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lime-500 text-black-600"
+        class="cursor-pointer shrink-0 flex size-5 items-center justify-center rounded-full transition-transform hover:scale-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lime-500 text-black-600"
         @click="handleRemove"
       >
         <svg class="size-full" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
