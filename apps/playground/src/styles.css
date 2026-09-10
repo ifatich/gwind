@@ -1,5 +1,5 @@
-@import '@gwind/ui/styles';
 @import 'tailwindcss';
+@import '@gwind/ui/styles';
 
 @source "../../../packages/ui/src";
 @source "./**/*.{vue,ts}";
