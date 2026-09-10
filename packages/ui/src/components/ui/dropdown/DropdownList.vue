@@ -80,7 +80,7 @@ watch(showSearch, (enabled) => {
       cn(
         'flex w-full flex-col overflow-hidden bg-white',
         'max-sm:rounded-none max-sm:rounded-t-2xl',
-        'sm:rounded-[6px]',
+        'sm:rounded-md',
         props.class,
       )
     "

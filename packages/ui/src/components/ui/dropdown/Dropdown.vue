@@ -130,7 +130,7 @@ function onKeydown(e: KeyboardEvent) {
         data-slot="dropdown-content"
         :class="
           cn(
-            'z-50 w-[var(--reka-popover-trigger-width)] overflow-hidden rounded-[6px] border border-black-200 bg-white p-0 shadow-drop-1 outline-none data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2',
+            'z-50 w-[var(--reka-popover-trigger-width)] overflow-hidden rounded-md border border-black-200 bg-white p-0 shadow-drop-1 outline-none data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2',
             props.contentClass,
           )
         "
@@ -153,7 +153,7 @@ function onKeydown(e: KeyboardEvent) {
       >
         <div
           v-if="isMobile && openState"
-          class="fixed inset-0 z-50 bg-[#000000]/80"
+          class="fixed inset-0 z-50 bg-black-800/80"
           @click="close"
           @keydown="onKeydown"
         />

@@ -49,7 +49,7 @@ function toggle() {
     :disabled="disabled"
     :class="
       cn(
-        'inline-flex h-6 w-11 shrink-0 cursor-pointer items-center rounded-full border border-transparent bg-black-300 p-0.5 transition-[background-color,box-shadow,transform] duration-150 ease-out active:scale-[var(--gwind-motion-scale-icon-press)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lime-500 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 disabled:active:scale-100',
+        'inline-flex h-6 w-11 shrink-0 cursor-pointer items-center rounded-full border border-transparent bg-black-400 p-0.5 transition-[background-color,box-shadow,transform] duration-150 ease-out active:scale-[var(--gwind-motion-scale-icon-press)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lime-500 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 disabled:active:scale-100',
         isChecked && 'bg-lime-500',
         props.class,
       )

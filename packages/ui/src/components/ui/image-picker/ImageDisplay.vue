@@ -42,12 +42,12 @@ const currentStatus = computed(() => {
 const sizeClasses = computed(() => {
   switch (props.size) {
     case 'large-4:3':
-      return 'h-[120px] w-[180px] rounded-[12px]'
+      return 'h-[120px] w-[180px] rounded-xl'
     case 'large-1:1':
-      return 'size-[120px] rounded-[12px]'
+      return 'size-[120px] rounded-xl'
     case 'small':
     default:
-      return 'size-[80px] rounded-[8px]'
+      return 'size-[80px] rounded-lg'
   }
 })
 
@@ -87,9 +87,9 @@ const handleImageError = (e: Event) => {
       >
       <!-- Dark overlay with +1 / +count badge -->
       <div
-        class="absolute inset-0 flex items-center justify-center bg-black-900/50 backdrop-blur-[0.5px]"
+        class="absolute inset-0 flex items-center justify-center bg-black-800/50 backdrop-blur-[0.5px]"
       >
-        <span class="font-extrabold text-[14px] text-white tracking-wide">
+        <span class="font-extrabold text-sigma text-white tracking-wide">
           {{ count }}+
         </span>
       </div>
@@ -142,7 +142,7 @@ const handleImageError = (e: Event) => {
             y1="32"
             x2="32"
             y2="8"
-            stroke="#E53E3E"
+            class="stroke-red-500"
             stroke-width="2.5"
             stroke-linecap="round"
           />

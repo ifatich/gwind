@@ -46,7 +46,7 @@ const emit = defineEmits<{
     :autoplay="props.autoplay"
     :autoplay-interval="props.autoplayInterval"
     :loop="props.loop"
-    :class="cn('w-full relative overflow-hidden rounded-2xl shadow-xl', props.class)"
+    :class="cn('w-full relative overflow-hidden rounded-2xl shadow-drop-2', props.class)"
     @select="(idx) => emit('select', idx)"
   >
     <!-- Slide Track: Background photo, overlay, tag, title, description slide together -->
@@ -73,7 +73,7 @@ const emit = defineEmits<{
           <!-- Tag Badge -->
           <Badge
             v-if="slide.tag"
-            class="!bg-lime-500 !text-white text-sigma font-extrabold px-3 py-1.5 rounded-[4px] shadow-sm tracking-wide border-0"
+            class="!bg-lime-500 !text-white text-sigma font-extrabold px-3 py-1.5 rounded-sm shadow-drop-1 tracking-wide border-0"
           >
             {{ slide.tag }}
           </Badge>
@@ -97,7 +97,7 @@ const emit = defineEmits<{
             type="button"
             variant="default"
             size="md"
-            class="mt-1 shadow-md"
+            class="mt-1 shadow-drop-1"
             @click="emit('clickAction', slide, index)"
           >
             {{ slide.actionLabel }}

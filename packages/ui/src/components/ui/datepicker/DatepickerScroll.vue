@@ -31,7 +31,7 @@ function selectItem(value: string) {
   <div
     :class="
       cn(
-        'flex w-[360px] flex-col overflow-hidden rounded-[12px] bg-white px-4 py-4 shadow-drop-1',
+        'flex w-[360px] flex-col overflow-hidden rounded-xl bg-white px-4 py-4 shadow-drop-1',
         variant === 'month-only' ? 'h-[324px]' : 'h-[349px]',
         props.class,
       )

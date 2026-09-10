@@ -26,7 +26,7 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits)
     v-bind="{ ...forwarded, ...$attrs }"
     :class="
       cn(
-        'gwind-datepicker-content z-50 w-[360px] overflow-hidden rounded-[12px] bg-white p-0 text-black-800 outline-none',
+        'gwind-datepicker-content z-50 w-[360px] overflow-hidden rounded-xl bg-white p-0 text-black-800 outline-none',
         'shadow-drop-1',
         'data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95',
         'data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 max-sm:data-[state=open]:slide-in-from-bottom-4 max-sm:data-[state=closed]:slide-out-to-bottom-4',
@@ -56,7 +56,7 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits)
     height: 100dvh !important;
     min-height: 100dvh !important;
     transform: none !important;
-    background: rgba(37, 37, 40, 0.48) !important;
+    background: color-mix(in srgb, var(--black-800) 48%, transparent) !important;
     z-index: 50 !important;
   }
 
@@ -67,7 +67,7 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits)
     border-bottom-left-radius: 0 !important;
     border-top-left-radius: 16px !important;
     border-top-right-radius: 16px !important;
-    box-shadow: 0 -8px 24px rgba(0, 0, 0, 0.18) !important;
+    box-shadow: 0 -8px 24px color-mix(in srgb, var(--black-800) 18%, transparent) !important;
   }
 
   .gwind-datepicker-content[data-state="open"] {

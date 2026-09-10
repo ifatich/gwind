@@ -138,13 +138,13 @@ const handleRemove = (event: Event) => {
 <template>
   <div :class="cn('relative w-full max-w-[603px] font-sans flex flex-col gap-1', props.class)">
     <div v-if="title || rightAction" class="flex items-center justify-between w-full">
-      <p v-if="title" class="text-[14px] font-extrabold text-[#252528] leading-[20px]">
+      <p v-if="title" class="text-sigma font-extrabold text-black-800 leading-[20px]">
         {{ title }}
       </p>
       <button 
         v-if="rightAction && !isFilled"
         type="button"
-        class="text-[12px] font-extrabold text-[#00ab4e] bg-white px-[10px] py-[3px] rounded-[4px] focus:outline-none focus-visible:ring-2 focus-visible:ring-lime-500"
+        class="text-omega font-extrabold text-lime-500 bg-white px-[10px] py-[3px] rounded-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-lime-500"
         @click="emit('action-click')"
       >
         Action
@@ -170,8 +170,8 @@ const handleRemove = (event: Event) => {
       :disabled="disabled"
       :class="
         cn(
-          'group relative flex w-full cursor-pointer items-center justify-center rounded-[6px] border border-dashed border-[#bbbdc0] bg-white py-[38px] px-4 transition-colors hover:border-[#00ab4e] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lime-500 focus-visible:ring-offset-2',
-          isDragging && 'border-[#00ab4e] bg-[#e6f6ea]',
+          'group relative flex w-full cursor-pointer items-center justify-center rounded-md border border-dashed border-black-400 bg-white py-[38px] px-4 transition-colors hover:border-lime-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lime-500 focus-visible:ring-offset-2',
+          isDragging && 'border-lime-500 bg-lime-100',
           disabled && 'pointer-events-none opacity-60',
         )
       "
@@ -182,13 +182,13 @@ const handleRemove = (event: Event) => {
       @drop="onDrop"
     >
       <div class="flex items-center gap-2">
-        <svg class="size-5 shrink-0 text-[#252528]" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg class="size-5 shrink-0 text-black-800" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M10.0007 2.49967V14.1663" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
           <path d="M5.83398 6.66634L10.0007 2.49967L14.1673 6.66634" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
           <path d="M3.33398 17.5H16.6673" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
-        <p class="text-[14px] font-semibold text-[#252528] text-center leading-[20px]">
-          Tarik file ke sini atau <span class="font-extrabold text-[#00ab4e]">pilih dari perangkat</span>
+        <p class="text-sigma font-semibold text-black-800 text-center leading-[20px]">
+          Tarik file ke sini atau <span class="font-extrabold text-lime-500">pilih dari perangkat</span>
         </p>
       </div>
     </button>
@@ -196,15 +196,15 @@ const handleRemove = (event: Event) => {
     <!-- Filled State -->
     <div
       v-else
-      class="flex w-full items-center justify-between rounded-[6px] border border-solid border-[#00ab4e] bg-[#e6f6ea] px-[16px] py-[10px] transition-all"
+      class="flex w-full items-center justify-between rounded-md border border-solid border-lime-500 bg-lime-100 px-4 py-2.5 transition-all"
     >
-      <p class="text-[14px] font-extrabold text-[#252528] truncate mr-4 leading-[20px]">
+      <p class="text-sigma font-extrabold text-black-800 truncate mr-4 leading-[20px]">
         {{ modelValue?.name }} - {{ formatFileSize(modelValue?.size || 0) }}
       </p>
       <button
         type="button"
         aria-label="Hapus file"
-        class="shrink-0 flex size-5 items-center justify-center rounded-full transition-transform hover:scale-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lime-500 text-[#58585B]"
+        class="shrink-0 flex size-5 items-center justify-center rounded-full transition-transform hover:scale-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lime-500 text-black-600"
         @click="handleRemove"
       >
         <svg class="size-full" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -216,13 +216,13 @@ const handleRemove = (event: Event) => {
     <!-- Hint / Error Text -->
     <p
       v-if="errorMessage"
-      class="min-h-[18px] w-full truncate text-[12px] leading-[18px] font-semibold text-red-500"
+      class="min-h-[18px] w-full truncate text-omega leading-[18px] font-semibold text-red-500"
     >
       {{ errorMessage }}
     </p>
     <p
       v-else-if="!isFilled"
-      class="min-h-[18px] w-full text-[12px] leading-[18px] font-semibold text-[#939597]"
+      class="min-h-[18px] w-full text-omega leading-[18px] font-semibold text-black-500"
     >
       Ukuran file maksimal {{ maxSize ? (maxSize / (1024 * 1024)).toFixed(0) : 5 }} MB
     </p>

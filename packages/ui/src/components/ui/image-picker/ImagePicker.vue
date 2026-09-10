@@ -288,10 +288,10 @@ const handleRetake = () => {
                 <img
                   :src="previewUrls[0]"
                   alt="Preview"
-                  :class="cn('h-full w-full object-cover rounded-[8px]', imageClass)"
+                  :class="cn('h-full w-full object-cover rounded-lg', imageClass)"
                   @error="handleImageError"
                 >
-                <div v-if="multiple && previewUrls.length > 1" class="absolute inset-0 flex items-center justify-center rounded-[8px] bg-black-900/50 text-white font-bold text-sigma">
+                <div v-if="multiple && previewUrls.length > 1" class="absolute inset-0 flex items-center justify-center rounded-lg bg-black-800/50 text-white font-bold text-sigma">
                   +{{ previewUrls.length - 1 }}
                 </div>
               </div>
@@ -314,8 +314,8 @@ const handleRetake = () => {
                         </CarouselItem>
                       </CarouselContent>
                       <div class="absolute inset-y-0 left-2 right-2 z-10 flex items-center justify-between pointer-events-none">
-                        <CarouselPrevious class="pointer-events-auto !size-6 shadow-sm" />
-                        <CarouselNext class="pointer-events-auto !size-6 shadow-sm" />
+                        <CarouselPrevious class="pointer-events-auto !size-6 shadow-drop-1" />
+                        <CarouselNext class="pointer-events-auto !size-6 shadow-drop-1" />
                       </div>
                       <div class="absolute bottom-10 left-0 flex w-full justify-center">
                         <CarouselIndicators />
@@ -345,12 +345,12 @@ const handleRetake = () => {
           <button
             type="button"
             aria-label="Hapus gambar"
-            class="absolute -right-2 -top-2 z-10 flex size-6 items-center justify-center rounded-full bg-white transition-transform hover:scale-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lime-500 shadow-sm"
+            class="absolute -right-2 -top-2 z-10 flex size-6 items-center justify-center rounded-full bg-white text-black-600 transition-transform hover:scale-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lime-500 shadow-drop-1"
             @click="handleRemove"
           >
             <!-- Icon: Cross SVG Bootstrap Match -->
             <svg class="size-full" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-              <path fill-rule="evenodd" clip-rule="evenodd" d="M18.3327 9.99935C18.3327 14.6017 14.6017 18.3327 9.99935 18.3327C5.39698 18.3327 1.66602 14.6017 1.66602 9.99935C1.66602 5.39698 5.39698 1.66602 9.99935 1.66602C14.6017 1.66602 18.3327 5.39698 18.3327 9.99935ZM6.86279 6.86279C7.10973 6.61586 7.50106 6.60133 7.76498 6.81921L7.81291 6.86279L10.2771 9.32701L12.7413 6.86279L12.7893 6.81921C13.0532 6.60133 13.4445 6.61586 13.6915 6.86279C13.9538 7.12516 13.9538 7.55054 13.6915 7.81291L11.2272 10.2771L13.6915 12.7413C13.9538 13.0037 13.9538 13.4291 13.6915 13.6915C13.4445 13.9384 13.0532 13.9529 12.7893 13.735L12.7413 13.6915L10.2771 11.2272L7.8129 13.6915L7.76498 13.735C7.50105 13.9529 7.10972 13.9384 6.86278 13.6915C6.60042 13.4291 6.60042 13.0037 6.86278 12.7413L9.32701 10.2771L6.86279 7.81291C6.60042 7.55054 6.60042 7.12516 6.86279 6.86279Z" fill="#58585B"/>
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M18.3327 9.99935C18.3327 14.6017 14.6017 18.3327 9.99935 18.3327C5.39698 18.3327 1.66602 14.6017 1.66602 9.99935C1.66602 5.39698 5.39698 1.66602 9.99935 1.66602C14.6017 1.66602 18.3327 5.39698 18.3327 9.99935ZM6.86279 6.86279C7.10973 6.61586 7.50106 6.60133 7.76498 6.81921L7.81291 6.86279L10.2771 9.32701L12.7413 6.86279L12.7893 6.81921C13.0532 6.60133 13.4445 6.61586 13.6915 6.86279C13.9538 7.12516 13.9538 7.55054 13.6915 7.81291L11.2272 10.2771L13.6915 12.7413C13.9538 13.0037 13.9538 13.4291 13.6915 13.6915C13.4445 13.9384 13.0532 13.9529 12.7893 13.735L12.7413 13.6915L10.2771 11.2272L7.8129 13.6915L7.76498 13.735C7.50105 13.9529 7.10972 13.9384 6.86278 13.6915C6.60042 13.4291 6.60042 13.0037 6.86278 12.7413L9.32701 10.2771L6.86279 7.81291C6.60042 7.55054 6.60042 7.12516 6.86279 6.86279Z" fill="currentColor"/>
             </svg>
           </button>
         </div>
@@ -365,7 +365,7 @@ const handleRetake = () => {
           :disabled="disabled"
           :class="
             cn(
-              'group relative flex size-full cursor-pointer flex-col items-center justify-center rounded-[6px] border border-dashed border-black-300 bg-white p-3 transition-colors hover:border-lime-500 hover:bg-lime-50/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lime-500 focus-visible:ring-offset-2',
+              'group relative flex size-full cursor-pointer flex-col items-center justify-center rounded-md border border-dashed border-black-200 bg-white p-3 transition-colors hover:border-lime-500 hover:bg-lime-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lime-500 focus-visible:ring-offset-2',
               isDragging && 'border-lime-500',
               disabled && 'pointer-events-none',
             )
@@ -385,12 +385,12 @@ const handleRetake = () => {
         <!-- Large: Filled Preview Card -->
         <div
           v-else
-          class="relative flex size-full items-center justify-center rounded-[6px] border border-dashed border-black-200 bg-white p-3"
+          class="relative flex size-full items-center justify-center rounded-md border border-dashed border-black-200 bg-white p-3"
         >
           <div
             :class="
               cn(
-                'relative flex items-center justify-center rounded-[12px] border border-black-200 bg-black-100 z-[1]',
+                'relative flex items-center justify-center rounded-xl border border-black-200 bg-black-100 z-[1]',
                 aspectRatio === '1:1' ? 'size-[120px]' : 'h-[120px] w-[180px]',
               )
             "
@@ -401,10 +401,10 @@ const handleRetake = () => {
                   <img
                     :src="previewUrls[0]"
                     alt="Preview"
-                    :class="cn('h-full w-full rounded-[12px] object-cover', imageClass)"
+                    :class="cn('h-full w-full rounded-xl object-cover', imageClass)"
                     @error="handleImageError"
                   />
-                  <div v-if="multiple && previewUrls.length > 1" class="absolute inset-0 flex items-center justify-center rounded-[12px] bg-black-900/50 text-white font-bold text-lambda">
+                  <div v-if="multiple && previewUrls.length > 1" class="absolute inset-0 flex items-center justify-center rounded-xl bg-black-800/50 text-white font-bold text-lambda">
                     +{{ previewUrls.length - 1 }}
                   </div>
                 </div>
@@ -427,8 +427,8 @@ const handleRetake = () => {
                           </CarouselItem>
                         </CarouselContent>
                         <div class="absolute inset-y-0 left-2 right-2 z-10 flex items-center justify-between pointer-events-none">
-                          <CarouselPrevious class="pointer-events-auto !size-6 shadow-sm" />
-                          <CarouselNext class="pointer-events-auto !size-6 shadow-sm" />
+                          <CarouselPrevious class="pointer-events-auto !size-6 shadow-drop-1" />
+                          <CarouselNext class="pointer-events-auto !size-6 shadow-drop-1" />
                         </div>
                         <div class="absolute bottom-10 left-0 flex w-full justify-center">
                           <CarouselIndicators />
@@ -454,16 +454,16 @@ const handleRetake = () => {
               </DialogContent>
             </Dialog>
 
-            <!-- Remove Button Badge (Bootstrap Match: top: 4px, right: 4px, size: 20px, bg: #ae1e22) -->
+            <!-- Remove Button Badge (Bootstrap Match: top: 4px, right: 4px, size: 20px, bg: red-500) -->
             <button
               type="button"
               aria-label="Hapus gambar"
-              class="absolute right-1 top-1 z-10 flex size-5 items-center justify-center rounded-full bg-[#ae1e22] shadow-xs transition-transform hover:scale-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lime-500"
+              class="absolute right-1 top-1 z-10 flex size-5 items-center justify-center rounded-full bg-red-500 text-white shadow-xs transition-transform hover:scale-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lime-500"
               @click="handleRemove"
             >
               <!-- Icon: Cross SVG Bootstrap Match -->
               <svg class="size-full" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                <path fill-rule="evenodd" clip-rule="evenodd" d="M18.3327 9.99935C18.3327 14.6017 14.6017 18.3327 9.99935 18.3327C5.39698 18.3327 1.66602 14.6017 1.66602 9.99935C1.66602 5.39698 5.39698 1.66602 9.99935 1.66602C14.6017 1.66602 18.3327 5.39698 18.3327 9.99935ZM6.86279 6.86279C7.10973 6.61586 7.50106 6.60133 7.76498 6.81921L7.81291 6.86279L10.2771 9.32701L12.7413 6.86279L12.7893 6.81921C13.0532 6.60133 13.4445 6.61586 13.6915 6.86279C13.9538 7.12516 13.9538 7.55054 13.6915 7.81291L11.2272 10.2771L13.6915 12.7413C13.9538 13.0037 13.9538 13.4291 13.6915 13.6915C13.4445 13.9384 13.0532 13.9529 12.7893 13.735L12.7413 13.6915L10.2771 11.2272L7.8129 13.6915L7.76498 13.735C7.50105 13.9529 7.10972 13.9384 6.86278 13.6915C6.60042 13.4291 6.60042 13.0037 6.86278 12.7413L9.32701 10.2771L6.86279 7.81291C6.60042 7.55054 6.60042 7.12516 6.86279 6.86279Z" fill="#58585B"/>
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M18.3327 9.99935C18.3327 14.6017 14.6017 18.3327 9.99935 18.3327C5.39698 18.3327 1.66602 14.6017 1.66602 9.99935C1.66602 5.39698 5.39698 1.66602 9.99935 1.66602C14.6017 1.66602 18.3327 5.39698 18.3327 9.99935ZM6.86279 6.86279C7.10973 6.61586 7.50106 6.60133 7.76498 6.81921L7.81291 6.86279L10.2771 9.32701L12.7413 6.86279L12.7893 6.81921C13.0532 6.60133 13.4445 6.61586 13.6915 6.86279C13.9538 7.12516 13.9538 7.55054 13.6915 7.81291L11.2272 10.2771L13.6915 12.7413C13.9538 13.0037 13.9538 13.4291 13.6915 13.6915C13.4445 13.9384 13.0532 13.9529 12.7893 13.735L12.7413 13.6915L10.2771 11.2272L7.8129 13.6915L7.76498 13.735C7.50105 13.9529 7.10972 13.9384 6.86278 13.6915C6.60042 13.4291 6.60042 13.0037 6.86278 12.7413L9.32701 10.2771L6.86279 7.81291C6.60042 7.55054 6.60042 7.12516 6.86279 6.86279Z" fill="currentColor"/>
               </svg>
             </button>
           </div>

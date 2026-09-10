@@ -65,7 +65,7 @@ const calendarGrid = ref<any[][]>([])
   <CalendarRoot
     v-bind="forwarded"
     v-slot="calendarSlot"
-    :class="cn('w-[360px] overflow-hidden rounded-[12px] bg-white shadow-drop-1', props.class)"
+    :class="cn('w-[360px] overflow-hidden rounded-xl bg-white shadow-drop-1', props.class)"
   >
     <div v-if="showPanelHeader" class="flex items-center gap-24 px-4 pt-4">
       <div class="flex-1 !text-lambda font-extrabold text-black-800">

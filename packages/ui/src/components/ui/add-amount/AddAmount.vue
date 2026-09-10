@@ -91,7 +91,7 @@ function handleInput(event: Event) {
           'flex h-full w-10 shrink-0 items-center justify-center bg-black-100 border-r border-black-200 transition-colors',
           isAtMin || readonly
             ? 'cursor-not-allowed text-black-500'
-            : 'cursor-pointer text-lime-500 hover:bg-black-200 active:bg-black-300',
+            : 'cursor-pointer text-lime-500 hover:bg-black-200 active:bg-black-400',
         )
       "
       @click="handleDecrement"
@@ -146,7 +146,7 @@ function handleInput(event: Event) {
           'flex h-full w-10 shrink-0 items-center justify-center bg-black-100 border-l border-black-200 transition-colors',
           isAtMax || readonly
             ? 'cursor-not-allowed text-black-500'
-            : 'cursor-pointer text-lime-500 hover:bg-black-200 active:bg-black-300',
+            : 'cursor-pointer text-lime-500 hover:bg-black-200 active:bg-black-400',
         )
       "
       @click="handleIncrement"

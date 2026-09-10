@@ -30,7 +30,7 @@ const props = defineProps<CalendarHeadingProps & { class?: HTMLAttributes['class
     </slot>
 
     <slot name="title">
-      <div class="text-sm font-bold text-black-800">
+      <div class="text-sigma font-bold text-black-800">
         <slot name="heading" />
       </div>
     </slot>

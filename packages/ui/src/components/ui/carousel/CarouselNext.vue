@@ -25,7 +25,7 @@ if (!context) {
     :disabled="!context.canScrollNext.value"
     :class="
       cn(
-        '!rounded-full size-10 p-0 bg-white hover:bg-neutral-100 text-neutral-800 shadow-md border border-neutral-100/80 transition-colors focus-visible:ring-lime-500 disabled:opacity-40 disabled:cursor-not-allowed',
+        '!rounded-full size-10 p-0 bg-white hover:bg-black-100 text-black-800 shadow-drop-1 border border-black-200 transition-colors focus-visible:ring-lime-500 disabled:opacity-40 disabled:cursor-not-allowed',
         props.class,
       )
     "
@@ -40,7 +40,7 @@ if (!context) {
         stroke-width="2.5"
         stroke-linecap="round"
         stroke-linejoin="round"
-        class="size-5 shrink-0 text-neutral-800"
+        class="size-5 shrink-0 text-black-800"
       >
         <path d="m9 18 6-6-6-6" />
       </svg>

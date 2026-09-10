@@ -14,13 +14,13 @@ const forwarded = useForwardPropsEmits(props, emits)
     v-bind="forwarded"
     :class="
       cn(
-        'group peer inline-flex h-6 w-6 shrink-0 cursor-pointer items-center justify-center rounded-[4px] ring-offset-background transition-[box-shadow,transform] duration-150 ease-out active:scale-[var(--gwind-motion-scale-icon-press)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lime-500 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:active:scale-100',
+        'group peer inline-flex h-6 w-6 shrink-0 cursor-pointer items-center justify-center rounded-sm ring-offset-background transition-[box-shadow,transform] duration-150 ease-out active:scale-[var(--gwind-motion-scale-icon-press)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lime-500 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:active:scale-100',
         props.class,
       )
     "
   >
     <span
-      class="flex h-5 w-5 items-center justify-center rounded-[4px] border-2 border-black-500 bg-white text-white transition-[background-color,border-color,transform] duration-150 ease-out group-hover:border-lime-600 group-disabled:border-black-400 group-data-[state=checked]:border-lime-500 group-data-[state=checked]:bg-lime-500 group-data-[state=indeterminate]:border-lime-500 group-data-[state=indeterminate]:bg-lime-500 group-data-[state=checked]:group-disabled:border-black-500 group-data-[state=checked]:group-disabled:bg-black-500 group-data-[state=indeterminate]:group-disabled:border-black-500 group-data-[state=indeterminate]:group-disabled:bg-black-500"
+      class="flex h-5 w-5 items-center justify-center rounded-sm border-2 border-black-500 bg-white text-white transition-[background-color,border-color,transform] duration-150 ease-out group-hover:border-lime-600 group-disabled:border-black-400 group-data-[state=checked]:border-lime-500 group-data-[state=checked]:bg-lime-500 group-data-[state=indeterminate]:border-lime-500 group-data-[state=indeterminate]:bg-lime-500 group-data-[state=checked]:group-disabled:border-black-500 group-data-[state=checked]:group-disabled:bg-black-500 group-data-[state=indeterminate]:group-disabled:border-black-500 group-data-[state=indeterminate]:group-disabled:bg-black-500"
     >
       <CheckboxIndicator class="flex h-full w-full items-center justify-center text-current data-[state=checked]:animate-in data-[state=checked]:fade-in-0 data-[state=checked]:zoom-in-75 data-[state=indeterminate]:animate-in data-[state=indeterminate]:fade-in-0 data-[state=indeterminate]:zoom-in-75">
         <slot>
