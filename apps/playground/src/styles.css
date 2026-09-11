@@ -87,9 +87,11 @@ body,
   position: sticky;
   top: 0;
   z-index: 40;
-  background: var(--pg-inverse-canvas);
-  color: var(--pg-inverse-ink);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  background: #090e0b;
+  color: #ffffff;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
 }
 
 /* ── Search Dropdown: styled via design tokens in PlaygroundHeader.vue ── */
