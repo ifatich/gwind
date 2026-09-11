@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { HTMLAttributes } from 'vue'
-import { computed, ref, useId, watch } from 'vue'
+import { computed, ref, useId } from 'vue'
 import { cn } from '../../../lib/utils'
 import Checkbox from './Checkbox.vue'
 
@@ -36,8 +36,14 @@ const emits = defineEmits<{
 const generatedId = useId()
 const checkboxId = computed(() => props.id ?? generatedId)
 const captionId = computed(() => `${checkboxId.value}-caption`)
-const internalValue = ref(props.modelValue ?? props.defaultValue)
-const isChecked = computed(() => props.modelValue ?? internalValue.value)
+const internalValue = ref(props.defaultValue)
+const isChecked = computed<boolean>({
+  get: () => (props.modelValue !== undefined ? props.modelValue : internalValue.value),
+  set: (val: boolean) => {
+    internalValue.value = val
+    emits('update:modelValue', val)
+  },
+})
 const slots = defineSlots<{
   default?: () => unknown
   caption?: () => unknown
@@ -45,18 +51,10 @@ const slots = defineSlots<{
 const hasCaption = computed(() => Boolean(props.caption || props.error || slots.caption))
 const isWebsite = computed(() => props.styleMode === 'website')
 
-watch(
-  () => props.modelValue,
-  (value) => {
-    if (value !== undefined) internalValue.value = value
-  },
-)
-
 function updateValue(value: boolean | 'indeterminate') {
   const nextValue = value === 'indeterminate' ? false : value
 
-  internalValue.value = nextValue
-  emits('update:modelValue', nextValue)
+  isChecked.value = nextValue
 }
 
 function toggleFromField(event: MouseEvent) {
