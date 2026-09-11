@@ -2,10 +2,11 @@
 import {
   computed,
   nextTick,
+  onMounted,
+  onUnmounted,
   provide,
   ref,
   useTemplateRef,
-  watch,
   type HTMLAttributes,
 } from "vue";
 import { Search } from "lucide-vue-next";
@@ -13,7 +14,6 @@ import { InputField } from "../input";
 import { cn } from "../../../lib/utils";
 import {
   DROPDOWN_LIST_CONTEXT_KEY,
-  useDropdownRootContext,
 } from "./context";
 
 const props = withDefaults(
@@ -49,28 +49,20 @@ provide(DROPDOWN_LIST_CONTEXT_KEY, {
   registerItem,
 });
 
-const dropdownRoot = useDropdownRootContext();
-
 async function focusSearchInput() {
   await nextTick();
   const input = searchFieldRef.value?.$el?.querySelector("input");
   input?.focus();
 }
 
-watch(
-  () => dropdownRoot?.open.value,
-  (isOpen) => {
-    if (!isOpen) {
-      searchQuery.value = "";
-      return;
-    }
+onMounted(() => {
+  if (showSearch.value) {
+    focusSearchInput();
+  }
+});
 
-    if (showSearch.value) focusSearchInput();
-  },
-);
-
-watch(showSearch, (enabled) => {
-  if (enabled && dropdownRoot?.open.value) focusSearchInput();
+onUnmounted(() => {
+  searchQuery.value = "";
 });
 </script>
 

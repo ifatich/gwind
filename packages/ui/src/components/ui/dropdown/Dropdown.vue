@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, onBeforeUnmount, provide, ref, watch, type HTMLAttributes } from "vue";
+import { computed, onBeforeUnmount, provide, ref, type HTMLAttributes } from "vue";
 import { ChevronDown } from "lucide-vue-next";
 import { useMediaQuery } from "@vueuse/core";
 import { Popover, PopoverTrigger } from "../popover";
@@ -32,8 +32,23 @@ const emits = defineEmits<{
   (event: "update:open", value: boolean): void;
 }>();
 
-const internalOpen = ref(props.open ?? props.defaultOpen ?? false);
-const openState = computed(() => props.open ?? internalOpen.value);
+const isMobile = useMediaQuery("(max-width: 639.9px)");
+
+function setBodyOverflow(locked: boolean) {
+  if (typeof document !== "undefined") {
+    document.body.style.overflow = locked ? "hidden" : "";
+  }
+}
+
+const internalOpen = ref(props.defaultOpen ?? false);
+const openState = computed<boolean>({
+  get: () => (props.open !== undefined ? props.open : internalOpen.value),
+  set: (val: boolean) => {
+    internalOpen.value = val;
+    emits("update:open", val);
+    setBodyOverflow(val && isMobile.value);
+  },
+});
 const isFilled = computed(() => Boolean(props.modelLabel?.trim()));
 const portalTarget = useGwindPortalTarget();
 
@@ -41,38 +56,16 @@ provide(DROPDOWN_ROOT_CONTEXT_KEY, {
   open: openState,
 });
 
-watch(
-  () => props.open,
-  (value) => {
-    if (value !== undefined) internalOpen.value = value;
-  },
-);
-
 function updateOpen(value: boolean) {
-  internalOpen.value = value;
-  emits("update:open", value);
+  openState.value = value;
 }
 
 function close() {
   updateOpen(false);
 }
 
-const isMobile = useMediaQuery("(max-width: 639.9px)");
-
-// Lock body scroll saat bottom sheet mobile terbuka
-watch(
-  [openState, isMobile],
-  ([open, mobile]) => {
-    if (typeof document === "undefined") return;
-    document.body.style.overflow = open && mobile ? "hidden" : "";
-  },
-  { immediate: true },
-);
-
 onBeforeUnmount(() => {
-  if (typeof document !== "undefined") {
-    document.body.style.overflow = "";
-  }
+  setBodyOverflow(false);
 });
 
 function onKeydown(e: KeyboardEvent) {
