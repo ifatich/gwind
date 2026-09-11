@@ -92,22 +92,9 @@ body,
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-/* ── Sticky Top Navigation Bar (replaces side menu) ──────────────── */
-.playground-top-nav {
-  position: sticky;
-  top: 56px;
-  z-index: 30;
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(12px);
-  border-bottom: 1px solid var(--pg-hairline);
-  padding: 8px 0;
-}
+/* ── Search Dropdown: styled via design tokens in PlaygroundHeader.vue ── */
 
-@media (min-width: 640px) {
-  .playground-top-nav {
-    top: 64px;
-  }
-}
+/* ── Sticky Top Navigation: styles now scoped in PlaygroundTopNav.vue ── */
 
 /* ── Container (Proven Responsive Standard: 16px mobile, 24px tablet, 32px desktop) ── */
 .playground-container {
