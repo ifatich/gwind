@@ -3,8 +3,8 @@ import {
   ref,
   computed,
   provide,
+  onMounted,
   onUnmounted,
-  watch,
   toRef,
   type HTMLAttributes,
 } from 'vue'
@@ -41,10 +41,16 @@ const selectedIndex = computed(() => {
 const registerSlide = () => {
   const index = slideCount.value
   slideCount.value++
+  if (props.autoplay && slideCount.value > 1 && !timer) {
+    startAutoplay()
+  }
   return {
     index,
     unregister: () => {
       slideCount.value = Math.max(0, slideCount.value - 1)
+      if (slideCount.value <= 1) {
+        stopAutoplay()
+      }
       if (virtualPos.value >= slideCount.value && slideCount.value > 0) {
         virtualPos.value = slideCount.value - 1
       }
@@ -143,13 +149,11 @@ const stopAutoplay = () => {
   }
 }
 
-watch(
-  () => [props.autoplay, props.autoplayInterval, slideCount.value],
-  () => {
+onMounted(() => {
+  if (props.autoplay && slideCount.value > 1) {
     startAutoplay()
-  },
-  { immediate: true },
-)
+  }
+})
 
 onUnmounted(() => {
   stopAutoplay()
