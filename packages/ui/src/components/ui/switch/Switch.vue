@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { HTMLAttributes } from 'vue'
-import { computed, ref, watch } from 'vue'
+import { computed, ref } from 'vue'
 import { cn } from '../../../lib/utils'
 
 const props = withDefaults(
@@ -21,22 +21,19 @@ const emits = defineEmits<{
   (event: 'update:modelValue', payload: boolean): void
 }>()
 
-const internalValue = ref(props.modelValue ?? props.defaultValue)
-const isChecked = computed(() => props.modelValue ?? internalValue.value)
-
-watch(
-  () => props.modelValue,
-  (value) => {
-    if (value !== undefined) internalValue.value = value
+const internalValue = ref(props.defaultValue)
+const isChecked = computed<boolean>({
+  get: () => (props.modelValue !== undefined ? props.modelValue : internalValue.value),
+  set: (val: boolean) => {
+    internalValue.value = val
+    emits('update:modelValue', val)
   },
-)
+})
 
 function toggle() {
   if (props.disabled) return
 
-  const nextValue = !isChecked.value
-  internalValue.value = nextValue
-  emits('update:modelValue', nextValue)
+  isChecked.value = !isChecked.value
 }
 </script>
 
