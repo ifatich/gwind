@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { HTMLAttributes } from 'vue'
-import { computed, ref, watch } from 'vue'
+import { computed, ref } from 'vue'
 import { cn } from '../../../lib/utils'
 
 const props = withDefaults(
@@ -23,14 +23,8 @@ const emit = defineEmits<{
   (e: 'error', event: Event): void
 }>()
 
-const isImageError = ref(false)
-
-watch(
-  () => props.src,
-  () => {
-    isImageError.value = false
-  },
-)
+const erroredSrc = ref<string | null>(null)
+const isImageError = computed(() => Boolean(props.src && erroredSrc.value === props.src))
 
 const currentStatus = computed(() => {
   if (props.status) return props.status
@@ -52,7 +46,7 @@ const sizeClasses = computed(() => {
 })
 
 const handleImageError = (e: Event) => {
-  isImageError.value = true
+  erroredSrc.value = props.src ?? ''
   emit('error', e)
 }
 </script>

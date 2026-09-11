@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { HTMLAttributes } from 'vue'
-import { computed, onUnmounted, ref, watch } from 'vue'
+import { computed, onUnmounted, ref } from 'vue'
 import { cn } from '../../../lib/utils'
 import { Dialog, DialogContent, DialogTrigger, DialogHeader, DialogTitle, DialogBody, DialogFooter, DialogClose } from '../dialog'
 import { Carousel, CarouselContent, CarouselItem, CarouselIndicators, CarouselPrevious, CarouselNext } from '../carousel'
