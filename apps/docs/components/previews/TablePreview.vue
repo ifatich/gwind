@@ -3,11 +3,11 @@ import { Alert, AlertDescription } from '../../../../packages/ui/src/components/
 import { DataTable, type DataTableColumn, type DataTableRow } from '../../../../packages/ui/src/components/ui/table'
 
 const columns: DataTableColumn[] = [
-  { key: 'gol', label: 'Gol', width: '40px' },
-  { key: 'uangPinjaman', label: 'Uang Pinjaman', width: '238px' },
-  { key: 'sewaModal', label: 'Sewa Modal', subLabel: '/15 Hari', align: 'right', width: '122px' },
-  { key: 'premi', label: 'Premi', width: '88px' },
-  { key: 'administrasi', label: 'Administrasi', align: 'right', width: '104px' },
+  { key: 'gol', label: 'Gol', width: 'w-[40px]' },
+  { key: 'uangPinjaman', label: 'Uang Pinjaman', width: 'w-[238px]' },
+  { key: 'sewaModal', label: 'Sewa Modal', subLabel: '/15 Hari', align: 'right', width: 'w-[122px]' },
+  { key: 'premi', label: 'Premi', width: 'w-[88px]' },
+  { key: 'administrasi', label: 'Administrasi', align: 'right', width: 'w-[104px]' },
 ]
 
 const rows: DataTableRow[] = [

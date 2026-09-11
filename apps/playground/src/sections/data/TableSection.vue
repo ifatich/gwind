@@ -24,21 +24,21 @@ import PropsTable, { type PropRow } from "../../components/PropsTable.vue";
 
 // Table Mock Data
 const tableColumns = [
-  { key: "gol", label: "Gol", width: "40px" },
-  { key: "uangPinjaman", label: "Uang Pinjaman", width: "238px" },
+  { key: "gol", label: "Gol", width: "w-[40px]" },
+  { key: "uangPinjaman", label: "Uang Pinjaman", width: "w-[238px]" },
   {
     key: "sewaModal",
     label: "Sewa Modal",
     subLabel: "/15 Hari",
     align: "right" as const,
-    width: "122px",
+    width: "w-[122px]",
   },
-  { key: "premi", label: "Premi", width: "88px" },
+  { key: "premi", label: "Premi", width: "w-[88px]" },
   {
     key: "administrasi",
     label: "Administrasi",
     align: "right" as const,
-    width: "104px",
+    width: "w-[104px]",
   },
 ];
 
@@ -278,14 +278,14 @@ const dtCategoryLabel = computed(() => {
 });
 
 const dtColumns = [
-  { key: "sbgNo", label: "No. SBG", width: "140px" },
-  { key: "nasabah", label: "Nasabah & NIK", width: "220px" },
-  { key: "kategori", label: "Kategori Jaminan", width: "180px" },
-  { key: "pinjaman", label: "Uang Pinjaman", align: "right" as const, width: "160px" },
-  { key: "sewaModal", label: "Sewa Modal", align: "right" as const, width: "140px" },
-  { key: "jatuhTempo", label: "Jatuh Tempo", width: "140px" },
-  { key: "status", label: "Status", align: "center" as const, width: "150px" },
-  { key: "action", label: "Aksi", align: "center" as const, width: "130px" },
+  { key: "sbgNo", label: "No. SBG", width: "w-[140px]" },
+  { key: "nasabah", label: "Nasabah & NIK", width: "w-[220px]" },
+  { key: "kategori", label: "Kategori Jaminan", width: "w-[180px]" },
+  { key: "pinjaman", label: "Uang Pinjaman", align: "right" as const, width: "w-[160px]" },
+  { key: "sewaModal", label: "Sewa Modal", align: "right" as const, width: "w-[140px]" },
+  { key: "jatuhTempo", label: "Jatuh Tempo", width: "w-[140px]" },
+  { key: "status", label: "Status", align: "center" as const, width: "w-[150px]" },
+  { key: "action", label: "Aksi", align: "center" as const, width: "w-[130px]" },
 ];
 
 const allDataRows = [

@@ -34,21 +34,21 @@ import {
 } from "@/components/ui/table";
 
 const columns: DataTableColumn[] = [
-  { key: "gol", label: "Gol", width: "40px" },
-  { key: "uangPinjaman", label: "Uang Pinjaman", width: "238px" },
+  { key: "gol", label: "Gol", width: "w-[40px]" },
+  { key: "uangPinjaman", label: "Uang Pinjaman", width: "w-[238px]" },
   {
     key: "sewaModal",
     label: "Sewa Modal",
     subLabel: "/15 Hari",
     align: "right",
-    width: "122px",
+    width: "w-[122px]",
   },
-  { key: "premi", label: "Premi", width: "88px" },
+  { key: "premi", label: "Premi", width: "w-[88px]" },
   {
     key: "administrasi",
     label: "Administrasi",
     align: "right",
-    width: "104px",
+    width: "w-[104px]",
   },
 ];
 
@@ -115,7 +115,7 @@ const row: DataTableRow = {
 | `label`       | `string`                  | Header label.                            |
 | `subLabel`    | `string`                  | Optional second header line.             |
 | `align`       | `'left'                   | 'center'                                 | 'right'` | Header and cell alignment. |
-| `width`       | `string`                  | Column width.                            |
+| `width`       | `string`                  | Column width utility class (e.g. `'w-[140px]'`, `'w-36'`, `'min-w-[200px]'`). |
 | `class`       | `HTMLAttributes['class']` | Optional class for both header and cell. |
 | `headerClass` | `HTMLAttributes['class']` | Optional class for the header cell.      |
 | `cellClass`   | `HTMLAttributes['class']` | Optional class for the body cell.        |

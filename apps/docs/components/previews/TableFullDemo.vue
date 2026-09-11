@@ -16,15 +16,15 @@ import {
 } from "../../../../packages/ui/src/components/ui/select";
 
 const columns: DataTableColumn[] = [
-  { key: "id", label: "ID", width: "56px" },
-  { key: "gol", label: "Gol", width: "64px" },
-  { key: "uangPinjaman", label: "Uang Pinjaman", width: "300px" },
-  { key: "sewaModal", label: "Sewa Modal", align: "right", width: "122px" },
+  { key: "id", label: "ID", width: "w-[56px]" },
+  { key: "gol", label: "Gol", width: "w-[64px]" },
+  { key: "uangPinjaman", label: "Uang Pinjaman", width: "w-[300px]" },
+  { key: "sewaModal", label: "Sewa Modal", align: "right", width: "w-[122px]" },
   {
     key: "administrasi",
     label: "Administrasi",
     align: "right",
-    width: "120px",
+    width: "w-[120px]",
   },
 ];
 
