@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { HTMLAttributes } from 'vue'
-import { computed, ref, useAttrs, watch } from 'vue'
+import { computed, ref, useAttrs } from 'vue'
 import InputField from '../InputField.vue'
 
 defineOptions({
@@ -48,15 +48,11 @@ function formatRupiah(value: number | null | undefined) {
   }).format(Math.trunc(value))
 }
 
-const internalValue = ref<number | null>(parseRupiah(props.modelValue ?? props.defaultValue))
-const displayValue = computed(() => formatRupiah(internalValue.value))
-
-watch(
-  () => props.modelValue,
-  (value) => {
-    if (value !== undefined) internalValue.value = parseRupiah(value)
-  },
-)
+const internalValue = ref<number | null>(parseRupiah(props.defaultValue))
+const resolvedValue = computed<number | null>(() => {
+  return props.modelValue !== undefined ? parseRupiah(props.modelValue) : internalValue.value
+})
+const displayValue = computed(() => formatRupiah(resolvedValue.value))
 
 function updateValue(value: string | number | null | undefined) {
   const parsedValue = parseRupiah(value)
@@ -142,10 +138,10 @@ function handlePaste(event: ClipboardEvent) {
       <slot name="left-icon" />
     </template>
 
-    <template v-if="(internalValue !== null && !disabled) || $slots['right-icon']" #right-icon>
+    <template v-if="(resolvedValue !== null && !disabled) || $slots['right-icon']" #right-icon>
       <slot name="right-icon">
         <button
-          v-if="internalValue !== null && !disabled"
+          v-if="resolvedValue !== null && !disabled"
           type="button"
           class="pointer-events-auto flex items-center justify-center cursor-pointer focus:outline-none text-black-600 hover:text-black-800"
           @click="updateValue(null)"
