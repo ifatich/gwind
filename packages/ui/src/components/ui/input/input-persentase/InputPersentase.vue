@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { HTMLAttributes } from 'vue'
-import { computed, ref, useAttrs, watch } from 'vue'
+import { computed, ref, useAttrs } from 'vue'
 import InputField from '../InputField.vue'
 
 defineOptions({
@@ -51,20 +51,16 @@ function formatPersentase(value: number | null | undefined) {
   return String(value)
 }
 
-const internalValue = ref<number | null>(parsePersentase(props.modelValue ?? props.defaultValue))
+const internalValue = ref<number | null>(parsePersentase(props.defaultValue))
+const resolvedValue = computed<number | null>(() => {
+  return props.modelValue !== undefined ? parsePersentase(props.modelValue) : internalValue.value
+})
 const displayValue = computed(() => {
   // If the user types a decimal point, we don't want to format it away immediately
   // For a basic implementation, we can just bind to formatPersentase, but 
   // to allow typing '1.', we might just return the internal formatted string if not using a complex mask.
-  return formatPersentase(internalValue.value)
+  return formatPersentase(resolvedValue.value)
 })
-
-watch(
-  () => props.modelValue,
-  (value) => {
-    if (value !== undefined) internalValue.value = parsePersentase(value)
-  },
-)
 
 function updateValue(value: string | number | null | undefined) {
   const parsedValue = parsePersentase(value)
@@ -153,10 +149,10 @@ function handlePaste(event: ClipboardEvent) {
       <slot name="left-icon" />
     </template>
 
-    <template v-if="(internalValue !== null && !disabled) || $slots['right-icon']" #right-icon>
+    <template v-if="(resolvedValue !== null && !disabled) || $slots['right-icon']" #right-icon>
       <slot name="right-icon">
         <button
-          v-if="internalValue !== null && !disabled"
+          v-if="resolvedValue !== null && !disabled"
           type="button"
           class="pointer-events-auto flex items-center justify-center cursor-pointer focus:outline-none text-black-600 hover:text-black-800"
           @click="updateValue(null)"
