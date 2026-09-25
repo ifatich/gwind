@@ -46,10 +46,6 @@ install dependencies:
         - master
         - dev
         - tags
-        - /^dev\/.*$/
-        - /^revamp\/.*$/
-        - /^feature\/.*$/
-        - merge_requests
 
 validate package:
     stage: validate
@@ -62,10 +58,6 @@ validate package:
         - master
         - dev
         - tags
-        - /^dev\/.*$/
-        - /^revamp\/.*$/
-        - /^feature\/.*$/
-        - merge_requests
 
 build package:
     stage: build
@@ -86,10 +78,6 @@ build package:
         - master
         - dev
         - tags
-        - /^dev\/.*$/
-        - /^revamp\/.*$/
-        - /^feature\/.*$/
-        - merge_requests
 
 deploy:
     image: $REGISTRY/node:20.10.0-alpine
@@ -129,4 +117,3 @@ snapshot:
         - build package
     only:
         - dev
-        - /^dev\/.*$/
