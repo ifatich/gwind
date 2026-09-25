@@ -5,6 +5,7 @@ node_modules
 dist
 .output
 .nuxt
+packages/cli/registry
 
 # Turborepo
 .turbo

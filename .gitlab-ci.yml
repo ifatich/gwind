@@ -1,0 +1,132 @@
+# #########################################################################################################################
+# ###################################################### NEW-PIPELINE #####################################################
+# #########################################################################################################################
+
+image: artifactory.pegadaian.co.id:8084/node:20.10.0-alpine
+
+variables:
+    DOCKER_AUTH_CONFIG: '{"auths": {"artifactory.pegadaian.co.id:5443": {"auth": "$DOCKER_AU_CONFIG"},"artifactory.pegadaian.co.id:8084": {"auth": "$DOCKER_AU_CONFIG"}}}'
+    REGISTRY: artifactory.pegadaian.co.id:8084
+    NPM_URL: https://artifactory.pegadaian.co.id/repository/npm-hosted-01/
+    PNPM_STORE_DIR: "$CI_PROJECT_DIR/.pnpm-store"
+
+stages:
+    - install
+    - validate
+    - build
+    - deploy
+    - snapshot
+
+before_script:
+    - npm install -g pnpm@10.15.0
+    - pnpm config set store-dir "$PNPM_STORE_DIR"
+    - pnpm config set @pegadaian:registry "$NPM_URL"
+
+cache:
+    key:
+        files:
+            - pnpm-lock.yaml
+    paths:
+        - .pnpm-store/
+        - .turbo/
+
+install dependencies:
+    stage: install
+    script:
+        - pnpm install --frozen-lockfile
+    artifacts:
+        paths:
+            - node_modules/
+            - apps/docs/node_modules/
+            - apps/playground/node_modules/
+            - packages/cli/node_modules/
+            - packages/ui/node_modules/
+        expire_in: 1h
+    only:
+        - master
+        - dev
+        - tags
+        - /^dev\/.*$/
+        - /^revamp\/.*$/
+        - /^feature\/.*$/
+        - merge_requests
+
+validate package:
+    stage: validate
+    script:
+        - pnpm build:registry
+        - pnpm lint
+    needs:
+        - install dependencies
+    only:
+        - master
+        - dev
+        - tags
+        - /^dev\/.*$/
+        - /^revamp\/.*$/
+        - /^feature\/.*$/
+        - merge_requests
+
+build package:
+    stage: build
+    script:
+        - pnpm build
+    artifacts:
+        name: "$CI_COMMIT_REF_SLUG"
+        paths:
+            - packages/ui/dist/
+            - packages/cli/dist/
+            - packages/cli/registry/
+            - registry/
+        expire_in: 1h
+    needs:
+        - install dependencies
+        - validate package
+    only:
+        - master
+        - dev
+        - tags
+        - /^dev\/.*$/
+        - /^revamp\/.*$/
+        - /^feature\/.*$/
+        - merge_requests
+
+deploy:
+    image: $REGISTRY/node:20.10.0-alpine
+    stage: deploy
+    before_script:
+        - apk add --no-cache git
+        - npm install -g pnpm@10.15.0
+    script:
+        - PUBLISH_REGISTRY="${NPM_REGISTRY_URL:-$NPM_URL}"
+        - echo "registry=$PUBLISH_REGISTRY" > .npmrc
+        - echo "@pegadaian:registry=$PUBLISH_REGISTRY" >> .npmrc
+        - echo "//artifactory.pegadaian.co.id/repository/npm-hosted-01/:_auth=$NPM_AUTH_TOKEN" >> .npmrc
+        - node packages/cli/scripts/copy-registry.mjs
+        - npm publish ./packages/ui --userconfig .npmrc --registry "$PUBLISH_REGISTRY"
+        - npm publish ./packages/cli --userconfig .npmrc --registry "$PUBLISH_REGISTRY"
+    needs:
+        - build package
+    only:
+        - master
+        - tags
+
+snapshot:
+    image: $REGISTRY/node:20.10.0-alpine
+    stage: snapshot
+    before_script:
+        - apk add --no-cache git
+        - npm install -g pnpm@10.15.0
+    script:
+        - PUBLISH_REGISTRY="${NPM_REGISTRY_URL:-$NPM_URL}"
+        - echo "registry=$PUBLISH_REGISTRY" > .npmrc
+        - echo "@pegadaian:registry=$PUBLISH_REGISTRY" >> .npmrc
+        - echo "//artifactory.pegadaian.co.id/repository/npm-hosted-01/:_auth=$NPM_AUTH_TOKEN" >> .npmrc
+        - node packages/cli/scripts/copy-registry.mjs
+        - npm publish ./packages/ui --userconfig .npmrc --registry "$PUBLISH_REGISTRY"
+        - npm publish ./packages/cli --userconfig .npmrc --registry "$PUBLISH_REGISTRY"
+    needs:
+        - build package
+    only:
+        - dev
+        - /^dev\/.*$/
