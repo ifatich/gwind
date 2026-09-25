@@ -94,7 +94,6 @@ deploy:
         - echo "@pegadaian:registry=$PUBLISH_REGISTRY" >> .npmrc
         - echo "//artifactory.pegadaian.co.id/repository/npm-hosted-01/:_auth=$NPM_AUTH_TOKEN" >> .npmrc
         - node packages/cli/scripts/copy-registry.mjs
-        - npm publish ./packages/ui --userconfig .npmrc --registry "$PUBLISH_REGISTRY"
         - npm publish ./packages/cli --userconfig .npmrc --registry "$PUBLISH_REGISTRY"
     needs:
         - build package
@@ -114,7 +113,6 @@ snapshot:
         - echo "@pegadaian:registry=$PUBLISH_REGISTRY" >> .npmrc
         - echo "//artifactory.pegadaian.co.id/repository/npm-hosted-01/:_auth=$NPM_AUTH_TOKEN" >> .npmrc
         - node packages/cli/scripts/copy-registry.mjs
-        - npm publish ./packages/ui --userconfig .npmrc --registry "$PUBLISH_REGISTRY"
         - npm publish ./packages/cli --userconfig .npmrc --registry "$PUBLISH_REGISTRY"
     needs:
         - build package
