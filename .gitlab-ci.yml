@@ -46,6 +46,7 @@ install dependencies:
         - master
         - dev
         - tags
+        - merge_requests
 
 validate package:
     stage: validate
@@ -58,6 +59,7 @@ validate package:
         - master
         - dev
         - tags
+        - merge_requests
 
 build package:
     stage: build
@@ -78,6 +80,7 @@ build package:
         - master
         - dev
         - tags
+        - merge_requests
 
 deploy:
     image: $REGISTRY/node:20.10.0-alpine
