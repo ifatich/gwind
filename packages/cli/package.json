@@ -1,6 +1,6 @@
 {
-  "name": "gwind-system-ui",
-  "version": "1.1.1",
+  "name": "gwind-ui",
+  "version": "1.0.4",
   "description": "CLI for Gwind Design System",
   "type": "module",
   "bin": {
