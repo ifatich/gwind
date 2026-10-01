@@ -6,7 +6,12 @@
     "@vueuse/core",
     "lucide-vue-next"
   ],
-  "registryDependencies": [],
+  "registryDependencies": [
+    "checkbox",
+    "input",
+    "label",
+    "popover"
+  ],
   "files": [
     {
       "name": "Dropdown.vue",

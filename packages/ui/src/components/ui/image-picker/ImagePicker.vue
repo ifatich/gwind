@@ -2,7 +2,7 @@
 import type { HTMLAttributes } from 'vue'
 import { computed, onUnmounted, ref } from 'vue'
 import { cn } from '../../../lib/utils'
-import { Dialog, DialogContent, DialogTrigger, DialogHeader, DialogTitle, DialogBody, DialogFooter, DialogClose } from '../dialog'
+import { Dialog, DialogContent, DialogTrigger, DialogHeader, DialogTitle} from '../dialog'
 import { Carousel, CarouselContent, CarouselItem, CarouselIndicators, CarouselPrevious, CarouselNext } from '../carousel'
 import { Button } from '../button'
 

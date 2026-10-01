@@ -4,7 +4,9 @@
   "dependencies": [
     "@vueuse/core"
   ],
-  "registryDependencies": [],
+  "registryDependencies": [
+    "label"
+  ],
   "files": [
     {
       "name": "Input.vue",

@@ -3,7 +3,8 @@
   "type": "ui",
   "dependencies": [
     "reka-ui",
-    "lucide-vue-next"
+    "lucide-vue-next",
+    "@internationalized/date"
   ],
   "registryDependencies": [],
   "files": [

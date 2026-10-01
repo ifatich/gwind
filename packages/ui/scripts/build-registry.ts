@@ -31,21 +31,27 @@ const getComponentFiles = (componentPath: string) => {
   }))
 }
 
-const getRegistryDependencies = (componentPath: string, files: ReturnType<typeof getComponentFiles>, componentPaths: string[]) => {
+const getRegistryDependencies = (
+  componentPath: string,
+  files: ReturnType<typeof getComponentFiles>,
+  componentPaths: string[]
+) => {
   const dependencies = new Set<string>()
-  const importPattern = /from ['"]([./]+)([^'"]+)['"]/g
+  const importPattern = /from\s+['"]([./][^'"]*)['"]/g
+  const sortedComponentPaths = [...componentPaths].sort((a, b) => b.length - a.length)
 
   files.forEach((file) => {
     for (const match of file.content.matchAll(importPattern)) {
-      const importPath = match[1] + match[2]
-      
+      const importPath = match[1]
       const resolvedPath = path.normalize(path.join(componentPath, importPath))
-      let dirname = path.dirname(resolvedPath)
-      
-      if (dirname === '.') dirname = componentPath
 
-      if (componentPaths.includes(dirname) && dirname !== componentPath) {
-        dependencies.add(path.basename(dirname))
+      for (const targetPath of sortedComponentPaths) {
+        if (targetPath === componentPath) continue
+
+        if (resolvedPath === targetPath || resolvedPath.startsWith(`${targetPath}/`)) {
+          dependencies.add(path.basename(targetPath))
+          break
+        }
       }
     }
   })
@@ -93,6 +99,7 @@ const main = () => {
     if (files.some(f => f.content.includes('tailwind-merge'))) dependencies.push('tailwind-merge')
     if (files.some(f => f.content.includes('@vueuse/core'))) dependencies.push('@vueuse/core')
     if (files.some(f => f.content.includes('lucide-vue-next'))) dependencies.push('lucide-vue-next')
+    if (files.some(f => f.content.includes('@internationalized/date'))) dependencies.push('@internationalized/date')
 
     const registryItem: RegistryItem = {
       name,
