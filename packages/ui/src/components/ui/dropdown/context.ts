@@ -7,6 +7,7 @@ import {
 
 export interface DropdownRootContext {
   open: ComputedRef<boolean>;
+  close: () => void;
 }
 
 export interface DropdownListContext {

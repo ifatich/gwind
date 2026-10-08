@@ -1,9 +1,10 @@
 <script setup lang="ts">
-import { computed, onBeforeUnmount, provide, ref, type HTMLAttributes } from "vue";
+import { computed, onBeforeUnmount, onMounted, provide, ref, type HTMLAttributes } from "vue";
 import { ChevronDown } from "lucide-vue-next";
 import { useMediaQuery } from "@vueuse/core";
 import { Popover, PopoverTrigger } from "../popover";
 import { PopoverContent as RekaPopoverContent, PopoverPortal } from "reka-ui";
+import { useFloatingPopperFix } from "../../../lib/floating-fix";
 import { useGwindPortalTarget } from "../../../lib/portal";
 import { Label } from "../label";
 import { cn } from "../../../lib/utils";
@@ -33,6 +34,11 @@ const emits = defineEmits<{
 }>();
 
 const isMobile = useMediaQuery("(max-width: 639.9px)");
+const isMounted = ref(false);
+
+onMounted(() => {
+  isMounted.value = true;
+});
 
 function setBodyOverflow(locked: boolean) {
   if (typeof document !== "undefined") {
@@ -52,17 +58,46 @@ const openState = computed<boolean>({
 const isFilled = computed(() => Boolean(props.modelLabel?.trim()));
 const portalTarget = useGwindPortalTarget();
 
-provide(DROPDOWN_ROOT_CONTEXT_KEY, {
-  open: openState,
-});
-
 function updateOpen(value: boolean) {
   openState.value = value;
+  if (value && !isMobile.value) {
+    requestAnimationFrame(() => {
+      floatingFix.update();
+      requestAnimationFrame(() => {
+        floatingFix.update();
+      });
+    });
+  }
 }
 
 function close() {
   updateOpen(false);
 }
+
+const contentRef = ref<HTMLElement | null>(null);
+const floatingFix = useFloatingPopperFix(contentRef, {
+  side: "bottom",
+  align: "start",
+  sideOffset: 8,
+  matchWidth: true,
+});
+
+function onContentRef(el: any) {
+  contentRef.value = el;
+  if (el) {
+    requestAnimationFrame(() => {
+      floatingFix.update();
+      requestAnimationFrame(() => {
+        floatingFix.update();
+      });
+    });
+  }
+}
+
+provide(DROPDOWN_ROOT_CONTEXT_KEY, {
+  open: openState,
+  close,
+});
 
 onBeforeUnmount(() => {
   setBodyOverflow(false);
@@ -78,7 +113,7 @@ function onKeydown(e: KeyboardEvent) {
 <template>
   <div :class="cn('flex w-full flex-col gap-2', props.class)">
     <Label v-if="label" :for="props.id">{{ label }}</Label>
-    <Popover :open="openState" @update:open="updateOpen" :modal="isMobile">
+    <Popover :open="openState" @update:open="updateOpen">
       <PopoverTrigger as-child>
         <slot name="trigger">
           <button
@@ -130,14 +165,14 @@ function onKeydown(e: KeyboardEvent) {
           )
         "
       >
-        <div :class="cn('min-w-full', props.class)">
+        <div :ref="onContentRef" :class="cn('min-w-full', props.class)">
           <slot />
         </div>
       </RekaPopoverContent>
     </PopoverPortal>
 
     <!-- ===== MOBILE: Bottom sheet lepas dari floating-ui, transform full dikontrol Transition ===== -->
-    <Teleport to="body">
+    <Teleport v-if="isMounted && isMobile" :to="portalTarget || 'body'">
       <Transition
         enter-active-class="transition-opacity duration-200 ease-out"
         enter-from-class="opacity-0"
@@ -147,7 +182,7 @@ function onKeydown(e: KeyboardEvent) {
         leave-to-class="opacity-0"
       >
         <div
-          v-if="isMobile && openState"
+          v-if="openState"
           class="fixed inset-0 z-50 bg-black-800/80"
           @click="close"
           @keydown="onKeydown"
@@ -161,9 +196,10 @@ function onKeydown(e: KeyboardEvent) {
         leave-active-class="transition-transform duration-200 ease-[cubic-bezier(0.32,0.72,0,1)]"
         leave-from-class="translate-y-0"
         leave-to-class="translate-y-full"
+        @after-leave="setBodyOverflow(false)"
       >
         <div
-          v-if="isMobile && openState"
+          v-if="openState"
           data-slot="dropdown-content"
           role="listbox"
           :class="
@@ -178,7 +214,7 @@ function onKeydown(e: KeyboardEvent) {
           <div class="flex items-center justify-between gap-4 border-b border-black-200 p-4">
             <div class="flex flex-col gap-y-1">
               <span class="text-lambda font-bold leading-none tracking-tight text-black-800">
-                <slot name="mobile-title">{{ placeholder }}</slot>
+                <slot name="mobile-title">{{ label || placeholder }}</slot>
               </span>
             </div>
             <button

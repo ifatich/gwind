@@ -21,6 +21,20 @@
   /* Mapping gwind-token CSS variables to Tailwind v4 utilities */
   --shadow-drop-1: var(--shadow-drop-1);
   --shadow-drop-2: var(--shadow-drop-2);
+
+  /* Bottomsheet native mobile motion curves (iOS / Material 3 standard) */
+  --ease-sheet-enter: cubic-bezier(0.32, 0.72, 0, 1);
+  --ease-sheet-exit: cubic-bezier(0.32, 0, 0.67, 0);
+}
+
+@utility duration-sheet-enter {
+  --tw-duration: 350ms;
+  transition-duration: 350ms;
+}
+
+@utility duration-sheet-exit {
+  --tw-duration: 250ms;
+  transition-duration: 250ms;
 }
 
 @keyframes gwind-enter {

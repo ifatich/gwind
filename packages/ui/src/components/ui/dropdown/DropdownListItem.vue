@@ -3,6 +3,7 @@ import { ref, toRefs, type HTMLAttributes } from "vue";
 import { Check } from "lucide-vue-next";
 import { cn } from "../../../lib/utils";
 import { useDropdownListItemSearch } from "./useDropdownListItemSearch";
+import { useDropdownRootContext } from "./context";
 
 const props = withDefaults(
   defineProps<{
@@ -23,6 +24,14 @@ const emits = defineEmits<{
   (event: "select"): void;
 }>();
 
+const rootContext = useDropdownRootContext();
+
+function handleClick() {
+  if (props.disabled) return;
+  emits("select");
+  rootContext?.close();
+}
+
 const { label, caption, searchText } = toRefs(props);
 const contentRef = ref<HTMLElement | null>(null);
 const { isVisible } = useDropdownListItemSearch({
@@ -39,10 +48,10 @@ const { isVisible } = useDropdownListItemSearch({
     type="button"
     :disabled="disabled"
     :aria-selected="selected"
-    @click="emits('select')"
+    @click="handleClick"
     :class="
       cn(
-        'group flex min-h-[48px] w-full cursor-pointer items-center gap-4 bg-white px-4 py-4 text-left transition-[background-color,color] duration-150 ease-out hover:bg-black-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lime-500 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50',
+        'group flex min-h-[48px] w-full cursor-pointer items-center gap-4 bg-transparent px-4 py-3 text-left transition-[background-color,color] duration-150 ease-out hover:bg-black-100 focus-visible:outline-none focus-visible:bg-black-100 disabled:cursor-not-allowed disabled:opacity-50',
         $slots.icon ? 'min-h-16' : '',
         props.class,
       )
