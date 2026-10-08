@@ -9,7 +9,7 @@
   "files": [
     {
       "name": "Breadcrumb.vue",
-      "content": "<script setup lang=\"ts\">\nimport type { HTMLAttributes } from 'vue'\nimport { cn } from '../../../lib/utils'\n\nconst props = defineProps<{\n  class?: HTMLAttributes['class']\n}>()\n</script>\n\n<template>\n  <nav aria-label=\"breadcrumb\" :class=\"props.class\">\n    <slot />\n  </nav>\n</template>\n"
+      "content": "<script setup lang=\"ts\">\nimport type { HTMLAttributes } from 'vue'\n\nconst props = defineProps<{\n  class?: HTMLAttributes['class']\n}>()\n</script>\n\n<template>\n  <nav aria-label=\"breadcrumb\" :class=\"props.class\">\n    <slot />\n  </nav>\n</template>\n"
     },
     {
       "name": "BreadcrumbEllipsis.vue",
