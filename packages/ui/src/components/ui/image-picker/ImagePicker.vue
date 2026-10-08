@@ -55,7 +55,6 @@ const emit = defineEmits<{
 
 const fileInputRef = ref<HTMLInputElement | null>(null)
 const isDragging = ref(false)
-const objectUrl = ref<string | null>(null)
 const isPreviewOpen = ref(false)
 const internalError = ref<string | null>(null)
 

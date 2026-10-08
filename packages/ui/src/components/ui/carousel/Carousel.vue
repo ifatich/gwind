@@ -6,7 +6,6 @@ import {
   onMounted,
   onUnmounted,
   toRef,
-  type HTMLAttributes,
 } from 'vue'
 import { useSwipe } from '@vueuse/core'
 import { cn } from '../../../lib/utils'
