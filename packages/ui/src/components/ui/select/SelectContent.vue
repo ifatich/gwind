@@ -9,7 +9,8 @@ import {
   SelectViewport,
   useForwardPropsEmits,
 } from 'reka-ui'
-import { type HTMLAttributes } from 'vue'
+import { ref, type HTMLAttributes } from 'vue'
+import { useFloatingPopperFix } from '../../../lib/floating-fix'
 import SelectScrollDownButton from './SelectScrollDownButton.vue'
 import SelectScrollUpButton from './SelectScrollUpButton.vue'
 
@@ -27,6 +28,14 @@ const emits = defineEmits<SelectContentEmits>()
 
 const forwarded = useForwardPropsEmits(props, emits)
 const portalTarget = useGwindPortalTarget()
+
+const contentRef = ref<any>(null)
+useFloatingPopperFix(contentRef, {
+  side: 'bottom',
+  align: 'start',
+  sideOffset: 4,
+  matchWidth: true,
+})
 </script>
 
 <template>
@@ -44,6 +53,7 @@ const portalTarget = useGwindPortalTarget()
     >
       <SelectScrollUpButton />
       <SelectViewport
+        ref="contentRef"
         :class="
           cn(
             'p-1',

@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import { computed, type HTMLAttributes } from 'vue'
+import { computed, ref, type HTMLAttributes } from 'vue'
 import { PopoverContent, type PopoverContentEmits, type PopoverContentProps, PopoverPortal, useForwardPropsEmits } from 'reka-ui'
+import { useFloatingPopperFix } from '../../../lib/floating-fix'
 import { useGwindPortalTarget } from '../../../lib/portal'
 import { cn } from '../../../lib/utils'
 
@@ -21,6 +22,13 @@ const delegatedProps = computed(() => {
 
 const forwarded = useForwardPropsEmits(delegatedProps, emits)
 const portalTarget = useGwindPortalTarget()
+
+const contentRef = ref<any>(null)
+useFloatingPopperFix(contentRef, {
+  side: 'bottom',
+  align: props.align as 'start' | 'center' | 'end',
+  sideOffset: props.sideOffset,
+})
 </script>
 
 <template>
@@ -34,15 +42,17 @@ const portalTarget = useGwindPortalTarget()
         )
       "
     >
-      <div v-if="props.title || $slots.header" class="flex flex-col gap-y-1 p-4 pb-1">
-        <slot name="header">
-          <h3 class="text-omicron font-bold leading-none tracking-tight text-black-800">
-            {{ props.title }}
-          </h3>
-        </slot>
-      </div>
-      <div :class="cn('p-4', (props.title || $slots.header) ? 'pt-0' : '')">
-        <slot />
+      <div ref="contentRef" class="w-full">
+        <div v-if="props.title || $slots.header" class="flex flex-col gap-y-1 p-4 pb-1">
+          <slot name="header">
+            <h3 class="text-omicron font-bold leading-none tracking-tight text-black-800">
+              {{ props.title }}
+            </h3>
+          </slot>
+        </div>
+        <div :class="cn('p-4', (props.title || $slots.header) ? 'pt-0' : '')">
+          <slot />
+        </div>
       </div>
     </PopoverContent>
   </PopoverPortal>
