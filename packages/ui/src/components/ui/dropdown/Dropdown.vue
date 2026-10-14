@@ -184,6 +184,7 @@ function onKeydown(e: KeyboardEvent) {
         <div
           v-if="openState"
           class="fixed inset-0 z-50 bg-black-800/80"
+          style="position: fixed; inset: 0;"
           @click="close"
           @keydown="onKeydown"
         />
@@ -209,6 +210,7 @@ function onKeydown(e: KeyboardEvent) {
               props.contentClass,
             )
           "
+          style="position: fixed; bottom: 0; left: 0; right: 0;"
         >
           <!-- Mobile Header (Matches DialogHeader) -->
           <div class="flex items-center justify-between gap-4 border-b border-black-200 p-4">
