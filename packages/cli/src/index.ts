@@ -192,7 +192,7 @@ export function cn(...inputs: ClassValue[]) {
       console.log(chalk.yellow('\nInstall required base dependencies:'))
       console.log(chalk.cyan(getInstallCommand(BASE_DEPENDENCIES)))
       console.log(chalk.cyan('\nYou can now start adding components using:'))
-      console.log(chalk.bold('npx gwind-system-ui add <component>'))
+      console.log(chalk.bold('npx gwind-ui add <component>'))
 
     } catch (error: any) {
       spinner.fail(chalk.red(`Error during initialization: ${error.message}`))
