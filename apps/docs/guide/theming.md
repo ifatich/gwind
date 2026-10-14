@@ -1,60 +1,40 @@
-# Theming
+# Theming & Kustomisasi
 
-Gwind menggunakan sistem konfigurasi CSS-first dari **Tailwind CSS v4**. Seluruh design token didefinisikan sebagai variabel CSS murni, yang kemudian didaftarkan ke dalam blok `@theme`.
+Gwind dibangun di atas fondasi **Tailwind CSS v4** dengan arsitektur **CSS-first**. Seluruh token warna, tipografi, dan elevasi didefinisikan sebagai variabel CSS native dari package `gwind-v2`, yang kemudian dipetakan ke dalam blok `@theme`.
 
-## Palet Warna Brand Gwind
+> [!NOTE]
+> Mencari daftar lengkap palet warna, tipografi 12 tingkat, spasi, dan elevasi?
+> Silakan kunjungi katalog resmi di [Design Tokens](/guide/tokens). Halaman ini berfokus pada **arsitektur konfigurasi dan cara kustomisasi tema**.
 
-Gwind hadir dengan palet warna resmi yang sudah dikonfigurasi di dalam `gwind-v2` (`^0.3.1`). Anda bisa menggunakan warna ini langsung sebagai utility class:
+---
 
-| Nama Warna | Contoh Class (Hundreds / Tens) | Kegunaan Utama |
-|------------|--------------------------------|----------------|
-| **Lime** | `bg-lime-500` / `bg-lime-50` | Warna identitas utama (Primary) |
-| **Lime Dark** | `bg-lime-dark-500` / `bg-lime-dark-50` | Varian kontras tinggi untuk dark mode |
-| **Broccoli** | `text-broccoli-600` / `text-broccoli-60` | Warna sekunder / penekanan |
-| **Orange** | `border-orange-400` / `border-orange-40` | Warna aksen / warning |
-| **Red** | `bg-red-500` / `bg-red-50` | Destructive error standar (light mode) |
-| **Red Dark** | `bg-red-dark-500` / `bg-red-dark-50` | Destructive dark mode desaturasi |
-| **Black** | `bg-black-800` / `bg-black-80` | Warna teks dan UI neutral gelap |
+## 1. Arsitektur CSS-First
 
-### Dual-Scale Alias System
+Arsitektur theming Gwind terbagi menjadi dua lapisan:
 
-Mulai versi `0.3.0`, `gwind-v2` mendukung sistem alias ganda:
-- **Hundreds Scale (`100`–`900`)**: Format standar modern Tailwind CSS (contoh: `bg-lime-500`, `text-broccoli-600`).
-- **Tens Scale (`10`–`90`)**: Format alias kompatibel (contoh: `bg-lime-50`, `text-broccoli-60`).
-
-Kedua format mereferensikan CSS variable yang sama dan dapat digunakan secara bergantian tanpa batasan.
-
-### Dark Mode Elevation Surfaces (`grey-*`)
-
-Untuk dark mode tanpa pergeseran rona warna (hue shift), Gwind menyediakan 5 level elevasi tonal:
-- `grey-darkest` (`#242429`): Level 0 - Base Canvas & Root Background
-- `grey-darker` (`#2E2E34`): Level 1 - Cards, Panels & Surface Bases
-- `grey-dark` (`#37373F`): Level 2 - Popovers, Modals & Floating Menus
-- `grey-lighter` (`#42424B`): Level 3 - Elevated Surfaces, Active Tabs & Borders
-- `grey-light` (`#55555E`): Level 4 - Interactive Hover & Muted Layers
-
-## Cara Kerja Tema
-
-Semua warna didaftarkan melalui variabel CSS di `gwind-v2/base.css` dan dipetakan ke Tailwind di `gwind-v2/theme.css`:
+1. **Layer Variabel CSS (`gwind-v2/base.css`)**:
+   Menyimpan nilai mentah palet warna (skala ratusan `100`–`900` dan alias puluhan `10`–`90`), token semantik, serta permukaan elevasi dark mode (`grey-*`).
+2. **Layer Pemetaan Tailwind (`gwind-v2/theme.css`)**:
+   Mendaftarkan variabel CSS tersebut ke dalam blok `@theme` Tailwind CSS v4 agar dapat digunakan sebagai utility class (misalnya `bg-primary`, `text-foreground`, `border-border`).
 
 ```css
-/* Di dalam gwind-v2/theme.css */
+/* Konsep internal gwind-v2/theme.css */
 @theme {
-  --color-primary: var(--lime-500);
-  --color-secondary: var(--broccoli-500);
-  
-  /* Palet warna lengkap tersedia secara native (dual-scale) */
-  --color-lime-500: var(--lime-500);
-  --color-lime-50: var(--lime-50);
-  --color-broccoli-500: var(--broccoli-500);
-  --color-broccoli-50: var(--broccoli-50);
-  /* ... dsb */
+  --color-primary: var(--primary);
+  --color-secondary: var(--secondary);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  /* Seluruh palet warna dan token semantik dipetakan di sini */
 }
 ```
 
-## Kustomisasi Warna
+---
 
-Untuk mengubah tema warna di proyek Anda, Anda cukup menimpa (override) variabel CSS di file CSS utama Anda:
+## 2. Kustomisasi Tema di Aplikasi Consumer
+
+Jika aplikasi Anda memerlukan penyesuaian identitas brand (misalnya mengubah warna aksi primer dari Lime ke Broccoli atau warna korporat lain), Anda tidak perlu memodifikasi kode komponen. Cukup **override variabel CSS** di file CSS utama proyek Anda di dalam `@layer base`.
+
+### Contoh Override Token Semantik
 
 ```css
 @import "tailwindcss";
@@ -63,74 +43,114 @@ Untuk mengubah tema warna di proyek Anda, Anda cukup menimpa (override) variabel
 
 @layer base {
   :root {
-    /* Ubah warna primary menjadi Broccoli bukan Lime */
+    /* Mengubah warna aksi primer dari Lime-500 ke Broccoli-500 */
     --primary: var(--broccoli-500);
-    
-    /* Atau tentukan warna hex kustom */
-    --lime-500: #32CD32; 
+    --primary-foreground: #ffffff;
+
+    /* Menyesuaikan border radius default komponen */
+    --radius: 0.375rem; /* 6px */
+  }
+
+  /* Kustomisasi khusus Dark Mode */
+  .dark {
+    --primary: var(--broccoli-400);
+    --primary-foreground: #000000;
   }
 }
 ```
 
-## Spacing & Radius
+### Kustomisasi Warna Brand dengan Hex Baru
 
-Gwind menggunakan sistem spacing berbasis pixel yang dikonversi ke `rem`. Selain itu, Gwind juga tetap mempertahankan spacing standar Tailwind.
-
-- **Spacing Standar**: `p-4` (16px), `m-2` (8px).
-- **Gwind Spacing**: Jika Anda butuh presisi token Gwind, gunakan prefix `gw-` (misal: `p-gw-16` untuk 16px, `p-gw-24` untuk 24px, s.d. `p-gw-120`).
-- **Radius**: Menggunakan variabel `--radius` yang dikonfigurasi ke utility `rounded-sm` (4px), `rounded-md` (6px), `rounded-lg` (8px), dan `rounded-full` (9999px).
-
-## 12-Level Typography Utilities
-
-Utility typography Gwind mengikuti hierarki 12 tingkat ukuran font dari Display Hero hingga Micro Hint:
-
-| Token | Class | Ukuran & Line Height | Peran Semantik |
-|-------|-------|----------------------|----------------|
-| `alpha` | `text-alpha` | 72px (4.5rem) / 108px | Display Hero Large |
-| `beta` | `text-beta` | 60px (3.75rem) / 90px | Display Hero Medium |
-| `gamma` | `text-gamma` | 48px (3rem) / 72px | Display Hero Small |
-| `delta` | `text-delta` | 36px (2.25rem) / 54px | Page Headline H1 |
-| `epsilon` | `text-epsilon` | 30px (1.875rem) / 45px | Section Header H2 |
-| `zeta` | `text-zeta` | 24px (1.5rem) / 36px | Subsection Header H3 |
-| `kappa` | `text-kappa` | 20px (1.25rem) / 30px | Card Title H4 |
-| `lambda` | `text-lambda` | 18px (1.125rem) / 27px | Dialog & Sheet Title |
-| `omicron` | `text-omicron` | 16px (1rem) / 24px | Body Default & Form Inputs |
-| `sigma` | `text-sigma` | 14px (0.875rem) / 20px | Body Small & Controls |
-| `omega` | `text-omega` | 12px (0.75rem) / 18px | Captions, Metadata & Badges |
-| `atom` | `text-atom` | 10px (0.625rem) / 14px | Micro Hints & Tags |
-
-<ShadowPreview>
-  <div class="gwind-docs-preview-col">
-    <p class="text-omega text-black-500">Omega - helper text dan metadata kecil</p>
-    <p class="text-sigma text-black-600">Sigma - teks sekunder dan body kecil</p>
-    <p class="text-omicron font-bold text-black-800">Omicron - body default dan teks utama</p>
-  </div>
-</ShadowPreview>
-
-```html
-<p class="text-omicron">Teks utama menggunakan token typography Gwind.</p>
-```
-
-## Drop Shadows & Motion Physics
-
-- **Drop Shadows**:
-  - `shadow-drop-1`: Elevasi halus untuk card, tombol, dan list items.
-  - `shadow-drop-2`: Elevasi mengambang untuk popover, modal, dan dropdown.
-- **Motion Dynamics**:
-  - `--gwind-motion-scale-press: 0.98`: Kompresi fisik saat tombol ditekan.
-  - `--gwind-motion-scale-icon-press: 0.92`: Kompresi fisik untuk kontrol ikonik.
-
-## Dark Mode
-
-Gwind mendukung dark mode secara otomatis melalui pemetaan token semantik:
+Jika brand atau produk Anda memiliki warna heksadesimal spesifik di luar palet standar Gwind:
 
 ```css
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --background: var(--grey-darkest);
-    --card: var(--grey-darker);
-    --foreground: var(--white);
-    --primary: var(--lime-dark-500); /* Hijau kontras tinggi untuk dark mode */
+    --primary: #00875a; /* Hijau korporat kustom */
+    --primary-foreground: #ffffff;
+    --ring: rgba(0, 135, 90, 0.35);
   }
 }
 ```
+
+Semua komponen Gwind yang menggunakan role `primary` (seperti `Button variant="primary"`, `Checkbox`, `Switch`, dsb.) akan otomatis menerapkan warna baru tersebut secara konsisten.
+
+---
+
+## 3. Konfigurasi Dark Mode
+
+Gwind mendukung dark mode secara native melalui strategi selector class `.dark` atau media query `prefers-color-scheme`.
+
+### Bagaimana Token Semantik Berpindah (Theme Switching)
+
+Secara default, token semantik Gwind dirancang untuk beradaptasi secara otomatis antara light mode dan dark mode tanpa perubahan markup:
+
+```css
+:root {
+  --background: #ffffff;
+  --foreground: var(--black-800);
+  --card: #ffffff;
+  --card-foreground: var(--black-800);
+  --border: var(--black-200);
+  --primary: var(--lime-500);
+}
+
+.dark {
+  --background: var(--grey-darkest);   /* #242429 - Level 0 Base Canvas */
+  --foreground: var(--white);
+  --card: var(--grey-darker);          /* #2E2E34 - Level 1 Surface */
+  --card-foreground: var(--white);
+  --border: var(--grey-lighter);       /* #42424B - Level 3 Border */
+  --primary: var(--lime-dark-500);     /* Varian kontras tinggi khusus dark mode */
+}
+```
+
+### Mengaktifkan Dark Mode di Proyek
+
+Gwind mendeteksi class `.dark` pada elemen root `<html>`:
+
+```html
+<!-- Light Mode -->
+<html lang="id">
+...
+</html>
+
+<!-- Dark Mode Aktif -->
+<html lang="id" class="dark">
+...
+</html>
+```
+
+Jika aplikasi Anda menggunakan toggle interaktif dengan deteksi preferensi sistem otomatis, gunakan composable `useDark` dari `@vueuse/core` (dependency resmi Gwind):
+
+```vue
+<script setup lang="ts">
+import { useDark, useToggle } from '@vueuse/core'
+
+const isDark = useDark()
+const toggleDark = useToggle(isDark)
+</script>
+
+<template>
+  <button
+    type="button"
+    class="px-3 py-1.5 rounded-lg border text-xs font-semibold cursor-pointer"
+    @click="toggleDark()"
+  >
+    Mode: {{ isDark ? 'Gelap 🌙' : 'Terang ☀️' }}
+  </button>
+</template>
+```
+
+---
+
+## 4. Best Practices Penerapan Theming
+
+1. **Utamakan Token Semantik**: Selalu gunakan kelas seperti `bg-background`, `bg-card`, `text-foreground`, `border-border`, dan `bg-primary` pada layout dan komponen aplikasi. Hindari langsung menulis kelas primitif seperti `bg-[#ffffff]` atau `bg-black-800` pada kontainer yang harus berganti tema di dark mode.
+2. **Manfaatkan Dual-Scale**: Saat membutuhkan warna palet spesifik, Anda bebas memilih skala ratusan (`bg-lime-500`) atau skala puluhan (`bg-lime-50`). Keduanya merujuk ke variabel CSS yang identik.
+3. **Elevasi Dark Mode**: Di dark mode, hindari menggunakan drop shadow pekat sebagai pemisah utama. Manfaatkan 5 tingkat elevasi tonal `grey-*` (`grey-darkest` hingga `grey-light`) untuk membedakan kedalaman permukaan antarmuka.
+
+---
+
+> [!TIP]
+> Untuk melihat daftar lengkap seluruh variabel CSS, nilai heksadesimal, perbandingan skala alias, dan live preview interaktif, buka [Katalog Design Tokens](/guide/tokens).
