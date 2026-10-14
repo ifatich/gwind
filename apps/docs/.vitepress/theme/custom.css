@@ -146,17 +146,29 @@
 }
 
 
-.vp-doc .gwind-docs-preview :where(.text-alpha) { font-size: 4.5rem; line-height: 1; }
-.vp-doc .gwind-docs-preview :where(.text-beta) { font-size: 3.75rem; line-height: 1; }
-.vp-doc .gwind-docs-preview :where(.text-gamma) { font-size: 3rem; line-height: 1; }
+.vp-doc :where(.text-alpha),
+.vp-doc .gwind-docs-preview :where(.text-alpha) { font-size: 4.5rem; line-height: 1.1; }
+.vp-doc :where(.text-beta),
+.vp-doc .gwind-docs-preview :where(.text-beta) { font-size: 3.75rem; line-height: 1.15; }
+.vp-doc :where(.text-gamma),
+.vp-doc .gwind-docs-preview :where(.text-gamma) { font-size: 3rem; line-height: 1.2; }
+.vp-doc :where(.text-delta),
 .vp-doc .gwind-docs-preview :where(.text-delta) { font-size: 2.25rem; line-height: 2.5rem; }
+.vp-doc :where(.text-epsilon),
 .vp-doc .gwind-docs-preview :where(.text-epsilon) { font-size: 1.875rem; line-height: 2.25rem; }
+.vp-doc :where(.text-zeta),
 .vp-doc .gwind-docs-preview :where(.text-zeta) { font-size: 1.5rem; line-height: 2rem; }
+.vp-doc :where(.text-kappa),
 .vp-doc .gwind-docs-preview :where(.text-kappa) { font-size: 1.25rem; line-height: 1.75rem; }
+.vp-doc :where(.text-lambda),
 .vp-doc .gwind-docs-preview :where(.text-lambda) { font-size: 1.125rem; line-height: 1.75rem; }
+.vp-doc :where(.text-omicron),
 .vp-doc .gwind-docs-preview :where(.text-omicron) { font-size: 1rem; line-height: 1.5rem; }
+.vp-doc :where(.text-sigma),
 .vp-doc .gwind-docs-preview :where(.text-sigma) { font-size: 0.875rem; line-height: 1.25rem; }
+.vp-doc :where(.text-omega),
 .vp-doc .gwind-docs-preview :where(.text-omega) { font-size: 0.75rem; line-height: 1rem; }
+.vp-doc :where(.text-atom),
 .vp-doc .gwind-docs-preview :where(.text-atom) { font-size: 0.625rem; line-height: 0.875rem; }
 
 .vp-doc .gwind-docs-preview :where(.text-xs) {

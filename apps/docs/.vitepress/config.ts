@@ -34,6 +34,7 @@ export default defineConfig({
     nav: [
       { text: "Guide", link: "/guide/getting-started" },
       { text: "Design", link: "/guide/design" },
+      { text: "Design Tokens", link: "/guide/tokens" },
       { text: "Components", link: "/components/accordion" },
       { text: "Playground ↗", link: playgroundUrl, target: isProd ? "_self" : "_blank" },
     ],
@@ -41,12 +42,19 @@ export default defineConfig({
     sidebar: [
       {
         text: "Guide",
-        collapsed: true,
+        collapsed: false,
         items: [
           { text: "Getting Started", link: "/guide/getting-started" },
           { text: "Design", link: "/guide/design" },
           { text: "Motion", link: "/guide/motion" },
-          { text: "Theming", link: "/guide/theming" },
+          { text: "Theming & Kustomisasi", link: "/guide/theming" },
+        ],
+      },
+      {
+        text: "Design Tokens",
+        collapsed: false,
+        items: [
+          { text: "Katalog Design Tokens", link: "/guide/tokens" },
         ],
       },
       {
@@ -63,10 +71,11 @@ export default defineConfig({
           { text: "Card", link: "/components/card" },
           { text: "Carousel", link: "/components/carousel" },
           { text: "Checkbox", link: "/components/checkbox" },
+          { text: "Combobox", link: "/components/combobox" },
+          { text: "Datepicker", link: "/components/datepicker" },
           { text: "Dialog", link: "/components/dialog" },
           { text: "Divider", link: "/components/divider" },
           { text: "Dropdown", link: "/components/dropdown" },
-          { text: "Datepicker", link: "/components/datepicker" },
           {
             text: "Input",
             link: "/components/input",
@@ -88,6 +97,7 @@ export default defineConfig({
           { text: "Popover", link: "/components/popover" },
           { text: "Progress", link: "/components/progress" },
           { text: "Radio Group", link: "/components/radio-group" },
+          { text: "Select", link: "/components/select" },
           { text: "Spinner", link: "/components/spinner" },
           { text: "Switch", link: "/components/switch" },
           { text: "Table", link: "/components/table" },

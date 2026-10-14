@@ -12,10 +12,10 @@ Gwind bukan landing-page kit. Hindari visual yang terlalu dekoratif, layout prom
 
 | Kebutuhan | Package | Penggunaan |
 | --- | --- | --- |
-| CLI source component | `gwind-system-ui` | `npx gwind-system-ui add button` |
+| CLI source component | `gwind-ui` | `npx gwind-ui add button` |
 | Monorepo component library | `@gwind/ui` | Dependency internal dengan `workspace:*`; package ini bersifat private |
 | Monorepo component styles | `@gwind/ui/styles` | Dipakai oleh docs dan playground di workspace |
-| Consumer foundation styles | Generated `gwind.css` | Dibuat oleh `npx gwind-system-ui init`; tidak memakai file `dist` monorepo |
+| Consumer foundation styles | Generated `gwind.css` | Dibuat oleh `npx gwind-ui init`; tidak memakai file `dist` monorepo |
 | Design tokens | `gwind-v2` | `@import "gwind-v2/base.css";` dan `@import "gwind-v2/theme.css";` |
 
 ## Design Principles
@@ -54,7 +54,7 @@ Use semantic color roles from `gwind-v2` and Tailwind theme mappings.
 | `border` / `input` | Structural boundaries and input borders. |
 | `destructive` | Error, destructive action, or critical state. |
 
-Do not create a screen dominated by one hue. Use the brand greens (Lime & Broccoli) as brand anchors, balanced with neutral surfaces, readable foregrounds, and limited accents.
+Do not create a screen dominated by one hue. Use the brand greens (Lime & Broccoli) as brand anchors, balanced with neutral surfaces, readable foregrounds, and limited accents. Untuk daftar lengkap seluruh token semantik dan palet warna, lihat [Katalog Design Tokens](/guide/tokens).
 
 ## Typography
 
@@ -155,7 +155,7 @@ import { Select } from '@/components/ui/select'
 For source component installation, prefer:
 
 ```bash
-npx gwind-system-ui add button
+npx gwind-ui add button
 ```
 
 Generated component code should use:
