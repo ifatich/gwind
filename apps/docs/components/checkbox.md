@@ -23,7 +23,7 @@ A control that allows the user to toggle between checked and not checked.
 ## Installation
 
 ```bash
-npx gwind-system-ui add checkbox
+npx gwind-ui add checkbox
 ```
 
 ## Preview

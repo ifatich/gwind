@@ -5,7 +5,7 @@ Displays the path to the current resource using a hierarchy of links.
 ## Installation
 
 ```bash
-npx gwind-system-ui add breadcrumb
+npx gwind-ui add breadcrumb
 ```
 
 ## Preview

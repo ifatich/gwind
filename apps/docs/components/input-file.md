@@ -5,7 +5,7 @@ Native file input with Gwind field styling.
 ## Installation
 
 ```bash
-npx gwind-system-ui add input
+npx gwind-ui add input
 ```
 
 ## Preview

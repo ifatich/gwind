@@ -5,7 +5,7 @@ Temporary notification surface for snackbar and banner-like messages.
 ## Installation
 
 ```bash
-npx gwind-system-ui add toast
+npx gwind-ui add toast
 ```
 
 ## Preview

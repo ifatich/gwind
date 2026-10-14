@@ -5,7 +5,7 @@ Loading state indicator.
 ## Installation
 
 ```bash
-npx gwind-system-ui add spinner
+npx gwind-ui add spinner
 ```
 
 ## Preview

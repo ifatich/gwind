@@ -5,7 +5,7 @@ A vertically stacked set of interactive headings that each reveal a section of c
 ## Installation
 
 ```bash
-npx gwind-system-ui add accordion
+npx gwind-ui add accordion
 ```
 
 ## Preview

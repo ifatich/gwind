@@ -14,7 +14,7 @@ Functional input for Indonesian Rupiah amounts. It displays thousands separators
 ## Installation
 
 ```bash
-npx gwind-system-ui add input-rupiah
+npx gwind-ui add input-rupiah
 ```
 
 ## Preview

@@ -5,7 +5,7 @@ Displays an indicator showing the completion progress of a task.
 ## Installation
 
 ```bash
-npx gwind-system-ui add progress
+npx gwind-ui add progress
 ```
 
 ## Preview

@@ -10,7 +10,7 @@ Data table components for structured tabular information.
 ## Installation
 
 ```bash
-npx gwind-system-ui add table
+npx gwind-ui add table
 ```
 
 ## Preview

@@ -5,7 +5,7 @@ InputField composition variants with prefix and suffix segments.
 ## Installation
 
 ```bash
-npx gwind-system-ui add input
+npx gwind-ui add input
 ```
 
 ## Preview

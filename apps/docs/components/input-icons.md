@@ -5,7 +5,7 @@ InputField composition variants with left icon, right icon, and label action.
 ## Installation
 
 ```bash
-npx gwind-system-ui add input
+npx gwind-ui add input
 ```
 
 ## Preview

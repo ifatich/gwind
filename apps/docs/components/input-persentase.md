@@ -14,7 +14,7 @@ Functional input for percentage amounts. It displays a percentage suffix and emi
 ## Installation
 
 ```bash
-npx gwind-system-ui add input-persentase
+npx gwind-ui add input-persentase
 ```
 
 ## Preview

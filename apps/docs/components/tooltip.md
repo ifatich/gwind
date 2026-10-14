@@ -5,7 +5,7 @@ A small pop-up box that appears when a user hovers over an element.
 ## Installation
 
 ```bash
-npx gwind-system-ui add tooltip
+npx gwind-ui add tooltip
 ```
 
 ## Preview

@@ -9,7 +9,7 @@ Autocomplete input and command palette with a list of suggestions.
 ## Installation
 
 ```bash
-npx gwind-system-ui add combobox
+npx gwind-ui add combobox
 ```
 
 ## Preview

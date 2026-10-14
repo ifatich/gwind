@@ -5,7 +5,7 @@ Displays a card with header, content, and footer.
 ## Installation
 
 ```bash
-npx gwind-system-ui add card
+npx gwind-ui add card
 ```
 
 ## Preview

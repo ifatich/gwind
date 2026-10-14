@@ -2,6 +2,12 @@
 
 Komponen `FilePicker` digunakan untuk mengunggah file non-gambar (seperti PDF, CSV, Excel, dll).
 
+## Installation
+
+```bash
+npx gwind-ui add file-picker
+```
+
 ## Default
 
 Secara default, FilePicker menolak file dengan tipe `image/*`.

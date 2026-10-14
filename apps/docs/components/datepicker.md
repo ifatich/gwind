@@ -9,7 +9,7 @@ Input-style trigger with a calendar popup for selecting a single date. The trigg
 ## Installation
 
 ```bash
-npx gwind-system-ui add datepicker
+npx gwind-ui add datepicker
 ```
 
 ## Preview

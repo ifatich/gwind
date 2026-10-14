@@ -5,7 +5,7 @@ Standard labeled input field with size and state variants.
 ## Installation
 
 ```bash
-npx gwind-system-ui add input
+npx gwind-ui add input
 ```
 
 ## Preview

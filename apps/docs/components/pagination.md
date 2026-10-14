@@ -9,7 +9,7 @@ Data-driven pagination for desktop and section-based mobile pagination.
 ## Installation
 
 ```bash
-npx gwind-system-ui add pagination
+npx gwind-ui add pagination
 ```
 
 ## Preview

@@ -9,7 +9,7 @@ A set of mutually exclusive options where only one item can be selected at a tim
 ## Installation
 
 ```bash
-npx gwind-system-ui add radio-group
+npx gwind-ui add radio-group
 ```
 
 ## Preview

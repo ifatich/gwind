@@ -5,7 +5,7 @@ A file input specialized for images with drag-and-drop, full-screen preview dial
 ## Installation
 
 ```bash
-npx gwind-system-ui add image-picker
+npx gwind-ui add image-picker
 ```
 
 ## Preview

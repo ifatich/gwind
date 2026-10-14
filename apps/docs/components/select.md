@@ -5,7 +5,7 @@ Displays a list of options for the user to pick from—triggered by a button.
 ## Installation
 
 ```bash
-npx gwind-system-ui add select
+npx gwind-ui add select
 ```
 
 ## Preview

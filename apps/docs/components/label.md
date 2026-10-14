@@ -5,7 +5,7 @@ Label adalah komponen untuk memberi teks penjelas pada field input/form.
 ## Installation
 
 ```bash
-npx gwind-system-ui add label
+npx gwind-ui add label
 ```
 
 ## Preview

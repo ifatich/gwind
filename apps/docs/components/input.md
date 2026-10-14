@@ -5,7 +5,7 @@ Input is the base field family for text entry, grouped input shells, file upload
 ## Installation
 
 ```bash
-npx gwind-system-ui add input
+npx gwind-ui add input
 ```
 
 ## Preview

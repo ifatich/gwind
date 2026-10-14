@@ -5,7 +5,7 @@ Inline link styles.
 ## Installation
 
 ```bash
-npx gwind-system-ui add link
+npx gwind-ui add link
 ```
 
 ## Preview

@@ -9,7 +9,7 @@ Solusi banner slide dan komposer carousel responsif dengan dukungan sentuhan/swi
 ## Installation
 
 ```bash
-npx gwind-system-ui add carousel
+npx gwind-ui add carousel
 ```
 
 ---

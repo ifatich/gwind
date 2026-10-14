@@ -5,7 +5,7 @@ Horizontal and vertical separator.
 ## Installation
 
 ```bash
-npx gwind-system-ui add divider
+npx gwind-ui add divider
 ```
 
 ## Preview

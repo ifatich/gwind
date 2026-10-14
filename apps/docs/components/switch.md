@@ -11,7 +11,7 @@ On/off control with disabled state.
 ## Installation
 
 ```bash
-npx gwind-system-ui add switch
+npx gwind-ui add switch
 ```
 
 ## Preview

@@ -10,7 +10,7 @@ The default trigger now uses an input-style field so it feels like a form contro
 ## Installation
 
 ```bash
-npx gwind-system-ui add dropdown
+npx gwind-ui add dropdown
 ```
 
 ## Preview

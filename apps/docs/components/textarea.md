@@ -18,7 +18,7 @@ Multi-line entry surface for capturing longer user input, with support for label
 ## Installation
 
 ```bash
-npx gwind-system-ui add textarea
+npx gwind-ui add textarea
 ```
 
 ## Preview

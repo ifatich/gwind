@@ -5,7 +5,7 @@ Image avatar with initials fallback.
 ## Installation
 
 ```bash
-npx gwind-system-ui add avatar
+npx gwind-ui add avatar
 ```
 
 ## Preview

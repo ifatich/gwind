@@ -5,7 +5,7 @@
 ## Installation
 
 ```bash
-npx gwind-system-ui add add-amount
+npx gwind-ui add add-amount
 ```
 
 ## Preview

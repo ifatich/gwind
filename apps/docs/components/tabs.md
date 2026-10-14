@@ -11,7 +11,7 @@ A set of layered sections of content, known as tab panels, that are displayed on
 ## Installation
 
 ```bash
-npx gwind-system-ui add tabs
+npx gwind-ui add tabs
 ```
 
 ## Preview

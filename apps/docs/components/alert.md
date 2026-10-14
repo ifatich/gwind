@@ -5,7 +5,7 @@ Displays a callout for user attention.
 ## Installation
 
 ```bash
-npx gwind-system-ui add alert
+npx gwind-ui add alert
 ```
 
 ## Preview

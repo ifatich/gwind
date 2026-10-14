@@ -9,7 +9,7 @@ Displays a button or a component that looks like a button.
 ## Installation
 
 ```bash
-npx gwind-system-ui add button
+npx gwind-ui add button
 ```
 
 ## Preview
