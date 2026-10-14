@@ -16,7 +16,7 @@ const copiedCli = ref(false);
 
 function copyCliCommand() {
   if (typeof navigator !== "undefined" && navigator.clipboard) {
-    navigator.clipboard.writeText("npx gwind-system-ui add");
+    navigator.clipboard.writeText("npx gwind-ui add");
     copiedCli.value = true;
     setTimeout(() => {
       copiedCli.value = false;
@@ -57,7 +57,7 @@ function copyCliCommand() {
             <span class="text-[11px] font-mono text-foreground-green bg-lime-100 px-2 py-0.5 rounded font-bold">npm package</span>
           </div>
           <div class="playground-cli-terminal">
-            <span class="truncate text-lime-300 font-mono text-xs select-all">npx gwind-system-ui add [komponen]</span>
+            <span class="truncate text-lime-300 font-mono text-xs select-all">npx gwind-ui add [komponen]</span>
             <button
               id="btn-hero-copy-cli"
               type="button"

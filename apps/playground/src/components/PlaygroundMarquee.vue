@@ -16,7 +16,7 @@ import { Sparkles } from "lucide-vue-next";
         <span>•</span>
         <span>Strict TypeScript Contract & No Any Types</span>
         <span>•</span>
-        <span>CLI Scaffolding via npx gwind-system-ui add</span>
+        <span>CLI Scaffolding via npx gwind-ui add</span>
       </div>
       <span class="hidden lg:inline-flex items-center gap-1.5 text-lime-400 font-mono text-xs">
         ✨ Interactive Playground

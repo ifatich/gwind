@@ -21,7 +21,7 @@ const copiedCli = ref(false);
 
 function copyCli() {
   if (typeof navigator !== "undefined" && navigator.clipboard) {
-    navigator.clipboard.writeText("npx gwind-system-ui add");
+    navigator.clipboard.writeText("npx gwind-ui add");
     copiedCli.value = true;
     setTimeout(() => {
       copiedCli.value = false;
@@ -103,7 +103,7 @@ function scrollToTop() {
             </div>
 
             <div class="flex items-center justify-between gap-3 bg-black/60 rounded-xl px-3.5 py-2.5 border border-white/10 font-mono text-xs text-lime-300">
-              <span class="truncate select-all">npx gwind-system-ui add [komponen]</span>
+              <span class="truncate select-all">npx gwind-ui add [komponen]</span>
               <button
                 id="btn-footer-copy-cli"
                 type="button"
