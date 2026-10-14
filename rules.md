@@ -75,7 +75,7 @@ Finally, create the documentation:
 2. The Markdown structure must include:
    - `<script setup lang="ts">` for local documentation variables.
    - Title & Brief Description.
-   - **Installation**: CLI command (`npx gwind-system-ui add <kebab-case-name>`).
+   - **Installation**: CLI command (`npx gwind-ui add <kebab-case-name>`).
    - **Preview**: Use the `<ShadowPreview>` tag and wrap the component with the `Gw` prefix (e.g., `<GwPascalCaseName>`).
    - **Behavior / Usage**: Explanation of functionality and `<template>` code snippets.
    - **States**: Visual render examples for different states. **CRITICAL**: Pastikan untuk memanggil dan menampilkan SEMUA *state* atau *behavior* yang ada (Default, Disabled, Error, dll) secara terpisah di blok dokumentasi.

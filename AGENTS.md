@@ -9,7 +9,7 @@
 
 **Gwind** (`gwind-monorepo`) adalah **design system** internal berbasis Vue 3 +
 Tailwind CSS v4 yang dibangun sebagai pnpm monorepo. Tujuannya menyediakan
-komponen UI reusable yang bisa di-install per komponen via CLI (`npx gwind-system-ui add <component>`).
+komponen UI reusable yang bisa di-install per komponen via CLI (`npx gwind-ui add <component>`).
 
 ---
 
@@ -77,9 +77,9 @@ gwind/
 │   │   ├── vite.config.ts       # Library build config (ESM, externals: vue, reka-ui)
 │   │   └── package.json         # @gwind/ui
 │   │
-│   └── cli/                     # gwind-system-ui — CLI tool (npm published)
+│   └── cli/                     # gwind-ui — CLI tool (npm published)
 │       ├── src/index.ts         # CLI entry (cac-based)
-│       └── package.json         # gwind-system-ui (bin: gwind-ui, gwind-system-ui)
+│       └── package.json         # gwind-ui (bin: gwind-ui, gwind-system-ui)
 │
 ├── registry/                    # Component registry untuk CLI
 │   ├── index.json               # Manifest: daftar komponen + file-file-nya
@@ -271,7 +271,7 @@ serta `registry/index.json`.
 2. Struktur wajib:
    - `<script setup lang="ts">` untuk variabel lokal docs
    - Title & deskripsi singkat
-   - **Installation**: `npx gwind-system-ui add <kebab-case-name>`
+   - **Installation**: `npx gwind-ui add <kebab-case-name>`
    - **Preview**: Bungkus dengan `<ShadowPreview>`, pakai prefix `Gw`
    - **Behavior / Usage**: Penjelasan + code snippet
    - **States**: Render semua state terpisah (Default, Disabled, Error, dll)

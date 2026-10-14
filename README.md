@@ -6,10 +6,17 @@ Gwind adalah sistem desain modern berbasis Vue 3 yang dibangun di atas **Reka UI
 
 Gwind dirancang agar sangat mudah digunakan. Ikuti langkah-langkah berikut:
 
+### 0. Konfigurasi Registry Artifactory Pegadaian
+Arahkan registry npm ke repository internal Pegadaian:
+```bash
+npm config set registry https://artifactory.pegadaian.co.id/repository/npm-group-1/
+```
+*(Atau gunakan opsi alternatif tanpa ubah config global: `npx --registry=https://artifactory.pegadaian.co.id/repository/npm-group-1/ gwind-ui init`)*
+
 ### 1. Inisialisasi Proyek (Sekali saja)
 Langkah ini menyiapkan utility `cn`, file konfigurasi `gwind.json`, dan stylesheet fondasi lokal `gwind.css` beserta import ke CSS global.
 ```bash
-npx gwind-system-ui init
+npx gwind-ui init
 ```
 
 Consumer tidak perlu mengimpor `packages/ui/dist/gwind-ui.css`; token, theme, motion, dan source scanning disiapkan melalui `gwind.css` yang dihasilkan CLI.
@@ -17,7 +24,7 @@ Consumer tidak perlu mengimpor `packages/ui/dist/gwind-ui.css`; token, theme, mo
 ### 2. Tambahkan Komponen
 Pilih komponen yang Anda butuhkan (misal: Button).
 ```bash
-npx gwind-system-ui add button
+npx gwind-ui add button
 ```
 
 ### 3. Gunakan di Kode Anda
@@ -42,7 +49,7 @@ import { Badge } from '@/components/ui/badge'
 Gwind dikelola menggunakan struktur monorepo untuk menjaga konsistensi antara komponen, alat bantu CLI, dan dokumentasi:
 
 -   `packages/ui`: Library komponen inti. Di sinilah semua source code komponen berada.
--   `packages/cli`: Alat baris perintah (`gwind-system-ui`) untuk menginisialisasi dan menambahkan komponen ke proyek lain.
+-   `packages/cli`: Alat baris perintah (`gwind-ui`) untuk menginisialisasi dan menambahkan komponen ke proyek lain.
 -   `registry/`: Database metadata komponen dalam format JSON yang dikonsumsi oleh CLI.
 -   `apps/docs`: Situs dokumentasi interaktif yang dibangun dengan VitePress.
 

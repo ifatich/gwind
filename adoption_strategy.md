@@ -13,11 +13,11 @@ Script ini akan men-scan seluruh project di GitLab untuk melihat penggunaan nyat
     - [ ] Fetch daftar semua project dalam Group/Namespace tertentu di GitLab.
     - [ ] Cek keberadaan file `gwind.json`.
     - [ ] Scan folder `src/components/ui/` untuk mendeteksi komponen apa saja yang sudah di-install.
-    - [ ] Ekstrak versi `gwind-system-ui` dari `package.json` project tujuan.
+    - [ ] Ekstrak versi `gwind-ui` dari `package.json` project tujuan.
 - [ ] Simpan hasil scan ke dalam file JSON atau Database sederhana.
 
 ## 📈 Fase 3: Integrasi Nexus Stats
-- [ ] Tarik data download harian/mingguan dari API Nexus untuk paket `gwind-system-ui`.
+- [ ] Tarik data download harian/mingguan dari API Nexus untuk paket `gwind-ui`.
 - [ ] Bandingkan jumlah download dengan jumlah project aktif di GitLab untuk melihat gap adopsi.
 
 ## 🛰️ Fase 4: CLI Telemetry (Real-time Tracking)
