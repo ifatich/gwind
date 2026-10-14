@@ -51,7 +51,7 @@ const { isVisible } = useDropdownListItemSearch({
     @click="handleClick"
     :class="
       cn(
-        'group flex min-h-[48px] w-full cursor-pointer items-center gap-4 bg-transparent px-4 py-3 text-left transition-[background-color,color] duration-150 ease-out hover:bg-black-100 focus-visible:outline-none focus-visible:bg-black-100 disabled:cursor-not-allowed disabled:opacity-50',
+        'group flex min-h-[48px] w-full cursor-pointer items-center gap-4 bg-transparent px-4 py-4 text-left transition-[background-color,color] duration-150 ease-out hover:bg-black-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lime-500 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50',
         $slots.icon ? 'min-h-16' : '',
         props.class,
       )
