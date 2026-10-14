@@ -8,6 +8,26 @@ Gwind adalah Vue 3 Design System yang dibangun di atas **Reka UI** dan **Tailwin
 - **Vue 3** ≥ 3.5
 - **Tailwind CSS v4** terinstal di proyek Anda
 - **pnpm** (direkomendasikan)
+- **Koneksi Jaringan Internal:** Pastikan perangkat Anda terhubung ke jaringan kantor atau **VPN Pegadaian** untuk mengakses package manager internal.
+
+### Konfigurasi Registry Internal Pegadaian
+
+Package CLI `gwind-ui` di-host secara privat di server Artifactory Pegadaian. Jalankan perintah berikut untuk mengarahkan registry npm:
+
+```bash
+npm config set registry https://artifactory.pegadaian.co.id/repository/npm-group-1/
+```
+
+> [!TIP] Opsi Alternatif (Tanpa Mengubah Konfigurasi Global)
+> Jika Anda tidak ingin mengubah konfigurasi npm global pada sistem operasi (misalnya agar proyek open-source atau non-Pegadaian lainnya di komputer Anda tidak terpengaruh), Anda dapat tetap menjalankan perintah dengan menyertakan flag `--registry` secara langsung:
+>
+> ```bash
+> npx --registry=https://artifactory.pegadaian.co.id/repository/npm-group-1/ gwind-ui init
+> npx --registry=https://artifactory.pegadaian.co.id/repository/npm-group-1/ gwind-ui add button
+> ```
+> Opsi ini mengeksekusi CLI secara langsung dari Artifactory Pegadaian tanpa menyimpan perubahan permanen pada pengaturan registry npm global komputer Anda.
+
+---
 
 ## Instalasi
 
@@ -24,7 +44,7 @@ pnpm add @fontsource/nunito-sans clsx tailwind-merge gwind-v2
 Jalankan CLI dari root aplikasi. Perintah `init` membuat `gwind.json`, utility `cn`, direktori komponen, dan `gwind.css` di sebelah CSS global yang Anda pilih.
 
 ```bash
-npx gwind-system-ui init
+npx gwind-ui init
 ```
 
 CLI otomatis menambahkan import berikut ke CSS global:
@@ -44,7 +64,7 @@ Tambahkan source component melalui CLI:
 
 ```bash
 # Tambahkan komponen button
-npx gwind-system-ui add button
+npx gwind-ui add button
 ```
 
 CLI menampilkan dependency tambahan yang dibutuhkan oleh komponen. Instal dependency yang belum ada menggunakan package manager project Anda.
@@ -54,7 +74,7 @@ Komponen dan stylesheet diambil dari snapshot registry yang dibundel bersama ver
 File komponen yang sudah ada tidak ditimpa secara default. Gunakan `--overwrite` hanya ketika Anda memang ingin memperbarui source component dari registry:
 
 ```bash
-npx gwind-system-ui add button --overwrite
+npx gwind-ui add button --overwrite
 ```
 
 Atau salin kode sumber secara manual dari halaman dokumentasi masing-masing komponen ke direktori `src/components/ui/`.

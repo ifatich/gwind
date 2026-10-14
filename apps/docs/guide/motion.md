@@ -4,7 +4,7 @@ Gwind motion exists to clarify state changes, not to decorate the interface.
 
 ## Source
 
-Untuk consumer CLI, motion utilities dibuat oleh `gwind-system-ui init` di file `gwind.css` dan diimpor otomatis oleh CSS global:
+Untuk consumer CLI, motion utilities dibuat oleh `gwind-ui init` di file `gwind.css` dan diimpor otomatis oleh CSS global:
 
 ```css
 @import "./gwind.css";
