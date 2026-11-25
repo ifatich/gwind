@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import DatepickerPreview from './previews/DatepickerPreview.vue'
+import MonthPickerPreview from './previews/MonthPickerPreview.vue'
 </script>
 
 # Datepicker
@@ -74,11 +75,53 @@ When `disablePastDates` or `disableFutureDates` is combined with `min` or `max`,
 
 The trigger displays dates as `DD/MM/YYYY`. The `v-model` value remains `YYYY-MM-DD` for predictable form handling.
 
+## Month Picker
+
+Variant of `Datepicker` for picking a month and year only (no day grid), such as reporting periods or billing cycles. It reuses the same trigger, popover, and styling. Installed together with `datepicker`.
+
+<MonthPickerPreview />
+
+```vue
+<script setup lang="ts">
+import { ref } from "vue";
+import { MonthPicker } from "@/components/ui/datepicker";
+
+const month = ref("2026-06");
+</script>
+
+<template>
+  <MonthPicker v-model="month" min="2026-01" max="2026-12" placeholder="Pilih bulan" />
+</template>
+```
+
+The trigger displays the value as `Juni 2026`. The `v-model` value is `YYYY-MM`. Click the year in the header to jump to the year grid.
+
+### MonthPicker Props
+
+| Name            | Type                      | Default          | Description                                                       |
+| --------------- | ------------------------- | ---------------- | ----------------------------------------------------------------- |
+| `modelValue`    | `string`                  | `undefined`      | Selected month in `YYYY-MM` format.                               |
+| `defaultValue`  | `string`                  | `undefined`      | Initial month for uncontrolled usage.                             |
+| `open`          | `boolean`                 | `undefined`      | Controlled open state.                                            |
+| `defaultOpen`   | `boolean`                 | `false`          | Initial uncontrolled open state.                                  |
+| `disabled`      | `boolean`                 | `false`          | Disables the trigger.                                             |
+| `placeholder`   | `string`                  | `'Pilih Bulan'`  | Placeholder shown when no month is selected.                      |
+| `min`           | `string`                  | `undefined`      | Minimum selectable month (`YYYY-MM`), inclusive.                  |
+| `max`           | `string`                  | `undefined`      | Maximum selectable month (`YYYY-MM`), inclusive.                  |
+| `title`         | `string`                  | `'Pilih Bulan'`  | Panel title.                                                      |
+| `minYearOffset` | `number`                  | `100`            | Number of years before the current year shown in the year grid.   |
+| `maxYearOffset` | `number`                  | `3`              | Number of years after the current year shown in the year grid.    |
+| `contentClass`  | `HTMLAttributes['class']` | `undefined`      | Additional class for the popover content.                         |
+| `class`         | `HTMLAttributes['class']` | `undefined`      | Additional class for the root.                                    |
+
+Emits: `update:modelValue` (`string`), `update:open` (`boolean`).
+
 ## Components
 
 | Component           | Description                                        |
 | ------------------- | -------------------------------------------------- |
 | `Datepicker`        | Composite: trigger + popover + calendar surface.   |
+| `MonthPicker`       | Composite: trigger + popover + month/year grid.    |
 | `DatepickerRoot`    | Reka `DatePickerRoot` wrapper.                     |
 | `DatepickerInput`   | Input trigger with calendar icon.                  |
 | `DatepickerContent` | Popover content surface for the calendar.          |

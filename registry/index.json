@@ -131,6 +131,7 @@
       "DatepickerInput.vue",
       "DatepickerRoot.vue",
       "DatepickerScroll.vue",
+      "MonthPicker.vue",
       "YearPicker.vue",
       "index.ts",
       "utils.ts"
