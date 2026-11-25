@@ -6,6 +6,7 @@ import fsExtra from 'fs-extra'
 import path from 'node:path'
 import prompts from 'prompts'
 import ora from 'ora'
+import { execa } from 'execa'
 import { fileURLToPath } from 'node:url'
 
 const { readJson, readFile, writeFile, mkdirp } = fsExtra
@@ -63,7 +64,7 @@ const toCssPath = (fromDir: string, targetPath: string) => {
   return relativePath.startsWith('.') ? relativePath : `./${relativePath}`
 }
 
-const getInstallCommand = (dependencies: string[]) => {
+const getPackageManager = () => {
   const projectRoot = process.cwd()
   let packageManager = ''
 
@@ -77,16 +78,21 @@ const getInstallCommand = (dependencies: string[]) => {
   }
 
   if (packageManager.startsWith('pnpm@') || fs.existsSync(path.join(projectRoot, 'pnpm-lock.yaml'))) {
-    return `pnpm add ${dependencies.join(' ')}`
+    return 'pnpm'
   }
   if (packageManager.startsWith('yarn@') || fs.existsSync(path.join(projectRoot, 'yarn.lock'))) {
-    return `yarn add ${dependencies.join(' ')}`
+    return 'yarn'
   }
   if (packageManager.startsWith('bun@') || fs.existsSync(path.join(projectRoot, 'bun.lock')) || fs.existsSync(path.join(projectRoot, 'bun.lockb'))) {
-    return `bun add ${dependencies.join(' ')}`
+    return 'bun'
   }
 
-  return `npm install ${dependencies.join(' ')}`
+  return 'npm'
+}
+
+const getInstallCommand = (dependencies: string[]) => {
+  const manager = getPackageManager()
+  return `${manager} ${manager === 'npm' ? 'install' : 'add'} ${dependencies.join(' ')}`
 }
 
 cli
@@ -214,6 +220,10 @@ cli
     const spinner = ora(`Fetching ${componentName}...`).start()
     
     try {
+      const consumerPackagePath = path.join(process.cwd(), 'package.json')
+      if (!fs.existsSync(consumerPackagePath)) {
+        throw new Error('package.json not found. Initialize the project before adding components.')
+      }
       const installedComponents = new Set<string>()
       const installingComponents = new Set<string>()
       const dependencies = new Set<string>(BASE_DEPENDENCIES)
@@ -265,14 +275,24 @@ cli
         installedComponents.add(name)
       }
 
-      spinner.succeed(`Found ${componentName}.`)
       await installComponent(componentName)
-      console.log(chalk.bold.green(`\nSuccessfully added ${Array.from(installedComponents).join(', ')}!`))
+      spinner.succeed(`Found ${componentName}.`)
 
-      if (dependencies.size > 0) {
-        console.log(chalk.yellow(`\nDon't forget to install these dependencies:`))
-        console.log(chalk.cyan(getInstallCommand(Array.from(dependencies))))
+      const consumerPackage = await readJson(consumerPackagePath)
+      const declared = { ...consumerPackage.dependencies, ...consumerPackage.devDependencies, ...consumerPackage.peerDependencies }
+      const missing = Array.from(dependencies).filter(dependency => !declared[dependency])
+      if (missing.length > 0) {
+        const manager = getPackageManager()
+        const args = [manager === 'npm' ? 'install' : 'add', ...missing]
+        console.log(chalk.cyan(`\nInstalling dependencies: ${getInstallCommand(missing)}`))
+        try {
+          await execa(manager, args, { cwd: process.cwd(), stdio: 'inherit' })
+        } catch {
+          throw new Error(`Dependency installation failed. Retry with: ${getInstallCommand(missing)}`)
+        }
       }
+
+      console.log(chalk.bold.green(`\nSuccessfully added ${Array.from(installedComponents).join(', ')}!`))
 
       console.log(
         chalk.hex('#8b5cf6')('\nBuild with ❤️ by Gwind Design || F.I.AL Arasy || Gwind')
@@ -280,6 +300,7 @@ cli
 
     } catch (error: any) {
       spinner.fail(chalk.red(`Error adding component: ${error.message}`))
+      process.exitCode = 1
     }
   })
 
