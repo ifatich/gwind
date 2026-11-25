@@ -100,6 +100,16 @@ The Combobox component is highly flexible:
 
 ---
 
+## Floating List Position
+
+`ComboboxList` renders its content in a portal so surrounding containers do not clip the popup. It follows the trigger and accepts the Reka UI placement props `side`, `align`, and `side-offset`.
+
+```vue
+<ComboboxList side="top" align="end" :side-offset="8">
+  <!-- input and options -->
+</ComboboxList>
+```
+
 ## Advanced Usage
 
 ### Custom Filtering
@@ -107,12 +117,33 @@ By default, it filters by the item value. To customize matching (or use it as a 
 
 ```vue
 <script setup lang="ts">
+import { computed, ref } from 'vue'
+
+const items = ['Cabang Bandung', 'Cabang Depok', 'Cabang Jakarta']
+const selected = ref('')
 const term = ref('')
-const filtered = computed(() => items.filter((i) => i.toLowerCase().startsWith(term.value.toLowerCase())))
+const filtered = computed(() => {
+  const query = term.value.trim().toLowerCase()
+  return items.filter((item) => item.toLowerCase().startsWith(query))
+})
 </script>
 
-<Combobox ignore-filter>
-  <ComboboxInput v-model="term" />
-  <ComboboxItem v-for="item in filtered" :key="item" :value="item">{{ item }}</ComboboxItem>
-</Combobox>
+<template>
+  <Combobox v-model="selected" ignore-filter>
+    <ComboboxAnchor>
+      <ComboboxTrigger>Pilih cabang</ComboboxTrigger>
+    </ComboboxAnchor>
+    <ComboboxList>
+      <ComboboxInput v-model="term" placeholder="Cari cabang..." />
+      <ComboboxEmpty>Tidak ada cabang yang cocok.</ComboboxEmpty>
+      <ComboboxGroup>
+        <ComboboxItem v-for="item in filtered" :key="item" :value="item">
+          {{ item }}
+        </ComboboxItem>
+      </ComboboxGroup>
+    </ComboboxList>
+  </Combobox>
+</template>
 ```
+
+`ComboboxInput` forwards its value and input events, so `v-model` keeps the custom query in sync. `ignore-filter` disables the built-in matching; the example above filters by prefix instead.
