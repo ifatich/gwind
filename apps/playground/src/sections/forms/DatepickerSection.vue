@@ -16,6 +16,8 @@ const tanggalBooking = ref("");
 const tanggalTerkunci = ref("2026-01-01");
 const periodeLaporan = ref("2026-06");
 const bulanTagihan = ref("");
+const bulanMaksimum = ref("");
+const awalTahunBerjalan = `${new Date().getFullYear()}-01`;
 
 const datepickerProps: PropRow[] = [
   {
@@ -184,11 +186,11 @@ const datepickerProps: PropRow[] = [
     <!-- CARD: Month Picker Variant -->
     <DocCard
       title="Month Picker Variant"
-      description="Varian Datepicker untuk memilih bulan dan tahun saja (tanpa grid hari). Nilai model berformat YYYY-MM."
+      description="Varian Datepicker untuk memilih bulan dan tahun saja (tanpa grid hari). Nilai model berformat YYYY-MM; batas min/max juga memperluas navigasi tahun bila diperlukan."
       badge="MonthPicker"
       badge-variant="outline"
     >
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-gw-24 py-gw-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-gw-24 py-gw-8">
         <div class="space-y-gw-8">
           <Label for="monthpicker-periode">Periode Laporan</Label>
           <MonthPicker
@@ -202,17 +204,17 @@ const datepickerProps: PropRow[] = [
         </div>
 
         <div class="space-y-gw-8">
-          <Label for="monthpicker-empty">Bulan Tagihan</Label>
+          <Label for="monthpicker-empty">Periode Tagihan Lintas Tahun</Label>
           <MonthPicker
             id="monthpicker-empty"
             v-model="bulanTagihan"
-            min="2026-03"
-            max="2026-09"
-            placeholder="Maret – September 2026"
+            min="2032-11"
+            max="2033-02"
+            placeholder="November 2032 – Februari 2033"
             class="w-full"
           />
-          <code class="block text-atom font-mono text-foreground-green font-semibold">min="2026-03" max="2026-09"</code>
-          <p class="text-omega text-foreground-secondary">Empty + rentang terbatas; bulan di luar rentang dinonaktifkan.</p>
+          <code class="block text-atom font-mono text-foreground-green font-semibold">min="2032-11" max="2033-02"</code>
+          <p class="text-omega text-foreground-secondary">Rentang lintas tahun di luar navigasi default; daftar tahun ikut mencakup batas tersebut.</p>
         </div>
 
         <div class="space-y-gw-8">
@@ -225,6 +227,20 @@ const datepickerProps: PropRow[] = [
           />
           <code class="block text-atom font-mono text-foreground-tertiary font-semibold">:disabled="true"</code>
           <p class="text-omega text-foreground-secondary">Pop-up tidak dapat dibuka.</p>
+        </div>
+
+        <div class="space-y-gw-8">
+          <Label for="monthpicker-max-only">Periode Tahun Berjalan sampai 2040</Label>
+          <MonthPicker
+            id="monthpicker-max-only"
+            v-model="bulanMaksimum"
+            :min="awalTahunBerjalan"
+            max="2040-12"
+            placeholder="Pilih periode sampai 2040"
+            class="w-full"
+          />
+          <code class="block text-atom font-mono text-foreground-green font-semibold">min="{{ awalTahunBerjalan }}" max="2040-12"</code>
+          <p class="text-omega text-foreground-secondary">Mulai Januari tahun berjalan; pilihan berakhir pada Desember 2040.</p>
         </div>
       </div>
     </DocCard>

@@ -5,42 +5,42 @@ import {
   type ComboboxContentEmits,
   type ComboboxContentProps,
   useForwardPropsEmits,
-} from "reka-ui";
-import { computed, ref, type HTMLAttributes } from "vue";
-import { useFloatingPopperFix } from "../../../lib/floating-fix";
-import { useGwindPortalTarget } from "../../../lib/portal";
-import { cn } from "../../../lib/utils";
+} from 'reka-ui'
+import { computed, ref, type HTMLAttributes } from 'vue'
+import { useFloatingPopperFix } from '../../../lib/floating-fix'
+import { useGwindPortalTarget } from '../../../lib/portal'
+import { cn } from '../../../lib/utils'
 
 defineOptions({
   inheritAttrs: false,
-});
+})
 
 const props = withDefaults(
-  defineProps<ComboboxContentProps & { class?: HTMLAttributes["class"] }>(),
+  defineProps<ComboboxContentProps & { class?: HTMLAttributes['class'] }>(),
   {
-    position: "popper",
-    side: "bottom",
-    align: "start",
+    position: 'popper',
+    side: 'bottom',
+    align: 'start',
     sideOffset: 4,
   },
-);
-const emits = defineEmits<ComboboxContentEmits>();
+)
+const emits = defineEmits<ComboboxContentEmits>()
 
 const delegatedProps = computed(() => {
-  const { class: _, ...delegated } = props;
-  return delegated;
-});
+  const { class: _, ...delegated } = props
+  return delegated
+})
 
-const forwarded = useForwardPropsEmits(delegatedProps, emits);
-const portalTarget = useGwindPortalTarget();
+const forwarded = useForwardPropsEmits(delegatedProps, emits)
+const portalTarget = useGwindPortalTarget()
 
-const contentRef = ref<HTMLElement | null>(null);
+const contentRef = ref<HTMLElement | null>(null)
 useFloatingPopperFix(contentRef, {
-  side: "bottom",
-  align: "start",
+  side: props.side,
+  align: props.align,
   sideOffset: props.sideOffset,
   matchWidth: true,
-});
+})
 </script>
 
 <template>

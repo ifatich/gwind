@@ -6,6 +6,8 @@ const blankMonth = ref("");
 const filledMonth = ref("2026-06");
 const openMonth = ref("2026-06");
 const rangeMonth = ref("");
+const currentYearTo2040Month = ref("");
+const currentYearStart = `${new Date().getFullYear()}-01`;
 const blankOpen = ref(false);
 const filledOpen = ref(false);
 </script>
@@ -48,13 +50,25 @@ const filledOpen = ref(false);
 
       <div class="grid gap-3">
         <div class="text-sigma font-semibold leading-6 text-black-800">
-          Limited range (2026-03 to 2026-09)
+          Cross-year range outside the default year window
         </div>
         <MonthPicker
           v-model="rangeMonth"
-          min="2026-03"
-          max="2026-09"
-          placeholder="Maret – September 2026"
+          min="2032-11"
+          max="2033-02"
+          placeholder="November 2032 – Februari 2033"
+        />
+      </div>
+
+      <div class="grid gap-3">
+        <div class="text-sigma font-semibold leading-6 text-black-800">
+          Current year through 2040
+        </div>
+        <MonthPicker
+          v-model="currentYearTo2040Month"
+          :min="currentYearStart"
+          max="2040-12"
+          placeholder="Pilih periode sampai 2040"
         />
       </div>
 

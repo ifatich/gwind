@@ -95,7 +95,7 @@ const comboboxProps: PropRow[] = [
           Combobox
         </h2>
         <p class="text-sigma text-foreground-secondary max-w-3xl mt-1 leading-relaxed">
-          Komponen pencarian autolengkap (autocomplete) dengan filter instan dalam popover floating surface, umpan balik hasil nihil (empty feedback), serta penanda centang seleksi aktif sesuai pola WAI-ARIA Combobox.
+          Komponen pencarian autolengkap (autocomplete) dengan daftar portal yang mengikuti pemicu, filter instan, umpan balik hasil nihil (empty feedback), serta penanda centang seleksi aktif.
         </p>
       </div>
       <Badge variant="brocoli" class="shrink-0">Search & Filter Primitive</Badge>

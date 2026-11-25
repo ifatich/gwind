@@ -94,7 +94,39 @@ const month = ref("2026-06");
 </template>
 ```
 
-The trigger displays the value as `Juni 2026`. The `v-model` value is `YYYY-MM`. Click the year in the header to jump to the year grid.
+The trigger displays the value as `Juni 2026`. The `v-model` value must use the exact `YYYY-MM` format. Click the year in the header to jump to the year grid. `min` and `max` are inclusive and expand the year grid when a boundary falls outside the default year window.
+
+To allow selection from the current year through 2040, set `min` to January of the current year and `max` to December 2040. MonthPicker accepts month precision (`YYYY-MM`), so a year-only value such as `max="2040"` is not a valid bound.
+
+This example spans two years and extends beyond the default three-year future window:
+
+```vue
+<MonthPicker
+  v-model="billingPeriod"
+  min="2032-11"
+  max="2033-02"
+  placeholder="November 2032 – Februari 2033"
+/>
+```
+
+Current year through 2040:
+
+```vue
+<script setup lang="ts">
+import { ref } from 'vue'
+
+const billingPeriod = ref('')
+const currentYearStart = `${new Date().getFullYear()}-01`
+</script>
+
+<template>
+  <MonthPicker
+    v-model="billingPeriod"
+    :min="currentYearStart"
+    max="2040-12"
+  />
+</template>
+```
 
 ### MonthPicker Props
 
@@ -106,11 +138,11 @@ The trigger displays the value as `Juni 2026`. The `v-model` value is `YYYY-MM`.
 | `defaultOpen`   | `boolean`                 | `false`          | Initial uncontrolled open state.                                  |
 | `disabled`      | `boolean`                 | `false`          | Disables the trigger.                                             |
 | `placeholder`   | `string`                  | `'Pilih Bulan'`  | Placeholder shown when no month is selected.                      |
-| `min`           | `string`                  | `undefined`      | Minimum selectable month (`YYYY-MM`), inclusive.                  |
-| `max`           | `string`                  | `undefined`      | Maximum selectable month (`YYYY-MM`), inclusive.                  |
+| `min`           | `string`                  | `undefined`      | Minimum selectable month (`YYYY-MM`), inclusive; expands the year grid when needed. |
+| `max`           | `string`                  | `undefined`      | Maximum selectable month (`YYYY-MM`), inclusive; expands the year grid when needed. |
 | `title`         | `string`                  | `'Pilih Bulan'`  | Panel title.                                                      |
-| `minYearOffset` | `number`                  | `100`            | Number of years before the current year shown in the year grid.   |
-| `maxYearOffset` | `number`                  | `3`              | Number of years after the current year shown in the year grid.    |
+| `minYearOffset` | `number`                  | `100`            | Default year window before the current year; an earlier `min` or `max` expands it. |
+| `maxYearOffset` | `number`                  | `3`              | Default year window after the current year; a later `min` or `max` expands it. |
 | `contentClass`  | `HTMLAttributes['class']` | `undefined`      | Additional class for the popover content.                         |
 | `class`         | `HTMLAttributes['class']` | `undefined`      | Additional class for the root.                                    |
 
