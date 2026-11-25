@@ -5,7 +5,7 @@
  * Strictly consumes Gwind Design Tokens for surfaces, borders, typography, spacing, and radius.
  */
 import { ref } from "vue";
-import { Badge, Datepicker, Label } from "@gwind/ui";
+import { Badge, Datepicker, Label, MonthPicker } from "@gwind/ui";
 import { Calendar, Info, Sparkles } from "lucide-vue-next";
 import DocCard from "../../components/DocCard.vue";
 import PropsTable, { type PropRow } from "../../components/PropsTable.vue";
@@ -14,6 +14,8 @@ const tanggalJatuhTempo = ref("2026-09-15");
 const tanggalLahir = ref("1995-08-17");
 const tanggalBooking = ref("");
 const tanggalTerkunci = ref("2026-01-01");
+const periodeLaporan = ref("2026-06");
+const bulanTagihan = ref("");
 
 const datepickerProps: PropRow[] = [
   {
@@ -177,6 +179,54 @@ const datepickerProps: PropRow[] = [
           <span><strong>Standar Waktu ISO:</strong> Seluruh output nilai model menggunakan format standar internasional <code>YYYY-MM-DD</code> sehingga kompatibel langsung dengan REST API backend.</span>
         </div>
       </template>
+    </DocCard>
+
+    <!-- CARD: Month Picker Variant -->
+    <DocCard
+      title="Month Picker Variant"
+      description="Varian Datepicker untuk memilih bulan dan tahun saja (tanpa grid hari). Nilai model berformat YYYY-MM."
+      badge="MonthPicker"
+      badge-variant="outline"
+    >
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-gw-24 py-gw-8">
+        <div class="space-y-gw-8">
+          <Label for="monthpicker-periode">Periode Laporan</Label>
+          <MonthPicker
+            id="monthpicker-periode"
+            v-model="periodeLaporan"
+            placeholder="Pilih periode"
+            class="w-full"
+          />
+          <code class="block text-atom font-mono text-foreground-green font-semibold">{{ periodeLaporan || 'null' }}</code>
+          <p class="text-omega text-foreground-secondary">Filled — klik tahun untuk lompat ke daftar tahun.</p>
+        </div>
+
+        <div class="space-y-gw-8">
+          <Label for="monthpicker-empty">Bulan Tagihan</Label>
+          <MonthPicker
+            id="monthpicker-empty"
+            v-model="bulanTagihan"
+            min="2026-03"
+            max="2026-09"
+            placeholder="Maret – September 2026"
+            class="w-full"
+          />
+          <code class="block text-atom font-mono text-foreground-green font-semibold">min="2026-03" max="2026-09"</code>
+          <p class="text-omega text-foreground-secondary">Empty + rentang terbatas; bulan di luar rentang dinonaktifkan.</p>
+        </div>
+
+        <div class="space-y-gw-8">
+          <Label for="monthpicker-disabled" class="text-foreground-tertiary">Periode Tutup Buku (Terkunci)</Label>
+          <MonthPicker
+            id="monthpicker-disabled"
+            disabled
+            model-value="2026-01"
+            class="w-full"
+          />
+          <code class="block text-atom font-mono text-foreground-tertiary font-semibold">:disabled="true"</code>
+          <p class="text-omega text-foreground-secondary">Pop-up tidak dapat dibuka.</p>
+        </div>
+      </div>
     </DocCard>
 
     <!-- CARD 3: Technical Specification & Props Matrix -->

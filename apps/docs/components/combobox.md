@@ -103,10 +103,16 @@ The Combobox component is highly flexible:
 ## Advanced Usage
 
 ### Custom Filtering
-By default, it filters by the item value. You can customize this or use it as a command palette.
+By default, it filters by the item value. To customize matching (or use it as a command palette), set `ignore-filter` on `Combobox`, bind `v-model` on `ComboboxInput`, and render the filtered list yourself.
 
 ```vue
-<Combobox :filter-function="(list, search) => ...">
-  ...
+<script setup lang="ts">
+const term = ref('')
+const filtered = computed(() => items.filter((i) => i.toLowerCase().startsWith(term.value.toLowerCase())))
+</script>
+
+<Combobox ignore-filter>
+  <ComboboxInput v-model="term" />
+  <ComboboxItem v-for="item in filtered" :key="item" :value="item">{{ item }}</ComboboxItem>
 </Combobox>
 ```

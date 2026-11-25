@@ -4,7 +4,7 @@
  * @description Enterprise-grade documentation for the Combobox autocomplete search component.
  * Strictly consumes Gwind Design Tokens for surfaces, borders, typography, spacing, and radius.
  */
-import { ref } from "vue";
+import { computed, ref } from "vue";
 import {
   Badge,
   Button,
@@ -37,6 +37,13 @@ const listCabang = [
 ];
 
 const selectedWilayah = ref("");
+
+const selectedFiltered = ref("");
+const filterTerm = ref("");
+const filteredCabang = computed(() => {
+  const term = filterTerm.value.trim().toLowerCase();
+  return listCabang.filter((c) => c.toLowerCase().startsWith(term));
+});
 
 const comboboxProps: PropRow[] = [
   {
@@ -232,6 +239,47 @@ const comboboxProps: PropRow[] = [
           <span><strong>Optimasi Keyboard:</strong> Mengetik pada <code>ComboboxInput</code> secara instan memfilter opsi item di dalam list tanpa perlu me-reload data dari server.</span>
         </div>
       </template>
+    </DocCard>
+
+    <!-- CARD 2b: Custom Filtering -->
+    <DocCard
+      title="Custom Filtering"
+      description="Filter bawaan mencocokkan sebagian teks. Dengan ignore-filter dan v-model pada ComboboxInput, logika pencarian dapat diganti, misalnya hanya cocok di awal kata."
+      badge="Custom Filter"
+      badge-variant="outline"
+    >
+      <div class="space-y-gw-8 py-gw-8 max-w-md">
+        <Label for="combobox-custom-filter">Cabang (cocok di awal nama)</Label>
+        <Combobox v-model="selectedFiltered" ignore-filter>
+          <ComboboxAnchor>
+            <ComboboxTrigger as-child>
+              <Button id="combobox-custom-filter" variant="outline" class="w-full justify-between bg-card text-left">
+                <span class="truncate text-foreground-secondary">{{ selectedFiltered || 'Ketik awal nama cabang...' }}</span>
+                <ChevronDown class="h-4 w-4 shrink-0 text-foreground-tertiary" />
+              </Button>
+            </ComboboxTrigger>
+          </ComboboxAnchor>
+          <ComboboxList class="w-full max-w-md bg-card shadow-drop-2 border border-border-subtle rounded-md">
+            <ComboboxInput v-model="filterTerm" placeholder="Awalan nama, mis. Cabang D" />
+            <ComboboxEmpty class="p-gw-16 text-omega text-foreground-secondary text-center">Tidak ada cabang berawalan tersebut.</ComboboxEmpty>
+            <ComboboxGroup class="p-1">
+              <ComboboxItem
+                v-for="item in filteredCabang"
+                :key="item"
+                :value="item"
+                class="flex items-center gap-gw-8 px-gw-16 py-gw-8 text-sigma rounded hover:bg-background cursor-pointer"
+                @select="selectedFiltered = item"
+              >
+                <ComboboxItemIndicator class="w-4 h-4 flex items-center justify-center">
+                  <Check class="h-4 w-4 text-foreground-green" />
+                </ComboboxItemIndicator>
+                <span>{{ item }}</span>
+              </ComboboxItem>
+            </ComboboxGroup>
+          </ComboboxList>
+        </Combobox>
+        <code class="block text-atom font-mono text-foreground-green font-semibold">ignore-filter + ComboboxInput v-model</code>
+      </div>
     </DocCard>
 
     <!-- CARD 3: Technical Specification & Props Matrix -->
