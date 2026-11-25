@@ -18,6 +18,9 @@
   /* Override gwind-v2 theme tokens */
   --font-weight-semibold: 600;
 
+  --color-black: #000000;
+  --color-white: #ffffff;
+
   /* Mapping gwind-token CSS variables to Tailwind v4 utilities */
   --shadow-drop-1: var(--shadow-drop-1);
   --shadow-drop-2: var(--shadow-drop-2);
